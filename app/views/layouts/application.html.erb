@@ -2,18 +2,37 @@
 <html>
   <head>
     <title>MakerCommunity</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %> <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="">
+    <div class="bg-blue-dark text-pink-dark py-20 px-6">
+      <h1 class="text-4xl leading-snug max-w-lg sm:text-5xl md:leading-snug"><strong>Maker Community</strong> is your local space to build, learn and share your passion for craft.</h1>
+    </div>
+    <div class="flex flex-row">
+      <div class="basis-1/2 bg-pink-light text-pink-very-dark py-16 px-6">
+        <h2 class="text-4xl font-medium text-blue-dark mb-3">Room to create</h2>
+        <p class="text-lg">
+          We've got a fully equipped woodworking space, heaps of 3D Printers, a hefty CNC router, soldering stations, electronics, laser cutter, textiles, drones and much more. Maker Community is like
+          your dream workshed, with the room and tools to create that project that you've always imagined.
+        </p>
+      </div>
+      <div class="basis-1/2 bg-skyblue-light text-skyblue-dark py-16 px-6">
+        <h2 class="text-blue-dark font-medium text-4xl mb-3">Learn to DIY</h2>
+        <p class="text-lg">
+          No matter your skill-level, our workshops will empower you to transform your project ideas into reality. From CNC Machining to Jewellery Making: we supply the tools and knowledge to build
+          your confidence, as well as your project.
+        </p>
+      </div>
+    </div>
+    <div class="bg-teal-dark text-pink-light py-20 px-6">
+      <h2 class="text-4xl font-medium mb-3">A Community of Makers</h2>
+      <p class="text-lg max-w-prose">
+        Our members are into interests such as woodworking, digital fabrication, cosplay, sewing, model making, RC planes, cars and drones, micro-controllers, robotics, coding, plastic recycling,
+        prototyping and pretty much every other facet of ‘Making’ in its broadest sense. You are sure to find like minded and kindred spirits at Maker Community.
+      </p>
+    </div>
   </body>
 </html>
