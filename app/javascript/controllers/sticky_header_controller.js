@@ -6,29 +6,29 @@ export default class extends Controller {
     this.isOpen = true;
     this.isLocked = false;
     this.oldScrollY = 0;
+    this.scrollTop = 60;
     this.element.classList.add("open");
     this.setMaxHeight(this.startingHeight);
-    this.scrollTop = 60;
   }
 
   onScroll(event) {
     const scrollY = window.scrollY;
 
-    console.log("event");
+    // console.log(scrollY, this.startingHeight - scrollY);
+    // this.setMaxHeight(this.startingHeight - scrollY);
+    // window.document.body.scrollTop = 0;
 
-    if (true) {
-      if (this.isOpen) {
-        console.log(window.scrollY);
-        if (window.scrollY > this.scrollTop) {
-          this.close();
-        }
-      } else {
-        console.log("scrollY", scrollY);
-        if (window.scrollY <= 1) {
-          this.open();
-        }
-      }
-    }
+    // if (this.isOpen) {
+    //   console.log(window.scrollY);
+    //   if (window.scrollY > this.scrollTop) {
+    //     this.close();
+    //   }
+    // } else {
+    //   console.log("scrollY", scrollY);
+    //   if (window.scrollY <= 1) {
+    //     this.open();
+    //   }
+    // }
 
     this.oldScrollY = scrollY;
   }
