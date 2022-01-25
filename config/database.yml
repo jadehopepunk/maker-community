@@ -1,12 +1,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 30 } %>
 
+default: &wordpress_production
+  database: my_animals_database
+  adapter: mysql2
+  database_tasks: false
+  host: makercommunity.org.au
+  database: <%= ENV["MAKER_COMMUNITY_WP_DATABASE"] %>
+  username: <%= ENV["MAKER_COMMUNITY_WP_DATABASE_USERNAME"] %>
+  password: <%= ENV["MAKER_COMMUNITY_WP_DATABASE_PASSWORD"] %>
+
 development:
-  <<: *default
-  database: maker-community-development
+  primary:
+    <<: *default
+    database: maker-community-development
+  wordpress:
+    <<: *wordpress_production
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

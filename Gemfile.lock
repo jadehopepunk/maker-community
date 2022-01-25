@@ -120,6 +120,7 @@ GEM
     mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.2)
+    mysql2 (0.5.3)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -260,6 +261,7 @@ DEPENDENCIES
   debug
   devise
   importmap-rails
+  mysql2
   pg
   puma (~> 5.0)
   rails (~> 7.0.1)
