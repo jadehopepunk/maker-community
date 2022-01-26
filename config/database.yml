@@ -27,7 +27,10 @@ test:
   database: maker-community-test
 
 production:
-  <<: *default
-  database: maker-community-production
-  username: maker-community
-  password: <%= ENV["MAKER_COMMUNITY_DATABASE_PASSWORD"] %>
+  primary:
+    <<: *default
+    database: maker-community-production
+    username: maker-community
+    password: <%= ENV["MAKER_COMMUNITY_DATABASE_PASSWORD"] %>
+  wordpress:
+    <<: *wordpress_production
