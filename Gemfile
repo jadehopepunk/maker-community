@@ -9,8 +9,7 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.1'
 gem 'sprockets-rails'
 
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem 'importmap-rails'
+gem 'jsbundling-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'

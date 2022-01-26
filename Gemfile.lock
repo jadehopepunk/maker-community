@@ -101,13 +101,12 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.0.2)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.5.11)
     io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
+    jsbundling-rails (1.0.0)
+      railties (>= 6.0.0)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -260,7 +259,7 @@ DEPENDENCIES
   capybara
   debug
   devise
-  importmap-rails
+  jsbundling-rails
   mysql2
   pg
   puma (~> 5.0)
