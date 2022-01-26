@@ -13,6 +13,7 @@
 */
 
 @layer components {
+  /* HEADER  */
   .sticky-header {
     @apply overflow-hidden;
     /* transition: all 0.5s ease-in-out; */
@@ -33,5 +34,84 @@
   .sticky-header.closed .only-open {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+  }
+
+  /* BUTTONS */
+
+  .button-sm {
+    @apply rounded-full py-1 px-4;
+  }
+
+  /* FLASH */
+
+  body p.flash.notice {
+    @apply bg-orange-400 text-black;
+  }
+
+  body p.flash.alert {
+    @apply bg-red-500 text-black;
+  }
+
+  /* ON DARK BLUE  */
+
+  .on-dark-blue {
+    @apply text-black bg-blue-dark;
+  }
+
+  .on-dark-blue h2 {
+    @apply text-pink-dark;
+  }
+
+  .on-dark-blue p,
+  .on-dark-blue label {
+    @apply text-white;
+  }
+
+  .on-dark-blue a {
+    @apply text-pink-dark;
+  }
+
+  .on-dark-blue a:hover {
+    @apply text-pink-light;
+  }
+
+  /* DEVISE */
+
+  .devise h2 {
+    @apply text-4xl mb-6;
+  }
+
+  .devise .field {
+    @apply mb-4;
+  }
+
+  .devise em {
+    @apply text-gray-400;
+  }
+
+  .devise .field input[type="text"],
+  .devise .field input[type="email"],
+  .devise .field input[type="password"] {
+    @apply w-full;
+  }
+
+  .devise .actions {
+    @apply mt-4;
+  }
+
+  .devise-shared-links {
+    @apply mt-8;
+  }
+
+  .devise-shared-links a {
+    @apply underline;
+  }
+
+  .devise input[type="submit"] {
+    @apply bg-pink-dark text-blue-dark button-sm;
+  }
+
+  .devise input[type="submit"]:hover {
+    @apply bg-pink-light;
   }
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MakerCommunity</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %> <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="devise on-dark-blue flex flex-col justify-center min-h-screen">
+    <%= render 'layouts/shared/flash' %>
+
+    <div class="container mx-auto max-w-xs"><%= yield %></div>
+  </body>
+</html>
