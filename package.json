@@ -6,7 +6,9 @@
     "esbuild": "^0.14.14",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
-    "postcss-nesting": "^10.1.2"
+    "postcss-import": "^14.0.2",
+    "postcss-media-variables": "^2.0.1",
+    "postcss-nested": "^5.0.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
