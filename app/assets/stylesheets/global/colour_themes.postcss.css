@@ -1,0 +1,30 @@
+/*
+"blue-dark-highlight": "#4d5ab6",
+"sky-light": "#94d8e7",
+"pink-dark": "#ee7879",
+"pink-very-dark": "#6D3F46",
+"pink-light": "#f4abaa",
+beige: "#E1A994", */
+
+:root {
+  --blue-dark: #2a3166;
+  --teal-dark: #0d9488;
+  --sky: #78cee1;
+  --gold: #efbf6e;
+}
+
+.theme-blue {
+  background-color: var(--blue-dark);
+}
+
+.theme-teal {
+  background-color: var(--teal-dark);
+}
+
+.theme-sky {
+  background-color: var(--sky);
+}
+
+.theme-gold {
+  background-color: var(--gold);
+}
