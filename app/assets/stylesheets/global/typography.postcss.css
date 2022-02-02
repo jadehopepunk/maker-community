@@ -1,5 +1,10 @@
+body {
+  font-family: "InterVariable", Roboto, Arial, sans-serif;
+}
+
 h1,
 h2,
 h2 {
+  font-weight: 500;
   margin: 0;
 }

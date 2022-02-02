@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@fontsource/inter": "^4.5.2",
     "autoprefixer": "^10.4.2",
     "esbuild": "^0.14.14",
     "postcss": "^8.4.5",
