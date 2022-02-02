@@ -4,8 +4,17 @@ a.button {
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 99999px;
+  display: inline-block;
 
   &:hover {
     background-color: var(--highlight-color-emphasis);
   }
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  color: white;
+
+  color: var(--highlight-color);
 }

@@ -8,4 +8,31 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+
+  .hero {
+    padding: var(--gutter);
+
+    p[role="doc-subtitle"] {
+      color: var(--highlight-color);
+      @mixin text-heading-xlarge;
+      max-width: 32rem;
+    }
+  }
+
+  .area-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: var(--gutter);
+
+    h2 {
+      @mixin text-heading-large;
+    }
+
+    p {
+      @mixin text-large;
+    }
+  }
 }

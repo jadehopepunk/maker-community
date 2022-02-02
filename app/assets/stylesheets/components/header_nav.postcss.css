@@ -1,3 +1,7 @@
 .header-nav {
   max-height: 100px;
+  padding: var(--gutter);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
