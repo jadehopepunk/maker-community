@@ -15,7 +15,11 @@
     top: 0;
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
+
+    @media (--mobile) {
+      grid-template-columns: 1fr 60px;
+    }
 
     .title-container {
       display: flex;
@@ -83,6 +87,10 @@
 
       h1 {
         font-size: 2.25rem;
+
+        @media (--mobile) {
+          font-size: 1.5rem;
+        }
       }
 
       .actions {

@@ -17,4 +17,8 @@ a.button {
   color: white;
 
   color: var(--highlight-color);
+
+  &:hover {
+    color: var(--highlight-color-emphasis);
+  }
 }
