@@ -1,0 +1,21 @@
+.admin-navbar {
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .page-title {
+    @mixin text-large;
+    font-weight: bold;
+  }
+
+  .actions {
+    .action {
+      svg {
+        width: 1.7em;
+        height: 1.7em;
+      }
+    }
+  }
+}
