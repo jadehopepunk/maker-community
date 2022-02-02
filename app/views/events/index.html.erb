@@ -1,16 +1,16 @@
 <div class="theme-sky">
-  <div class="container mx-auto py-8 px-6 center">
-    <h1 class="font-bold text-4xl mb-8">Workshops and Events</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  <div class="container">
+    <h1 class="inline-page-title">Workshops and Events</h1>
+    <div class="events-grid">
       <% 15.times do %>
-      <a href="<%= event_path('spoon-carving') %>" class="rounded-sm overflow-hidden bg-white hover:bg-pink-light">
-        <img class="mx-auto" src="http://placekitten.com/500/300" />
-        <div class="p-5 flex flex-col">
-          <h2 class="font-semibold mb-3">Spoon carving</h2>
-          <p class="text-gray-600">Students will learn all the skills required to reproduce their own wooden spoons; this includes the correct usage of hand and power tools.</p>
-          <div class="mt-4 flex flex-row">
-            <img class="rounded-full mr-3" src="http://placekitten.com/40/40" />
-            <div class="flex flex-col justify-between">
+      <a href="<%= event_path('spoon-carving') %>" class="event rounded-sm overflow-hidden bg-white hover:bg-pink-light">
+        <img class="event-image" src="http://placekitten.com/500/300" />
+        <div class="details">
+          <h2 class="event-title">Spoon carving</h2>
+          <p class="event-description">Students will learn all the skills required to reproduce their own wooden spoons; this includes the correct usage of hand and power tools.</p>
+          <div class="event-host">
+            <img class="avatar" src="http://placekitten.com/40/40" />
+            <div class="host-text">
               <h3 class="font-medium leading-none">Alma Arriaga</h3>
               <div class="text-sm text-gray-500">Mon 17th Jan</div>
             </div>
