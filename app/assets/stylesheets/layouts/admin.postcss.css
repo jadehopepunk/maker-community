@@ -1,0 +1,5 @@
+.layout-admin {
+  .admin-content {
+    margin: var(--gutter);
+  }
+}
