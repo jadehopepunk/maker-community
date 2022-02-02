@@ -8,6 +8,7 @@
 @import "layouts/home.postcss.css";
 @import "layouts/devise.postcss.css";
 @import "layouts/admin.postcss.css";
+@import "layouts/people_admin_index.postcss.css";
 
 @import "components/buttons.postcss.css";
 @import "components/header_nav.postcss.css";

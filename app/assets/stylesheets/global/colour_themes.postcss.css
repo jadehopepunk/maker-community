@@ -18,6 +18,7 @@ beige: "#E1A994", */
   --pink-light: #f4abaa;
   --gray-100: #f3f4f6;
   --slate-800: rgb(30, 41, 59);
+  --slate-700: rgb(51, 65, 85);
 }
 
 @define-mixin blue-dark-highlight {
@@ -77,8 +78,14 @@ beige: "#E1A994", */
   @mixin blue-dark-highlight;
 
   &.theme-inverted {
-    --text-color: var(--gold);
+    --text-color: var(--gray-100);
+    --highlight-color: var(--gold);
     --background-color: var(--slate-800);
+
+    .callout {
+      --background-color: var(--slate-700);
+      background-color: var(--background-color);
+    }
   }
 
   @mixin apply-theme-colors;
