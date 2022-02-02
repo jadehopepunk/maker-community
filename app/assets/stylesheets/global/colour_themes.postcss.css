@@ -11,20 +11,39 @@ beige: "#E1A994", */
   --teal-dark: #0d9488;
   --sky: #78cee1;
   --gold: #efbf6e;
+  --black: #000000;
+  --gray-100: #f3f4f6;
+}
+
+@define-mixin apply-theme-colors {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .theme-blue {
-  background-color: var(--blue-dark);
+  --text-color: var(--gray-100);
+  --background-color: var(--blue-dark);
+
+  @mixin apply-theme-colors;
 }
 
 .theme-teal {
-  background-color: var(--teal-dark);
+  --text-color: var(--gray-100);
+  --background-color: var(--teal-dark);
+
+  @mixin apply-theme-colors;
 }
 
 .theme-sky {
-  background-color: var(--sky);
+  --text-color: var(--black);
+  --background-color: var(--sky);
+
+  @mixin apply-theme-colors;
 }
 
 .theme-gold {
-  background-color: var(--gold);
+  --text-color: var(--black);
+  --background-color: var(--gold);
+
+  @mixin apply-theme-colors;
 }
