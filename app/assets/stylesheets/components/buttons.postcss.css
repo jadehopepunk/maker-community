@@ -1,4 +1,4 @@
-a.button {
+@define-mixin button {
   background-color: var(--highlight-color);
   color: var(--highlight-color-inverse);
   text-decoration: none;
@@ -9,6 +9,10 @@ a.button {
   &:hover {
     background-color: var(--highlight-color-emphasis);
   }
+}
+
+a.button {
+  @mixin button;
 }
 
 .icon-button {

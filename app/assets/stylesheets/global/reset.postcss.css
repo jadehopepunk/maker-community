@@ -9,3 +9,8 @@ a {
     text-decoration: none;
   }
 }
+
+input {
+  border-width: 0;
+  border-radius: 0;
+}
