@@ -6,6 +6,7 @@ export default class extends Controller {
   connect() {
     this.offsetTop = this.titleTarget.offsetTop;
     this.openHeight = this.element.offsetHeight;
+    this.startsClosed = this.element.classList.contains("closed");
   }
 
   onScroll(event) {
@@ -16,8 +17,6 @@ export default class extends Controller {
     } else {
       this.element.classList.remove("sticky");
     }
-
-    // console.log("bottom", this.isAtBottom());
 
     if (this.openHeight - scrollY <= 64 || this.isAtBottom()) {
       this.element.classList.add("closed");

@@ -4,7 +4,7 @@
     <%= render 'layouts/shared/head' %>
   </head>
 
-  <body class="theme-blue">
-    <%= render 'layouts/shared/flash' %> <%= render 'layouts/shared/navbar' %> <%= yield %>
+  <body class="theme-blue with-navbar">
+    <%= render 'layouts/shared/flash' %> <%= render 'layouts/shared/navbar', with_hero: current_page?('/') %> <%= yield %>
   </body>
 </html>
