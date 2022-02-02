@@ -5,4 +5,8 @@
   --breakpoint-xl: 1280px;
 } */
 
+:root {
+  --gutter: 20px;
+}
+
 @custom-media --desktop (min-width: 640px);

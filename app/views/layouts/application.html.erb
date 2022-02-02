@@ -3,19 +3,21 @@
   <head>
     <title>MakerCommunity</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet" />
+
     <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> <%= stylesheet_link_tag "application", "data-turbo-track":
     "reload"%>
   </head>
 
-  <body class="bg-blue-dark">
+  <body class="theme-blue">
     <%= render 'layouts/shared/flash' %>
 
-    <div class="header-nav theme-blue py-3 px-6 sticky top-0 flex flex-row justify-between items-center">
-      <a href="/"><h1 class="text-pink-dark hover:text-pink-light text-4xl leading-snug md:text-5xl md:leading-snug font-bold">Maker Community</h1></a>
+    <div class="header-nav theme-blue">
+      <a href="/"><h1 class="">Maker Community</h1></a>
       <div class="actions grid grid-flow-col gap-2">
         <% if current_user %>
         <a href="/admin/people">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 hover:text-pink-light" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon-button action-admin" viewBox="0 0 20 20" fill="currentColor">
             <path
               fill-rule="evenodd"
               d="M10.496 2.132a1 1 0 00-.992 0l-7 4A1 1 0 003 8v7a1 1 0 100 2h14a1 1 0 100-2V8a1 1 0 00.496-1.868l-7-4zM6 9a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1zm3 1a1 1 0 012 0v3a1 1 0 11-2 0v-3zm5-1a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z"
@@ -24,11 +26,11 @@
           </svg>
         </a>
         <%= link_to destroy_user_session_path do %>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 hover:text-pink-light" viewBox="0 0 20 20" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon-button action-user" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
         </svg>
         <% end %> <% else %> <%= link_to new_user_session_path do %>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 hover:text-pink-light" viewBox="0 0 20 20" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon-button action-userh-10 w-10 text-gray-400 hover:text-pink-light" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
         </svg>
         <% end %> <% end %>
