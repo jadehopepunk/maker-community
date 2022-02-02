@@ -5,8 +5,13 @@
   --breakpoint-xl: 1280px;
 } */
 
+@custom-media --desktop (min-width: 640px);
+@custom-media --mobile (max-width: 640px);
+
 :root {
   --gutter: 20px;
-}
 
-@custom-media --desktop (min-width: 640px);
+  @media (--mobile) {
+    --gutter: 15px;
+  }
+}

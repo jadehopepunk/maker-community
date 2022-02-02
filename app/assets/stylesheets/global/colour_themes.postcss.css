@@ -33,6 +33,14 @@ beige: "#E1A994", */
   h2,
   h3 {
     color: var(--highlight-color);
+
+    a {
+      color: var(--highlight-color);
+
+      &:hover {
+        color: var(--highlight-color-emphasis);
+      }
+    }
   }
 }
 
