@@ -1,4 +1,6 @@
 /* Entry point for your PostCSS build */
+@import "@fontsource/inter";
+@import "global/reset.postcss.css";
 @import "global/typography.postcss.css";
 @import "global/colour_themes.postcss.css";
 
