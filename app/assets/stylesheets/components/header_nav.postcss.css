@@ -1,6 +1,10 @@
-.navbar-with-hero {
+body.with-navbar {
   --nav-height: 64px;
 
+  padding-top: var(--nav-height);
+}
+
+.navbar-with-hero {
   .title,
   .subtitle {
     color: var(--highlight-color);
