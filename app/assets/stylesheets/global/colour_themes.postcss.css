@@ -8,20 +8,39 @@ beige: "#E1A994", */
 
 :root {
   --blue-dark: #2a3166;
+  --blue-dark-highlight: #4d5ab6;
   --teal-dark: #0d9488;
   --sky: #78cee1;
   --gold: #efbf6e;
+  --white: #ffffff;
   --black: #000000;
+  --pink-dark: #ee7879;
+  --pink-light: #f4abaa;
   --gray-100: #f3f4f6;
+}
+
+@define-mixin blue-dark-highlight {
+  --highlight-color: var(--blue-dark);
+  --highlight-color-emphasis: var(--blue-dark-highlight);
+  --highlight-color-inverse: var(--white);
 }
 
 @define-mixin apply-theme-colors {
   background-color: var(--background-color);
   color: var(--text-color);
+
+  h1,
+  h2,
+  h3 {
+    color: var(--highlight-color);
+  }
 }
 
 .theme-blue {
   --text-color: var(--gray-100);
+  --highlight-color: var(--pink-dark);
+  --highlight-color-emphasis: var(--pink-light);
+  --highlight-color-inverse: var(--white);
   --background-color: var(--blue-dark);
 
   @mixin apply-theme-colors;
@@ -30,6 +49,7 @@ beige: "#E1A994", */
 .theme-teal {
   --text-color: var(--gray-100);
   --background-color: var(--teal-dark);
+  @mixin blue-dark-highlight;
 
   @mixin apply-theme-colors;
 }
@@ -37,6 +57,7 @@ beige: "#E1A994", */
 .theme-sky {
   --text-color: var(--black);
   --background-color: var(--sky);
+  @mixin blue-dark-highlight;
 
   @mixin apply-theme-colors;
 }
@@ -44,6 +65,7 @@ beige: "#E1A994", */
 .theme-gold {
   --text-color: var(--black);
   --background-color: var(--gold);
+  @mixin blue-dark-highlight;
 
   @mixin apply-theme-colors;
 }

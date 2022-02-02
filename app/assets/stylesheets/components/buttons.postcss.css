@@ -1,0 +1,11 @@
+a.button {
+  background-color: var(--highlight-color);
+  color: var(--highlight-color-inverse);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 99999px;
+
+  &:hover {
+    background-color: var(--highlight-color-emphasis);
+  }
+}
