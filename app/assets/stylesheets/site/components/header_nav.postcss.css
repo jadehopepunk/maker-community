@@ -106,4 +106,12 @@ body.with-navbar {
       color: var(--background-color);
     }
   }
+
+  &.logged-in {
+    .header-nav {
+      .actions {
+        opacity: 1;
+      }
+    }
+  }
 }

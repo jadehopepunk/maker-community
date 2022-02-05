@@ -1,5 +1,5 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    false
+    user.present? && user.has_role?(:people_admin)
   end
 end

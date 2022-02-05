@@ -1,5 +1,5 @@
 <% if with_hero %>
-<div class="navbar-with-hero theme-blue" data-controller="navbar" data-action="scroll@window->navbar#onScroll">
+<div class="navbar-with-hero theme-blue <%= 'logged-in' if current_user %>" data-controller="navbar" data-action="scroll@window->navbar#onScroll">
   <div class="header-nav"><%= render partial: 'layouts/shared/navbar_nav' %></div>
   <div class="hero">
     <div class="title-container" data-navbar-target="title">
