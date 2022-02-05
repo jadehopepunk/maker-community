@@ -3,31 +3,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
 
-gem 'kaminari'
+gem 'rails', '~> 7.0.1'
+
+gem 'cssbundling-rails'
+gem 'jsbundling-rails'
 gem 'mysql2'
 gem 'pg'
 gem 'puma', '~> 5.0'
-gem 'rails', '~> 7.0.1'
 gem 'sprockets-rails'
-
-gem 'jsbundling-rails'
-
-gem 'cssbundling-rails'
-
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails'
-
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails'
-
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem 'jbuilder'
-
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 
 gem 'bootsnap', require: false
 gem 'devise'
+gem 'kaminari'
+gem 'pundit'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
