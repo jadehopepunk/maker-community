@@ -1,4 +1,7 @@
 <%= render partial: 'admin/people/navbar' %>
 <div class="admin-content">
+  <div class="breadcrumbs">
+    <a class="breadcrumb return" href="<%= admin_people_path %>">↩ People</a>
+  </div>
   <h1><%= @person.display_name %></h1>
 </div>

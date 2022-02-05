@@ -1,5 +1,6 @@
 module Admin
   class PeopleController < AdminController
+
     def index
       authorize [:admin, User], :index?
       @people = User.page(params[:page]).per(20)

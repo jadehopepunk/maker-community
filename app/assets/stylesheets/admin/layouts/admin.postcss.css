@@ -1,5 +1,20 @@
 .layout-admin {
   .admin-content {
     margin: var(--gutter);
+
+    .breadcrumbs {
+      margin-bottom: 0.5rem;
+
+      a,
+      a:visited,
+      a:link {
+        color: var(--text-color);
+      }
+
+      a:hover {
+        color: var(--highlight-color);
+        text-decoration: underline;
+      }
+    }
   }
 }
