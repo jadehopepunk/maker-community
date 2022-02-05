@@ -3,16 +3,18 @@ module Wp
     self.table_name = 'wp_users'
 
     class << self
+      def dest_class
+        ::User
+      end
+
       def sync
-        all.each do |wp_user|
-          existing = ::User.find_by_email(wp_user.user_email)
-          create(wp_user) unless existing
-          puts existing.inspect
+        find_each do |record|
+          import_new(record) unless dest_class.where(wordpress_id: record.ID).exists?
         end
       end
 
-      def create(wp_user)
-        user = ::User.new(
+      def import_new(wp_user)
+        user = dest_class.new(
           email: wp_user.user_email,
           password: wp_user.user_pass,
           display_name: wp_user.display_name,

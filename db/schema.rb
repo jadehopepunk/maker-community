@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_033309) do
+ActiveRecord::Schema.define(version: 2022_02_05_083655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2022_02_05_033309) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "stripe_source_id"
+    t.string "stripe_customer_id"
+    t.decimal "order_total", precision: 8, scale: 2
+    t.decimal "order_tax", precision: 8, scale: 2
+    t.string "order_currency"
+    t.string "payment_method_title"
+    t.string "payment_method"
+    t.integer "wordpress_post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,4 +62,5 @@ ActiveRecord::Schema.define(version: 2022_02_05_033309) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "subscriptions", "users"
 end
