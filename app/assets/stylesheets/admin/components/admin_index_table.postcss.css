@@ -12,7 +12,17 @@
       }
 
       td {
-        padding: 0.5rem 1rem;
+        padding: 0 1rem;
+
+        a.primary-row-link {
+          padding: 0.5rem 0;
+          display: block;
+          color: var(--text-color);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
