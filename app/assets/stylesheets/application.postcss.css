@@ -1,17 +1,4 @@
 /* Entry point for your PostCSS build */
-@import "global/reset.postcss.css";
-@import "global/responsive.postcss.css";
-@import "global/colour_themes.postcss.css";
-@import "global/typography.postcss.css";
-@import "global/forms.postcss.css";
-
-@import "layouts/home.postcss.css";
-@import "layouts/devise.postcss.css";
-@import "layouts/admin.postcss.css";
-@import "layouts/admin_people_index.postcss.css";
-
-@import "components/buttons.postcss.css";
-@import "components/header_nav.postcss.css";
-@import "components/flash.postcss.css";
-@import "components/admin_navbar.postcss.css";
-@import "components/events_grid.postcss.css";
+@import "shared/index.postcss.css";
+@import "site/index.postcss.css";
+@import "admin/index.postcss.css";

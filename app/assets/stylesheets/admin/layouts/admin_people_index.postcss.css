@@ -3,6 +3,7 @@
     border: 2px solid var(--highlight-color);
     border-radius: 0.5rem;
     padding: var(--gutter);
+    margin-bottom: calc(var(--gutter) * 2);
 
     .callout-title {
       @mixin text-heading-small;

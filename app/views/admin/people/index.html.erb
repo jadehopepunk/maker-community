@@ -17,4 +17,16 @@
       </div>
     </div>
   </div>
+  <div class="admin-index-table">
+    <table>
+      <tbody>
+        <% @people.each do |person| %>
+        <tr>
+          <td><%= person.display_name %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @people %>
+  </div>
 </div>

@@ -44,6 +44,11 @@ beige: "#E1A994", */
       }
     }
   }
+
+  .callout {
+    --background-color: var(--callout-background-color);
+    background-color: var(--background-color);
+  }
 }
 
 .theme-blue {
@@ -81,11 +86,7 @@ beige: "#E1A994", */
     --text-color: var(--gray-100);
     --highlight-color: var(--gold);
     --background-color: var(--slate-800);
-
-    .callout {
-      --background-color: var(--slate-700);
-      background-color: var(--background-color);
-    }
+    --callout-background-color: var(--slate-700);
   }
 
   @mixin apply-theme-colors;
