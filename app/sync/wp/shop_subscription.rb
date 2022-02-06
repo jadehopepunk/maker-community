@@ -3,6 +3,7 @@ module Wp
     self.table_name = 'wp_posts'
 
     has_many :post_meta, foreign_key: :post_id, class_name: 'Wp::PostMeta'
+    has_many :order_items, foreign_key: :order_id, class_name: 'Wp::OrderItem'
 
     default_scope { where(post_type: 'shop_subscription') }
     scope :with_meta, -> { includes(:post_meta) }
