@@ -7,6 +7,7 @@ module Wp
     class << self
       def sync
         User.sync
+        MembershipPlan.sync
       end
     end
   end

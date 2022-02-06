@@ -1,8 +1,8 @@
 module Wp
   class ShopSubscription < Wp::Base
     self.table_name = 'wp_posts'
+    include Concerns::HasPostMeta
 
-    has_many :post_meta, foreign_key: :post_id, class_name: 'Wp::PostMeta'
     has_many :order_items, foreign_key: :order_id, class_name: 'Wp::OrderItem'
 
     default_scope { where(post_type: 'shop_subscription') }
@@ -20,7 +20,7 @@ module Wp
       end
 
       def import_new(record)
-        meta = PostMeta.convert_to_hash(record.post_meta)
+        meta = record.post_meta_hash
         user = ::User.where(wordpress_id: meta['_customer_user'].to_i).first
 
         dest = dest_class.new(
@@ -36,7 +36,7 @@ module Wp
           wordpress_post_id: record.ID
         )
         dest.save!
-        puts '.'
+        puts "Imported subscription: #{dest.id}"
       end
     end
   end
