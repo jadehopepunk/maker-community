@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2022_02_06_111025) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.string "status"
+    t.bigint "user_id"
+    t.bigint "membership_plan_id"
+    t.bigint "subscription_id"
+    t.integer "wordpress_post_id"
+    t.datetime "start_at", precision: 6
+    t.datetime "end_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["membership_plan_id"], name: "index_memberships_on_membership_plan_id"
+    t.index ["subscription_id"], name: "index_memberships_on_subscription_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -48,21 +63,6 @@ ActiveRecord::Schema.define(version: 2022_02_06_111025) do
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
-  create_table "user_memberships", force: :cascade do |t|
-    t.string "status"
-    t.bigint "user_id"
-    t.bigint "membership_plan_id"
-    t.bigint "subscription_id"
-    t.integer "wordpress_post_id"
-    t.datetime "start_at", precision: 6
-    t.datetime "end_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["membership_plan_id"], name: "index_user_memberships_on_membership_plan_id"
-    t.index ["subscription_id"], name: "index_user_memberships_on_subscription_id"
-    t.index ["user_id"], name: "index_user_memberships_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 2022_02_06_111025) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "memberships", "membership_plans"
+  add_foreign_key "memberships", "subscriptions"
+  add_foreign_key "memberships", "users"
   add_foreign_key "subscriptions", "users"
-  add_foreign_key "user_memberships", "membership_plans"
-  add_foreign_key "user_memberships", "subscriptions"
-  add_foreign_key "user_memberships", "users"
 end

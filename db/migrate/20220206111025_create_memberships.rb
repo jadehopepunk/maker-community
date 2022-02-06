@@ -1,6 +1,6 @@
-class CreateUserMemberships < ActiveRecord::Migration[7.0]
+class CreateMemberships < ActiveRecord::Migration[7.0]
   def change
-    create_table :user_memberships do |t|
+    create_table :memberships do |t|
       t.string :status
       t.belongs_to :user, foreign_key: true
       t.belongs_to :membership_plan, foreign_key: true

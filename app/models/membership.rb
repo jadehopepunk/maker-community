@@ -1,4 +1,4 @@
-class UserMembership < ApplicationRecord
+class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :membership_plan
   belongs_to :subscription, optional: true

@@ -7,7 +7,7 @@ module Wp
 
     class << self
       def dest_class
-        ::UserMembership
+        ::Membership
       end
 
       def sync
@@ -22,6 +22,8 @@ module Wp
         membership_plan = ::MembershipPlan.where(wordpress_post_id: record.post_parent.to_i).first
         subscription = ::Subscription.where(wordpress_post_id: meta['_subscription_id']).first
 
+        return unless user && membership_plan
+
         dest = dest_class.new(
           user:,
           membership_plan:,
@@ -33,7 +35,7 @@ module Wp
           end_at: meta['_end_date']
         )
         dest.save!
-        puts "Imported user membership: #{record.id}"
+        puts "Imported membership: #{user.display_name}, #{membership_plan.name}, #{dest.status}"
       end
     end
   end

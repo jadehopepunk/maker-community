@@ -17,6 +17,8 @@ module Wp
       end
 
       def import_new(record)
+        return if record.post_name == 'account-holder'
+
         dest = dest_class.new(
           title: record.post_title,
           name: record.post_name,
