@@ -8,6 +8,8 @@ module Wp
       def sync
         User.sync
         MembershipPlan.sync
+        ShopSubscription.sync
+        UserMembership.sync
       end
     end
   end
