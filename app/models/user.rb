@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :active_memberships, -> { active }, class_name: 'Membership'
   has_many :active_plans, through: :active_memberships, source: :plan
-  has_many :events, class_name: 'UserEvent'
+  has_many :events, -> { order(occured_at: :desc) }, class_name: 'UserEvent'
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
 end

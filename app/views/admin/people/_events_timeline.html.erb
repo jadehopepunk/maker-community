@@ -1,0 +1,10 @@
+<table class="timeline">
+  <tbody>
+    <% events.each do |event| %>
+    <tr>
+      <td><%= event.occured_at.to_date.strftime("%-d %b %Y") %></td>
+      <td><%= render partial: "admin/people/events/#{event.class.name.demodulize.underscore}", locals: { event: event } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
