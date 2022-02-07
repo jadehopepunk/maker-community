@@ -24,7 +24,7 @@ module Wp
 
         return unless user && plan
 
-        dest = dest_class.new(
+        props = {
           user:,
           plan:,
           subscription:,
@@ -33,8 +33,9 @@ module Wp
           wordpress_post_id: record.ID,
           start_at: meta['_start_date'],
           end_at: meta['_end_date']
-        )
-        dest.save!
+        }
+        dest = Services::CreateMembership.call(props)
+
         puts "Imported membership: #{user.display_name}, #{plan.name}, #{dest.status}"
       end
     end
