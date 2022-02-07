@@ -17,6 +17,7 @@
     <div class="table-controls">
       <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %>
       <%= search_form_for @q, url: admin_people_path do |f| %>
+        <%= hash_to_hidden_fields(@search_params) %>
         <div class="search-with-submit">
           <%= f.search_field :display_name_cont %>
           <%= f.submit "search" %>

@@ -5,11 +5,11 @@ module Admin
 
       @q = User.ransack(params[:q])
       @q.sorts = ['display_name asc'] if @q.sorts.empty?
-
-      @people = @q.result.includes(:active_plans).page(params[:page]).per(20)
-      @plans = Plan.all
       @filters = SearchFilters.from_params(params[:filters])
-      @search_params = params.permit(:page, :plan, q: [:s])
+
+      @people = @filters.apply(@q.result).includes(:active_plans).page(params[:page]).per(20)
+      @plans = Plan.all
+      @search_params = params.permit(:page, filters: [], q: [:display_name_cont])
     end
 
     def show

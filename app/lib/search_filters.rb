@@ -10,6 +10,10 @@ class SearchFilters < Array
     def title
       "#{key}: #{value}"
     end
+
+    def apply(_scope)
+      raise NotImplementedError, 'Override this function to do something'
+    end
   end
 
   class PlanSearchFilter < SearchFilter
@@ -19,6 +23,10 @@ class SearchFilters < Array
 
     def title
       plan.title
+    end
+
+    def apply(scope)
+      scope.with_plan(plan)
     end
   end
 
@@ -45,5 +53,13 @@ class SearchFilters < Array
     input.each do |filter|
       self << filter
     end
+    super
+  end
+
+  def apply(scope)
+    each do |filter|
+      scope = filter.apply(scope)
+    end
+    scope
   end
 end
