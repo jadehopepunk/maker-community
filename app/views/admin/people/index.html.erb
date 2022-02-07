@@ -15,6 +15,7 @@
   </div>
   <div class="admin-index-table">
     <div class="table-controls">
+      <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %>
       <%= search_form_for @q, url: admin_people_path do |f| %>
         <div class="search-with-submit">
           <%= f.search_field :display_name_cont %>
