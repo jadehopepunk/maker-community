@@ -95,5 +95,7 @@ beige: "#E1A994", */
 
 .theme-inverted {
   --tag-background-color: var(--blue-dark-highlight);
+  --tag-background-color-hightlight: #5e6abd;
   --tag-text-color: var(--white);
+  --text-color-muted: #9ca3af;
 }

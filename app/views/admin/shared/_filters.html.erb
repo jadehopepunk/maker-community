@@ -1,5 +1,5 @@
 <div class="filters">
-  <% filters.each do |filter| %>
-  <div class="filter"><%= filter.title %></div>
+  <% if filters.present? %><span class="filters-title">Filtered by:</span><% end %> <% filters.each do |filter| %>
+  <div class="filter"><span class="filter-title"><%= filter.title %></span><%= link_to '✕', @search_params.merge(filters: []), class: 'close-button' %></div>
   <% end %>
 </div>

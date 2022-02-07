@@ -104,5 +104,45 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .filters-title {
+      margin-right: 0.8rem;
+      color: var(--text-color-muted);
+    }
+
+    .filter {
+      display: inline-block;
+      background-color: var(--tag-background-color);
+      color: var(--tag-text-color);
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      overflow: hidden;
+
+      .filter-title {
+        padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+      }
+
+      .close-button {
+        color: var(--text-color);
+        font-weight: bold;
+        background-color: var(--tag-background-color);
+        display: block;
+        padding: 0.3rem 0.8rem 0.3rem 0.4rem;
+
+        &:hover {
+          background-color: var(--tag-background-color-hightlight);
+        }
+      }
+    }
   }
 }
