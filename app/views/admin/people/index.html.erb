@@ -14,10 +14,18 @@
     </div>
   </div>
   <div class="admin-index-table">
+    <div class="table-controls">
+      <%= search_form_for @q, url: admin_people_path do |f| %>
+        <div class="search-with-submit">
+          <%= f.search_field :display_name_cont %>
+          <%= f.submit "search" %>
+        </div>
+      <% end %>
+    </div>
     <table>
       <thead>
         <tr>
-          <th><%= sort_link(@q, :display_name, 'Name') %></th>
+          <th><%= sort_link(@q, :display_name, 'Name', default_order: :asc) %></th>
           <th></th>
         </tr>
       </thead>

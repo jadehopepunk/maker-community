@@ -2,11 +2,15 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "files.associations": {
-    "*.html.erb": "html"
+    "*.html.erb": "erb"
   },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "ruby.rubocop.useBundler": true,
   "[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html.erb]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "files.exclude": {
     "**/.git": true,
