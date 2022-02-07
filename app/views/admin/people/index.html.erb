@@ -5,7 +5,7 @@
     <div class="stats">
       <% @plans.each do |plan| %>
       <div class="stat-container">
-        <a class="stat" href="<%= url_for @search_params.merge(plan: plan.name) %>">
+        <a class="stat" href="<%= url_for @search_params.merge(filters: ["plan|#{plan.name}"]) %>">
           <div class="value"><%= plan.active_users.count %></div>
           <div class="label"><%= plan.title.pluralize %></div>
         </a>
