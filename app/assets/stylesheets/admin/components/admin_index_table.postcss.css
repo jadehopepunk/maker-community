@@ -44,4 +44,24 @@
       }
     }
   }
+
+  .tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    & > .tag:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .tag {
+    padding: 0.3rem 0.8rem;
+    display: inline-block;
+    background-color: var(--tag-background-color);
+    color: var(--tag-text-color);
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+  }
 }

@@ -3,18 +3,12 @@
   <div class="callout stats-callout">
     <h2 class="callout-title">Overview</h2>
     <div class="stats">
+      <% @plans.each do |plan| %>
       <div class="stat">
-        <div class="value">4</div>
-        <div class="label">Full members</div>
+        <div class="value"><%= plan.active_users.count %></div>
+        <div class="label"><%= plan.title.pluralize %></div>
       </div>
-      <div class="stat">
-        <div class="value">14</div>
-        <div class="label">Community members</div>
-      </div>
-      <div class="stat">
-        <div class="value">36</div>
-        <div class="label">Association members</div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="admin-index-table">
@@ -23,6 +17,13 @@
         <% @people.each do |person| %>
         <tr>
           <td><%= link_to person.display_name, admin_person_path(person), class: 'primary-row-link' %></td>
+          <td>
+            <div class="tags">
+              <% person.active_plans.each do |plan| %>
+              <span class="tag"><%= plan.title %></span>
+              <% end %>
+            </div>
+          </td>
         </tr>
         <% end %>
       </tbody>

@@ -1,7 +1,9 @@
 class Membership < ApplicationRecord
+  STATES = %w[active expired cancelled paused pending].freeze
+
   belongs_to :user
-  belongs_to :membership_plan
+  belongs_to :plan
   belongs_to :subscription, optional: true
 
-  STATES = %w[active expired cancelled paused pending].freeze
+  scope :active, -> { where(status: 'active') }
 end

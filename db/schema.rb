@@ -10,32 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_111025) do
+ActiveRecord::Schema.define(version: 2022_02_07_000500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "membership_plans", force: :cascade do |t|
-    t.string "title"
-    t.string "name"
-    t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "memberships", force: :cascade do |t|
     t.string "status"
     t.bigint "user_id"
-    t.bigint "membership_plan_id"
+    t.bigint "plan_id"
     t.bigint "subscription_id"
     t.integer "wordpress_post_id"
     t.datetime "start_at", precision: 6
     t.datetime "end_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["membership_plan_id"], name: "index_memberships_on_membership_plan_id"
+    t.index ["plan_id"], name: "index_memberships_on_plan_id"
     t.index ["subscription_id"], name: "index_memberships_on_subscription_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "title"
+    t.string "name"
+    t.integer "wordpress_post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "position", default: 0
   end
 
   create_table "roles", force: :cascade do |t|
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_111025) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "memberships", "membership_plans"
+  add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"
   add_foreign_key "memberships", "users"
   add_foreign_key "subscriptions", "users"
