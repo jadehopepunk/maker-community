@@ -16,6 +16,7 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'kaminari'
 gem 'pundit'
+gem 'ransack'
 gem 'rolify'
 gem 'stimulus-rails'
 gem 'turbo-rails'

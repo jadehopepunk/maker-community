@@ -3,8 +3,10 @@ module Admin
     def index
       authorize [:admin, User], :index?
 
-      @people = User.includes(:active_plans).page(params[:page]).per(20)
+      @q = User.ransack(params[:q])
+      @people = @q.result.includes(:active_plans).page(params[:page]).per(20)
       @plans = Plan.all
+      @search_params = params.permit(:page, :plan)
     end
 
     def show

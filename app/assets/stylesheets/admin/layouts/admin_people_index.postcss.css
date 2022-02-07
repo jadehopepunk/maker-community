@@ -14,9 +14,26 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
 
-      .value {
-        color: var(--highlight-color);
-        @mixin text-heading-large;
+      .stat-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      a.stat {
+        color: var(--text-color);
+        display: block;
+
+        .value {
+          color: var(--highlight-color);
+          @mixin text-heading-large;
+        }
+
+        &:hover {
+          .label {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

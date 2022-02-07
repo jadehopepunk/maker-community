@@ -4,15 +4,23 @@
     <h2 class="callout-title">Overview</h2>
     <div class="stats">
       <% @plans.each do |plan| %>
-      <div class="stat">
-        <div class="value"><%= plan.active_users.count %></div>
-        <div class="label"><%= plan.title.pluralize %></div>
+      <div class="stat-container">
+        <a class="stat" href="<%= url_for @search_params.merge(plan: plan.name) %>">
+          <div class="value"><%= plan.active_users.count %></div>
+          <div class="label"><%= plan.title.pluralize %></div>
+        </a>
       </div>
       <% end %>
     </div>
   </div>
   <div class="admin-index-table">
     <table>
+      <thead>
+        <tr>
+          <th><%= sort_link(@q, :display_name, 'Name') %></th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
         <% @people.each do |person| %>
         <tr>

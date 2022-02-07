@@ -6,6 +6,17 @@
     margin: 0;
     padding: 0;
 
+    thead {
+      th {
+        text-align: left;
+        padding: 0.5rem 1rem;
+
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+
     tbody {
       tr:nth-child(odd) {
         background-color: var(--callout-background-color);
