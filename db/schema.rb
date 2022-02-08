@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_063519) do
+ActiveRecord::Schema.define(version: 2022_02_08_095835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_063519) do
     t.integer "wordpress_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_type", "product_id"], name: "index_order_items_on_product"
+    t.index ["wordpress_id"], name: "index_order_items_on_wordpress_id", unique: true
   end
 
   create_table "orders", force: :cascade do |t|

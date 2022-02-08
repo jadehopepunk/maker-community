@@ -19,22 +19,24 @@ module Wp
       Post.find(product_id).as_subclass
     end
 
-    def import_new(_order)
-      # puts "Product post is #{product_post.inspect}"
-      # dest = ::OrderItem.create!(
-      #   order:,
-      #   product:,
-      #   name: order_item_name,
-      #   quantity: meta_hash['_qty'],
-      #   line_subtotal: meta_hash['_line_subtotal'],
-      #   line_subtotal_tax: meta_hash['_line_subtotal_tax'],
-      #   line_total: meta_hash['_line_total'],
-      #   line_tax: meta_hash['_line_tax'],
-      #   wordpress_id: self.ID
-      # )
+    def import_new(order)
+      product = product_post.destination_record
+      return nil if product.nil?
 
-      # puts "imported order item #{order_item_name}"
-      # dest
+      dest = ::OrderItem.create!(
+        order:,
+        product:,
+        name: order_item_name,
+        quantity: meta_hash['_qty'],
+        line_subtotal: meta_hash['_line_subtotal'],
+        line_subtotal_tax: meta_hash['_line_subtotal_tax'],
+        line_total: meta_hash['_line_total'],
+        line_tax: meta_hash['_line_tax'],
+        wordpress_id: order_item_id
+      )
+
+      puts "imported order item #{order_item_name}"
+      dest
     end
   end
 end

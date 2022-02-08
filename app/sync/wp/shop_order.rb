@@ -13,7 +13,7 @@ module Wp
       end
 
       def sync
-        limit(5).with_meta.includes(:order_items).find_each do |record|
+        with_meta.includes(:order_items).find_each do |record|
           record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
         end
       end
