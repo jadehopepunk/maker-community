@@ -1,6 +1,6 @@
-module Services
-  class CreateMembership
-    def self.call(properties)
+class MembershipService
+  class << self
+    def create(properties)
       membership = Membership.create!(properties)
 
       UserEvents::StartedMembership.create!(

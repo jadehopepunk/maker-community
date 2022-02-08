@@ -19,12 +19,11 @@ module Wp
       Post.find(product_id).as_subclass
     end
 
-    def import_new(order)
+    def build_new
       product = product_post.destination_record
       return nil if product.nil?
 
-      dest = ::OrderItem.create!(
-        order:,
+      ::OrderItem.new(
         product:,
         name: order_item_name,
         quantity: meta_hash['_qty'],
@@ -34,6 +33,14 @@ module Wp
         line_tax: meta_hash['_line_tax'],
         wordpress_id: order_item_id
       )
+    end
+
+    def import_new(order)
+      dest = build_new
+      return nil if dest.nil?
+
+      dest.order = order
+      dest.save!
 
       puts "imported order item #{order_item_name}"
       dest

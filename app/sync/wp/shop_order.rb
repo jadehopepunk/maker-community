@@ -20,6 +20,15 @@ module Wp
     end
 
     def import_new
+      dest = build_new
+      return if dest.nil?
+
+      OrderService.create(dest)
+
+      puts "Imported order: #{self.ID}"
+    end
+
+    def build_new
       meta = meta_hash
       user_id = meta['_customer_user'].to_i
 
@@ -30,7 +39,7 @@ module Wp
 
       user = ::User.where(wordpress_id: user_id).first
 
-      dest = self.class.dest_class.new(
+      self.class.dest_class.new(
         user:,
         created_at: post_date,
         stripe_source_id: meta['_stripe_source_id'],
@@ -42,18 +51,16 @@ module Wp
         payment_method_title: meta['_payment_method_title'],
         paid_at: meta['_paid_date'],
         completed_at: meta['_completed_date'],
-        wordpress_post_id: self.ID
+        wordpress_post_id: self.ID,
+        order_items: build_order_items
       )
-      dest.save!
-      import_new_order_items(dest)
-      puts "Imported order: #{self.ID}"
     end
 
-    def import_new_order_items(dest)
+    def build_order_items
       scope = order_items.where.not(order_item_type: %w[tax coupon shipping]).with_meta
-      scope.each do |order_item|
-        order_item.import_new(dest)
-      end
+      scope.map do |order_item|
+        order_item.build_new
+      end.compact
     end
   end
 end

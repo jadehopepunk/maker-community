@@ -35,7 +35,7 @@ module Wp
         start_at: meta['_start_date'],
         end_at: meta['_end_date']
       }
-      dest = Services::CreateMembership.call(props)
+      dest = MembershipService.create(props)
 
       puts "Imported membership: #{user.display_name}, #{plan.name}, #{dest.status}"
     end
