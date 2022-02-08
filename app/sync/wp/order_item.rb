@@ -13,9 +13,14 @@ module Wp
       meta_hash['_product_id']&.to_i
     end
 
-    def product; end
+    def product_post
+      raise "no product id for #{inspect}" unless product_id.present?
+
+      Post.find(product_id).as_subclass
+    end
 
     def import_new(_order)
+      puts "Product post is #{product_post.inspect}"
       # dest = ::OrderItem.create!(
       #   order:,
       #   product:,
@@ -29,7 +34,7 @@ module Wp
       # )
 
       # puts "imported order item #{order_item_name}"
-      dest
+      # dest
     end
   end
 end

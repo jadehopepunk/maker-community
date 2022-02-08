@@ -50,7 +50,8 @@ module Wp
     end
 
     def import_new_order_items(dest)
-      order_items.each do |order_item|
+      scope = order_items.where.not(order_item_type: %w[tax coupon shipping]).with_meta
+      scope.each do |order_item|
         order_item.import_new(dest)
       end
     end
