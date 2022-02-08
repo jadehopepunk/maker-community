@@ -14,29 +14,29 @@ module Wp
 
       def sync
         find_each do |record|
-          import_new(record) unless dest_class.where(wordpress_post_id: record.ID).exists?
+          record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
         end
       end
+    end
 
-      def import_new(record)
-        meta = record.post_meta_hash
-        user = ::User.where(wordpress_id: meta['_customer_user'].to_i).first
+    def import_new
+      meta = post_meta_hash
+      user = ::User.where(wordpress_id: meta['_customer_user'].to_i).first
 
-        dest = dest_class.new(
-          user:,
-          created_at: record.post_date,
-          stripe_source_id: meta['_stripe_source_id'],
-          stripe_customer_id: meta['_stripe_customer_id'],
-          order_total: meta['_order_total'],
-          order_tax: meta['_order_tax'],
-          order_currency: meta['_order_currency'],
-          payment_method_title: meta['_payment_method_title'],
-          payment_method: meta['_payment_method'],
-          wordpress_post_id: record.ID
-        )
-        dest.save!
-        puts "Imported subscription: #{dest.id}"
-      end
+      dest = self.class.dest_class.new(
+        user:,
+        created_at: post_date,
+        stripe_source_id: meta['_stripe_source_id'],
+        stripe_customer_id: meta['_stripe_customer_id'],
+        order_total: meta['_order_total'],
+        order_tax: meta['_order_tax'],
+        order_currency: meta['_order_currency'],
+        payment_method_title: meta['_payment_method_title'],
+        payment_method: meta['_payment_method'],
+        wordpress_post_id: self.ID
+      )
+      dest.save!
+      puts "Imported subscription: #{self.ID}"
     end
   end
 end

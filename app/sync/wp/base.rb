@@ -10,6 +10,7 @@ module Wp
         MembershipPlan.sync
         ShopSubscription.sync
         UserMembership.sync
+        ShopOrder.sync
       end
 
       def add_roles

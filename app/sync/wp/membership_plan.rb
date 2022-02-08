@@ -27,23 +27,23 @@ module Wp
 
       def sync
         find_each do |record|
-          import_new(record) unless dest_class.where(wordpress_post_id: record.ID).exists?
+          record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
         end
       end
+    end
 
-      def import_new(record)
-        return if record.post_name == 'account-holder'
+    def import_new
+      return if post_name == 'account-holder'
 
-        dest = dest_class.new(
-          title: TITLE_MAP[record.post_name] || record.post_title,
-          name: record.post_name,
-          created_at: record.post_date,
-          position: PLAN_ORDER.index(record.post_name),
-          wordpress_post_id: record.ID
-        )
-        dest.save!
-        puts "Imported membership plan: #{dest.name}"
-      end
+      dest = self.class.dest_class.new(
+        title: TITLE_MAP[post_name] || post_title,
+        name: post_name,
+        created_at: post_date,
+        position: PLAN_ORDER.index(post_name),
+        wordpress_post_id: self.ID
+      )
+      dest.save!
+      puts "Imported membership plan: #{dest.name}"
     end
   end
 end
