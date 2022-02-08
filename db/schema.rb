@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_003112) do
+ActiveRecord::Schema.define(version: 2022_02_08_031256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 2022_02_08_003112) do
     t.index ["subscription_id"], name: "index_memberships_on_subscription_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
     t.index ["wordpress_post_id"], name: "index_memberships_on_wordpress_post_id", unique: true
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "product_type"
+    t.bigint "product_id"
+    t.string "name"
+    t.integer "quantity"
+    t.decimal "line_subtotal", precision: 10, scale: 2
+    t.decimal "line_subtotal_tax", precision: 10, scale: 2
+    t.decimal "line_total", precision: 10, scale: 2
+    t.decimal "line_tax", precision: 10, scale: 2
+    t.integer "wordpress_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_type", "product_id"], name: "index_order_items_on_product"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -122,6 +137,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_003112) do
   add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"
   add_foreign_key "memberships", "users"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_events", "users"

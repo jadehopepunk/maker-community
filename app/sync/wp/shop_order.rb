@@ -13,7 +13,7 @@ module Wp
       end
 
       def sync
-        with_meta.find_each do |record|
+        with_meta.includes(:order_items).find_each do |record|
           record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
         end
       end
@@ -45,7 +45,14 @@ module Wp
         wordpress_post_id: self.ID
       )
       dest.save!
+      import_new_order_items(dest)
       puts "Imported order: #{self.ID}"
+    end
+
+    def import_new_order_items(dest)
+      order_items.each do |order_item|
+        order_item.import_new(dest)
+      end
     end
   end
 end
