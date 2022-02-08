@@ -1,3 +1,31 @@
-.timeline {
-  border: 1px solid red;
+table.timeline {
+  margin-top: 1rem;
+  tbody {
+    tr {
+      td {
+        padding: 0.5rem 1rem;
+
+        .timeline-event {
+          padding: 1rem;
+
+          &.major {
+            background-color: var(--callout-background-color);
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 1rem;
+              left: -20px;
+              width: 0;
+              height: 0px;
+              border-width: 10px;
+              border-style: solid;
+              border-color: transparent var(--callout-background-color) transparent transparent;
+            }
+          }
+        }
+      }
+    }
+  }
 }
