@@ -7,7 +7,6 @@ gem 'rails', '~> 7.0.1'
 
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
-gem 'mysql2'
 gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
@@ -22,6 +21,10 @@ gem 'rolify'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Needd while we integrate with Wordpress
+gem 'mysql2'
+gem 'php-serialize'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

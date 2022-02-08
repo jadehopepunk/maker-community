@@ -1,7 +1,7 @@
 module Wp
   class MembershipPlan < Wp::Base
     self.table_name = 'wp_posts'
-    include Concerns::HasPostMeta
+    include Concerns::IsPostType
 
     TITLE_MAP = {
       'makerspace-community-concession-member' => 'Community Concession Member',
@@ -40,10 +40,17 @@ module Wp
         name: post_name,
         created_at: post_date,
         position: PLAN_ORDER.index(post_name),
-        wordpress_post_id: self.ID
+        wordpress_post_id: self.ID,
+        wordpress_product_id: product_ids.first
       )
       dest.save!
       puts "Imported membership plan: #{dest.name}"
+    end
+
+    def product_ids
+      return [] if meta_hash['_product_ids'].blank?
+
+      PHP.unserialize meta_hash['_product_ids']
     end
   end
 end

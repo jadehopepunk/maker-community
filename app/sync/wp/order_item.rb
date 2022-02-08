@@ -20,7 +20,7 @@ module Wp
     end
 
     def import_new(_order)
-      puts "Product post is #{product_post.inspect}"
+      # puts "Product post is #{product_post.inspect}"
       # dest = ::OrderItem.create!(
       #   order:,
       #   product:,

@@ -1,7 +1,7 @@
 module Wp
   class UserMembership < Wp::Base
     self.table_name = 'wp_posts'
-    include Concerns::HasPostMeta
+    include Concerns::IsPostType
 
     default_scope { where(post_type: 'wc_user_membership') }
 
@@ -18,7 +18,7 @@ module Wp
     end
 
     def import_new
-      meta = post_meta_hash
+      meta = meta_hash
       user = ::User.where(wordpress_id: post_author.to_i).first
       plan = ::Plan.where(wordpress_post_id: post_parent.to_i).first
       subscription = ::Subscription.where(wordpress_post_id: meta['_subscription_id']).first

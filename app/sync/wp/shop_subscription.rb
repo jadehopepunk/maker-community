@@ -1,7 +1,7 @@
 module Wp
   class ShopSubscription < Wp::Base
     self.table_name = 'wp_posts'
-    include Concerns::HasPostMeta
+    include Concerns::IsPostType
 
     has_many :order_items, foreign_key: :order_id, class_name: 'Wp::OrderItem'
 
@@ -20,7 +20,7 @@ module Wp
     end
 
     def import_new
-      meta = post_meta_hash
+      meta = meta_hash
       user = ::User.where(wordpress_id: meta['_customer_user'].to_i).first
 
       dest = self.class.dest_class.new(

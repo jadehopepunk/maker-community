@@ -9,7 +9,7 @@ module Wp
         scope :with_meta, -> { includes(:post_meta) }
       end
 
-      def post_meta_hash
+      def meta_hash
         PostMeta.convert_to_hash(post_meta)
       end
     end

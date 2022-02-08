@@ -8,8 +8,10 @@ module Wp
       end
 
       def sync
-        find_each do |record|
-          record.import_new unless dest_class.where(wordpress_id: record.ID).exists?
+        imported_ids = dest_class.pluck(:wordpress_id)
+
+        where.not('ID' => imported_ids).find_each do |record|
+          record.import_new
         end
       end
     end
@@ -18,7 +20,7 @@ module Wp
       user = self.class.dest_class.new(
         email: user_email,
         password: user_pass,
-        display_name: display_name,
+        display_name:,
         wordpress_id: self.ID,
         created_at: user_registered
       )

@@ -1,6 +1,7 @@
 module Wp
   class Post < Wp::Base
     self.table_name = 'wp_posts'
+    include Concerns::IsPostType
 
     POST_TYPES = {
       shop_order: Wp::ShopOrder,
