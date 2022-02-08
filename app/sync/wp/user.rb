@@ -22,6 +22,7 @@ module Wp
           created_at: wp_user.user_registered
         )
         user.save!
+        puts "imported user #{user.display_name}"
       end
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_093249) do
+ActiveRecord::Schema.define(version: 2022_02_08_003112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 2022_02_07_093249) do
     t.index ["plan_id"], name: "index_memberships_on_plan_id"
     t.index ["subscription_id"], name: "index_memberships_on_subscription_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+    t.index ["wordpress_post_id"], name: "index_memberships_on_wordpress_post_id", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "status"
+    t.string "stripe_customer_id"
+    t.string "stripe_source_id"
+    t.string "payment_method"
+    t.string "payment_method_title"
+    t.decimal "order_total", precision: 8, scale: 2
+    t.decimal "order_tax", precision: 8, scale: 2
+    t.string "order_currency"
+    t.datetime "paid_at", precision: 6
+    t.datetime "completed_at", precision: 6
+    t.string "wordpress_post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["wordpress_post_id"], name: "index_orders_on_wordpress_post_id", unique: true
   end
 
   create_table "plans", force: :cascade do |t|
@@ -37,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_093249) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position", default: 0
+    t.index ["wordpress_post_id"], name: "index_plans_on_wordpress_post_id", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
@@ -62,6 +83,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_093249) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.index ["wordpress_post_id"], name: "index_subscriptions_on_wordpress_post_id", unique: true
   end
 
   create_table "user_events", force: :cascade do |t|
@@ -86,6 +108,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_093249) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["wordpress_id"], name: "index_users_on_wordpress_id", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -99,6 +122,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_093249) do
   add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"
   add_foreign_key "memberships", "users"
+  add_foreign_key "orders", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_events", "users"
 end

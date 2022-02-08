@@ -5,6 +5,8 @@ module Wp
 
       included do
         has_many :post_meta, foreign_key: :post_id, class_name: 'Wp::PostMeta'
+
+        scope :with_meta, -> { includes(:post_meta) }
       end
 
       def post_meta_hash

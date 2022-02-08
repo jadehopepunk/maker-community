@@ -1,5 +1,6 @@
 @import "./components/admin_navbar.postcss.css";
 @import "./components/admin_index_table.postcss.css";
+@import "./components/admin_timeline.postcss.css";
 
 @import "./layouts/admin.postcss.css";
 @import "./layouts/admin_people_index.postcss.css";
