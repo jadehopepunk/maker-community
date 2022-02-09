@@ -1,10 +1,12 @@
 class OrderService
   class << self
     def create(order)
-      order.save!
+      ActiveRecord::Base.transaction do
+        order.save!
 
-      order.order_items.each do |order_item|
-        trigger_order_item_events(order, order_item)
+        order.order_items.each do |order_item|
+          trigger_order_item_events(order, order_item)
+        end
       end
 
       order

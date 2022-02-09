@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_032500) do
     t.bigint "event_session_id"
     t.bigint "user_id"
     t.bigint "order_item_id"
+    t.string "status"
     t.integer "persons", default: 1
     t.integer "wordpress_post_id"
     t.datetime "created_at", precision: 6, null: false

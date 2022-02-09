@@ -16,15 +16,32 @@ module Wp
     end
 
     def import_new
-      import_event_session_if_new
+      event_session = import_event_session_if_new
+      user = imported_customer
+      order_item = imported_order_item
+
+      if user.nil?
+        puts "skipping booking #{self.ID} as it has no customer"
+        return
+      end
+
+      dest = ::EventBooking.new(
+        event_session:,
+        user:,
+        order_item:,
+        status: post_status,
+        persons: booking_persons,
+        wordpress_post_id: self.ID,
+        created_at: post_date
+      )
+      EventBookingsService.create(dest)
     end
 
     def import_event_session_if_new
       raise "No event for #{self.ID} status:#{post_status}" if event.nil?
 
       session = ::EventSession.where(event:, start_at: booking_start).first
-      session ||= import_event_session
-      puts "session: #{session.inspect}"
+      session || import_event_session
     end
 
     def import_event_session
@@ -53,6 +70,26 @@ module Wp
 
     def booking_end
       meta_hash['_booking_end'].to_datetime
+    end
+
+    def imported_order_item
+      ::OrderItem.where(wordpress_id: order_item_id).first
+    end
+
+    def imported_customer
+      ::User.where(wordpress_id: customer_id).first
+    end
+
+    def order_item_id
+      meta_hash['_booking_order_item_id'].to_i
+    end
+
+    def customer_id
+      meta_hash['_booking_customer_id'].to_i
+    end
+
+    def booking_persons
+      PHP.unserialize(meta_hash['_booking_persons']).first
     end
   end
 end

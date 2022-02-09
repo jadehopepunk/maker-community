@@ -106,6 +106,8 @@ GEM
       rack (>= 1.2)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    indefinite_article (0.2.4)
+      activesupport
     io-console (0.5.11)
     io-wait (0.2.1)
     irb (1.4.1)
@@ -280,6 +282,7 @@ DEPENDENCIES
   debug
   devise
   hash_to_hidden_fields
+  indefinite_article
   jsbundling-rails
   kaminari
   mysql2

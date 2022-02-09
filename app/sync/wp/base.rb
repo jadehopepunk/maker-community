@@ -12,6 +12,7 @@ module Wp
         Wp::ShopSubscription.sync
         Wp::UserMembership.sync
         Wp::ShopOrder.sync
+        Wp::Booking.sync
       end
 
       def add_roles

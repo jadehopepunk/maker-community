@@ -23,6 +23,16 @@ table.timeline {
               border-style: solid;
               border-color: transparent var(--callout-background-color) transparent transparent;
             }
+
+            h3 {
+              font-weight: normal;
+              color: var(--callout-text-color);
+
+              strong {
+                font-weight: bold;
+                color: var(--highlight-color);
+              }
+            }
           }
         }
       }

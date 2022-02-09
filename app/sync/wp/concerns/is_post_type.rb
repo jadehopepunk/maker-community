@@ -27,6 +27,10 @@ module Wp
       def term_slugs
         terms.map(&:slug)
       end
+
+      def imported_post_author
+        ::User.where(wordpress_id: post_author).first
+      end
     end
   end
 end
