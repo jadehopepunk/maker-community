@@ -16,11 +16,25 @@ module Wp
     end
 
     def import_new
-      import_event_session
+      import_event_session_if_new
+    end
+
+    def import_event_session_if_new
+      raise "No event for #{self.ID} status:#{post_status}" if event.nil?
+
+      session = ::EventSession.where(event:, start_at: booking_start).first
+      session ||= import_event_session
+      puts "session: #{session.inspect}"
     end
 
     def import_event_session
-      puts "No event for #{self.ID} status:#{post_status}" if event.nil?
+      dest = ::EventSession.create!(
+        event:,
+        start_at: booking_start,
+        end_at: booking_end
+      )
+      puts "imported event session #{event.slug}, #{dest.start_at}"
+      dest
     end
 
     def event
@@ -31,6 +45,14 @@ module Wp
       raise 'event _booking_product_id not found' unless meta_hash['_booking_product_id']
 
       meta_hash['_booking_product_id'].to_i
+    end
+
+    def booking_start
+      meta_hash['_booking_start'].to_datetime
+    end
+
+    def booking_end
+      meta_hash['_booking_end'].to_datetime
     end
   end
 end
