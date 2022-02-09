@@ -8,7 +8,8 @@ module Wp
       shop_subscription: Wp::ShopSubscription,
       wc_membership_plan: Wp::MembershipPlan,
       wc_user_membership: Wp::UserMembership,
-      product: Wp::Product
+      product: Wp::Product,
+      attachment: Wp::Attachment
     }
 
     def as_subclass

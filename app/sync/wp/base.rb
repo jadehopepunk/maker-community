@@ -6,11 +6,12 @@ module Wp
 
     class << self
       def sync
-        User.sync
-        MembershipPlan.sync
-        ShopSubscription.sync
-        UserMembership.sync
-        # ShopOrder.sync
+        Wp::User.sync
+        Wp::MembershipPlan.sync
+        Wp::Event.sync
+        Wp::ShopSubscription.sync
+        Wp::UserMembership.sync
+        # Wp::ShopOrder.sync
       end
 
       def add_roles
