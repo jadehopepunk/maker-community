@@ -9,6 +9,10 @@ module Wp
       plan_destination
     end
 
+    def is_event?
+      term_slugs.include? 'events'
+    end
+
     private
 
     def plan_destination

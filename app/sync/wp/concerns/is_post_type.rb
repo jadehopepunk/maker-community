@@ -5,6 +5,8 @@ module Wp
 
       included do
         include Concerns::HasPostMeta
+
+        has_many :term_relationships, class_name: 'Wp::TermRelationship', foreign_key: 'object_id'
       end
 
       def parent
@@ -16,6 +18,14 @@ module Wp
 
       def children
         Post.where(post_parent: self.ID).map(&:as_subclass)
+      end
+
+      def terms
+        term_relationships.includes(term_taxonomy: :term).map(&:term_taxonomy).map(&:term)
+      end
+
+      def term_slugs
+        terms.map(&:slug)
       end
     end
   end

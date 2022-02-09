@@ -19,3 +19,6 @@ Style/NumericPredicate:
 
 Style/GuardClause:
   Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
