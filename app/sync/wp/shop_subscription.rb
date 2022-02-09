@@ -20,7 +20,6 @@ module Wp
     end
 
     def import_new
-      meta = meta_hash
       user = ::User.where(wordpress_id: meta['_customer_user'].to_i).first
 
       dest = self.class.dest_class.new(

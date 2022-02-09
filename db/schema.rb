@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_032500) do
     t.string "order_currency"
     t.datetime "paid_at", precision: 6
     t.datetime "completed_at", precision: 6
-    t.string "wordpress_post_id"
+    t.integer "wordpress_post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"

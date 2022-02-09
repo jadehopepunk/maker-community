@@ -18,7 +18,6 @@ module Wp
     end
 
     def import_new
-      meta = meta_hash
       user = ::User.where(wordpress_id: post_author.to_i).first
       plan = ::Plan.where(wordpress_post_id: post_parent.to_i).first
       subscription = ::Subscription.where(wordpress_post_id: meta['_subscription_id']).first

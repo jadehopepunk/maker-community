@@ -13,7 +13,7 @@ module Wp
       end
 
       def sync
-        with_meta.includes(:order_items).find_each do |record|
+        with_meta.where(post_status: 'wc-completed').includes(:order_items).find_each do |record|
           record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
         end
       end
@@ -29,15 +29,11 @@ module Wp
     end
 
     def build_new
-      meta = meta_hash
-      user_id = meta['_customer_user'].to_i
+      user = imported_customer
 
-      if user_id == 0
-        puts "skipping ShopOrder ##{self.ID} because it has no customer id"
-        return
-      end
+      return nil if user.nil?
 
-      user = ::User.where(wordpress_id: user_id).first
+      puts "importing order #{self.ID}"
 
       self.class.dest_class.new(
         user:,
@@ -52,6 +48,7 @@ module Wp
         paid_at: meta['_paid_date'],
         completed_at: meta['_completed_date'],
         wordpress_post_id: self.ID,
+        status: post_status&.sub('wc-', ''),
         order_items: build_order_items
       )
     end
@@ -61,6 +58,20 @@ module Wp
       scope.map do |order_item|
         order_item.build_new
       end.compact
+    end
+
+    def imported_customer
+      return nil if customer_id.nil?
+
+      user = ::User.where(wordpress_id: customer_id).first
+      raise "No user for customer #{meta['_customer_user']} on order #{self.ID}" if user.nil?
+
+      user
+    end
+
+    def customer_id
+      result = meta['_customer_user']&.to_i
+      result == 0 ? nil : result
     end
   end
 end

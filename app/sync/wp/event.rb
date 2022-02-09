@@ -36,7 +36,7 @@ module Wp
     end
 
     def booking_availability
-      PHP.unserialize meta_hash['_wc_booking_availability']
+      PHP.unserialize meta['_wc_booking_availability']
     end
   end
 end

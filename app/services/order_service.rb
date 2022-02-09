@@ -22,6 +22,9 @@ class OrderService
           occured_at: order.completed_at
         )
       end
+    rescue ActiveRecord::RecordInvalid => e
+      e.message << ": #{order.inspect}"
+      raise e
     end
   end
 end

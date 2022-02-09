@@ -9,8 +9,8 @@ module Wp
         scope :with_meta, -> { includes(:post_meta) }
       end
 
-      def meta_hash
-        PostMeta.convert_to_hash(post_meta)
+      def meta
+        @meta ||= PostMeta.convert_to_hash(post_meta)
       end
     end
   end

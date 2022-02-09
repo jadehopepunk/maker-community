@@ -12,7 +12,7 @@ class CreateOrders < ActiveRecord::Migration[7.0]
       t.string :order_currency
       t.datetime :paid_at
       t.datetime :completed_at
-      t.string :wordpress_post_id
+      t.integer :wordpress_post_id
       t.timestamps
     end
 

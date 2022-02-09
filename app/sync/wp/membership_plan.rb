@@ -48,9 +48,9 @@ module Wp
     end
 
     def product_ids
-      return [] if meta_hash['_product_ids'].blank?
+      return [] if meta['_product_ids'].blank?
 
-      PHP.unserialize meta_hash['_product_ids']
+      PHP.unserialize meta['_product_ids']
     end
   end
 end

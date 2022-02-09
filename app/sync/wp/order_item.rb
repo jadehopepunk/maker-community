@@ -5,12 +5,12 @@ module Wp
     has_many :order_item_meta, foreign_key: :order_item_id, class_name: 'Wp::OrderItemMeta'
     scope :with_meta, -> { includes(:order_item_meta) }
 
-    def meta_hash
+    def meta
       @meta ||= OrderItemMeta.convert_to_hash(order_item_meta)
     end
 
     def product_id
-      meta_hash['_product_id']&.to_i
+      meta['_product_id']&.to_i
     end
 
     def product_post
@@ -26,11 +26,11 @@ module Wp
       ::OrderItem.new(
         product:,
         name: order_item_name,
-        quantity: meta_hash['_qty'],
-        line_subtotal: meta_hash['_line_subtotal'],
-        line_subtotal_tax: meta_hash['_line_subtotal_tax'],
-        line_total: meta_hash['_line_total'],
-        line_tax: meta_hash['_line_tax'],
+        quantity: meta['_qty'],
+        line_subtotal: meta['_line_subtotal'],
+        line_subtotal_tax: meta['_line_subtotal_tax'],
+        line_total: meta['_line_total'],
+        line_tax: meta['_line_tax'],
         wordpress_id: order_item_id
       )
     end

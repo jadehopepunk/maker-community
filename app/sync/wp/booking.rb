@@ -59,17 +59,17 @@ module Wp
     end
 
     def event_post_id
-      raise 'event _booking_product_id not found' unless meta_hash['_booking_product_id']
+      raise 'event _booking_product_id not found' unless meta['_booking_product_id']
 
-      meta_hash['_booking_product_id'].to_i
+      meta['_booking_product_id'].to_i
     end
 
     def booking_start
-      meta_hash['_booking_start'].to_datetime
+      meta['_booking_start'].to_datetime
     end
 
     def booking_end
-      meta_hash['_booking_end'].to_datetime
+      meta['_booking_end'].to_datetime
     end
 
     def imported_order_item
@@ -81,15 +81,15 @@ module Wp
     end
 
     def order_item_id
-      meta_hash['_booking_order_item_id'].to_i
+      meta['_booking_order_item_id'].to_i
     end
 
     def customer_id
-      meta_hash['_booking_customer_id'].to_i
+      meta['_booking_customer_id'].to_i
     end
 
     def booking_persons
-      PHP.unserialize(meta_hash['_booking_persons']).first
+      PHP.unserialize(meta['_booking_persons']).first
     end
   end
 end
