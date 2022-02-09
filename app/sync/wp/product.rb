@@ -16,7 +16,11 @@ module Wp
     private
 
     def plan_destination
-      ::Plan.where(wordpress_product_id: self.ID).first
+      if is_event?
+        ::Event.where(wordpress_post_id: self.ID).first
+      else
+        ::Plan.where(wordpress_product_id: self.ID).first
+      end
     end
   end
 end

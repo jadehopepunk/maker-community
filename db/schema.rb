@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_022342) do
+ActiveRecord::Schema.define(version: 2022_02_09_032500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_bookings", force: :cascade do |t|
+    t.bigint "event_session_id"
+    t.bigint "user_id"
+    t.bigint "order_item_id"
+    t.integer "persons", default: 1
+    t.integer "wordpress_post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_session_id"], name: "index_event_bookings_on_event_session_id"
+    t.index ["order_item_id"], name: "index_event_bookings_on_order_item_id"
+    t.index ["user_id"], name: "index_event_bookings_on_user_id"
+  end
+
+  create_table "event_sessions", force: :cascade do |t|
+    t.bigint "event_id"
+    t.datetime "start_at", precision: 6
+    t.datetime "end_at", precision: 6
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_sessions_on_event_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.bigint "author_id"
@@ -147,6 +169,10 @@ ActiveRecord::Schema.define(version: 2022_02_09_022342) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "event_bookings", "event_sessions"
+  add_foreign_key "event_bookings", "order_items"
+  add_foreign_key "event_bookings", "users"
+  add_foreign_key "event_sessions", "events"
   add_foreign_key "events", "users", column: "author_id"
   add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"

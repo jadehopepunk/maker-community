@@ -11,6 +11,10 @@ module Wp
         find_by_slug 'events'
       end
 
+      def inductions
+        find_by_slug 'inductions'
+      end
+
       def post_ids
         term_relationships.pluck(:object_id)
       end

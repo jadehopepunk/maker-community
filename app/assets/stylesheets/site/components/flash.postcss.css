@@ -7,7 +7,7 @@
     padding: 10px;
 
     &.notice {
-      background-color: rgb(251, 146, 60);
+      background-color: #15803d;
     }
 
     &.alert {

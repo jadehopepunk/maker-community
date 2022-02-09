@@ -2,7 +2,13 @@ module Wp
   class Event < Wp::Product
     class << self
       def all_events
-        find Wp::Term.events.post_ids
+        terms = [
+          Wp::Term.events,
+          Wp::Term.inductions
+        ]
+        custom_ids = [6264, 6241]
+        ids = (custom_ids + terms.map(&:post_ids).flatten).uniq
+        find ids
       end
 
       def sync
