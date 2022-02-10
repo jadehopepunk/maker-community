@@ -1,4 +1,45 @@
 .layout-admin {
+  display: flex;
+  flex-direction: row;
+
+  .admin-menu {
+    width: 200px;
+    box-size: border-box;
+    background-color: #000000;
+    box-shadow: 5px 0 3px rgba(0, 0, 0, 0.2);
+
+    .menu-nav {
+      margin-top: 60px;
+
+      .nav-item {
+        display: block;
+        padding: 0.75rem 0.75rem;
+        background-color: #222222;
+
+        &:not(:last-child) {
+          margin-bottom: 2px;
+        }
+      }
+
+      .nav-item.disabled {
+        color: #6b7280;
+      }
+
+      a.nav-item {
+        color: white;
+
+        &:hover {
+          background-color: #444444;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .admin-body {
+    flex-grow: 1;
+  }
+
   .admin-content {
     margin: var(--gutter);
 

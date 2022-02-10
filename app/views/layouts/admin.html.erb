@@ -5,6 +5,10 @@
   </head>
 
   <body class="theme-gold theme-inverted layout-admin">
-    <%= render 'layouts/shared/flash' %> <%= yield %>
+    <%= render 'layouts/shared/flash' %> <%= render 'admin/shared/menu' %>
+    <div class="admin-body">
+      <%= render partial: 'admin/people/navbar' %>
+      <div class="admin-content"><%= yield %></div>
+    </div>
   </body>
 </html>

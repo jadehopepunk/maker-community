@@ -57,6 +57,7 @@ beige: "#E1A994", */
   --highlight-color-emphasis: var(--pink-light);
   --highlight-color-inverse: var(--white);
   --background-color: var(--blue-dark);
+  --background-color-emphasis: var(--blue-dark-highlight);
 
   @mixin apply-theme-colors;
 }
