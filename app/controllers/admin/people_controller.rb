@@ -11,7 +11,7 @@ module Admin
       @plans = Plan.all
       @search_params = params.permit(filters: [], q: [:display_name_cont])
 
-      @area_roles = Role.where(name: 'people_admin').includes(:users)
+      @area_roles = Role.where(name: 'people_admin').includes(:users) || []
     end
 
     def show

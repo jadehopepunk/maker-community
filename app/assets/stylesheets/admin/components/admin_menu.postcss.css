@@ -3,6 +3,7 @@
     --gutter: 15px;
 
     width: 200px;
+    flex-shrink: 0;
     box-size: border-box;
     box-shadow: 5px 0 3px rgba(0, 0, 0, 0.2);
 

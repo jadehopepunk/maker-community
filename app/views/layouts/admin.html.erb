@@ -4,10 +4,10 @@
     <%= render 'layouts/shared/head' %>
   </head>
 
-  <body class="theme-people theme-inverted layout-admin">
+  <body class="<%= @section.present? ? "theme-#{@section}" : "theme-blue" %> theme-inverted layout-admin">
     <%= render 'layouts/shared/flash' %> <%= render 'admin/shared/menu' %>
     <div class="admin-body">
-      <%= render partial: 'admin/people/navbar' %>
+      <%= render(partial: "admin/#{@section}/navbar") if @section %>
       <div class="admin-content"><%= yield %></div>
     </div>
   </body>

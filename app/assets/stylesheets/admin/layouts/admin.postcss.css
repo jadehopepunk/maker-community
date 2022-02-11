@@ -41,10 +41,17 @@
       }
 
       a.person {
+        margin-right: 0.6rem;
+
         &:hover {
           text-decoration: underline;
         }
       }
     }
+  }
+
+  .center {
+    max-width: 600px;
+    margin: 20vh auto;
   }
 }
