@@ -100,3 +100,11 @@ beige: "#E1A994", */
   --tag-text-color: var(--white);
   --text-color-muted: #9ca3af;
 }
+
+.theme-black {
+  --background-color: var(--black);
+  --text-color: var(--white);
+  --highlight-color: var(--white);
+
+  @mixin apply-theme-colors;
+}

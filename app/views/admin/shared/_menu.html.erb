@@ -1,7 +1,27 @@
-<div class="admin-menu">
+<div class="admin-menu theme-black">
+  <div class="menu-hero">
+    <h1>Maker Community</h1>
+  </div>
   <nav class="menu-nav">
     <a class="nav-item" href="<%= admin_people_path %>">People</a>
     <div class="nav-item disabled">Place</div>
     <a class="nav-item" href="/admin">Program</a>
   </nav>
+  <div class="user-details">
+    <div class="welcome">
+      <div class="de-emphasise">welcome,</div>
+      <a class="user-name" href="<%= admin_person_path(current_user) %>"><%= current_user.display_name %></a>
+      <div class="roles de-emphasise">
+        <% current_user.roles.each do |role| %>
+        <div class="role"><%= role.display_name %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="user-links de-emphasise">
+      <a class="user-name" href="https://makercommunity.org.au/">main website</a>
+      <a class="user-name" href="https://makercommunity.org.au/wp-admin">wordpress admin</a>
+      <a class="user-name" href="/">WIP website</a>
+      <a class="user-name" href="<%= destroy_user_session_path %>">log out</a>
+    </div>
+  </div>
 </div>

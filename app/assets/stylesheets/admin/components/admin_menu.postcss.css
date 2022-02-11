@@ -1,0 +1,93 @@
+.layout-admin {
+  .admin-menu {
+    --gutter: 15px;
+
+    width: 200px;
+    box-size: border-box;
+    box-shadow: 5px 0 3px rgba(0, 0, 0, 0.2);
+
+    .menu-hero {
+      padding: var(--gutter);
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .menu-nav {
+      .nav-item {
+        display: block;
+        padding: 0.75rem var(--gutter);
+        background-color: #222222;
+
+        &:not(:last-child) {
+          margin-bottom: 2px;
+        }
+      }
+
+      .nav-item.disabled {
+        color: #6b7280;
+      }
+
+      a.nav-item {
+        color: white;
+
+        &:hover {
+          background-color: #444444;
+          color: white;
+        }
+      }
+    }
+
+    .user-details {
+      --text-color: #d1d5db;
+      color: var(--text-color);
+      margin-top: var(--gutter);
+      padding: var(--gutter);
+
+      a,
+      a:link,
+      a:visited {
+        color: var(--text-color);
+        display: block;
+
+        & {
+        }
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .de-emphasise {
+        color: #6b7280;
+
+        a,
+        a:link,
+        a:visited {
+          color: #9ca3af;
+        }
+      }
+
+      .welcome {
+        margin-bottom: var(--gutter);
+
+        .roles {
+          margin-top: calc(var(--gutter) / 2);
+        }
+      }
+
+      .user-links {
+        a {
+          display: block;
+          padding: 0.05rem 0;
+
+          &:before {
+            content: "•";
+            margin-right: 0.25rem;
+          }
+        }
+      }
+    }
+  }
+}

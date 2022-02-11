@@ -1,40 +1,8 @@
 .layout-admin {
   display: flex;
   flex-direction: row;
-
-  .admin-menu {
-    width: 200px;
-    box-size: border-box;
-    background-color: #000000;
-    box-shadow: 5px 0 3px rgba(0, 0, 0, 0.2);
-
-    .menu-nav {
-      margin-top: 60px;
-
-      .nav-item {
-        display: block;
-        padding: 0.75rem 0.75rem;
-        background-color: #222222;
-
-        &:not(:last-child) {
-          margin-bottom: 2px;
-        }
-      }
-
-      .nav-item.disabled {
-        color: #6b7280;
-      }
-
-      a.nav-item {
-        color: white;
-
-        &:hover {
-          background-color: #444444;
-          color: white;
-        }
-      }
-    }
-  }
+  height: 100%;
+  overflow: scroll;
 
   .admin-body {
     flex-grow: 1;
@@ -55,6 +23,27 @@
       a:hover {
         color: var(--highlight-color);
         text-decoration: underline;
+      }
+    }
+  }
+
+  .admin-area-leads {
+    margin-bottom: 1rem;
+
+    .role {
+      display: flex;
+      flex-direction: row;
+
+      h2 {
+        font-size: 1rem;
+        margin-right: 1rem;
+        color: var(--text-color);
+      }
+
+      a.person {
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

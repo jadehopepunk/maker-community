@@ -10,6 +10,8 @@ module Admin
       @people = @filters.apply(@q.result).includes(:active_plans).page(params[:page]).per(20)
       @plans = Plan.all
       @search_params = params.permit(filters: [], q: [:display_name_cont])
+
+      @area_roles = Role.where(name: 'people_admin').includes(:users)
     end
 
     def show

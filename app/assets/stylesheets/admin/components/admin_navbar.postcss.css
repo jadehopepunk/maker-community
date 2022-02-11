@@ -9,13 +9,4 @@
     @mixin text-large;
     font-weight: bold;
   }
-
-  .actions {
-    .action {
-      svg {
-        width: 1.7em;
-        height: 1.7em;
-      }
-    }
-  }
 }
