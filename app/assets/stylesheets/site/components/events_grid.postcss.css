@@ -15,7 +15,7 @@
 
     .details {
       padding: calc(var(--gutter) * 0.75);
-      background-color: #0284c7;
+      background-color: var(--callout-background-color);
       color: white;
 
       display: flex;

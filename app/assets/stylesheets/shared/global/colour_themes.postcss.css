@@ -10,6 +10,7 @@ beige: "#E1A994", */
   --blue-dark: #2a3166;
   --blue-dark-highlight: #4d5ab6;
   --teal-dark: #0d9488;
+  --teal-light: #14b8a6;
   --sky: #78cee1;
   --gold: #efbf6e;
   --white: #ffffff;
@@ -62,15 +63,23 @@ beige: "#E1A994", */
   @mixin apply-theme-colors;
 }
 
-.theme-teal {
+.theme-people {
   --text-color: var(--gray-100);
   --background-color: var(--teal-dark);
   @mixin blue-dark-highlight;
 
+  &.theme-inverted {
+    --text-color: var(--gray-100);
+    --highlight-color: var(--teal-light);
+    --highlight-color-inverse: var(--black);
+    --background-color: var(--slate-800);
+    --callout-background-color: var(--slate-700);
+  }
+
   @mixin apply-theme-colors;
 }
 
-.theme-sky {
+.theme-place {
   --text-color: var(--black);
   --background-color: var(--sky);
   @mixin blue-dark-highlight;
@@ -78,9 +87,10 @@ beige: "#E1A994", */
   @mixin apply-theme-colors;
 }
 
-.theme-gold {
+.theme-program {
   --text-color: var(--black);
   --background-color: var(--gold);
+  --callout-background-color: #e9aa3e;
   @mixin blue-dark-highlight;
 
   &.theme-inverted {
