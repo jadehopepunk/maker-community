@@ -1,6 +1,8 @@
 module Admin
   class AdminController < ApplicationController
     before_action :set_section
+    before_action -> { authorize :application, :can_admin? }
+
     layout 'admin'
     SECTIONS = {
       'people' => 'people',

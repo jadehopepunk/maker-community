@@ -11,6 +11,7 @@ class Role < ApplicationRecord
     people_admin
     program_admin
     place_admin
+    teacher
   ].freeze
 
   belongs_to :resource, polymorphic: true, optional: true

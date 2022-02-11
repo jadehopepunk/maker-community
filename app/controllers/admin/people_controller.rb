@@ -1,7 +1,7 @@
 module Admin
   class PeopleController < AdminController
     def index
-      authorize [:admin, User], :index?
+      # authorize [:admin, User], :index?
 
       @q = User.ransack(params[:q])
       @q.sorts = ['display_name asc'] if @q.sorts.empty?

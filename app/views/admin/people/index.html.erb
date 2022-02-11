@@ -9,19 +9,21 @@
       </div>
     <% end %>
   </div>
-  <div class="callout stats-callout">
-    <h2 class="callout-title">Overview</h2>
-    <div class="stats">
-      <% @plans.each do |plan| %>
-      <div class="stat-container">
-        <a class="stat" href="<%= url_for @search_params.merge(filters: ["plan|#{plan.name}"]) %>">
-          <div class="value"><%= plan.active_users.count %></div>
-          <div class="label"><%= plan.title.pluralize %></div>
-        </a>
+  <% if policy([:admin, :user]).basic_member_stats? %>
+    <div class="callout stats-callout">
+      <h2 class="callout-title">Overview</h2>
+      <div class="stats">
+        <% @plans.each do |plan| %>
+        <div class="stat-container">
+          <a class="stat" href="<%= url_for @search_params.merge(filters: ["plan|#{plan.name}"]) %>">
+            <div class="value"><%= plan.active_users.count %></div>
+            <div class="label"><%= plan.title.pluralize %></div>
+          </a>
+        </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
-  </div>
+  <% end %>
   <div class="admin-index-table">
     <div class="table-controls">
       <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %>

@@ -1,5 +1,15 @@
 module Admin
   class UserPolicy < ApplicationPolicy
+    def basic_member_stats?
+      has_any_of? %w[
+        board_member
+        duty_manager
+        people_admin
+        program_admin
+        place_admin
+      ]
+    end
+
     def index?
       admin?
     end
