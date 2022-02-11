@@ -11,4 +11,7 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
+  scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }
+
+  def has_any_of_roles?(these_role_names); end
 end

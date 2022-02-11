@@ -5,4 +5,5 @@ class Plan < ApplicationRecord
   has_many :active_users, through: :active_memberships, source: :user
 
   default_scope { order(position: 'ASC') }
+  scope :in_person, -> { where.not(name: 'association-member') }
 end

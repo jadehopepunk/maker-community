@@ -3,11 +3,12 @@ module Admin
     def index
       # authorize [:admin, User], :index?
 
-      @q = User.ransack(params[:q])
+      @q = policy_scope([:admin, User]).ransack(params[:q])
       @q.sorts = ['display_name asc'] if @q.sorts.empty?
       @filters = SearchFilters.from_params(params[:filters])
 
       @people = @filters.apply(@q.result).includes(:active_plans).page(params[:page]).per(20)
+
       @plans = Plan.all
       @search_params = params.permit(filters: [], q: [:display_name_cont])
 
