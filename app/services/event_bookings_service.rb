@@ -7,7 +7,7 @@ class EventBookingsService
         UserEvents::BookedForEvent.create!(
           user: booking.user,
           subject: booking,
-          occured_at: booking.event_session.start_at
+          occured_at: booking.session.start_at
         )
       end
 
