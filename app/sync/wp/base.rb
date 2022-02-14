@@ -27,5 +27,9 @@ module Wp
         end
       end
     end
+
+    def dest_class
+      self.class.dest_class
+    end
   end
 end

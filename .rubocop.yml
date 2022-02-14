@@ -22,3 +22,6 @@ Style/GuardClause:
 
 Naming/PredicateName:
   Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false

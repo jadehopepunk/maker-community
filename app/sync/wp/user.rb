@@ -8,16 +8,24 @@ module Wp
       end
 
       def sync
-        imported_ids = dest_class.pluck(:wordpress_id)
-
-        where.not('ID' => imported_ids).find_each do |record|
-          record.import_new
-        end
+        find_each(&:import_or_update)
       end
     end
 
+    def import_or_update
+      if existing_dest
+        update_existing
+      else
+        import_new
+      end
+    end
+
+    def existing_dest
+      @dest ||= dest_class.where(wordpress_id: self.ID).first
+    end
+
     def import_new
-      user = self.class.dest_class.new(
+      user = dest_class.new(
         email: user_email,
         password: user_pass,
         display_name:,
@@ -26,6 +34,17 @@ module Wp
       )
       user.save!
       puts "imported user #{user.display_name}"
+    end
+
+    def update_existing
+      dest = existing_dest
+
+      dest.email = user_email
+      dest.display_name = display_name
+      if dest.changed?
+        dest.save!
+        puts "updated user #{dest.display_name}"
+      end
     end
   end
 end
