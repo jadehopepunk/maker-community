@@ -5,7 +5,7 @@
   </head>
 
   <body class="<%= @section.present? ? "theme-#{@section}" : "theme-blue" %> theme-inverted layout-admin">
-    <%= render 'layouts/shared/flash' %> <%= render 'admin/shared/menu' %>
+    <%= render 'layouts/shared/flash' %> <%= render 'admin/shared/menu', locals: { section: @section } %>
     <div class="admin-body">
       <%= render(partial: "admin/#{@section}/navbar") if @section %>
       <div class="admin-content"><%= yield %></div>

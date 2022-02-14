@@ -32,6 +32,14 @@ table.timeline {
                 font-weight: bold;
                 color: var(--highlight-color);
               }
+
+              a {
+                color: var(--highlight-color);
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
             }
           }
         }

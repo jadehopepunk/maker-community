@@ -3,9 +3,9 @@
     <h1><a href="/admin">Maker Community</a></h1>
   </div>
   <nav class="menu-nav">
-    <a class="nav-item" href="<%= admin_people_path %>">People</a>
-    <div class="nav-item disabled">Place</div>
-    <a class="nav-item" href="<%= admin_events_path %>">Program</a>
+    <a class="nav-item <%= 'active' if @section == 'people' %>" href="<%= admin_people_path %>">People</a>
+    <div class="nav-item disabled <%= 'active' if @section == 'place' %>">Place</div>
+    <a class="nav-item <%= 'active' if @section == 'program' %>" href="<%= admin_events_path %>">Program</a>
   </nav>
   <div class="user-details">
     <div class="welcome">

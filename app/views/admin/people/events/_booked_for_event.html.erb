@@ -1,4 +1,8 @@
 <div class="timeline-event major">
-  <h3>booked for <strong><%= event.event&.title %></strong></h3>
+  <h3>
+    booked for <% if event.event_session %>
+    <a href="<%= admin_event_session_path event.event_session %>"><%= event.event&.title %></a>
+    <% else %> an event. <% end %>
+  </h3>
   <div></div>
 </div>

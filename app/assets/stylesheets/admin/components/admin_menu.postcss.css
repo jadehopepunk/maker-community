@@ -24,10 +24,15 @@
         &:not(:last-child) {
           margin-bottom: 2px;
         }
-      }
 
-      .nav-item.disabled {
-        color: #6b7280;
+        &.disabled {
+          color: #6b7280;
+        }
+
+        &.active {
+          background-color: #444444;
+          color: white;
+        }
       }
 
       a.nav-item {

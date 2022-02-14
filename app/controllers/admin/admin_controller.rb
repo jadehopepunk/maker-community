@@ -6,7 +6,8 @@ module Admin
     layout 'admin'
     SECTIONS = {
       'people' => 'people',
-      'events' => 'program'
+      'events' => 'program',
+      'event_sessions' => 'program'
     }
 
     def index; end
