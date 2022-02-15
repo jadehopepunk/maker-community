@@ -1,1 +1,12 @@
-<p>EventSessions#show</p>
+<div class="layout-show">
+  <div class="title-container">
+    <h2 class="page-title"><%= @event_session.event.title %></h2>
+    <div class="page-subtitle"><%= format_datetime @event_session.start_at, seperator: ' at ' %></div>
+  </div>
+
+  <h3>Attendees</h3>
+  <br />
+  <% @event_session.bookings.each do |booking| %>
+  <div class="booking"><%= link_to booking.user.display_name, admin_person_path(booking.user) %></div>
+  <% end %>
+</div>

@@ -25,3 +25,6 @@ Naming/PredicateName:
 
 Naming/MemoizedInstanceVariableName:
   Enabled: false
+
+Style/StringInterpolation:
+  Enabled: false
