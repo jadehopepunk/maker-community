@@ -25,6 +25,10 @@
       td {
         padding: 0 1rem;
 
+        &.right {
+          text-align: right;
+        }
+
         a.primary-row-link {
           padding: 0.5rem 0;
           display: block;

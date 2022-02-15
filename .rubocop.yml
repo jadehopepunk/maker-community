@@ -28,3 +28,7 @@ Naming/MemoizedInstanceVariableName:
 
 Style/VariableInterpolation:
   Enabled: false
+
+Style/WordArray:
+  EnforcedStyle: brackets
+  Enabled: true

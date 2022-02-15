@@ -8,6 +8,8 @@ module DatetimeHelper
   end
 
   def format_time(datetime)
+    return nil if datetime.blank?
+
     content_tag :span, class: 'time' do
       datetime.strftime('%l:%M %P')
     end

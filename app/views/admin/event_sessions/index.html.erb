@@ -9,5 +9,5 @@
     </div>
     <% end %>
   </div>
-  <%= render partial: 'admin/event_sessions/bookings', locals: { filters: @filters, bookings: @bookings, q: @q } %>
+  <%= render partial: 'admin/event_sessions/sessions', locals: { filters: @filters, records: @event_sessions, q: @q } %>
 </div>
