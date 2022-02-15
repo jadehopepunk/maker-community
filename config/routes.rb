@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     root to: 'admin#index'
     resources :people, only: [:index, :show]
     resources :events, only: [:index]
-    resources :event_sessions, only: [:show]
+    resources :event_sessions, only: [:index, :show]
   end
 
   root 'pages#home'

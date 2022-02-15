@@ -7,31 +7,5 @@
   <h3>Attendees</h3>
   <br />
 
-  <div class="admin-index-table">
-    <div class="table-controls">
-      <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %> <%= search_form_for @q, url: admin_event_session_path(@event_session) do |f| %>
-      <div class="search-with-submit"><%= f.search_field :user_display_name_cont %> <%= f.submit "search" %></div>
-      <% end %>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th><%= sort_link(@q, :user_display_name, 'Name', default_order: :asc) %></th>
-          <th>People</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @bookings.each do |booking| %>
-        <tr>
-          <td><%= link_to booking.user.display_name, admin_person_path(booking.user), class: 'primary-row-link' %></td>
-          <td><%= booking.persons %></td>
-          <td><%= booking.status %></td>
-        </tr>
-        <% end %>
-      </tbody>
-      <%= paginate @bookings %>
-    </table>
-  </div>
+  <%= render partial: 'admin/event_sessions/bookings', locals: { filters: @filters, bookings: @bookings, q: @q } %>
 </div>

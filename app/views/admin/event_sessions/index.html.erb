@@ -1,0 +1,13 @@
+<div class="layout-admin-people-index">
+  <div class="admin-area-leads">
+    <% @area_roles.each do |role| %>
+    <div class="role">
+      <h2><%= role.display_name.pluralize %></h2>
+      <% role.users.each do |user| %>
+      <a class="person" href="<%= url_for admin_person_path(user) %>"><%= user.display_name %></a>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <%= render partial: 'admin/event_sessions/bookings', locals: { filters: @filters, bookings: @bookings, q: @q } %>
+</div>
