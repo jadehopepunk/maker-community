@@ -1,4 +1,4 @@
-<div class="admin-index-table">
+<div class="admin-index-table event-sessions-table">
   <div class="table-controls">
     <%= render partial: 'admin/shared/filters', locals: { filters: filters } %> <%= search_form_for q, url: request.fullpath do |f| %>
     <div class="search-with-submit"><%= f.search_field :event_title_cont %> <%= f.submit "search" %></div>
@@ -19,7 +19,7 @@
       <% records.each do |event_session| %>
       <tr>
         <td><%= link_to event_session.event.title, admin_event_session_path(event_session), class: 'primary-row-link' %></td>
-        <td><%= event_session.start_at.to_date.to_s :long %></td>
+        <td class="<%= 'date-past' if event_session.start_at.to_date < Date.today %>""><%= event_session.start_at.to_date.to_s :long %></td>
         <td><%= format_time event_session.start_at %></td>
         <td><%= format_time event_session.end_at %></td>
         <td class="right"><%= event_session.bookings.confirmed.sum(:persons) %></td>

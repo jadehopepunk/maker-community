@@ -37,7 +37,7 @@ class ApplicationPolicy
   end
 
   def can_admin?
-    user.has_any_role?(
+    user&.has_any_role?(
       :board_member,
       :duty_manager,
       :people_admin,

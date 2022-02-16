@@ -1,7 +1,7 @@
 module Admin
   class UserPolicy < ApplicationPolicy
     def basic_member_stats?
-      user.has_any_role?(
+      user&.has_any_role?(
         :board_member,
         :duty_manager,
         :people_admin,
@@ -23,7 +23,7 @@ module Admin
       end
 
       def resolve
-        if user.has_any_role?(:board_member, :people_admin)
+        if user&.has_any_role?(:board_member, :people_admin)
           scope.all
         else
           scope.current_participants
