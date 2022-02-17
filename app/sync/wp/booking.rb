@@ -6,13 +6,13 @@ module Wp
     default_scope { where(post_type: 'wc_booking') }
 
     class << self
+      def dest_class
+        ::EventBooking
+      end
+
       def sync
         find_each(&:import_if_new)
       end
-    end
-
-    def import_if_new
-      import_new unless ::EventBooking.where(wordpress_post_id: self.ID).exists?
     end
 
     def import_new

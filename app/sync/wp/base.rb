@@ -28,8 +28,8 @@ module Wp
       end
     end
 
-    def dest_class
-      self.class.dest_class
+    def import_if_new
+      import_new unless dest_class.where(wordpress_post_id: self.ID).exists?
     end
 
     def import_or_update
@@ -40,8 +40,18 @@ module Wp
       end
     end
 
+    private
+
+    def dest_class
+      self.class.dest_class
+    end
+
+    def imported_record_key
+      :wordpress_id
+    end
+
     def existing_dest
-      @dest ||= dest_class.where(wordpress_id: self.ID).first
+      @dest ||= dest_class.where(imported_record_key => self.ID).first
     end
   end
 end

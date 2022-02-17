@@ -23,7 +23,8 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Needd while we integrate with Wordpress
+# Need while we integrate with Wordpress
+gem 'down'
 gem 'mysql2'
 gem 'php-serialize'
 

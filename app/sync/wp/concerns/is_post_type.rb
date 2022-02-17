@@ -31,6 +31,12 @@ module Wp
       def imported_post_author
         ::User.where(wordpress_id: post_author).first
       end
+
+      private
+
+      def imported_record_key
+        :wordpress_post_id
+      end
     end
   end
 end
