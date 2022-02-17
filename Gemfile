@@ -14,6 +14,7 @@ gem 'sprockets-rails'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'hash_to_hidden_fields'
+gem 'image_processing', '~> 1.2'
 gem 'indefinite_article'
 gem 'kaminari'
 gem 'pundit'

@@ -1,0 +1,2 @@
+<div><% @images.each do |image| %> <% if image.file.representable? %> <%= image_tag image.file.representation(resize_to_limit: [100, 100]) %> <% end %> <% end %></div>
+<%= paginate @images %>

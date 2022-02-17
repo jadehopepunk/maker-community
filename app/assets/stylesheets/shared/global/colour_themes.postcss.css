@@ -71,6 +71,25 @@ beige: "#E1A994", */
   @mixin apply-theme-colors;
 }
 
+.theme-public {
+  --text-color: var(--gray-100);
+  --highlight-color: var(--pink-dark);
+  --highlight-color-emphasis: var(--pink-light);
+  --highlight-color-inverse: var(--white);
+  --background-color: var(--blue-dark);
+  --background-color-emphasis: var(--blue-dark-highlight);
+
+  &.theme-inverted {
+    --text-color: var(--gray-100);
+    --highlight-color: var(--pink-dark);
+    --highlight-color-inverse: var(--black);
+    --background-color: var(--slate-800);
+    --callout-background-color: var(--slate-700);
+  }
+
+  @mixin apply-theme-colors;
+}
+
 .theme-people {
   --text-color: var(--gray-100);
   --background-color: var(--teal-dark);

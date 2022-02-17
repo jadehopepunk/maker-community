@@ -7,7 +7,8 @@ module Admin
     SECTIONS = {
       'people' => 'people',
       'events' => 'program',
-      'event_sessions' => 'program'
+      'event_sessions' => 'program',
+      'images' => 'public'
     }
 
     def index; end
