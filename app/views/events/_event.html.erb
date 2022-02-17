@@ -7,7 +7,7 @@
       <span class="time"><%= format_time event_session.start_at %></span>
     </div>
 
-    <p class="event-description"><%= event_session.event.content.html_safe %></p>
+    <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
     <div class="event-host">
       <img class="avatar" src="http://placekitten.com/40/40" />
       <div class="host-text">
