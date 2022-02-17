@@ -11,6 +11,7 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
 
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'hash_to_hidden_fields'
