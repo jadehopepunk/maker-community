@@ -26,7 +26,7 @@ module Wp
       end
 
       dest = ::EventBooking.new(
-        event_session:,
+        session: event_session,
         user:,
         order_item:,
         status: post_status,

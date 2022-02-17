@@ -1,6 +1,10 @@
 module Wp
   class Event < Wp::Product
     class << self
+      def dest_class
+        ::Event
+      end
+
       def all_events
         terms = [
           Wp::Term.events,
@@ -12,28 +16,47 @@ module Wp
       end
 
       def sync
-        all_events.each(&:import_if_new)
+        all_events.each(&:import_or_update)
       end
     end
 
-    def import_if_new
-      import_new unless ::Event.where(wordpress_post_id: self.ID).exists?
+    def existing_dest
+      @dest ||= dest_class.where(wordpress_post_id: self.ID).first
     end
 
     def import_new
       author = ::User.find_by_wordpress_id(post_author)
 
-      dest = ::Event.create!(
+      dest = dest_class.create!(
         slug: post_name,
         author:,
-        title: post_title,
-        content: post_content,
+        **shared_attributes,
         wordpress_post_id: self.ID,
         created_at: post_date
       )
       puts "imported event #{dest.title}"
       dest
     end
+
+    def update_existing
+      dest = existing_dest
+
+      dest.assign_attributes shared_attributes
+      if dest.changed?
+        dest.save!
+        puts "updated event: #{dest.title}"
+      end
+    end
+
+    def shared_attributes
+      {
+        title: post_title,
+        short_description: post_excerpt,
+        content: post_content
+      }
+    end
+
+    private
 
     def booking_availability
       PHP.unserialize meta['_wc_booking_availability']

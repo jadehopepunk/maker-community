@@ -7,5 +7,5 @@ class EventBooking < ApplicationRecord
 
   STATES = ['was-in-cart', 'complete', 'pending-confirmation', 'paid'].freeze
 
-  validates :state, inclusion: { in: STATES }
+  validates :status, inclusion: { in: STATES }
 end

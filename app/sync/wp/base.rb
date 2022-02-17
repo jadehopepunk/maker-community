@@ -31,5 +31,17 @@ module Wp
     def dest_class
       self.class.dest_class
     end
+
+    def import_or_update
+      if existing_dest
+        update_existing
+      else
+        import_new
+      end
+    end
+
+    def existing_dest
+      @dest ||= dest_class.where(wordpress_id: self.ID).first
+    end
   end
 end

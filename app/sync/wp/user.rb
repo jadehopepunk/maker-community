@@ -39,7 +39,7 @@ module Wp
     def update_existing
       dest = existing_dest
 
-      dest.email = user_email
+      dest.email = user_email.downcase
       dest.display_name = display_name
       if dest.changed?
         dest.save!

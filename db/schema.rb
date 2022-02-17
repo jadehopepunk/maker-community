@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_032500) do
+ActiveRecord::Schema.define(version: 2022_02_17_071245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_032500) do
     t.integer "wordpress_post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "short_description"
     t.index ["author_id"], name: "index_events_on_author_id"
   end
 
