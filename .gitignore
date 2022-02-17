@@ -38,5 +38,6 @@
 !/app/assets/builds/.keep
 
 /.env
+/.envrc
 
 /node_modules
