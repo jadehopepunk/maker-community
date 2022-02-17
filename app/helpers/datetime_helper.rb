@@ -11,7 +11,7 @@ module DatetimeHelper
     return nil if datetime.blank?
 
     content_tag :span, class: 'time' do
-      datetime.strftime('%l:%M %P')
+      datetime.strftime('%l:%M%P')
     end
   end
 

@@ -1,0 +1,19 @@
+<a href="<%= event_path('spoon-carving') %>" class="event">
+  <img class="event-image" src="http://placekitten.com/500/300" />
+  <div class="details">
+    <h2 class="event-title"><%= event_session.event.title %></h2>
+    <div class="date-time">
+      <span class="date"><%= format_date event_session.date %></span>
+      <span class="time"><%= format_time event_session.start_at %></span>
+    </div>
+
+    <p class="event-description"><%= event_session.event.content.html_safe %></p>
+    <div class="event-host">
+      <img class="avatar" src="http://placekitten.com/40/40" />
+      <div class="host-text">
+        <div class="teacher-description">presented by</div>
+        <h3 class="teacher-name">Alma Arriaga</h3>
+      </div>
+    </div>
+  </div>
+</a>
