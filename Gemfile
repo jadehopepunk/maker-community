@@ -24,6 +24,7 @@ gem 'rolify'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'sidekiq'
 
 # Need while we integrate with Wordpress
 gem 'down'
