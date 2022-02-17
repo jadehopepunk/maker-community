@@ -327,6 +327,7 @@ DEPENDENCIES
   pundit
   rails (~> 7.0.1)
   ransack
+  redis
   rolify
   rubocop
   selenium-webdriver
