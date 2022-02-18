@@ -32,5 +32,6 @@ production:
     database: maker-community-production
     username: maker-community
     password: <%= ENV["MAKER_COMMUNITY_DATABASE_PASSWORD"] %>
+    pool: 5
   wordpress:
     <<: *wordpress_production
