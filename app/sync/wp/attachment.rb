@@ -16,6 +16,12 @@ module Wp
       def sync
         images.find_each(&:import_if_new)
       end
+
+      def import_async
+        images.find_each do |attatchment|
+          WpAttachmentImportJob.perform_later(attatchment.ID)
+        end
+      end
     end
 
     def import_new
