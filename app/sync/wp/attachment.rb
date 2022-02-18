@@ -1,3 +1,5 @@
+require 'image_processing/mini_magick'
+
 module Wp
   class Attachment < Wp::Base
     self.table_name = 'wp_posts'
@@ -25,7 +27,13 @@ module Wp
       )
 
       tempfile = Down.download(guid)
-      dest.file.attach(io: tempfile, filename: post_name)
+
+      processed = ImageProcessing::MiniMagick
+                  .source(tempfile)
+                  .resize_to_limit(1080, 810)
+                  .call
+
+      dest.file.attach(io: processed, filename: post_name)
 
       puts "imported image #{self.ID}: #{dest.caption || dest.alt_text}"
       dest

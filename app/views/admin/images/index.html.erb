@@ -1,7 +1,7 @@
 <div class="admin-media-gallery">
   <div class="images">
     <% @images.each do |image| %> <% if image.file.representable? %>
-    <div class="image-container"><%= image_tag image.file.variant(:thumb) %></div>
+    <div class="image-container"><%= variant_image_tag image.file, :thumb %></div>
     <% end %> <% end %>
   </div>
   <%= paginate @images %>
