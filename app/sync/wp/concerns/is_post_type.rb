@@ -20,6 +20,10 @@ module Wp
         Post.where(post_parent: self.ID).map(&:as_subclass)
       end
 
+      def attachments
+        Post.where(post_parent: self.ID).where(post_type: 'attachment').map(&:as_subclass)
+      end
+
       def terms
         term_relationships.includes(term_taxonomy: :term).map(&:term_taxonomy).map(&:term)
       end

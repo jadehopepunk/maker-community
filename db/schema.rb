@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_17_113600) do
+ActiveRecord::Schema.define(version: 2022_02_18_054324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,15 +75,18 @@ ActiveRecord::Schema.define(version: 2022_02_17_113600) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "short_description"
+    t.bigint "image_id"
     t.index ["author_id"], name: "index_events_on_author_id"
+    t.index ["image_id"], name: "index_events_on_image_id"
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "wordpress_post_id"
     t.string "alt_text"
     t.string "caption"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "wordpress_post_id"
+    t.index ["wordpress_post_id"], name: "index_images_on_wordpress_post_id", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -213,6 +216,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_113600) do
   add_foreign_key "event_bookings", "order_items"
   add_foreign_key "event_bookings", "users"
   add_foreign_key "event_sessions", "events"
+  add_foreign_key "events", "images"
   add_foreign_key "events", "users", column: "author_id"
   add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"

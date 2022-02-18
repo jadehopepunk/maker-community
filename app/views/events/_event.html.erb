@@ -1,5 +1,5 @@
-<a href="<%= event_path('spoon-carving') %>" class="event">
-  <img class="event-image" src="http://placekitten.com/500/300" />
+<a href="<%= event_path(event_session) %>" class="event">
+  <%= image_tag(event_session.event.image.file) if event_session.event.image.present? %>
   <div class="details">
     <h2 class="event-title"><%= event_session.event.title %></h2>
     <div class="date-time">

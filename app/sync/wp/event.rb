@@ -52,11 +52,24 @@ module Wp
       {
         title: post_title,
         short_description: post_excerpt,
-        content: post_content
+        content: post_content,
+        image: attachment_image
       }
     end
 
     private
+
+    def attachment_image
+      attachment&.existing_dest
+    end
+
+    def attachment
+      thumbnail || attachments.first
+    end
+
+    def thumbnail
+      Wp::Attachment.find(meta['_thumbnail_id']) if meta['_thumbnail_id']
+    end
 
     def booking_availability
       PHP.unserialize meta['_wc_booking_availability']

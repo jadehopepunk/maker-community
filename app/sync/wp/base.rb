@@ -40,6 +40,10 @@ module Wp
       end
     end
 
+    def existing_dest
+      @dest ||= dest_class.where(imported_record_key => self.ID).first
+    end
+
     private
 
     def dest_class
@@ -48,10 +52,6 @@ module Wp
 
     def imported_record_key
       :wordpress_id
-    end
-
-    def existing_dest
-      @dest ||= dest_class.where(imported_record_key => self.ID).first
     end
   end
 end
