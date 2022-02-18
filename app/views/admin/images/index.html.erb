@@ -1,2 +1,8 @@
-<div><% @images.each do |image| %> <% if image.file.representable? %> <%= image_tag image.file.variant(:thumb) %> <% end %> <% end %></div>
-<%= paginate @images %>
+<div class="admin-media-gallery">
+  <div class="images">
+    <% @images.each do |image| %> <% if image.file.representable? %>
+    <div class="image-container"><%= image_tag image.file.variant(:thumb) %></div>
+    <% end %> <% end %>
+  </div>
+  <%= paginate @images %>
+</div>

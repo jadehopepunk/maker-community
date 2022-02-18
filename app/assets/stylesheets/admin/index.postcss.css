@@ -2,6 +2,7 @@
 @import "./components/admin_menu.postcss.css";
 @import "./components/admin_index_table.postcss.css";
 @import "./components/admin_timeline.postcss.css";
+@import "./components/admin_media_gallery.postcss.css";
 
 @import "./layouts/admin.postcss.css";
 @import "./layouts/layout_show.postcss.css";

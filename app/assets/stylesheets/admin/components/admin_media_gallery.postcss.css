@@ -1,0 +1,22 @@
+.admin-media-gallery {
+  .images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 110px);
+    gap: 10px;
+
+    .image-container {
+      border: 1px solid black;
+      padding: 4px;
+      box-sizing: border-box;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .pagination {
+    margin-top: 1rem;
+  }
+}
