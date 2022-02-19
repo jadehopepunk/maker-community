@@ -1,6 +1,11 @@
 <div class="theme-program">
   <div class="container">
     <h1 class="inline-page-title">Workshops and Events</h1>
-    <div class="events-grid"><% @event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %></div>
+    <div class="events-list">
+      <section>
+        <h2>This week</h2>
+        <% @event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
+      </section>
+    </div>
   </div>
 </div>

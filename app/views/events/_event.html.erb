@@ -1,5 +1,5 @@
 <a href="<%= event_path(event_session) %>" class="event">
-  <%= image_tag(event_session.event.image.file) if event_session.event.image.present? %>
+  <div class="image-container"><%= image_model_tag(event_session.event.image, class: 'event-image') if event_session.event.image.present? %></div>
   <div class="details">
     <h2 class="event-title"><%= event_session.event.title %></h2>
     <div class="date-time">
@@ -8,12 +8,12 @@
     </div>
 
     <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
-    <div class="event-host">
+    <!-- <div class="event-host">
       <img class="avatar" src="http://placekitten.com/40/40" />
       <div class="host-text">
         <div class="teacher-description">presented by</div>
         <h3 class="teacher-name">Alma Arriaga</h3>
       </div>
-    </div>
+    </div> -->
   </div>
 </a>
