@@ -1,11 +1,11 @@
 <a href="<%= event_path(event_session) %>" class="event">
   <div class="image-container"><%= image_model_tag(event_session.event.image, class: 'event-image') if event_session.event.image.present? %></div>
   <div class="details">
-    <h2 class="event-title"><%= event_session.event.title %></h2>
     <div class="date-time">
       <span class="date"><%= format_date event_session.date %></span>
       <span class="time"><%= format_time event_session.start_at %></span>
     </div>
+    <h2 class="event-title"><%= event_session.event.title %></h2>
 
     <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
     <!-- <div class="event-host">
