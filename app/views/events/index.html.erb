@@ -2,10 +2,12 @@
   <div class="container">
     <h1 class="inline-page-title">Workshops and Events</h1>
     <div class="events-list">
+      <% @sectioned_sessions.each do |section_title, event_sessions| %> <% if event_sessions.present? %>
       <section>
-        <h2>This week</h2>
-        <% @event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
+        <h2><%= section_title %></h2>
+        <% event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
       </section>
+      <% end %> <% end %> <%= paginate @event_sessions %>
     </div>
   </div>
 </div>

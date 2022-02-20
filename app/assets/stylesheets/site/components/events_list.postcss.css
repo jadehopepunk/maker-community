@@ -3,6 +3,18 @@
   flex-direction: column;
   max-width: 800px;
 
+  > section {
+    margin-bottom: 2rem;
+
+    > h2 {
+      font-weight: bold;
+      border-bottom: 2px solid var(--highlight-color);
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding-right: 3em;
+    }
+  }
+
   a.event {
     display: flex;
     flex-direction: row;
