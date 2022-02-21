@@ -28,6 +28,10 @@ module Wp
         term_relationships.includes(term_taxonomy: :term).map(&:term_taxonomy).map(&:term)
       end
 
+      def imported_tags
+        terms.map(&:imported_tag).compact
+      end
+
       def term_slugs
         terms.map(&:slug)
       end

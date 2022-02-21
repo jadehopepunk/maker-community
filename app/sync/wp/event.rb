@@ -53,7 +53,8 @@ module Wp
         title: post_title,
         short_description: post_excerpt,
         content: post_content,
-        image: attachment_image
+        image: attachment_image,
+        tags: imported_tags
       }
     end
 

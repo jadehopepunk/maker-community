@@ -31,7 +31,7 @@ module Wp
     def import_new
       dest = dest_class.create!(
         title: name,
-        slug: slug,
+        slug:,
         wordpress_term_id: term_id
       )
       puts "imported tag #{name}"
@@ -44,6 +44,10 @@ module Wp
 
     def primary_key
       term_id
+    end
+
+    def imported_tag
+      existing_dest
     end
   end
 end
