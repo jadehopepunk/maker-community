@@ -1,5 +1,5 @@
 <div class="tag-filters">
-  <% tags.each do |tag| %>
-  <div><%= link_to tag.name.humanize, "##{tag.name}" %></div>
+  <% tags.each do |name, count| %>
+  <div><%= link_to name.humanize, "##{name}" %> <span><%= count %></span></div>
   <% end %>
 </div>

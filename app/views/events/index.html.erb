@@ -13,7 +13,7 @@
           </section>
           <% end %> <% end %> <%= paginate @event_sessions %>
         </div>
-        <div class="filters"><%= render partial: 'events/tag_filters', locals: { tags: @tags } %></div>
+        <div class="filters"><%= render partial: 'events/tag_filters', locals: { tags: @tag_counts } %></div>
       </div>
     </div>
   </div>
