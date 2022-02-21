@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_054324) do
+ActiveRecord::Schema.define(version: 2022_02_20_235207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,24 @@ ActiveRecord::Schema.define(version: 2022_02_18_054324) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
     t.index ["wordpress_post_id"], name: "index_subscriptions_on_wordpress_post_id", unique: true
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.string "taggable_type"
+    t.bigint "taggable_id"
+    t.datetime "created_at", precision: 6
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.integer "wordpress_term_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["wordpress_term_id"], name: "index_tags_on_wordpress_term_id", unique: true
   end
 
   create_table "user_events", force: :cascade do |t|

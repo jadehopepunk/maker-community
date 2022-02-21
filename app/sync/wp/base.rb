@@ -6,6 +6,7 @@ module Wp
 
     class << self
       def sync
+        Wp::Term.sync
         Wp::User.sync
         Wp::MembershipPlan.sync
         Wp::Event.sync
@@ -29,7 +30,7 @@ module Wp
     end
 
     def import_if_new
-      import_new unless dest_class.where(wordpress_post_id: self.ID).exists?
+      import_new unless dest_class.where(imported_record_key => primary_key).exists?
     end
 
     def import_or_update
@@ -41,7 +42,7 @@ module Wp
     end
 
     def existing_dest
-      @dest ||= dest_class.where(imported_record_key => self.ID).first
+      @dest ||= dest_class.where(imported_record_key => primary_key).first
     end
 
     private
@@ -52,6 +53,10 @@ module Wp
 
     def imported_record_key
       :wordpress_id
+    end
+
+    def primary_key
+      self.ID
     end
   end
 end
