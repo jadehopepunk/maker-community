@@ -6,7 +6,6 @@ module Wp
 
     class << self
       def sync
-        Wp::Term.sync
         Wp::User.sync
         Wp::MembershipPlan.sync
         Wp::Event.sync
