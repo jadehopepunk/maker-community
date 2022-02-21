@@ -1,5 +1,5 @@
 <div class="tag-filters">
   <% tags.each do |tag| %>
-  <div><%= link_to tag.title, "##{tag.slug}" %></div>
+  <div><%= link_to tag.name.humanize, "##{tag.name}" %></div>
   <% end %>
 </div>

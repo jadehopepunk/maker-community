@@ -3,8 +3,8 @@ class EventsController < ApplicationController
     sessions_scope = EventSession.from_this_week
     @event_sessions = sessions_scope.page(params[:page]).per(20)
     @sectioned_sessions = section_by_date @event_sessions
-    @tags = Tag.all
-    @tag_counts = count_sessions_for_tags(sessions_scope, tags)
+    @tags = ActsAsTaggableOn::Tag.all
+    # @tag_counts = count_sessions_for_tags(sessions_scope, tags)
   end
 
   def show; end

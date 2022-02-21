@@ -11,6 +11,7 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
 
+gem 'acts-as-taggable-on', '~> 9.0'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'

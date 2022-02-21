@@ -54,11 +54,15 @@ module Wp
         short_description: post_excerpt,
         content: post_content,
         image: attachment_image,
-        tags: imported_tags
+        tag_list: product_tag_list
       }
     end
 
     private
+
+    def product_tag_list
+      terms.map(&:slug) & TermTaxonomy.product_tags.map(&:term).map(&:slug)
+    end
 
     def attachment_image
       attachment&.existing_dest
