@@ -1,7 +1,10 @@
 class EventsController < ApplicationController
   def index
-    @event_sessions = EventSession.from_this_week.page(params[:page]).per(20)
+    sessions_scope = EventSession.from_this_week
+    @event_sessions = sessions_scope.page(params[:page]).per(20)
     @sectioned_sessions = section_by_date @event_sessions
+    @tags = Tag.all
+    @tag_counts = count_sessions_for_tags(sessions_scope, tags)
   end
 
   def show; end
@@ -34,5 +37,9 @@ class EventsController < ApplicationController
   def month_title(date = Date.today)
     format_string = date.year == Date.today.year ? '%B' : '%B, %Y'
     date.strftime(format_string)
+  end
+
+  def count_sessions_for_tags(sessions_scope, tags)
+    # scope = sessions_scope.where()
   end
 end

@@ -1,0 +1,14 @@
+.events-index {
+  > .body {
+    display: flex;
+    flex-direction: row;
+
+    > .events-list {
+      margin-right: var(--gutter);
+    }
+
+    > .filters {
+      flex: 1;
+    }
+  }
+}

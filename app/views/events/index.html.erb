@@ -1,13 +1,20 @@
 <div class="theme-program">
   <div class="container">
-    <h1 class="inline-page-title">Workshops and Events</h1>
-    <div class="events-list">
-      <% @sectioned_sessions.each do |section_title, event_sessions| %> <% if event_sessions.present? %>
-      <section>
-        <h2><%= section_title %></h2>
-        <% event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
-      </section>
-      <% end %> <% end %> <%= paginate @event_sessions %>
+    <div class="events-index">
+      <div class="header">
+        <h1 class="inline-page-title">Workshops and Events</h1>
+      </div>
+      <div class="body">
+        <div class="events-list">
+          <% @sectioned_sessions.each do |section_title, event_sessions| %> <% if event_sessions.present? %>
+          <section>
+            <h2><%= section_title %></h2>
+            <% event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
+          </section>
+          <% end %> <% end %> <%= paginate @event_sessions %>
+        </div>
+        <div class="filters"><%= render partial: 'events/tag_filters', locals: { tags: @tags } %></div>
+      </div>
     </div>
   </div>
 </div>
