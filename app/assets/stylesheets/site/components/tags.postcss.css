@@ -1,0 +1,43 @@
+.tag-filters {
+  > div {
+    margin-bottom: 0.6rem;
+  }
+}
+
+.tag-button {
+  background-color: var(--callout-background-color);
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 99999px;
+  display: inline-block;
+
+  &:hover {
+    background-color: var(--highlight-color-emphasis);
+  }
+
+  &.with-count {
+    background-color: transparent;
+    display: inline-block;
+    padding: 0;
+    overflow: hidden;
+
+    & > span {
+      background-color: var(--callout-background-color);
+      padding: 0.5rem 1rem;
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 2px;
+      }
+    }
+
+    &:hover {
+      background-color: var(--highlight-color);
+
+      & > span {
+        background-color: var(--highlight-color-emphasis);
+      }
+    }
+  }
+}
