@@ -58,6 +58,12 @@ module Wp
       }
     end
 
+    def booking_availability
+      meta_avail_string = meta['_wc_booking_availability']
+      meta_avail = meta_avail_string.present? ? PHP.unserialize(meta_avail_string) : []
+      meta_avail.map { |a| Wp::BookingAvailability.new(a) }
+    end
+
     private
 
     def product_tag_list
@@ -74,10 +80,6 @@ module Wp
 
     def thumbnail
       Wp::Attachment.find(meta['_thumbnail_id']) if meta['_thumbnail_id']
-    end
-
-    def booking_availability
-      PHP.unserialize meta['_wc_booking_availability']
     end
   end
 end
