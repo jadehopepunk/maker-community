@@ -53,7 +53,7 @@ module Wp
     def shared_attributes
       {
         title: post_title,
-        short_description: post_excerpt,
+        short_description: short_description,
         content: post_content,
         image: attachment_image,
         tag_list: product_tag_list
@@ -73,6 +73,10 @@ module Wp
     end
 
     private
+
+    def short_description
+      [post_excerpt, meta['_yoast_wpseo_metadesc']].reject(&:blank?).first
+    end
 
     def product_tag_list
       terms.map(&:slug) & TermTaxonomy.product_tags.map(&:term).map(&:slug)

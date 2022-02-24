@@ -1,7 +1,9 @@
 <div class="tag-filters">
-  <% tags.each do |name, count| %>
+  <% tags.each do |name, count| %> <% selected = selected_tags.include?(name) %>
   <div>
-    <a class="tag-button with-count" href="#<%= name %>"> <span class="tag-name"><%= name.humanize %></span><span class="count"><%= count %></span> </a>
+    <a class="tag-button with-count <%= 'selected' if selected %>" href="<%=  url_for(url_params.merge(tag: (selected ? nil : name))) %>">
+      <span class="tag-name"><%= name.humanize %></span><span class="count"><%= count %></span>
+    </a>
   </div>
   <% end %>
 </div>

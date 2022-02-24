@@ -11,9 +11,9 @@
             <h2><%= section_title %></h2>
             <% event_sessions.each do |event_session| %> <%= render 'events/event', event_session: event_session %> <% end %>
           </section>
-          <% end %> <% end %> <%= paginate @event_sessions %>
+          <% end %> <% end %> <%= render 'events/more_events' %> <%= paginate @event_sessions %>
         </div>
-        <div class="filters"><%= render partial: 'events/tag_filters', locals: { tags: @tag_counts } %></div>
+        <div class="filters"><%= render partial: 'events/tag_filters', locals: { tags: @tag_counts, selected_tags: @tags, url_params: @url_params } %></div>
       </div>
     </div>
   </div>

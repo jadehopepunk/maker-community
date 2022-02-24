@@ -8,13 +8,8 @@
   background-color: var(--callout-background-color);
   color: var(--text-color);
   text-decoration: none;
-  padding: 0.5rem 1rem;
   border-radius: 99999px;
   display: inline-block;
-
-  &:hover {
-    background-color: var(--highlight-color-emphasis);
-  }
 
   &.with-count {
     background-color: transparent;
@@ -24,7 +19,7 @@
 
     & > span {
       background-color: var(--callout-background-color);
-      padding: 0.5rem 1rem;
+      padding: 8px 14px;
       display: inline-block;
 
       &:not(:last-child) {
@@ -33,11 +28,19 @@
     }
 
     &:hover {
-      background-color: var(--highlight-color);
+      border: 2px solid var(--highlight-color);
+      margin: -2px;
 
       & > span {
-        background-color: var(--highlight-color-emphasis);
       }
+    }
+  }
+
+  &.selected {
+    background-color: var(--highlight-color);
+
+    & > span {
+      background-color: var(--highlight-color-emphasis);
     }
   }
 }

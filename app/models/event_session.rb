@@ -3,6 +3,11 @@ class EventSession < ApplicationRecord
   has_many :bookings, dependent: :destroy, class_name: 'EventBooking'
 
   scope :from_this_week, -> { where('start_at >= ?', Date.today.beginning_of_week.to_time) }
+  scope :tagged_with, lambda { |tags|
+    return self if tags.empty?
+
+    where(event_id: Event.tagged_with(tags).pluck(:id))
+  }
 
   def time_range
     [start_at, end_at]

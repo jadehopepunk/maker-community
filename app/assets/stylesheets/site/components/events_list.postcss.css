@@ -22,11 +22,21 @@
     background-color: var(--callout-background-color);
 
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 16px;
     }
 
-    h2.event-title {
+    &:hover {
+      border: 2px solid var(--highlight-color);
+      margin: -2px -2px -2px -2px;
+
+      &:not(:last-child) {
+        margin-bottom: 14px;
+      }
+    }
+
+    .event-title {
       font-weight: bold;
+      font-size: 1.4rem;
     }
 
     .date-time {
@@ -83,5 +93,12 @@
         flex-direction: column;
       }
     }
+  }
+
+  .more-events {
+    border: 2px solid var(--callout-background-color);
+    padding: calc(var(--gutter) * 0.75);
+    border-radius: calc(var(--gutter) * 0.75);
+    text-align: center;
   }
 }

@@ -7,7 +7,7 @@
       <span class="date"><%= format_date event_session.date %></span>
       <span class="time"><%= format_time event_session.start_at %></span>
     </div>
-    <h2 class="event-title"><%= event_session.event.title %></h2>
+    <h3 class="event-title"><%= event_session.event.title %></h3>
 
     <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
     <!-- <div class="event-host">

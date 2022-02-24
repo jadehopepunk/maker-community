@@ -1,14 +1,20 @@
 class EventsController < ApplicationController
   def index
+    @tags = load_tags
     sessions_scope = EventSession.from_this_week
-    @event_sessions = sessions_scope.page(params[:page]).per(20)
+    @event_sessions = sessions_scope.tagged_with(@tags).page(params[:page]).per(20)
     @sectioned_sessions = section_by_date @event_sessions
     @tag_counts = EventSession.tag_counts(sessions_scope)
+    @url_params = params.permit(:controller, :action)
   end
 
   def show; end
 
   private
+
+  def load_tags
+    [params[:tag]].reject(&:blank?).map(&:downcase)
+  end
 
   def section_by_date(event_sessions)
     result = {
