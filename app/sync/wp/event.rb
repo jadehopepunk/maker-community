@@ -34,6 +34,7 @@ module Wp
         wordpress_post_id: self.ID,
         created_at: post_date
       )
+      sync_event_sessions(dest)
       puts "imported event #{dest.title}"
       dest
     end
@@ -46,6 +47,7 @@ module Wp
         dest.save!
         puts "updated event: #{dest.title}"
       end
+      sync_event_sessions(dest)
     end
 
     def shared_attributes
@@ -62,6 +64,12 @@ module Wp
       meta_avail_string = meta['_wc_booking_availability']
       meta_avail = meta_avail_string.present? ? PHP.unserialize(meta_avail_string) : []
       meta_avail.map { |a| Wp::BookingAvailability.new(a) }
+    end
+
+    def sync_event_sessions(event)
+      booking_availability.select(&:bookable?).each do |availability|
+        availability.import_event_session_if_new(event)
+      end
     end
 
     private
