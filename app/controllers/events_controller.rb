@@ -46,9 +46,9 @@ class EventsController < ApplicationController
   def open_times
     monday = Date.today.beginning_of_week
     [
-      OpenTimeEventSession.new(monday, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
-      OpenTimeEventSession.new(monday + 3, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
-      OpenTimeEventSession.new(monday + 5, Time.parse('10:00am UTC'), Time.parse('4:00pm UTC'))
+      Events::OpenTimeEventSession.new(monday, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
+      Events::OpenTimeEventSession.new(monday + 3, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
+      Events::OpenTimeEventSession.new(monday + 5, Time.parse('10:00am UTC'), Time.parse('4:00pm UTC'))
     ]
   end
 

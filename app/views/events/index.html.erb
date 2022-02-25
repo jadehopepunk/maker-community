@@ -9,7 +9,7 @@
           <% @sectioned_sessions.each do |section_title, event_sessions| %> <% if event_sessions.present? %>
           <section>
             <h2><%= section_title %></h2>
-            <div class="events"><% event_sessions.each do |event_session| %><%= render "events/#{event_session.event.class.name.underscore}", event_session: event_session %><% end %></div>
+            <div class="events"><% event_sessions.each do |event_session| %><%= render "events/#{event_session.event.class.name.demodulize.underscore}", event_session: event_session %><% end %></div>
           </section>
           <% end %> <% end %> <%= render 'events/more_events' %> <%= paginate @event_sessions %>
         </div>
