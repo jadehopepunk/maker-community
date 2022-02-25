@@ -2,8 +2,8 @@ class EventsController < ApplicationController
   def index
     @tags = load_tags
     sessions_scope = EventSession.from_this_week
-    @event_sessions = sessions_scope.tagged_with(@tags).page(params[:page]).per(20)
-    @sectioned_sessions = section_by_date @event_sessions
+    @event_sessions = sessions_scope.tagged_with(@tags).page(page).per(20)
+    @sectioned_sessions = add_open_times section_by_date(@event_sessions)
     @tag_counts = EventSession.tag_counts(sessions_scope)
     @url_params = params.permit(:controller, :action)
   end
@@ -35,6 +35,31 @@ class EventsController < ApplicationController
     result
   end
 
+  def add_open_times(section_sessions)
+    return section_sessions unless first_page?
+
+    section_sessions['This week'] = sort_by_start_time(section_sessions['This week'] + open_times)
+
+    section_sessions
+  end
+
+  def open_times
+    monday = Date.today.beginning_of_week
+    [
+      OpenTimeEventSession.new(monday, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
+      OpenTimeEventSession.new(monday + 3, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
+      OpenTimeEventSession.new(monday + 5, Time.parse('10:00am UTC'), Time.parse('4:00pm UTC'))
+    ]
+  end
+
+  def first_page?
+    page == 1
+  end
+
+  def page
+    params[:page] || 1
+  end
+
   def week_nearly_over?
     Date.today.end_of_week - Date.today <= 2
   end
@@ -44,7 +69,9 @@ class EventsController < ApplicationController
     date.strftime(format_string)
   end
 
-  def count_sessions_for_tags(sessions_scope, tags)
-    # scope = sessions_scope.where()
+  def sort_by_start_time(sessions)
+    result = sessions.sort do |a, b|
+      a.start_at <=> b.start_at
+    end
   end
 end
