@@ -38,20 +38,14 @@ class EventsController < ApplicationController
   def add_open_times(section_sessions)
     return section_sessions unless first_page?
 
-    section_sessions['This week'] = sort_by_start_time(section_sessions['This week'] + open_times)
+    section_sessions['This week'] = sort_by_start_time(section_sessions['This week'] + virtual_sessions(Date.today))
+    section_sessions['Next week'] = sort_by_start_time(section_sessions['Next week'] + virtual_sessions(Date.today.end_of_week + 1))
 
     section_sessions
   end
 
-  def open_times
-    monday = Date.today.beginning_of_week
-    [
-      Events::VirtualEventSession.new(Events::OpenTime.new, monday, Time.parse('6:30pm UTC'), Time.parse('9:30pm UTC')),
-      Events::VirtualEventSession.new(Events::OpenTime.new, monday + 3, Time.parse('6:30pm UTC'),
-                                      Time.parse('9:30pm UTC')),
-      Events::VirtualEventSession.new(Events::OpenTime.new, monday + 5, Time.parse('10:00am UTC'),
-                                      Time.parse('4:00pm UTC'))
-    ]
+  def virtual_sessions(date)
+    Events::VirtualCalendar.new.sessions_during(date..date.end_of_week)
   end
 
   def first_page?
