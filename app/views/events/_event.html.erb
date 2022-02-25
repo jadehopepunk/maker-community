@@ -1,8 +1,6 @@
 <div class="event-container">
   <a href="<%= event_path(event_session) %>" class="event">
-    <% if event_session.event.image.present? %>
-    <div class="image-container"><%= image_model_tag(event_session.event.image, class: 'event-image') %></div>
-    <% end %>
+    <% if event_session.event.image.present? %> <%= image_model_tag(event_session.event.image, class: 'event-image') %> <% end %>
     <div class="details">
       <div class="date-time">
         <span class="date"><%= format_date event_session.date %></span>

@@ -1,6 +1,20 @@
 .tag-filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+
   > div {
-    margin-bottom: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  @media (--mobile) {
+    gap: 10px;
+    margin-bottom: var(--gutter);
+
+    > div {
+      display: inline-block;
+    }
   }
 }
 
@@ -21,6 +35,9 @@
       background-color: var(--callout-background-color);
       padding: 8px 14px;
       display: inline-block;
+      @media (--mobile) {
+        padding: 6px 10px;
+      }
 
       &:not(:last-child) {
         margin-right: 2px;

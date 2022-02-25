@@ -5,8 +5,8 @@
   --breakpoint-xl: 1280px;
 } */
 
-@custom-media --desktop (min-width: 640px);
-@custom-media --mobile (max-width: 640px);
+@custom-media --desktop (min-width: 800px);
+@custom-media --mobile (max-width: 799px);
 
 :root {
   --gutter: 20px;

@@ -9,6 +9,16 @@
 
     > .filters {
       flex: 1;
+      min-width: 200px;
+    }
+
+    @media (--mobile) {
+      flex-direction: column-reverse;
+
+      > .events-list {
+        margin-right: 0;
+        margin-top: var(--gutter);
+      }
     }
   }
 }
