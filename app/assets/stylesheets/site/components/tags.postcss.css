@@ -1,7 +1,6 @@
 .tag-filters {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 12px;
 
   > div {
@@ -11,6 +10,8 @@
   @media (--mobile) {
     gap: 10px;
     margin-bottom: var(--gutter);
+    flex-wrap: wrap;
+    flex-direction: row;
 
     > div {
       display: inline-block;
