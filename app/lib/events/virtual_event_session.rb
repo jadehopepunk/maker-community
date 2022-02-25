@@ -1,15 +1,12 @@
 module Events
-  class OpenTimeEventSession
-    attr_reader :date, :start_time, :end_time
+  class VirtualEventSession
+    attr_reader :date, :start_time, :end_time, :event
 
-    def initialize(date, start_time, end_time)
+    def initialize(event, date, start_time, end_time)
       @date = date
       @start_time = start_time
       @end_time = end_time
-    end
-
-    def event
-      self
+      @event = event
     end
 
     def image
@@ -18,14 +15,6 @@ module Events
 
     def start_at
       combine_date_and_time date, start_time
-    end
-
-    def title
-      'Open for Making'
-    end
-
-    def short_description
-      ''
     end
 
     private
