@@ -7,14 +7,17 @@ module Reports
     end
 
     def each
+      row = nil
+
       months.each do |month|
-        yield result_month(month)
+        row = result_month(month, last_row: row)
+        yield row
       end
     end
 
     private
 
-    def result_month(_month)
+    def result_month(*)
       raise NotImplementedError, 'override this'
     end
   end

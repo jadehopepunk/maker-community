@@ -7,7 +7,7 @@ module Reports
         @title = title
       end
 
-      def decorate_value(data)
+      def decorate_value(data, _options = {})
         ReportValue.new(data)
       end
 

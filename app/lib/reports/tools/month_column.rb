@@ -12,7 +12,7 @@ module Reports
         end
       end
 
-      def decorate_value(data)
+      def decorate_value(data, _options = {})
         MonthValue.new(data)
       end
 

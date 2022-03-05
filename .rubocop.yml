@@ -23,6 +23,9 @@ Style/NumericPredicate:
 Style/GuardClause:
   Enabled: false
 
+Style/FloatDivision:
+  Enabled: false
+
 Naming/PredicateName:
   Enabled: false
 
@@ -35,3 +38,6 @@ Style/VariableInterpolation:
 Style/WordArray:
   EnforcedStyle: brackets
   Enabled: true
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true

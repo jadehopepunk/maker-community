@@ -4,21 +4,33 @@ module Reports
       @columns ||= [
         Tools::MonthColumn.new,
         Tools::Column.new('Concession'),
-        Tools::Column.new('Full')
+        Tools::Column.new('Full'),
+        Tools::Column.new('Total'),
+        Tools::ChangeColumn.new('Growth', column_index: 3)
       ]
     end
 
-    def result_month(month)
-      plans = ['makerspace-community-concession-member', 'makerspace-community-member']
+    def result_month(month, last_row: nil)
+      concession = orders_for(month, 'makerspace-community-concession-member')
+      full = orders_for(month, 'makerspace-community-member')
 
       Tools::ReportRow.new(
         columns:,
         values: [
           month,
-          OrderItem.completed_in_month(month).has_plan_name(['makerspace-community-concession-member']).count(:user_id),
-          OrderItem.completed_in_month(month).has_plan_name(['makerspace-community-member']).count(:user_id)
-        ]
+          concession,
+          full,
+          concession + full,
+          nil
+        ],
+        last_row:
       )
+    end
+
+    private
+
+    def orders_for(month, plan_name)
+      OrderItem.completed_in_month(month).has_plan_name([plan_name]).count(:user_id)
     end
   end
 end
