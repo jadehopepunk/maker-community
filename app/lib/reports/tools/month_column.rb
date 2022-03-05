@@ -1,6 +1,6 @@
 module Reports
   module Tools
-    class MonthColumn
+    class MonthColumn < Column
       class MonthValue < ReportValue
         def to_s
           show_year = (data.year != Date.today.year)
@@ -12,12 +12,16 @@ module Reports
         end
       end
 
+      def initialize(title = 'Month')
+        super(title)
+      end
+
       def decorate_value(data, _options = {})
         MonthValue.new(data)
       end
 
-      def to_s
-        'Month'
+      def numeric?
+        false
       end
     end
   end

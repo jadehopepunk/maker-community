@@ -3,19 +3,20 @@ module Reports
     def columns
       @columns ||= [
         Tools::MonthColumn.new,
-        Tools::Column.new('Concession'),
-        Tools::Column.new('Full'),
-        Tools::Column.new('Total'),
+        Tools::NumberColumn.new('Concession'),
+        Tools::NumberColumn.new('Full'),
+        Tools::NumberColumn.new('Total'),
         Tools::ChangeColumn.new('Growth', column_index: 3)
       ]
     end
 
-    def result_month(month, last_row: nil)
+    def result_month(month, last_row: nil, in_progress: false)
       concession = orders_for(month, 'makerspace-community-concession-member')
       full = orders_for(month, 'makerspace-community-member')
 
       Tools::ReportRow.new(
         columns:,
+        classes: [in_progress ? 'in-progress' : nil],
         values: [
           month,
           concession,

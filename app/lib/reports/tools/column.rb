@@ -14,6 +14,16 @@ module Reports
       def to_s
         title
       end
+
+      def classes
+        result = []
+        result << 'numeric' if numeric?
+        result
+      end
+
+      def numeric?
+        true
+      end
     end
   end
 end

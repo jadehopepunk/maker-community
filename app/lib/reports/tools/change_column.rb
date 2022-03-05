@@ -1,26 +1,41 @@
 module Reports
   module Tools
     class ChangeColumn < Column
-      class ChangeValue
-        attr_reader :original, :current
+      class ChangeValue < ReportValue
+        attr_reader :original
 
         def initialize(original, current)
           @original = original
-          @current = current
+          super(current)
         end
 
         def to_s
+          return '' unless valid_change?
           return '' if original.to_i == 0
-
-          delta = current - original
 
           as_percentage(delta.to_f / original.to_f)
         end
 
+        def prefix
+          return nil unless valid_change?
+          return { type: :change_up } if delta > 0
+          return { type: :change_down } if delta < 0
+
+          nilvalid_change?
+        end
+
         private
 
+        def valid_change?
+          !original.nil?
+        end
+
+        def delta
+          data - original
+        end
+
         def as_percentage(fraction)
-          percentage = (fraction * 100)
+          percentage = fraction.abs * 100
           "#{percentage.round(0)}%"
         end
       end

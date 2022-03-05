@@ -10,21 +10,28 @@
       text-align: left;
       padding: 0.5rem 1rem;
 
-      &.right {
+      &.numeric {
         text-align: right;
       }
     }
   }
 
   tbody {
-    tr:nth-child(odd) {
-      background-color: var(--callout-background-color);
+    tr {
+      &:nth-child(odd) {
+        background-color: var(--callout-background-color);
+      }
+
+      &.in-progress {
+        opacity: 0.4;
+      }
     }
 
     td {
       padding: 0.2rem 1rem;
+      text-align: left;
 
-      &.right {
+      &.numeric {
         text-align: right;
       }
 
@@ -42,5 +49,13 @@
         color: var(--text-color-muted);
       }
     }
+  }
+
+  .change-up {
+    color: green;
+  }
+
+  .change-down {
+    color: red;
   }
 }

@@ -10,6 +10,10 @@ module Reports
       def to_s
         @data.to_s
       end
+
+      def prefix
+        nil
+      end
     end
   end
 end

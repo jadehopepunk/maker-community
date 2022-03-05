@@ -2,15 +2,15 @@
   <thead>
     <tr>
       <% report.columns.each do |column| %>
-      <th><%= column.to_s %></th>
+      <th class="<%= column.classes.join(' ') %>"><%= column.to_s %></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
     <% report.each do |row| %>
-    <tr>
-      <% row.each do |value| %>
-      <td><%= value.to_s %></td>
+    <tr class="<%= row.classes.join(' ') %>">
+      <% row.each_with_index do |value, index| %> <% column = report.columns[index] %>
+      <td class="<%= column.classes.join(' ') %>"><%= table_prefix value.prefix %> <%= value.to_s %></td>
       <% end %>
     </tr>
     <% end %>
