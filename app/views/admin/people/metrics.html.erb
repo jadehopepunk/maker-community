@@ -3,11 +3,9 @@
   <section>
     <div class="section-intro">
       <h3>Membership Growth</h3>
-      <p>
-        We want to grow membership to a level where it will sustain the our usage of the current space. This table shows monthly memberships paid in each month, and doesn't include pre-paid or free
-        memberships.
-      </p>
+      <p>We want to grow membership to a level where it will sustain the our usage of the current space.</p>
     </div>
     <%= render partial: 'admin/shared/reports/table', locals: { report: @member_growth } %>
+    <p class="legend">This table shows monthly memberships paid in each month, and doesn't include pre-paid or free memberships.</p>
   </section>
 </div>

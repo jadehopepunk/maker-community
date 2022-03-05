@@ -8,5 +8,11 @@
       border-left: 3px solid var(--highlight-color);
       padding-left: calc(var(--gutter) / 2);
     }
+
+    .legend {
+      font-size: 0.7em;
+      opacity: 0.8;
+      text-align: center;
+    }
   }
 }
