@@ -8,7 +8,9 @@ class EventsController < ApplicationController
     @url_params = params.permit(:controller, :action)
   end
 
-  def show; end
+  def show
+    @event_session = EventSession.find(params[:id])
+  end
 
   private
 
@@ -39,7 +41,8 @@ class EventsController < ApplicationController
     return section_sessions unless first_page?
 
     section_sessions['This week'] = sort_by_start_time(section_sessions['This week'] + virtual_sessions(Date.today))
-    section_sessions['Next week'] = sort_by_start_time(section_sessions['Next week'] + virtual_sessions(Date.today.end_of_week + 1))
+    section_sessions['Next week'] =
+      sort_by_start_time(section_sessions['Next week'] + virtual_sessions(Date.today.end_of_week + 1))
 
     section_sessions
   end

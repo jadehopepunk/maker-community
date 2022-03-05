@@ -11,6 +11,7 @@ beige: "#E1A994", */
   --blue-dark-highlight: #4d5ab6;
   --teal-dark: #0d9488;
   --teal-light: #14b8a6;
+  --teal-lighter: #22e6d1;
   --sky: #78cee1;
   --gold: #efbf6e;
   --white: #ffffff;
@@ -98,6 +99,7 @@ beige: "#E1A994", */
   &.theme-inverted {
     --text-color: var(--gray-100);
     --highlight-color: var(--teal-light);
+    --highlight-color-emphasis: var(--teal-lighter);
     --highlight-color-inverse: var(--black);
     --background-color: var(--slate-800);
     --callout-background-color: var(--slate-700);

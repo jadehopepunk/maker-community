@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Actual</th>
+      <th>Growth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% report.each do |row| %> <% row.each do |value| %>
+    <tr>
+      <td><%= value.to_s %></td>
+    </tr>
+    <% end %> <% end %>
+  </tbody>
+</table>

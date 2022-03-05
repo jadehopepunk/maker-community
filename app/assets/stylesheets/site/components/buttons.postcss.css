@@ -13,6 +13,10 @@
 
 a.button {
   @mixin button;
+
+  &.compact {
+    padding: 0.25rem 0.8rem;
+  }
 }
 
 .icon-button {

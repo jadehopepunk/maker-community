@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'admin#index'
-    resources :people, only: [:index, :show]
+    resources :people, only: [:index, :show] do
+      collection do
+        get :metrics
+      end
+    end
     resources :events, only: [:index]
     resources :event_sessions, only: [:index, :show]
     resources :images, only: [:index]

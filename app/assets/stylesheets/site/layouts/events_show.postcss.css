@@ -1,0 +1,14 @@
+.events-show {
+  display: flex;
+  flex-direction: row;
+
+  .main {
+    margin-right: var(--gutter);
+  }
+
+  .details {
+    border: 2px dashed red;
+    flex: 1;
+    min-width: 350px;
+  }
+}
