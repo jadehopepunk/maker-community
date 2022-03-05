@@ -1,9 +1,9 @@
-<table>
+<table class="admin-report-table">
   <thead>
     <tr>
-      <th>Month</th>
-      <th>Actual</th>
-      <th>Growth</th>
+      <% report.columns.each do |column| %>
+      <th><%= column.to_s %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

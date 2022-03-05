@@ -4,7 +4,9 @@
   }
 
   > section {
-    border-left: 3px solid var(--highlight-color);
-    padding-left: calc(var(--gutter) / 2);
+    .section-intro {
+      border-left: 3px solid var(--highlight-color);
+      padding-left: calc(var(--gutter) / 2);
+    }
   }
 }

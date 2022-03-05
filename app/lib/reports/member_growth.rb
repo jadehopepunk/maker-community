@@ -1,9 +1,16 @@
 module Reports
   class MemberGrowth < MonthlyReport
+    def columns
+      @columns ||= [
+        Tools::MonthColumn.new
+      ]
+    end
+
     def result_month(month)
       Tools::ReportRow.new(
+        columns:,
         values: [
-          Tools::ReportValue.new(month.to_s)
+          month
         ]
       )
     end

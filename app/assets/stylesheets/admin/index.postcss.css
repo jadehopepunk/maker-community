@@ -1,6 +1,7 @@
 @import "./components/admin_navbar.postcss.css";
 @import "./components/admin_menu.postcss.css";
 @import "./components/admin_index_table.postcss.css";
+@import "./components/admin_report_table.postcss.css";
 @import "./components/admin_timeline.postcss.css";
 @import "./components/admin_media_gallery.postcss.css";
 

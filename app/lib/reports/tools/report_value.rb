@@ -1,12 +1,14 @@
 module Reports
   module Tools
     class ReportValue
-      def initialize(text)
-        @text = text
+      attr_reader :data
+
+      def initialize(data)
+        @data = data
       end
 
       def to_s
-        @text
+        @data.to_s
       end
     end
   end

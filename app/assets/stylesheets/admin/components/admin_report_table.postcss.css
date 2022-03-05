@@ -1,0 +1,46 @@
+.admin-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+
+  thead {
+    th {
+      text-align: left;
+      padding: 0.5rem 1rem;
+
+      &.right {
+        text-align: right;
+      }
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background-color: var(--callout-background-color);
+    }
+
+    td {
+      padding: 0.2rem 1rem;
+
+      &.right {
+        text-align: right;
+      }
+
+      a.primary-row-link {
+        padding: 0.5rem 0;
+        display: block;
+        color: var(--text-color);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &.date-past {
+        color: var(--text-color-muted);
+      }
+    }
+  }
+}
