@@ -6,4 +6,5 @@ class Plan < ApplicationRecord
 
   default_scope { order(position: 'ASC') }
   scope :in_person, -> { where.not(name: 'association-member') }
+  scope :has_name, ->(names) { where(name: names) }
 end

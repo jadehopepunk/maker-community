@@ -7,10 +7,12 @@
     </tr>
   </thead>
   <tbody>
-    <% report.each do |row| %> <% row.each do |value| %>
+    <% report.each do |row| %>
     <tr>
+      <% row.each do |value| %>
       <td><%= value.to_s %></td>
+      <% end %>
     </tr>
-    <% end %> <% end %>
+    <% end %>
   </tbody>
 </table>
