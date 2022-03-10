@@ -16,6 +16,8 @@ module DatetimeHelper
   end
 
   def format_date(date)
+    return nil if date.nil?
+
     show_year = (date.year != Date.today.year)
 
     format_string = '%a, %b %d'
