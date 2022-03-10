@@ -13,6 +13,7 @@ module Wp
         Wp::UserMembership.sync
         Wp::ShopOrder.sync
         Wp::Booking.sync
+        Import.record.update!(imported_at: Time.now)
       end
 
       def add_roles

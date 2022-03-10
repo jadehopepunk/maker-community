@@ -24,5 +24,9 @@
       <a class="user-name" href="/">WIP website</a>
       <a class="user-name" href="<%= destroy_user_session_path %>">log out</a>
     </div>
+    <div class="stats de-emphasise">
+      <div>Last imported:</div>
+      <div><%= format_date Import.record.imported_at %></div>
+    </div>
   </div>
 </div>
