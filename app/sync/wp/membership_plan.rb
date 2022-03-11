@@ -9,14 +9,14 @@ module Wp
       'makerspace-community-member' => 'Community Member'
     }.freeze
 
-    PLAN_ORDER = %w[
-      association-member
-      makerspace-community-concession-member
-      makerspace-community-member
-      makerspace-full-time-member
-      volunteer
-      board-member
-    ]
+    NAME_MAP = {
+      'makerspace-community-concession-member' => 'community_concession_member',
+      'makerspace-full-time-member' => 'full_time_member',
+      'makerspace-community-member' => 'community_member'
+    }.freeze
+
+    PLAN_ORDER = ['association-member', 'makerspace-community-concession-member', 'makerspace-community-member',
+                  'makerspace-full-time-member', 'volunteer', 'board-member']
 
     default_scope { where(post_type: 'wc_membership_plan') }
 
@@ -26,9 +26,7 @@ module Wp
       end
 
       def sync
-        find_each do |record|
-          record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
-        end
+        find_each(&:import_or_update)
       end
     end
 
@@ -36,10 +34,8 @@ module Wp
       return if post_name == 'account-holder'
 
       dest = self.class.dest_class.new(
-        title: TITLE_MAP[post_name] || post_title,
-        name: post_name,
+        **shared_attributes,
         created_at: post_date,
-        position: PLAN_ORDER.index(post_name),
         wordpress_post_id: self.ID,
         wordpress_product_id: product_ids.first
       )
@@ -47,10 +43,22 @@ module Wp
       puts "Imported membership plan: #{dest.name}"
     end
 
+    def shared_attributes
+      {
+        title: TITLE_MAP[post_name] || post_title,
+        name: NAME_MAP[post_name] || post_name.underscore,
+        position: PLAN_ORDER.index(post_name)
+      }
+    end
+
     def product_ids
       return [] if meta['_product_ids'].blank?
 
       PHP.unserialize meta['_product_ids']
+    end
+
+    def imported_record_key
+      :wordpress_post_id
     end
   end
 end

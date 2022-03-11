@@ -45,6 +45,16 @@ module Wp
       @dest ||= dest_class.where(imported_record_key => primary_key).first
     end
 
+    def update_existing
+      dest = existing_dest
+
+      dest.assign_attributes shared_attributes
+      if dest.changed?
+        dest.save!
+        puts "updated #{self.class.name}: #{dest.title}"
+      end
+    end
+
     private
 
     def dest_class
