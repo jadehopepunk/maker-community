@@ -15,7 +15,7 @@ module Admin
     end
 
     def show_personal_information?
-      record == user || user&.has_any_role?(:people_admin)
+      record == user || user&.has_any_role?(:president, :vice_president, :secretary, :people_admin)
     end
 
     class Scope
