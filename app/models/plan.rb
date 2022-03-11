@@ -7,4 +7,20 @@ class Plan < ApplicationRecord
   default_scope { order(position: 'ASC') }
   scope :in_person, -> { where.not(name: 'association-member') }
   scope :has_name, ->(names) { where(name: names) }
+
+  ROLES = {
+    board_member: [:board_member],
+    community_member: [:community_member, :community_concession_member, :full_time_member],
+    full_time_member: [:full_time_member]
+  }.freeze
+
+  def self.update_roles
+    ROLES.each do |role_name, plan_names|
+      plans = Plan.has_name(plan_names)
+      role = Role.find_or_create_by!(name: role_name)
+      user_ids = plans.map { |plan| plan.active_users.pluck(:id) }.flatten.uniq
+      role.user_ids = user_ids
+      role.save!
+    end
+  end
 end

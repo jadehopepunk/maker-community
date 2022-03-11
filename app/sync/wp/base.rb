@@ -16,11 +16,6 @@ module Wp
         Import.record.update!(imported_at: Time.now)
       end
 
-      def add_roles
-        craig = ::User.find_by_email('craig@craigambrose.com')
-        craig.add_role :people_admin
-      end
-
       def clear_passwords
         ::User.where(email: ['craig@craigambrose.com']).each do |user|
           user.password = 'password'
