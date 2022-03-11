@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container footer-container">
   <nav class="footer-nav">
     <div class="column">
       <div class="section">
@@ -7,20 +7,15 @@
       </div>
       <div class="section">
         <h3>Opening Hours</h3>
+
         <table class="opening-hours">
           <tbody>
+            <% Events::OpenTime::SESSIONS.each do |key, times| %>
             <tr>
-              <td>Monday</td>
-              <td>6:30pm - 9:30pm</td>
+              <td><%= Date::DAYNAMES[key] %></td>
+              <td><%= format_time times[:start_time] %> - <%= format_time times[:end_time] %></td>
             </tr>
-            <tr>
-              <td>Thursday</td>
-              <td>6:30pm - 9:30pm</td>
-            </tr>
-            <tr>
-              <td>Saturday</td>
-              <td>10am - 4pm</td>
-            </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
@@ -164,4 +159,10 @@
       </div>
     </div>
   </nav>
+  <div class="acknowledgement">
+    <p>
+      Maker Community acknowledges the Wurundjeri people of the Eastern Kulin Nation as the owners of the land on which we sit. For millennia they have fostered the spirit of sharing, learning, and
+      living sustainably. We acknowledge that sovereignty was never ceded, and pay our respects to their Elders — past, present, and emerging.
+    </p>
+  </div>
 </div>

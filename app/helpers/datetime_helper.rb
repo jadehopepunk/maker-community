@@ -10,8 +10,12 @@ module DatetimeHelper
   def format_time(datetime)
     return nil if datetime.blank?
 
+    format_string = '%l'
+    format_string += ':%M' if datetime.min.nonzero?
+    format_string += '%P'
+
     content_tag :span, class: 'time' do
-      datetime.strftime('%l:%M%P')
+      datetime.strftime(format_string)
     end
   end
 
