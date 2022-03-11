@@ -4,5 +4,7 @@ class CreateInductions < ActiveRecord::Migration[7.0]
       t.string :title
       t.timestamps
     end
+
+    add_index :inductions, :title, unique: true
   end
 end

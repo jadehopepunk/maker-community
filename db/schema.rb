@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2022_03_11_071619) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_inductions_on_title", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -242,7 +243,7 @@ ActiveRecord::Schema.define(version: 2022_03_11_071619) do
   create_table "user_inductions", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "induction_id"
-    t.date "inducted_on"
+    t.date "inducted_on", default: -> { "CURRENT_DATE" }
     t.index ["induction_id"], name: "index_user_inductions_on_induction_id"
     t.index ["user_id", "induction_id"], name: "index_user_inductions_on_user_id_and_induction_id", unique: true
     t.index ["user_id"], name: "index_user_inductions_on_user_id"

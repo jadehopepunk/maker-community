@@ -27,14 +27,15 @@ module Wp
     end
 
     def import_new
-      user = dest_class.new(
+      dest = dest_class.new(
         password: user_pass,
         **shared_attributes,
         wordpress_id: self.ID,
         created_at: user_registered
       )
-      user.save!
-      puts "imported user #{user.display_name}"
+      dest.save!
+      insert_new_inductions!(dest)
+      puts "imported user #{dest.display_name}"
     end
 
     def update_existing
@@ -45,13 +46,14 @@ module Wp
         dest.save!
         puts "updated user #{dest.display_name}"
       end
+      insert_new_inductions!(dest)
     end
 
     def shared_attributes
       {
         email: user_email.downcase,
-        display_name: display_name,
-        address_attributes: address_attributes,
+        display_name:,
+        address_attributes:,
         phone: meta['billing_phone']
       }
     end
@@ -69,6 +71,24 @@ module Wp
       has_result = result.values.reject(&:blank?).compact.any?
 
       has_result ? result : {}
+    end
+
+    def insert_new_inductions!(record)
+      insert_inductions!(record, inductions - record.inductions.pluck(:title))
+    end
+
+    def insert_inductions!(record, new_inductions)
+      return if new_inductions.empty?
+
+      puts "about to create inductions #{new_inductions.inspect}"
+
+      new_inductions.each do |induction_name|
+        record.user_inductions.create! induction_id: induction_id_for(induction_name)
+      end
+    end
+
+    def induction_id_for(induction_name)
+      Induction.find_or_create_by!(title: induction_name).id
     end
 
     def meta

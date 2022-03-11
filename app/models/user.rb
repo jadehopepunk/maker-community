@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :active_plans, through: :active_memberships, source: :plan
   has_many :events, -> { order(occured_at: :desc) }, class_name: 'UserEvent'
   has_many :orders, dependent: :destroy
+  has_many :user_inductions, dependent: :destroy
+  has_many :inductions, through: :user_inductions
   belongs_to :address, dependent: :destroy
 
   accepts_nested_attributes_for :address
