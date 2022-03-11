@@ -1,7 +1,6 @@
 .layout-home {
   display: flex;
   flex-direction: column;
-  min-height: 1400px;
 
   @media (--desktop) {
     .row-2 {
