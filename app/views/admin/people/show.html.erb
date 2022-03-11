@@ -3,8 +3,19 @@
     <a class="breadcrumb return" href="<%= admin_people_path %>">↩ People</a>
   </div>
   <h1 class="page-title"><%= @person.display_name %></h1>
-  <% if policy([:admin, @person]).show_personal_information? %>
   <div class="callout person-details">
+    <div class="detail">
+      <div class="title">Inductions</div>
+      <div class="value">
+        <ul>
+          <% @person.inductions.pluck(:title).each do |induction| %>
+          <li><%= induction %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <% if policy([:admin, @person]).show_personal_information? %>
     <div class="detail">
       <div class="title">Address</div>
       <div class="value"><%= render partial: 'admin/people/address', locals: { address: @person.address } %></div>
@@ -13,6 +24,7 @@
       <div class="title">Phone</div>
       <div class="value"><%= @person.phone %></div>
     </div>
+    <% end %>
   </div>
-  <% end %> <%= render partial: 'admin/people/events_timeline', locals: { person: @person, events: @person.events } %>
+  <%= render partial: 'admin/people/events_timeline', locals: { person: @person, events: @person.events } %>
 </div>
