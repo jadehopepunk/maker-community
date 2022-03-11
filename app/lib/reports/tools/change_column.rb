@@ -21,7 +21,7 @@ module Reports
           return { type: :change_up } if delta > 0
           return { type: :change_down } if delta < 0
 
-          nilvalid_change?
+          nil
         end
 
         private

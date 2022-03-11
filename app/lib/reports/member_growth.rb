@@ -11,8 +11,8 @@ module Reports
     end
 
     def result_month(month, last_row: nil, in_progress: false)
-      concession = orders_for(month, 'makerspace-community-concession-member')
-      full = orders_for(month, 'makerspace-community-member')
+      concession = orders_for(month, :community_concession_member)
+      full = orders_for(month, :community_member)
 
       Tools::ReportRow.new(
         columns:,
