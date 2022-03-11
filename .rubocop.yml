@@ -41,3 +41,6 @@ Style/WordArray:
 
 Lint/UnusedMethodArgument:
   AllowUnusedKeywordArguments: true
+
+Naming/VariableNumber:
+  Enabled: false

@@ -2,13 +2,15 @@ module Wp
   class User < Wp::Base
     self.table_name = 'wp_users'
 
+    has_many :user_meta, class_name: 'Wp::UserMeta', foreign_key: 'user_id'
+
     class << self
       def dest_class
         ::User
       end
 
       def sync
-        find_each(&:import_or_update)
+        includes(:user_meta).find_each(&:import_or_update)
       end
     end
 
@@ -26,9 +28,8 @@ module Wp
 
     def import_new
       user = dest_class.new(
-        email: user_email,
         password: user_pass,
-        display_name:,
+        **shared_attributes,
         wordpress_id: self.ID,
         created_at: user_registered
       )
@@ -39,12 +40,39 @@ module Wp
     def update_existing
       dest = existing_dest
 
-      dest.email = user_email.downcase
-      dest.display_name = display_name
-      if dest.changed?
+      dest.assign_attributes shared_attributes
+      if dest.changed? || dest.address&.changed?
         dest.save!
         puts "updated user #{dest.display_name}"
       end
+    end
+
+    def shared_attributes
+      {
+        email: user_email.downcase,
+        display_name: display_name,
+        address_attributes: address_attributes,
+        phone: meta['billing_phone']
+      }
+    end
+
+    def address_attributes(prefix: 'billing_')
+      result = {
+        address_1: meta["#{prefix}address_1"],
+        address_2: meta["#{prefix}address_2"],
+        city: meta["#{prefix}city"],
+        state: meta["#{prefix}state"],
+        postcode: meta["#{prefix}postcode"],
+        country_code: meta["#{prefix}country"]
+      }
+
+      has_result = result.values.reject(&:blank?).compact.any?
+
+      has_result ? result : {}
+    end
+
+    def meta
+      @meta ||= PostMeta.convert_to_hash(user_meta)
     end
   end
 end

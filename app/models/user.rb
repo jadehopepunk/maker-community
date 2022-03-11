@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :active_plans, through: :active_memberships, source: :plan
   has_many :events, -> { order(occured_at: :desc) }, class_name: 'UserEvent'
   has_many :orders, dependent: :destroy
+  belongs_to :address, dependent: :destroy
+
+  accepts_nested_attributes_for :address
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }
