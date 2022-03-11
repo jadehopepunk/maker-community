@@ -74,5 +74,12 @@ module Wp
     def meta
       @meta ||= PostMeta.convert_to_hash(user_meta)
     end
+
+    def inductions
+      value = meta['_wc_memberships_profile_field_inductions']
+      return [] if value.blank?
+
+      PHP.unserialize meta['_wc_memberships_profile_field_inductions']
+    end
   end
 end
