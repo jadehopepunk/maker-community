@@ -1,0 +1,9 @@
+<% if address.present? %>
+<div class="address">
+  <div><%= address.address_1 %></div>
+  <div><%= address.address_2 %></div>
+  <div><%= address.city %> <%= address.state %> <%= address.postcode %></div>
+</div>
+<% else %>
+<div class="no-data">address unknown</div>
+<% end %>

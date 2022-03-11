@@ -1,0 +1,23 @@
+.admin-people-show {
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .person-details {
+    border: 2px solid var(--highlight-color);
+    border-radius: 0.5rem;
+    padding: var(--gutter);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gutter);
+
+    .detail {
+      .title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--highlight-color);
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
