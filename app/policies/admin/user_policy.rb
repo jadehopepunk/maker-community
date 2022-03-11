@@ -14,6 +14,10 @@ module Admin
       basic_member_stats?
     end
 
+    def show_personal_information?
+      record == user || user&.has_any_role?(:people_admin)
+    end
+
     class Scope
       attr_reader :user, :scope
 

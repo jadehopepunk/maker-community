@@ -3,6 +3,7 @@
     <a class="breadcrumb return" href="<%= admin_people_path %>">↩ People</a>
   </div>
   <h1 class="page-title"><%= @person.display_name %></h1>
+  <% if policy([:admin, @person]).show_personal_information? %>
   <div class="callout person-details">
     <div class="detail">
       <div class="title">Address</div>
@@ -13,5 +14,5 @@
       <div class="value"><%= @person.phone %></div>
     </div>
   </div>
-  <%= render partial: 'admin/people/events_timeline', locals: { person: @person, events: @person.events } %>
+  <% end %> <%= render partial: 'admin/people/events_timeline', locals: { person: @person, events: @person.events } %>
 </div>
