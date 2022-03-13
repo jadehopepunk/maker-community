@@ -25,6 +25,7 @@ gem 'ransack'
 gem 'redis'
 gem 'rolify'
 gem 'sidekiq'
+gem 'slack-ruby-client'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -37,6 +38,7 @@ gem 'php-serialize'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -53,7 +55,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'database_cleaner-active_record'
+  gem 'rspec-rails'
 end

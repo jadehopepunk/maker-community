@@ -4,6 +4,9 @@ AllCops:
     - db/schema.rb
     - db/migrate/**/*
 
+Metrics/BlockLength:
+  IgnoredMethods: ["describe", "context"]
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
