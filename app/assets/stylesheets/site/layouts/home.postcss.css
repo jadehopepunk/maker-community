@@ -15,14 +15,37 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    padding: var(--gutter);
+    .block-contents {
+      margin: calc(var(--gutter) * 2) var(--gutter);
+    }
+
+    .block-images {
+      display: flex;
+      flex-direction: row;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
 
     h2 {
       @mixin text-heading-large;
+      line-height: 1em;
     }
 
     p {
       @mixin text-large;
+    }
+
+    &.image-right {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+
+      > img {
+        /* height: auto;
+        width: auto; */
+      }
     }
   }
 }

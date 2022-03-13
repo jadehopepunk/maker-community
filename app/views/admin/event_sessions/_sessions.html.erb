@@ -19,7 +19,7 @@
       <% records.each do |event_session| %>
       <tr>
         <td><%= link_to event_session.event.title, admin_event_session_path(event_session), class: 'primary-row-link' %></td>
-        <td class="<%= 'date-past' if event_session.start_at.to_date < Date.today %>""><%= event_session.start_at.to_date.to_s :long %></td>
+        <td class="<%= 'date-past' if event_session.start_at.to_date < Date.today %>""><%= format_date event_session.start_at.to_date %></td>
         <td><%= format_time event_session.start_at %></td>
         <td><%= format_time event_session.end_at %></td>
         <td class="right"><%= event_session.bookings.confirmed.sum(:persons) %></td>

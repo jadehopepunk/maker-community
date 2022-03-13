@@ -1,32 +1,36 @@
 <div class="layout-home">
   <div class="row-2">
     <section class="theme-place area-block">
-      <div>
+      <div class="block-contents">
         <h2>Room to create</h2>
         <p>
           We've got a fully equipped woodworking space, heaps of 3D Printers, a hefty CNC router, soldering stations, electronics, laser cutter, textiles, drones and much more. Maker Community is like
           your dream workshed, with the room and tools to create that project that you've always imagined.
         </p>
+        <a href="#" class="button">Explore the workshop</a>
       </div>
-      <a href="#" class="button">Explore the workshop</a>
+      <div class="block-images"><% Image.where(wordpress_post_id: [1416, 1009, 1007]).each do |image| %> <%= image_model_tag(image, class: 'feature-image') %> <% end %></div>
     </section>
     <section class="theme-program area-block">
-      <div>
+      <div class="block-contents">
         <h2>Learn to DIY</h2>
         <p>
           No matter your skill-level, our workshops will empower you to transform your project ideas into reality. From CNC Machining to Jewellery Making: we supply the tools and knowledge to build
           your confidence, as well as your project.
         </p>
+        <a class="button" href="<%= events_path %>">Upcoming classes</a>
       </div>
-      <a class="button" href="<%= events_path %>">Upcoming classes</a>
     </section>
   </div>
-  <section class="theme-people area-block">
-    <h2>A Community of Makers</h2>
-    <p>
-      Our members are into interests such as woodworking, digital fabrication, cosplay, sewing, model making, RC planes, cars and drones, micro-controllers, robotics, coding, plastic recycling,
-      prototyping and pretty much every other facet of ‘Making’ in its broadest sense. You are sure to find like minded and kindred spirits at Maker Community.
-    </p>
-    <a href="#" class="button">Who's Involved?</a>
+  <section class="theme-people area-block image-right">
+    <div class="block-contents">
+      <h2>A Community of Makers</h2>
+      <p>
+        Our members are into interests such as woodworking, digital fabrication, cosplay, sewing, model making, RC planes, cars and drones, micro-controllers, robotics, coding, plastic recycling,
+        prototyping and pretty much every other facet of ‘Making’ in its broadest sense. You are sure to find like minded and kindred spirits at Maker Community.
+      </p>
+      <a href="#" class="button">Who's Involved?</a>
+    </div>
+    <div class="block-images"><% Image.where(wordpress_post_id: [383]).each do |image| %> <%= image_model_tag(image, class: 'feature-image') %> <% end %></div>
   </section>
 </div>

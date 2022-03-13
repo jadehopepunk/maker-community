@@ -11,4 +11,9 @@ namespace :data do
     Plan.update_roles
     Wp::Base.clear_passwords
   end
+
+  desc 'Sync all images'
+  task sync_images: [:environment] do
+    Wp::Attachment.sync
+  end
 end
