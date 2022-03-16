@@ -11,9 +11,7 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :user_inductions, dependent: :destroy
   has_many :inductions, through: :user_inductions
-  belongs_to :address, dependent: :destroy
-
-  accepts_nested_attributes_for :address
+  belongs_to :address, dependent: :destroy, optional: true
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }

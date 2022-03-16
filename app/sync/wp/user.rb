@@ -30,6 +30,7 @@ module Wp
       dest = dest_class.new(
         password: user_pass,
         **shared_attributes,
+        build_address:,
         wordpress_id: self.ID,
         created_at: user_registered
       )
@@ -42,10 +43,12 @@ module Wp
       dest = existing_dest
 
       dest.assign_attributes shared_attributes
-      if dest.changed? || dest.address&.changed?
+      if dest.changed?
         dest.save!
         puts "updated user #{dest.display_name}"
       end
+
+      update_user_address_if_needed(dest)
       insert_new_inductions!(dest)
     end
 
@@ -53,9 +56,20 @@ module Wp
       {
         email: user_email.downcase,
         display_name:,
-        address_attributes:,
         phone: meta['billing_phone']
       }
+    end
+
+    def update_user_address_if_needed(user)
+      address = user.address
+
+      if address.blank?
+        user.address = build_address
+        user.save!
+      else
+        address.assign_attributes(address_attributes)
+        address.save! if address.changed?
+      end
     end
 
     def address_attributes(prefix: 'billing_')
@@ -71,6 +85,11 @@ module Wp
       has_result = result.values.reject(&:blank?).compact.any?
 
       has_result ? result : {}
+    end
+
+    def build_address
+      result = Address.new(address_attributes)
+      result.valid? ? result : nil
     end
 
     def insert_new_inductions!(record)
