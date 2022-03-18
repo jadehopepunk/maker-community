@@ -1,4 +1,6 @@
 class EventBookingsService
+  include Rails.application.routes.url_helpers
+
   PROGRAM_CHANNEL = '#team-program'.freeze
 
   class << self
@@ -26,10 +28,21 @@ class EventBookingsService
       event_title = booking.session.event.title
       event_date = booking.session.start_at.to_date
 
+      people_count = booking.persons > 1 ? " #{booking.persons} people" : ''
+      event_link = escaped_markdown_link_to event_title, url_helpers.admin_event_session_url(booking.session)
+
       Slack::PostMessageJob.perform_later(
         channel: PROGRAM_CHANNEL,
-        text: "`#{user_name}` booked for `#{event_title}` on #{event_date.strftime('%a, %b %d')}"
+        text: "`#{user_name}` booked#{people_count} for #{event_link} on #{event_date.strftime('%a, %b %d')}"
       )
+    end
+
+    def escaped_markdown_link_to(title, url)
+      "<#{title}|#{url}>"
+    end
+
+    def url_helpers
+      Rails.application.routes.url_helpers
     end
   end
 end

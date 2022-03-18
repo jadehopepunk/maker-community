@@ -27,13 +27,27 @@ describe EventBookingsService do
       ).to eq(1)
     end
 
-    it 'queues a Slack message' do
-      expect(Slack::PostMessageJob).to receive(:perform_later).with(
-        channel: '#team-program',
-        text: '`Jade` booked for `Spoon Carving` on Fri, Jan 10'
-      )
+    context 'slack message' do
+      it 'queues a Slack message' do
+        expect(Slack::PostMessageJob).to receive(:perform_later).with(
+          channel: '#team-program',
+          text: "`Jade` booked for <Spoon Carving|http://example.com/admin/event_sessions/#{event_session.id}> on Fri, Jan 10"
+        )
 
-      EventBookingsService.create(unsaved_booking)
+        EventBookingsService.create(unsaved_booking)
+      end
+
+      it 'includes the person count if it was more than one' do
+        booking = unsaved_booking
+        booking.persons = 3
+
+        expect(Slack::PostMessageJob).to receive(:perform_later).with(
+          channel: '#team-program',
+          text: "`Jade` booked 3 people for <Spoon Carving|http://example.com/admin/event_sessions/#{event_session.id}> on Fri, Jan 10"
+        )
+
+        EventBookingsService.create(booking)
+      end
     end
   end
 end
