@@ -4,6 +4,7 @@ module Wp
     include Concerns::IsPostType
 
     default_scope { where(post_type: 'wc_booking') }
+    scope :excluding_cart, -> { where.not(post_status: 'was-in-cart') }
 
     class << self
       def dest_class
@@ -11,7 +12,7 @@ module Wp
       end
 
       def sync
-        find_each(&:import_if_new)
+        excluding_cart.find_each(&:import_if_new)
       end
     end
 
