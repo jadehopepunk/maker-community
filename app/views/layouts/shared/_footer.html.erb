@@ -13,7 +13,7 @@
             <% Events::OpenTime::SESSIONS.each do |key, times| %>
             <tr>
               <td><%= Date::DAYNAMES[key] %></td>
-              <td><%= format_time times[:start_time] %> - <%= format_time times[:end_time] %></td>
+              <td><%= format_time_html times[:start_time] %> - <%= format_time_html times[:end_time] %></td>
             </tr>
             <% end %>
           </tbody>

@@ -3,7 +3,7 @@
     <div class="details">
       <div class="date-time">
         <span class="date"><%= format_date event_session.date %></span>
-        <span class="time"><%= format_time event_session.start_time %> - <%= format_time event_session.end_time %></span>
+        <span class="time"><%= format_time_html event_session.start_time %> - <%= format_time_html event_session.end_time %></span>
       </div>
       <h3 class="event-title">🔨 <%= event_session.event.title %></h3>
     </div>

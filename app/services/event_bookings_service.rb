@@ -15,7 +15,7 @@ class EventBookingsService
         )
       end
 
-      puts "imported event booking #{booking.wordpress_post_id}"
+      puts "created event booking #{booking.wordpress_post_id}"
 
       notify_of_create(booking) if notify
       booking
@@ -29,7 +29,7 @@ class EventBookingsService
       event_date = booking.session.start_at.to_date
 
       people_count = booking.persons > 1 ? " #{booking.persons} people" : ''
-      event_link = escaped_markdown_link_to event_title, url_helpers.admin_event_session_url(booking.session)
+      event_link = slack_link_to event_title, url_helpers.admin_event_session_url(booking.session)
 
       Slack::PostMessageJob.perform_later(
         channel: PROGRAM_CHANNEL,
@@ -37,8 +37,8 @@ class EventBookingsService
       )
     end
 
-    def escaped_markdown_link_to(title, url)
-      "<#{title}|#{url}>"
+    def slack_link_to(title, url)
+      "<#{url}|#{title}>"
     end
 
     def url_helpers

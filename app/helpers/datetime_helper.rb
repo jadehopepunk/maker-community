@@ -7,16 +7,20 @@ module DatetimeHelper
     end
   end
 
-  def format_time(datetime)
+  def format_time_html(datetime)
+    content_tag :span, class: 'time' do
+      format_time_text(datetime)
+    end
+  end
+
+  def format_time_text(datetime)
     return nil if datetime.blank?
 
-    format_string = '%l'
+    format_string = '%-l'
     format_string += ':%M' if datetime.min.nonzero?
     format_string += '%P'
 
-    content_tag :span, class: 'time' do
-      datetime.strftime(format_string)
-    end
+    datetime.strftime(format_string)
   end
 
   def format_date(date)

@@ -25,13 +25,12 @@ module Wp
     end
 
     def import_event_session(event)
-      dest = ::EventSession.create!(
+      dest = ::EventSession.new(
         event:,
         start_at:,
         end_at:
       )
-      puts "imported event session #{event.slug}, #{start_at}"
-      dest
+      EventSessionService.create(dest)
     end
 
     def date
