@@ -5,6 +5,7 @@ class EventSession < ApplicationRecord
   validates :start_at, presence: true
 
   scope :from_this_week, -> { where('start_at >= ?', Date.today.beginning_of_week.to_time) }
+  scope :in_date_range, ->(date_range) { where(start_at: date_range) }
   scope :tagged_with, lambda { |tags|
     return self if tags.empty?
 
