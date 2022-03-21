@@ -1,7 +1,7 @@
 <div class="layout-show">
   <div class="title-container">
     <h2 class="page-title"><%= @event_session.event.title %></h2>
-    <div class="page-subtitle"><%= format_datetime @event_session.start_at, seperator: ' at ' %></div>
+    <div class="page-subtitle"><%= format_datetime_html @event_session.start_at, seperator: ' at ' %></div>
   </div>
 
   <h3>Attendees</h3>

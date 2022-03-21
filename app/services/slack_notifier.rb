@@ -26,9 +26,23 @@ class SlackNotifier
       channel: GENERAL_CHANNEL,
       text: <<~TEXT
         New event: *#{session.event.title}*
-        #{format_date_text(session.start_at)} at #{format_time_text session.start_at}
+        #{format_datetime_text(session.start_at, seperator: ' at ')}
 
         See it on our #{slack_link_to 'events page', 'https://makercommunity.org.au/events/'}
+      TEXT
+    )
+  end
+
+  def upcoming_this_week(sessions:)
+    return if sessions.empty?
+
+    post_message(
+      channel: GENERAL_CHANNEL,
+      text: <<~TEXT
+        *This Week at Maker Community*
+
+        <https://makercommunity.org.au/events/|Events>:
+        #{sessions.map { |session| "• *#{session.title}*: #{format_datetime_text(session.start_at, seperator: ' at ')}" }.join("\n")}
       TEXT
     )
   end
@@ -37,7 +51,7 @@ class SlackNotifier
 
   def post_message(*params)
     if delayed
-      Slack::PostMessageJob.perform_later(*params)
+      Slack::PostMessageJob.perform_later(*params) unless Rails.env.test?
     else
       client.chat_postMessage(*params)
     end

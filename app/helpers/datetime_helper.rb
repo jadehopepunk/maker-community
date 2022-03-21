@@ -1,11 +1,17 @@
 module DatetimeHelper
-  def format_datetime(datetime, options = {})
+  def format_datetime_html(datetime, options = {})
     seperator = options[:seperator] || ': '
 
     content_tag :span, class: 'datetime' do
       format_date_html(datetime) + seperator + format_time_html(datetime)
     end
   end
+
+  def format_datetime_text(datetime, options = {})
+  seperator = options[:seperator] || ': '
+
+  format_date_text(datetime) + seperator + format_time_text(datetime)
+end
 
   def format_time_html(datetime)
     content_tag :span, class: 'time' do
