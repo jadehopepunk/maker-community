@@ -3,7 +3,7 @@
     <% if event_session.event.image.present? %> <%= image_model_tag(event_session.event.image, class: 'event-image') %> <% end %>
     <div class="details">
       <div class="date-time">
-        <span class="date"><%= format_date event_session.date %></span>
+        <span class="date"><%= format_date_html event_session.date %></span>
         <span class="time"><%= format_time_html event_session.start_at %></span>
       </div>
       <h3 class="event-title"><%= event_session.event.title %></h3>

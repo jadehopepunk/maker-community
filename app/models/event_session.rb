@@ -11,6 +11,8 @@ class EventSession < ApplicationRecord
     where(event_id: Event.tagged_with(tags).pluck(:id))
   }
 
+  delegate :title, to: :event
+
   def time_range
     [start_at, end_at]
   end

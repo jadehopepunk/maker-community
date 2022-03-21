@@ -13,16 +13,8 @@ describe EventSessionService do
       expect(session).to be_persisted
     end
 
-    it 'notifies everyone in #general on slack' do
-      expect(Slack::PostMessageJob).to receive(:perform_later).with(
-        channel: '#general',
-        text: <<~TEXT
-          New event: *Spoon Carving*
-          Fri, Jan 10 at 6:30pm
-
-          See it on our <events page|https://makercommunity.org.au/events/>
-        TEXT
-      )
+    it 'notifies on slack' do
+      expect_any_instance_of(SlackNotifier).to receive(:new_event_listed).with(spoon_carving_jan_10)
 
       EventSessionService.create(spoon_carving_jan_10)
     end

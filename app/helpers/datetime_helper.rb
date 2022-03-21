@@ -3,7 +3,7 @@ module DatetimeHelper
     seperator = options[:seperator] || ': '
 
     content_tag :span, class: 'datetime' do
-      format_date(datetime) + seperator + format_time_html(datetime)
+      format_date_html(datetime) + seperator + format_time_html(datetime)
     end
   end
 
@@ -23,14 +23,19 @@ module DatetimeHelper
     datetime.strftime(format_string)
   end
 
-  def format_date(date)
+  def format_date_text(date)
     return nil if date.nil?
 
     show_year = (date.year != Date.today.year)
 
     format_string = '%a, %b %d'
     format_string += ', %Y' if show_year
+    date.strftime(format_string)
+  end
 
-    content_tag :span, date.strftime(format_string), class: 'date'
+  def format_date_html(date)
+    return nil if date.nil?
+
+    content_tag :span, format_date_text(date), class: 'date'
   end
 end
