@@ -3,7 +3,7 @@ module DatetimeHelper
     seperator = options[:seperator] || ': '
 
     content_tag :span, class: 'datetime' do
-      format_date(datetime) + seperator + format_time(datetime)
+      format_date(datetime) + seperator + format_time_html(datetime)
     end
   end
 
