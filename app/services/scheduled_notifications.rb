@@ -1,5 +1,5 @@
 class ScheduledNotifications
-  def initialize(date: Date.today, slack_notifier: SlackNotifier.new(delayed: false))
+  def initialize(date: Date.today, slack_notifier: SlackNotifier.new)
     @slack_notifier = slack_notifier
     @date = date
   end
