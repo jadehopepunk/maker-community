@@ -6,6 +6,7 @@
 @import "./components/admin_media_gallery.postcss.css";
 @import "./components/stats_callout.postcss.css";
 @import "./components/admin_page.postcss.css";
+@import "./components/month_nav.postcss.css";
 
 @import "./layouts/admin.postcss.css";
 @import "./layouts/layout_show.postcss.css";
