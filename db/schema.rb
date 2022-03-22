@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_22_041848) do
+ActiveRecord::Schema.define(version: 2022_03_22_234838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 2022_03_22_041848) do
     t.string "subject_type"
     t.bigint "subject_id"
     t.datetime "occured_at", precision: 6
+    t.json "data", default: {}
     t.index ["subject_type", "subject_id"], name: "index_user_events_on_subject"
     t.index ["user_id"], name: "index_user_events_on_user_id"
   end
