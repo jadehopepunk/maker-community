@@ -9,6 +9,8 @@ module Events
       @event = event
     end
 
+    delegate :title, to: :event
+
     def image
       nil
     end

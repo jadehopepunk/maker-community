@@ -11,4 +11,21 @@
   </div>
   <h1 class="page-title">Open Times & Duty Management</h1>
   <%= render 'admin/shared/month_nav', month: @month %>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Day</th>
+        <th>Session</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.date.day %></td>
+        <td><%= session.date.strftime('%a') %></td>
+        <td><%= session.title %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

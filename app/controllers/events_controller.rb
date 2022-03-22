@@ -69,7 +69,7 @@ class EventsController < ApplicationController
   end
 
   def sort_by_start_time(sessions)
-    result = sessions.sort do |a, b|
+    sessions.sort do |a, b|
       a.start_at <=> b.start_at
     end
   end

@@ -8,7 +8,15 @@ module Events
     end
 
     def sessions_during(date_range)
-      @virtual_events.map { |event| event.sessions_during(date_range) }.flatten
+      sort_by_start_time @virtual_events.map { |event| event.sessions_during(date_range) }.flatten
+    end
+
+    private
+
+    def sort_by_start_time(sessions)
+      sessions.sort do |a, b|
+        a.start_at <=> b.start_at
+      end
     end
   end
 end
