@@ -12,7 +12,7 @@ class SearchFilters < Array
     end
 
     def apply(_scope)
-      raise NotImplementedError, 'Override this function to do something'
+      raise NotImplementedError, "Override this function to do something (for filter #{title})"
     end
   end
 
@@ -30,9 +30,24 @@ class SearchFilters < Array
     end
   end
 
+  class EventDateSearchFilter < SearchFilter
+    SCOPES = ['future'].freeze
+
+    def title
+      value
+    end
+
+    def apply(scope)
+      raise ArgumentError unless SCOPES.include?(value)
+
+      scope.send(value)
+    end
+  end
+
   class << self
     FACTORIES = {
-      'plan' => SearchFilters::PlanSearchFilter
+      'plan' => SearchFilters::PlanSearchFilter,
+      'event_date' => SearchFilters::EventDateSearchFilter
     }
 
     def search_filter_class_for(key)
