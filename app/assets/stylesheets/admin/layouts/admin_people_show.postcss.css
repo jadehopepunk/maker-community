@@ -1,8 +1,4 @@
 .admin-people-show {
-  .page-title {
-    margin-bottom: 1rem;
-  }
-
   .person-details {
     border: 2px solid var(--highlight-color);
     border-radius: 0.5rem;

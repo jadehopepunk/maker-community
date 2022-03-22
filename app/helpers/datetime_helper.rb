@@ -44,4 +44,11 @@ module DatetimeHelper
 
     content_tag :span, format_date_text(date), class: 'date'
   end
+
+  def format_month_text(month)
+    show_year = (month.year != Date.current.year)
+    result = month.name.to_s
+    result += ", #{month.year}" if show_year
+    result
+  end
 end

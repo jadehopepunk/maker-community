@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
 
-  .page-title {
+  .section-title {
     @mixin text-large;
     font-weight: bold;
   }

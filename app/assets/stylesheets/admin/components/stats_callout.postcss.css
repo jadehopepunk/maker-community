@@ -1,0 +1,48 @@
+.stats-callout {
+  border: 2px solid var(--highlight-color);
+  border-radius: 0.5rem;
+  padding: var(--gutter);
+  margin-bottom: calc(var(--gutter) * 2);
+
+  .callout-title {
+    @mixin text-heading-small;
+    margin-bottom: 1rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--gutter);
+
+    .stat-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    a.stat {
+      color: var(--text-color);
+      display: block;
+
+      .value {
+        color: var(--highlight-color);
+        @mixin text-heading-large;
+      }
+
+      &:hover {
+        .label {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    a {
+    }
+  }
+}
