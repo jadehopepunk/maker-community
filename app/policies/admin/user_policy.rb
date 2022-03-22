@@ -18,6 +18,10 @@ module Admin
       record == user || user&.has_any_role?(:president, :vice_president, :secretary, :people_admin)
     end
 
+    def edit_availability?
+      record == user || user&.has_any_role?(:program_admin, :duty_roster_admin)
+    end
+
     class Scope
       attr_reader :user, :scope
 

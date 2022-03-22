@@ -20,6 +20,18 @@
         <th><%= dm.short_name %></th>
         <% end %>
       </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <% @duty_managers.each do |dm| %>
+        <th>
+          <% if policy([:admin, dm]).edit_availability? %>
+          <a href="#">edit</a>
+          <% end %>
+        </th>
+        <% end %>
+      </tr>
     </thead>
     <tbody>
       <% @sessions.each do |session| %>

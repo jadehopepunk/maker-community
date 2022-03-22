@@ -1,4 +1,6 @@
 .open-times-table {
+  min-width: 100%;
+
   tbody {
     tr {
       td {
