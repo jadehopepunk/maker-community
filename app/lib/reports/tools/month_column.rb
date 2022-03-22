@@ -3,7 +3,7 @@ module Reports
     class MonthColumn < Column
       class MonthValue < ReportValue
         def to_s
-          show_year = (data.year != Date.today.year)
+          show_year = (data.year != Date.current.year)
 
           format_string = '%B'
           format_string += ', %Y' if show_year

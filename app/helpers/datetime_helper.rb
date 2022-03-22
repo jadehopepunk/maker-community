@@ -8,10 +8,10 @@ module DatetimeHelper
   end
 
   def format_datetime_text(datetime, options = {})
-  seperator = options[:seperator] || ': '
+    seperator = options[:seperator] || ': '
 
-  format_date_text(datetime) + seperator + format_time_text(datetime)
-end
+    format_date_text(datetime) + seperator + format_time_text(datetime)
+  end
 
   def format_time_html(datetime)
     content_tag :span, class: 'time' do
@@ -26,17 +26,17 @@ end
     format_string += ':%M' if datetime.min.nonzero?
     format_string += '%P'
 
-    datetime.strftime(format_string)
+    datetime.in_time_zone.strftime(format_string)
   end
 
   def format_date_text(date)
     return nil if date.nil?
 
-    show_year = (date.year != Date.today.year)
+    show_year = (date.year != Date.current.year)
 
     format_string = '%a, %b %d'
     format_string += ', %Y' if show_year
-    date.strftime(format_string)
+    date.in_time_zone.strftime(format_string)
   end
 
   def format_date_html(date)

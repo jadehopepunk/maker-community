@@ -4,6 +4,6 @@ module DateSpecHelpers
   end
 
   def jan_time(day, hour, minute)
-    DateTime.new(2020, 1, day, hour, minute)
+    Time.zone.local(2020, 1, day, hour, minute)
   end
 end
