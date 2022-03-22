@@ -4,6 +4,7 @@ module Admin
       @month = get_month
       @sessions = Events::VirtualCalendar.new.sessions_during(@month.dates)
       @area_roles = Role.where(name: 'program_admin').includes(:users) || []
+      @duty_managers = User.with_role(:duty_manager).order(:display_name)
     end
 
     private

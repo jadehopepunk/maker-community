@@ -15,7 +15,7 @@ describe SlackNotifier do
     it 'queues a Slack message' do
       expect_message(
         channel: '#team-program',
-        text: "`Jade` booked for <http://example.com/admin/event_sessions/#{event_session.id}|Spoon Carving> on Fri, Jan 10, 2020"
+        text: "`Jade` booked for <http://example.com/admin/program/event_sessions/#{event_session.id}|Spoon Carving> on Fri, Jan 10, 2020"
       )
 
       subject.new_event_booking(unsaved_booking)
@@ -27,7 +27,7 @@ describe SlackNotifier do
 
       expect_message(
         channel: '#team-program',
-        text: "`Jade` booked 3 people for <http://example.com/admin/event_sessions/#{event_session.id}|Spoon Carving> on Fri, Jan 10, 2020"
+        text: "`Jade` booked 3 people for <http://example.com/admin/program/event_sessions/#{event_session.id}|Spoon Carving> on Fri, Jan 10, 2020"
       )
 
       subject.new_event_booking(booking)

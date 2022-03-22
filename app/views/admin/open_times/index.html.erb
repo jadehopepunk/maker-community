@@ -16,6 +16,9 @@
       <tr>
         <th colspan="2">Day</th>
         <th>Session</th>
+        <% @duty_managers.each do |dm| %>
+        <th><%= dm.short_name %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +27,9 @@
         <td><%= session.date.day %></td>
         <td><%= session.date.strftime('%a') %></td>
         <td><%= session.title %></td>
+        <% @duty_managers.each do |dm| %>
+        <td>xx</td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
