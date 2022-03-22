@@ -5,6 +5,7 @@ class SlackNotifier
 
   GENERAL_CHANNEL = '#general'.freeze
   PROGRAM_CHANNEL = '#team-program'.freeze
+  PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
 
   def initialize(client: Slack::Web::Client.new, delayed: true)
     @client = client
@@ -47,6 +48,15 @@ class SlackNotifier
     )
   end
 
+  def membership_status_changed(membership, old_status, new_status)
+    post_message(
+      channel: PEOPLE_PRIVATE_CHANNEL,
+      text: <<~TEXT
+        #{user_admin_link membership.user}'s #{membership.plan.title} status changed from `#{old_status}` to `#{new_status}`
+      TEXT
+    )
+  end
+
   private
 
   def post_message(*params)
@@ -55,6 +65,10 @@ class SlackNotifier
     else
       client.chat_postMessage(*params)
     end
+  end
+
+  def user_admin_link(user)
+    slack_link_to user.display_name, url_helpers.admin_person_url(user)
   end
 
   def event_session_admin_link(session)

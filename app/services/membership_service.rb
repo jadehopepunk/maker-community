@@ -15,5 +15,11 @@ class MembershipService
 
       membership
     end
+
+    def status_changed(membership, old_status, new_status, notify: true)
+      return unless old_status != new_status
+
+      SlackNotifier.new.membership_status_changed(membership, old_status, new_status) if notify
+    end
   end
 end

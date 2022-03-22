@@ -75,7 +75,7 @@ module Wp
     end
 
     def save_status(old_value, new_value)
-      puts "saving status because of change #{old_value} -> #{new_value}"
+      MembershipService.status_changed(find_existing_dest, old_value, new_value)
     end
 
     def imported_record_key
