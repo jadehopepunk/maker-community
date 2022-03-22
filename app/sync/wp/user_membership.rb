@@ -11,9 +11,7 @@ module Wp
       end
 
       def sync
-        find_each do |record|
-          record.import_new unless dest_class.where(wordpress_post_id: record.ID).exists?
-        end
+        find_each(&:import_or_update)
       end
     end
 
@@ -28,15 +26,60 @@ module Wp
         user:,
         plan:,
         subscription:,
-        created_at: post_date,
-        status: post_status&.sub(/^wcm-/, ''),
-        wordpress_post_id: self.ID,
         start_at: meta['_start_date'],
-        end_at: meta['_end_date']
+        **shared_attributes,
+        created_at: post_date,
+        wordpress_post_id: self.ID
       }
       dest = MembershipService.create(props)
 
       puts "Imported membership: #{user.display_name}, #{plan.name}, #{dest.status}"
+    end
+
+    def shared_attributes
+      {
+        status: post_status&.sub(/^wcm-/, ''),
+        end_at: meta['_end_date']
+      }
+    end
+
+    def update_existing
+      dest = existing_dest
+
+      dest.assign_attributes shared_attributes
+      save_changes(dest) if dest.changed?
+    end
+
+    def save_changes(dest)
+      dest.changes.each do |key, values|
+        send("save_#{key}".to_sym, *values)
+      end
+    end
+
+    def save_end_at(old_value, new_value)
+      if old_value.present? && new_value.present?
+        difference = (new_value - old_value).to_i
+        if difference.abs < 24.hours
+          update_end_at_value(new_value)
+          puts "User membership #{self.ID} - updated time difference for end at: #{difference / 1.hour.to_f} hours"
+          return
+        end
+      end
+
+      update_end_at_value(new_value)
+      puts "User membership #{self.ID} - updated from #{old_value.inspect} to #{new_value.inspect}"
+    end
+
+    def update_end_at_value(new_value)
+      find_existing_dest.update!(end_at: new_value)
+    end
+
+    def save_status(old_value, new_value)
+      puts "saving status because of change #{old_value} -> #{new_value}"
+    end
+
+    def imported_record_key
+      :wordpress_post_id
     end
   end
 end

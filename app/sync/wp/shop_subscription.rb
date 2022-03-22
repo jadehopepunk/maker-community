@@ -36,6 +36,8 @@ module Wp
       )
       dest.save!
       puts "Imported subscription: #{self.ID}"
+    rescue ActiveRecord::RecordInvalid => e
+      puts "Failed to import subscription: #{self.ID} - #{e.message}"
     end
   end
 end

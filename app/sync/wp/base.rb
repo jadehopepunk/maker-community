@@ -37,7 +37,11 @@ module Wp
     end
 
     def existing_dest
-      @dest ||= dest_class.where(imported_record_key => primary_key).first
+      @dest ||= find_existing_dest
+    end
+
+    def find_existing_dest
+      dest_class.where(imported_record_key => primary_key).first
     end
 
     def update_existing
