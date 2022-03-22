@@ -30,7 +30,7 @@ module Wp
       dest = dest_class.new(
         password: user_pass,
         **shared_attributes,
-        build_address:,
+        address: build_address,
         wordpress_id: self.ID,
         created_at: user_registered
       )
