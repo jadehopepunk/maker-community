@@ -4,20 +4,17 @@ module Admin
     before_action -> { authorize :application, :can_admin? }
 
     layout 'admin'
-    SECTIONS = {
-      'people' => 'people',
-      'events' => 'program',
-      'event_sessions' => 'program',
-      'images' => 'public'
-    }
 
     def index; end
 
     private
 
     def set_section
-      controller_name = params[:controller].split('/')[1]
-      @section = SECTIONS[controller_name]
+      @section = path_section
+    end
+
+    def path_section
+      request.path.split('/').reject(&:blank?)[1]
     end
   end
 end

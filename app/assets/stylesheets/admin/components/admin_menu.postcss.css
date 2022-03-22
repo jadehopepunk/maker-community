@@ -33,6 +33,16 @@
           background-color: #444444;
           color: white;
         }
+
+        &.has-children::after {
+          content: "▼";
+          float: right;
+        }
+
+        &.child-item {
+          padding-left: calc(var(--gutter) * 2);
+          font-size: 0.9em;
+        }
       }
 
       a.nav-item {

@@ -11,9 +11,13 @@ Rails.application.routes.draw do
         get :metrics
       end
     end
-    resources :events, only: [:index]
-    resources :event_sessions, only: [:index, :show]
-    resources :images, only: [:index]
+    scope :program do
+      resources :event_sessions, only: [:index, :show]
+      resources :open_times, only: [:index]
+    end
+    scope :public do
+      resources :images, only: [:index]
+    end
   end
 
   authenticate :user do
