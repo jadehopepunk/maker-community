@@ -11,7 +11,7 @@
   </div>
   <h1 class="page-title">Open Times & Duty Management</h1>
   <%= render 'admin/shared/month_nav', month: @month %>
-  <table>
+  <table class="open-times-table">
     <thead>
       <tr>
         <th colspan="2">Day</th>
@@ -28,7 +28,7 @@
         <td><%= session.date.strftime('%a') %></td>
         <td><%= session.title %></td>
         <% @duty_managers.each do |dm| %>
-        <td>xx</td>
+        <td><a class="open-time availability-unknown" href="#"></a></td>
         <% end %>
       </tr>
       <% end %>
