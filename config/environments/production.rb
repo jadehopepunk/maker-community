@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "maker_community_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'http://maker-community.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'app.makercommunity.org.au', protocol: 'http' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
