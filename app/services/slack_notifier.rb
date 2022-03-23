@@ -48,11 +48,22 @@ class SlackNotifier
     )
   end
 
+  def new_member(membership)
+    plan = membership.plan
+
+    post_message(
+      channel: PEOPLE_PRIVATE_CHANNEL,
+      text: <<~TEXT
+        #{user_admin_link membership.user} became #{plan.title.indefinite_article} `#{plan.title}`
+      TEXT
+    )
+  end
+
   def membership_status_changed(membership, old_status, new_status)
     post_message(
       channel: PEOPLE_PRIVATE_CHANNEL,
       text: <<~TEXT
-        #{user_admin_link membership.user}'s #{membership.plan.title} status changed from `#{old_status}` to `#{new_status}`
+        #{user_admin_link membership.user}'s #{membership.plan.title} status changed from #{old_status} to `#{new_status}`
       TEXT
     )
   end
