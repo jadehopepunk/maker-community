@@ -10,40 +10,5 @@
     <% end %>
   </div>
   <h1 class="page-title">Open Times & Duty Management</h1>
-  <%= render 'admin/shared/month_nav', month: @month %>
-  <table class="open-times-table">
-    <thead>
-      <tr>
-        <th colspan="2">Day</th>
-        <th>Session</th>
-        <% @duty_managers.each do |dm| %>
-        <th><%= dm.short_name %></th>
-        <% end %>
-      </tr>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <% @duty_managers.each do |dm| %>
-        <th>
-          <% if policy([:admin, dm]).edit_availability? %>
-          <a href="#">edit</a>
-          <% end %>
-        </th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @sessions.each do |session| %>
-      <tr>
-        <td><%= session.date.day %></td>
-        <td><%= session.date.strftime('%a') %></td>
-        <td><%= session.title %></td>
-        <% @duty_managers.each do |dm| %>
-        <td><a class="open-time availability-unknown" href="#"></a></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render 'admin/shared/month_nav', month: @month %> <%= render 'admin/open_times/duty_manager_availability', duty_managers: @duty_managers, sessions: @sessions %>
 </div>
