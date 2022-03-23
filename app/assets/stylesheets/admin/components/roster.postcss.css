@@ -24,6 +24,12 @@
     }
   }
 
+  &:not(.editing) {
+    tbody.edit-actions {
+      display: none;
+    }
+  }
+
   &.editing {
     thead {
       tr.actions {
