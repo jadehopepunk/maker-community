@@ -1,15 +1,40 @@
 .roster {
   min-width: 100%;
 
-  tbody {
+  tbody.slots-body {
     tr {
       td {
-        min-width: 50px;
         /* position: relative; */
 
+        &.day {
+          width: 2em;
+        }
+
+        &.weekday {
+          width: 3em;
+        }
+
+        &.session-name {
+          width: 9em;
+          font-size: 0.8em;
+          opacity: 0.75;
+        }
+
         &.user-slot {
+          min-width: 50px;
+          height: 2rem;
+
           &[data-availability="unknown"] {
-            background: repeating-linear-gradient(45deg, var(--slate-700), var(--slate-700) 4px, transparent 4px, transparent 8px);
+            background: repeating-linear-gradient(45deg, var(--slate-600), var(--slate-600) 4px, transparent 4px, transparent 8px);
+            opacity: 0.8;
+          }
+
+          &[data-availability="busy"] {
+            background-color: red;
+          }
+
+          &[data-availability="available"] {
+            background-color: orange;
           }
         }
       }
@@ -30,17 +55,32 @@
           opacity: 0.5;
         }
       }
+
+      th.user-header:not(.editing) {
+        display: none;
+      }
     }
 
-    tbody {
+    tbody.slots-body {
       td.user-slot:not(.editing) {
         opacity: 0.4;
         cursor: not-allowed;
+        display: none;
       }
 
       td.user-slot.editing {
         cursor: pointer;
-        background-color: var(--slate-500);
+        opacity: 1;
+      }
+    }
+
+    tbody.edit-actions {
+      td {
+        padding: 0.5em 0;
+
+        a {
+          margin-right: 0.5em;
+        }
       }
     }
   }
