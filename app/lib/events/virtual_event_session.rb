@@ -9,7 +9,7 @@ module Events
       @event = event
     end
 
-    delegate :title, to: :event
+    delegate :title, :string_identifier, to: :event
 
     def image
       nil
@@ -17,6 +17,10 @@ module Events
 
     def start_at
       combine_date_and_time date, start_time
+    end
+
+    def string_identifier
+      start_at.to_s
     end
 
     private

@@ -41,12 +41,39 @@ export default class extends Controller {
     this.clearEditingClass();
   }
 
+  saveEdit(event) {
+    const values = this.currentEditValues();
+    console.log("values", values);
+    this.cancelEdit();
+  }
+
   startEditing(userId) {
     if (this.editing) return;
 
     this.editing = userId;
     this.clearEditingClass();
     this.setEditingClass(userId);
+  }
+
+  currentEditValues() {
+    if (!this.editing) return [];
+    return this.userValues(this.editing);
+  }
+
+  userValues(userId) {
+    var result = {};
+
+    this.rosterBodyTarget.querySelectorAll(`[data-user="${userId}"]`).forEach((element) => {
+      const availability = element.dataset["availability"];
+      const sessionType = element.parentElement.dataset["sessionType"];
+      const sessionId = element.parentElement.dataset["sessionId"];
+      result[sessionId] = {
+        type: sessionType,
+        availability: availability,
+      };
+    });
+
+    return result;
   }
 
   // private
