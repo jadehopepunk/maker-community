@@ -3,6 +3,8 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application";
-
 import NabarController from "./navbar_controller";
+import RosterController from "./roster_controller";
+
 application.register("navbar", NabarController);
+application.register("roster", RosterController);

@@ -1,22 +1,18 @@
-<table class="open-times-table">
+<table class="open-times-table" data-controller="roster">
   <thead>
     <tr>
       <th colspan="2">Day</th>
       <th>Session</th>
-      <% duty_managers.each do |dm| %>
-      <th><%= dm.short_name %></th>
+      <% users.each do |user| %>
+      <th><%= user.short_name %></th>
       <% end %>
     </tr>
-    <tr>
+    <tr data-roster-target="edits">
       <th></th>
       <th></th>
       <th></th>
-      <% duty_managers.each do |dm| %>
-      <th>
-        <% if policy([:admin, dm]).edit_availability? %>
-        <a href="#">edit</a>
-        <% end %>
-      </th>
+      <% users.each do |user| %>
+      <th><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
       <% end %>
     </tr>
   </thead>
@@ -26,7 +22,7 @@
       <td><%= session.date.day %></td>
       <td><%= session.date.strftime('%a') %></td>
       <td><%= session.title %></td>
-      <% duty_managers.each do |dm| %>
+      <% users.each do |user| %>
       <td><a class="open-time availability-unknown" href="#"></a></td>
       <% end %>
     </tr>

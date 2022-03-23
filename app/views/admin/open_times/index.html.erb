@@ -10,5 +10,5 @@
     <% end %>
   </div>
   <h1 class="page-title">Open Times & Duty Management</h1>
-  <%= render 'admin/shared/month_nav', month: @month %> <%= render 'admin/open_times/duty_manager_availability', duty_managers: @duty_managers, sessions: @sessions %>
+  <%= render 'admin/shared/month_nav', month: @month %> <%= render 'admin/open_times/roster', users: @duty_managers, sessions: @sessions %>
 </div>
