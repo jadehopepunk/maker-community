@@ -16,14 +16,14 @@
       <% end %>
     </tr>
   </thead>
-  <tbody>
+  <tbody data-roster-target="rosterBody">
     <% sessions.each do |session| %>
     <tr>
       <td><%= session.date.day %></td>
       <td><%= session.date.strftime('%a') %></td>
       <td><%= session.title %></td>
       <% users.each do |user| %>
-      <td class="user-slot" data-user="<%= user.id %>"><a class="open-time availability-unknown" href="#"></a></td>
+      <td class="user-slot" data-user="<%= user.id %>" data-availability="unknown"></td>
       <% end %>
     </tr>
     <% end %>
@@ -32,7 +32,7 @@
     <tr>
       <td colspan="3"></td>
       <td>
-        <a>Save</a>
+        <a class="button">Save</a>
         <a>Cancel</a>
       </td>
     </tr>

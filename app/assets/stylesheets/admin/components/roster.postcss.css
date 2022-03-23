@@ -5,18 +5,10 @@
     tr {
       td {
         min-width: 50px;
-        position: relative;
+        /* position: relative; */
 
-        a.open-time {
-          height: 100%;
-          display: block;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          right: 0;
-          left: 0;
-
-          &.availability-unknown {
+        &.user-slot {
+          &[data-availability="unknown"] {
             background: repeating-linear-gradient(45deg, var(--slate-700), var(--slate-700) 4px, transparent 4px, transparent 8px);
           }
         }
@@ -39,9 +31,16 @@
         }
       }
     }
+
     tbody {
       td.user-slot:not(.editing) {
         opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      td.user-slot.editing {
+        cursor: pointer;
+        background-color: var(--slate-500);
       }
     }
   }
