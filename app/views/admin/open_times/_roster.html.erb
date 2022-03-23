@@ -1,4 +1,4 @@
-<table class="open-times-table" data-controller="roster">
+<table class="roster" data-controller="roster">
   <thead>
     <tr>
       <th colspan="2">Day</th>
@@ -7,12 +7,12 @@
       <th><%= user.short_name %></th>
       <% end %>
     </tr>
-    <tr data-roster-target="edits">
+    <tr class="actions" data-roster-target="edits">
       <th></th>
       <th></th>
       <th></th>
       <% users.each do |user| %>
-      <th><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
+      <th data-user="<%= user.id %>"><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
       <% end %>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
       <td><%= session.date.strftime('%a') %></td>
       <td><%= session.title %></td>
       <% users.each do |user| %>
-      <td><a class="open-time availability-unknown" href="#"></a></td>
+      <td class="user-slot" data-user="<%= user.id %>"><a class="open-time availability-unknown" href="#"></a></td>
       <% end %>
     </tr>
     <% end %>

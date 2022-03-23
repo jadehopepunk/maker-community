@@ -1,4 +1,4 @@
-.open-times-table {
+.roster {
   min-width: 100%;
 
   tbody {
@@ -20,6 +20,22 @@
             background: repeating-linear-gradient(45deg, var(--slate-700), var(--slate-700) 4px, transparent 4px, transparent 8px);
           }
         }
+      }
+    }
+  }
+
+  &.editing {
+    thead {
+      tr.actions {
+        a {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+      }
+    }
+    tbody {
+      td.user-slot:not(.editing) {
+        opacity: 0.4;
       }
     }
   }
