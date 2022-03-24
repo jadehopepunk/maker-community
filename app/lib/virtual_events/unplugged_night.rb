@@ -1,4 +1,4 @@
-module Events
+module VirtualEvents
   class UnpluggedNight < VirtualEvent
     def title
       'Unplugged Night'
@@ -27,7 +27,7 @@ module Events
       date_range.map do |date|
         template = SESSIONS[date.wday]
         if template && valid_date?(date)
-          result << Events::VirtualEventSession.new(self, date, template[:start_time],
+          result << VirtualEvents::VirtualEventSession.new(self, date, template[:start_time],
                                                     template[:end_time])
         end
       end

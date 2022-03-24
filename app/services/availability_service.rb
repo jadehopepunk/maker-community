@@ -17,7 +17,7 @@ class AvailabilityService
     private
 
     def find_virtual_event(type)
-      Events::VirtualCalendar.new.get_virtual_event(type)
+      VirtualEvents::VirtualCalendar.new.get_virtual_event(type)
     end
   end
 end

@@ -1,4 +1,4 @@
-module Events
+module VirtualEvents
   class VirtualEventSession
     attr_reader :date, :start_time, :end_time, :event
 

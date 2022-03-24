@@ -23,7 +23,7 @@ describe AvailabilityService do
       let(:entries) do
         {
           start_at.to_s => {
-            type: 'Events::OpenTime',
+            type: 'VirtualEvents::OpenTime',
             availability: 'busy'
           }
         }

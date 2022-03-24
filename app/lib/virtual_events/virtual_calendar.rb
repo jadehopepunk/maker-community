@@ -1,6 +1,6 @@
-module Events
+module VirtualEvents
   class VirtualCalendar
-    VALID_EVENT_TYPES = ['Events::UnpluggedNight', 'Events::OpenTime'].freeze
+    VALID_EVENT_TYPES = ['VirtualEvents::UnpluggedNight', 'VirtualEvents::OpenTime'].freeze
 
     def initialize(virtual_events = nil)
       @virtual_events = virtual_events || [

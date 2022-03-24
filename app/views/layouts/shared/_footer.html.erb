@@ -10,7 +10,7 @@
 
         <table class="opening-hours">
           <tbody>
-            <% Events::OpenTime::SESSIONS.each do |key, times| %>
+            <% VirtualEvents::OpenTime::SESSIONS.each do |key, times| %>
             <tr>
               <td><%= Date::DAYNAMES[key] %></td>
               <td><%= format_time_html times[:start_time] %> - <%= format_time_html times[:end_time] %></td>

@@ -1,4 +1,4 @@
-module Events
+module VirtualEvents
   class OpenTime < VirtualEvent
     def title
       'Open for Making'
@@ -33,8 +33,8 @@ module Events
       date_range.map do |date|
         template = SESSIONS[date.wday]
         if SESSIONS[date.wday]
-          result << Events::VirtualEventSession.new(self, date, template[:start_time],
-                                                    template[:end_time])
+          result << VirtualEvents::VirtualEventSession.new(self, date, template[:start_time],
+                                                           template[:end_time])
         end
       end
 
