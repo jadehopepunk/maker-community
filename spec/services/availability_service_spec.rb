@@ -3,8 +3,6 @@ require 'rails_helper'
 describe AvailabilityService do
   include DateSpecHelpers
 
-  subject { described_class }
-
   describe '.bulk_update' do
     let(:bilbo) { create(:bilbo) }
     let(:jade) { create(:jade) }

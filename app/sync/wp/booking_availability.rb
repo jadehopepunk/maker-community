@@ -30,7 +30,7 @@ module Wp
         start_at:,
         end_at:
       )
-      EventSessionService.create(dest)
+      EventSessionService.new.create(dest)
     end
 
     def date

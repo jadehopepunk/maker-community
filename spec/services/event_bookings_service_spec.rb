@@ -10,13 +10,13 @@ describe EventBookingsService do
     let(:unsaved_booking) { EventBooking.new(session: event_session, user: jade, status: 'paid') }
 
     it 'saves the booking' do
-      EventBookingsService.create(unsaved_booking)
+      subject.create(unsaved_booking)
 
       expect(unsaved_booking).to be_persisted
     end
 
     it 'creates a BookedForEvent user event' do
-      EventBookingsService.create(unsaved_booking)
+      subject.create(unsaved_booking)
 
       expect(
         UserEvents::BookedForEvent.where(
@@ -32,7 +32,7 @@ describe EventBookingsService do
 
       it 'queues a Slack message if event is in the future' do
         expect_any_instance_of(SlackNotifier).to receive(:new_event_booking).with(unsaved_booking)
-        EventBookingsService.create(unsaved_booking)
+        subject.create(unsaved_booking)
       end
     end
   end

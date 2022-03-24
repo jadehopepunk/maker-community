@@ -31,7 +31,7 @@ module Wp
         created_at: post_date,
         wordpress_post_id: self.ID
       }
-      dest = MembershipService.create(props)
+      dest = MembershipService.new.create(props)
 
       puts "Imported membership: #{user.display_name}, #{plan.name}, #{dest.status}"
     end
@@ -75,7 +75,7 @@ module Wp
     end
 
     def save_status(old_value, new_value)
-      MembershipService.status_changed(find_existing_dest, old_value, new_value)
+      MembershipService.new.status_changed(find_existing_dest, old_value, new_value)
     end
 
     def imported_record_key

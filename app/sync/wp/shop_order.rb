@@ -23,7 +23,7 @@ module Wp
       dest = build_new
       return if dest.nil?
 
-      OrderService.create(dest)
+      OrderService.new.create(dest)
 
       puts "Imported order: #{self.ID}"
     end

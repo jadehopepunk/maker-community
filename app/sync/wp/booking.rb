@@ -35,7 +35,7 @@ module Wp
         wordpress_post_id: self.ID,
         created_at: post_date
       )
-      EventBookingsService.create(dest)
+      EventBookingsService.new.create(dest)
     end
 
     def import_event_session_if_new

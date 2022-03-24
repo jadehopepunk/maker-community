@@ -16,7 +16,7 @@ module Admin
       user = User.find_by(id: params[:user_id])
       authorize [:admin, user], :edit_availability?
 
-      AvailabilityService.bulk_update(user:, creator: current_user, entries:)
+      AvailabilityService.new.bulk_update(user:, creator: current_user, entries:)
       render success: true, json: {}
     end
 

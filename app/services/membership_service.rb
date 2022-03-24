@@ -1,40 +1,38 @@
 class MembershipService
-  class << self
-    def create(properties, notify: true)
-      membership = nil
+  def create(properties, notify: true)
+    membership = nil
 
-      ActiveRecord::Base.transaction do
-        membership = Membership.create!(properties)
+    ActiveRecord::Base.transaction do
+      membership = Membership.create!(properties)
 
-        UserEvents::StartedMembership.create!(
-          user: membership.user,
-          subject: membership,
-          occured_at: membership.start_at
-        )
-      end
-
-      SlackNotifier.new.new_member(membership) if notify && membership.start_at >= 1.week.ago
-
-      membership
+      UserEvents::StartedMembership.create!(
+        user: membership.user,
+        subject: membership,
+        occured_at: membership.start_at
+      )
     end
 
-    def status_changed(membership, old_status, new_status, notify: true)
-      return unless old_status != new_status
+    SlackNotifier.new.new_member(membership) if notify && membership.start_at >= 1.week.ago
 
-      ActiveRecord::Base.transaction do
-        membership.update!(status: new_status)
+    membership
+  end
 
-        UserEvents::MembershipStatusChanged.create!(
-          user: membership.user,
-          subject: membership,
-          occured_at: Time.current,
-          data: { old_status:, new_status: }
-        )
-      end
+  def status_changed(membership, old_status, new_status, notify: true)
+    return unless old_status != new_status
 
-      SlackNotifier.new.membership_status_changed(membership, old_status, new_status) if notify
+    ActiveRecord::Base.transaction do
+      membership.update!(status: new_status)
 
-      membership
+      UserEvents::MembershipStatusChanged.create!(
+        user: membership.user,
+        subject: membership,
+        occured_at: Time.current,
+        data: { old_status:, new_status: }
+      )
     end
+
+    SlackNotifier.new.membership_status_changed(membership, old_status, new_status) if notify
+
+    membership
   end
 end
