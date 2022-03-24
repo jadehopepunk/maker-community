@@ -17,5 +17,15 @@ FactoryBot.define do
     factory :spoon_carving do
       title { 'Spoon Carving' }
     end
+
+    factory :unplugged_night do
+      slug { 'unplugged-night' }
+      title { 'Unplugged Night' }
+    end
+
+    factory :open_for_making do
+      slug { 'open-for-making' }
+      title { 'Open for Making' }
+    end
   end
 end

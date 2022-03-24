@@ -19,11 +19,11 @@ describe AvailabilityService do
     end
 
     context 'with one entry' do
-      let(:start_at) { jan_time(15, 18, 30) }
+      let(:start_at) { Time.utc(2020, 1, 4, 10, 0) }
       let(:entries) do
         {
           start_at.to_s => {
-            type: 'Events::UnpluggedNight',
+            type: 'Events::OpenTime',
             availability: 'busy'
           }
         }
@@ -33,17 +33,20 @@ describe AvailabilityService do
         it 'creates event' do
           subject.bulk_update(user: bilbo, creator: bilbo, entries:)
 
-          event = Event.find_by_slug('unplugged-night')
+          event = Event.find_by_slug('open-for-making')
           expect(event).not_to be_nil
-          expect(event.title).to eq('Unplugged Night')
+          expect(event.title).to eq('Open for Making')
         end
       end
 
       context 'where no session exists' do
-        xit 'creates session and availability' do
+        let!(:open_for_making) { create(:open_for_making) }
+
+        it 'creates session and availability' do
           subject.bulk_update(user: bilbo, creator: bilbo, entries:)
 
-          session = EventSession.first
+          session = open_for_making.sessions.first
+          expect(session).not_to be_nil
           expect(session.start_at).to eq(start_at)
         end
       end

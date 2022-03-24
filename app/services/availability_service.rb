@@ -7,14 +7,17 @@ class AvailabilityService
     end
 
     def update(user:, creator:, date:, type:, availability:)
-      event = event_for_type(type)
+      virtual_event = find_virtual_event(type)
+      event = virtual_event.find_or_create_event
+      start_at = DateTime.parse(date.split('+').first)
+      session = virtual_event.find_or_create_session(event, start_at)
+      puts session.inspect
     end
 
     private
 
-    def event_for_type(type)
-      result = Events::VirtualCalendar.new.get_virtual_event(type)
-      result.find_or_create_event
+    def find_virtual_event(type)
+      Events::VirtualCalendar.new.get_virtual_event(type)
     end
   end
 end
