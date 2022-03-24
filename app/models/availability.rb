@@ -1,5 +1,5 @@
 class Availability < ApplicationRecord
-  UNKNOWN_STATE = 'unknown'
+  UNKNOWN_STATE = 'unknown'.freeze
   STATES = ['busy', 'available'].freeze
 
   belongs_to :user
@@ -8,7 +8,13 @@ class Availability < ApplicationRecord
 
   validates :status, inclusion: { in: STATES }
 
-  def self.update_for_user_and_session(session, user, attributes)
-    where(session:, user:).first_or_create.update(attributes)
+  def self.update_for_user_and_session(session, user, status:, creator:)
+    scope = where(session:, user:)
+
+    if status == UNKNOWN_STATE
+      scope.destroy_all
+    else
+      scope.first_or_create.update(status:, creator:)
+    end
   end
 end
