@@ -25,7 +25,7 @@ module Admin
     end
 
     def entries
-      JSON.parse(params[:entries]).transform_values(&:symbolize_keys)
+      JSON.parse(params[:entries]).transform_keys(&:to_i)
     end
   end
 end

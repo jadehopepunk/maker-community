@@ -20,38 +20,17 @@ describe AvailabilityService do
 
     context 'with one entry' do
       let(:start_at) { Time.utc(2020, 1, 4, 10, 0) }
-      let(:entries) do
-        {
-          start_at.to_s => {
-            type: 'VirtualEvents::OpenTime',
-            availability: 'busy'
-          }
-        }
-      end
+      let(:open_for_making) { create(:open_for_making) }
+      let(:session) { open_for_making.sessions.create!(start_at:) }
+      let(:entries) { { session.id => 'busy' } }
 
-      context 'where no event exists' do
-        it 'creates event' do
+      context 'where no availability exists' do
+        it 'creates availability' do
           subject.bulk_update(user: bilbo, creator: bilbo, entries:)
-
-          event = Event.find_by_slug('open-for-making')
-          expect(event).not_to be_nil
-          expect(event.title).to eq('Open for Making')
-        end
-      end
-
-      context 'where no session exists' do
-        let!(:open_for_making) { create(:open_for_making) }
-
-        it 'creates session and availability' do
-          subject.bulk_update(user: bilbo, creator: bilbo, entries:)
-
-          session = open_for_making.sessions.first
-          expect(session).not_to be_nil
-          expect(session.start_at).to eq(start_at)
-          expect(session.end_at).to eq(start_at + 6.hours)
 
           availability = session.availabilities.where(user: bilbo).first
           expect(availability).not_to be_nil
+          expect(availability.status).to eq('busy')
         end
       end
     end

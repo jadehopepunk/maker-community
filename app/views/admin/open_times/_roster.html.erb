@@ -18,7 +18,7 @@
   </thead>
   <tbody class="slots-body" data-roster-target="rosterBody">
     <% sessions.each do |session| %>
-    <tr data-session-type="<%= session.event.class.name %>" data-session-id="<%= session.string_identifier %>">
+    <tr data-session-id="<%= session.string_identifier %>">
       <td class="day"><%= session.date.day %></td>
       <td class="weekday"><%= session.date.strftime('%a') %></td>
       <td class="session-name"><%= session.title %></td>

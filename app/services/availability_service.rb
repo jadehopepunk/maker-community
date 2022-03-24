@@ -1,17 +1,14 @@
 class AvailabilityService
   class << self
     def bulk_update(user:, creator:, entries:)
-      entries.each do |date, data|
-        update(user:, creator:, date:, type: data[:type], availability: data[:availability])
+      entries.each do |session_id, status|
+        update(user:, creator:, session_id:, status:)
       end
     end
 
-    def update(user:, creator:, date:, type:, availability:)
-      virtual_event = find_virtual_event(type)
-      event = virtual_event.find_or_create_event
-      start_at = DateTime.parse(date.split('+').first)
-      session = virtual_event.find_or_create_session(event, start_at)
-      Availability.update_for_user_and_session(session, user, creator:, status: availability)
+    def update(user:, creator:, session_id:, status:)
+      session = EventSession.find(session_id)
+      Availability.update_for_user_and_session(session, user, creator:, status:)
     end
 
     private

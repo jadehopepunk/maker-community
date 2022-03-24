@@ -76,12 +76,8 @@ export default class extends Controller {
 
     this.rosterBodyTarget.querySelectorAll(`[data-user="${userId}"]`).forEach((element) => {
       const availability = element.dataset["availability"];
-      const sessionType = element.parentElement.dataset["sessionType"];
       const sessionId = element.parentElement.dataset["sessionId"];
-      result[sessionId] = {
-        type: sessionType,
-        availability: availability,
-      };
+      result[sessionId] = availability;
     });
 
     return result;
