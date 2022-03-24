@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :open_times, only: [:index] do
         collection do
           post :bulk_update
+          get :create_month
         end
       end
     end

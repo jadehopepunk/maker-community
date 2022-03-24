@@ -14,7 +14,7 @@
   <div class="no-roster">
     <p>There are no sessions for this month yet.</p>
     <% if policy([:admin, :user]).admin_roster? %>
-    <p><%= link_to 'Create open times', '#', class: 'button' %></p>
+    <p><%= link_to 'Create open times', create_month_admin_open_times_path(month: @month), class: 'button' %></p>
     <% else %>
     <p>Sessions can be created by <%= @area_roles.map(&:users).flatten.map(&:display_name).join(', ') %></p>
     <% end %>

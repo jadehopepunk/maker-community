@@ -20,6 +20,11 @@ module Admin
       render success: true, json: {}
     end
 
+    def create_month
+      @month = get_month
+      redirect_to action: 'index', month: @month
+    end
+
     private
 
     def get_month
