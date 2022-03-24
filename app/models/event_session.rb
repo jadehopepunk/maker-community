@@ -39,4 +39,8 @@ class EventSession < ApplicationRecord
   def in_future?
     start_at >= DateTime.current
   end
+
+  def string_identifier
+    id
+  end
 end
