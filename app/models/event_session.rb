@@ -43,4 +43,14 @@ class EventSession < ApplicationRecord
   def string_identifier
     id
   end
+
+  def availability_status(user)
+    hashed_availability_states[user.id]
+  end
+
+  private
+
+  def hashed_availability_states
+    @hashed_availability_states ||= availabilities.pluck(:user_id, :status).to_h
+  end
 end
