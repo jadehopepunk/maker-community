@@ -10,11 +10,5 @@ class AvailabilityService
       session = EventSession.find(session_id)
       Availability.update_for_user_and_session(session, user, creator:, status:)
     end
-
-    private
-
-    def find_virtual_event(type)
-      VirtualEvents::VirtualCalendar.new.get_virtual_event(type)
-    end
   end
 end
