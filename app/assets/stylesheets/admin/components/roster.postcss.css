@@ -23,6 +23,8 @@
         &.user-slot {
           min-width: 50px;
           height: 2rem;
+          text-align: center;
+          color: black;
 
           &[data-availability="unknown"] {
             background: repeating-linear-gradient(45deg, var(--slate-600), var(--slate-600) 4px, transparent 4px, transparent 8px);

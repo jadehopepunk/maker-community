@@ -23,7 +23,7 @@
       <td class="weekday"><%= session.date.strftime('%a') %></td>
       <td class="session-name"><%= session.title %></td>
       <% users.each do |user| %>
-      <td class="user-slot" data-user="<%= user.id %>" data-availability="unknown"><%= session.availability_status(user) %></td>
+      <td class="user-slot" data-user="<%= user.id %>" data-availability="<%= session.availability_status(user) || 'unknown' %>"><%= session.availability_status(user) %></td>
       <% end %>
     </tr>
     <% end %>

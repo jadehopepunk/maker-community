@@ -6,7 +6,7 @@ module Admin
       @month = get_month
       events = Event.duty_managed.all
 
-      @sessions = EventSession.where(event: events).in_date_range(@month.dates)
+      @sessions = EventSession.where(event: events).in_date_range(@month.dates).date_order
 
       # @sessions = VirtualEvents::VirtualCalendar.new.virtual_sessions_during(@month.dates)
       @area_roles = Role.where(name: ['program_admin', 'duty_roster_admin']).includes(:users) || []
@@ -14,8 +14,11 @@ module Admin
     end
 
     def bulk_update
-      AvailabilityService.bulk_update(user: current_user, creator: current_user, entries:)
-      render success: true
+      user = User.find_by(id: params[:user_id])
+      authorize [:admin, user], :edit_availability?
+
+      AvailabilityService.bulk_update(user:, creator: current_user, entries:)
+      render success: true, json: {}
     end
 
     private

@@ -34,7 +34,9 @@ export default class extends Controller {
   }
 
   onEditClick(cell) {
-    cell.dataset["availability"] = this.nextAvailability(cell.dataset["availability"]);
+    const availability = this.nextAvailability(cell.dataset["availability"]);
+    cell.dataset["availability"] = availability;
+    cell.innerText = availability;
   }
 
   cancelEdit(event) {
@@ -48,6 +50,7 @@ export default class extends Controller {
 
     var fd = new FormData();
     fd.append("entries", JSON.stringify(values));
+    fd.append("user_id", this.editing);
 
     Rails.ajax({
       type: "POST",
