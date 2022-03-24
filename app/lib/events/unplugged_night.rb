@@ -1,11 +1,15 @@
 module Events
-  class UnpluggedNight
+  class UnpluggedNight < VirtualEvent
     def title
       'Unplugged Night'
     end
 
     def short_description
       ''
+    end
+
+    def event_slug
+      'unplugged-night'
     end
 
     START_DATE = Date.new(2022, 3, 1)

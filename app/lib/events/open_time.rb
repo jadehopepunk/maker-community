@@ -1,11 +1,15 @@
 module Events
-  class OpenTime
+  class OpenTime < VirtualEvent
     def title
       'Open for Making'
     end
 
     def short_description
       ''
+    end
+
+    def event_slug
+      'open-for-making'
     end
 
     SESSIONS = {
