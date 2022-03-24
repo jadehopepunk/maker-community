@@ -28,7 +28,9 @@ describe EventBookingsService do
     end
 
     context 'slack message' do
-      it 'queues a Slack message' do
+      let(:event_session) { EventSession.create!(event:, start_at: Date.current + 7) }
+
+      it 'queues a Slack message if event is in the future' do
         expect_any_instance_of(SlackNotifier).to receive(:new_event_booking).with(unsaved_booking)
         EventBookingsService.create(unsaved_booking)
       end

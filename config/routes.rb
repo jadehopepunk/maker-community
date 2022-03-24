@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
     scope :program do
       resources :event_sessions, only: [:index, :show]
-      resources :open_times, only: [:index]
+      resources :open_times, only: [:index] do
+        collection do
+          post :bulk_update
+        end
+      end
     end
     scope :public do
       resources :images, only: [:index]

@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import Rails from "@rails/ujs";
 
 const AVAILABILITIES = ["unknown", "busy", "available"];
 
@@ -44,6 +45,16 @@ export default class extends Controller {
   saveEdit(event) {
     const values = this.currentEditValues();
     console.log("values", values);
+
+    var fd = new FormData();
+    fd.append("entries", JSON.stringify(values));
+
+    Rails.ajax({
+      type: "POST",
+      url: "/admin/program/open_times/bulk_update",
+      data: fd,
+    });
+
     this.cancelEdit();
   }
 

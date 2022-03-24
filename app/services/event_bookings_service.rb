@@ -13,7 +13,7 @@ class EventBookingsService
 
       puts "created event booking #{booking.wordpress_post_id}"
 
-      SlackNotifier.new.new_event_booking(booking) if notify
+      SlackNotifier.new.new_event_booking(booking) if notify && booking.in_future?
       booking
     end
   end

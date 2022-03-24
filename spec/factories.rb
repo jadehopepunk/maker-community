@@ -6,6 +6,11 @@ FactoryBot.define do
       display_name { 'Jade' }
       email { 'jade@user.com' }
     end
+
+    factory :bilbo do
+      display_name { 'Bilbo' }
+      email { 'bilbo@user.com' }
+    end
   end
 
   factory :event do

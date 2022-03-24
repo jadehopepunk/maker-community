@@ -13,7 +13,7 @@ class MembershipService
         )
       end
 
-      SlackNotifier.new.new_member(membership) if notify
+      SlackNotifier.new.new_member(membership) if notify && membership.start_at >= 1.week.ago
 
       membership
     end

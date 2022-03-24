@@ -34,4 +34,8 @@ class EventSession < ApplicationRecord
       .pluck('tags.name', 'COUNT(taggable_id)')
       .to_h
   end
+
+  def in_future?
+    start_at >= DateTime.current
+  end
 end

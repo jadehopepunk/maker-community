@@ -8,4 +8,6 @@ class EventBooking < ApplicationRecord
   STATES = ['was-in-cart', 'complete', 'pending-confirmation', 'paid'].freeze
 
   validates :status, inclusion: { in: STATES }
+
+  delegate :in_future?, to: :session
 end

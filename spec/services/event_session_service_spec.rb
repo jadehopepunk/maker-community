@@ -13,10 +13,14 @@ describe EventSessionService do
       expect(session).to be_persisted
     end
 
-    it 'notifies on slack' do
-      expect_any_instance_of(SlackNotifier).to receive(:new_event_listed).with(spoon_carving_jan_10)
+    context 'slack message' do
+      let(:spoon_carving_future) { EventSession.new(event: spoon_carving, start_at: 7.days.from_now) }
 
-      EventSessionService.create(spoon_carving_jan_10)
+      it 'notifies on slack if event is in the future' do
+        expect_any_instance_of(SlackNotifier).to receive(:new_event_listed).with(spoon_carving_future)
+
+        EventSessionService.create(spoon_carving_future)
+      end
     end
   end
 end
