@@ -11,7 +11,7 @@ class AvailabilityService
       event = virtual_event.find_or_create_event
       start_at = DateTime.parse(date.split('+').first)
       session = virtual_event.find_or_create_session(event, start_at)
-      puts session.inspect
+      Availability.update_for_user_and_session(session, user, creator:, status: availability)
     end
 
     private

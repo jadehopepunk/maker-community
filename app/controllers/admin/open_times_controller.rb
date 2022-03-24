@@ -10,6 +10,7 @@ module Admin
     end
 
     def bulk_update
+      AvailabilityService.bulk_update(user: current_user, creator: current_user, entries:)
       render success: true
     end
 
@@ -17,6 +18,10 @@ module Admin
 
     def get_month
       params[:month].present? ? Month.parse(params[:month]) : Month(Date.current)
+    end
+
+    def entries
+      JSON.parse(params[:entries]).transform_values(&:symbolize_keys)
     end
   end
 end
