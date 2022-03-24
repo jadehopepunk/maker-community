@@ -16,7 +16,10 @@ module MakerCommunity
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = 'Melbourne'
+    config.time_zone = 'UTC'
+    config.active_record.default_timezone = :utc
+    config.active_record.time_zone_aware_attributes = false
+
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

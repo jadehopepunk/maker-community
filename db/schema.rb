@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_225635) do
+ActiveRecord::Schema.define(version: 2022_03_24_033329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,13 +56,13 @@ ActiveRecord::Schema.define(version: 2022_03_23_225635) do
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "event_session_id_id"
+    t.bigint "event_session_id"
+    t.bigint "creator_id"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "creator_id"
     t.index ["creator_id"], name: "index_availabilities_on_creator_id"
-    t.index ["event_session_id_id"], name: "index_availabilities_on_event_session_id_id"
+    t.index ["event_session_id"], name: "index_availabilities_on_event_session_id"
     t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 

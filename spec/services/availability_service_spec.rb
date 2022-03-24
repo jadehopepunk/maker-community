@@ -48,6 +48,10 @@ describe AvailabilityService do
           session = open_for_making.sessions.first
           expect(session).not_to be_nil
           expect(session.start_at).to eq(start_at)
+          expect(session.end_at).to eq(start_at + 6.hours)
+
+          availability = session.availabilities.where(user: bilbo).first
+          expect(availability).not_to be_nil
         end
       end
     end
