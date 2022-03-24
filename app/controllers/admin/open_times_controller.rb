@@ -8,7 +8,6 @@ module Admin
 
       @sessions = EventSession.where(event: events).in_date_range(@month.dates).date_order
 
-      # @sessions = VirtualEvents::VirtualCalendar.new.virtual_sessions_during(@month.dates)
       @area_roles = Role.where(name: ['program_admin', 'duty_roster_admin']).includes(:users) || []
       @duty_managers = User.with_role(:duty_manager).order(:display_name)
     end

@@ -22,6 +22,10 @@ module Admin
       record == user || user&.has_any_role?(:program_admin, :duty_roster_admin)
     end
 
+    def admin_roster?
+      user&.has_any_role?(:program_admin, :duty_roster_admin)
+    end
+
     class Scope
       attr_reader :user, :scope
 

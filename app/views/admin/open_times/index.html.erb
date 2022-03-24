@@ -1,4 +1,4 @@
-<div class="layout-admin-program-index">
+<div class="layout-admin-roster">
   <div class="admin-area-leads">
     <% @area_roles.each do |role| %>
     <div class="role">
@@ -10,5 +10,14 @@
     <% end %>
   </div>
   <h1 class="page-title">Open Times & Duty Management</h1>
-  <%= render 'admin/shared/month_nav', month: @month %> <%= render 'admin/open_times/roster', users: @duty_managers, sessions: @sessions %>
+  <%= render 'admin/shared/month_nav', month: @month %> <% if @sessions.present? %> <%= render 'admin/open_times/roster', users: @duty_managers, sessions: @sessions %> <% else %>
+  <div class="no-roster">
+    <p>There are no sessions for this month yet.</p>
+    <% if policy([:admin, :user]).admin_roster? %>
+    <p><%= link_to 'Create open times', '#', class: 'button' %></p>
+    <% else %>
+    <p>Sessions can be created by <%= @area_roles.map(&:users).flatten.map(&:display_name).join(', ') %></p>
+    <% end %>
+  </div>
+  <% end %>
 </div>
