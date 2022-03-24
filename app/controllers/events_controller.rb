@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   end
 
   def virtual_sessions(date)
-    Events::VirtualCalendar.new.sessions_during(date..date.end_of_week)
+    Events::VirtualCalendar.new.virtual_sessions_during(date..date.end_of_week)
   end
 
   def first_page?

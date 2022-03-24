@@ -21,7 +21,7 @@ module Events
       }
     }
 
-    def sessions_during(date_range)
+    def virtual_sessions_during(date_range)
       result = []
 
       date_range.map do |date|

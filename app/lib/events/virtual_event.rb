@@ -13,7 +13,7 @@ module Events
 
     def find_virtual_session(start_time)
       date = start_time.to_date
-      candidates = sessions_during(date..date)
+      candidates = virtual_sessions_during(date..date)
       candidates.find do |session|
         session.start_at.hour == start_time.hour && session.start_at.min == start_time.min
       end

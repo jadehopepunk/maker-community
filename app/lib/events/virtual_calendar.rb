@@ -9,8 +9,8 @@ module Events
       ]
     end
 
-    def sessions_during(date_range)
-      sort_by_start_time @virtual_events.map { |event| event.sessions_during(date_range) }.flatten
+    def virtual_sessions_during(date_range)
+      sort_by_start_time @virtual_events.map { |event| event.virtual_sessions_during(date_range) }.flatten
     end
 
     def get_virtual_event(type)
