@@ -6,14 +6,22 @@ module Wp
 
     class << self
       def sync
+        puts 'IMPORTING USERS'
         Wp::User.sync
+        puts 'IMPORTING PLANS'
         Wp::MembershipPlan.sync
+        puts 'IMPORTING EVENTS'
         Wp::Event.sync
+        puts 'IMPORTING SUBSCRIPTIONS'
         Wp::ShopSubscription.sync
+        puts 'IMPORTING MEMBERSHIPS'
         Wp::UserMembership.sync
+        puts 'IMPORTING ORDERS'
         Wp::ShopOrder.sync
+        puts 'IMPORTING BOOKINGS'
         Wp::Booking.sync
         Import.record.update!(imported_at: Time.now)
+        puts 'DONE'
       end
 
       def clear_passwords

@@ -51,11 +51,11 @@ module Wp
     end
 
     def from_time
-      Time.parse(from_time_string)
+      from_time_string.in_time_zone(Time.zone)
     end
 
     def to_time
-      Time.parse(to_time_string)
+      to_time_string.in_time_zone(Time.zone)
     end
 
     def start_at
