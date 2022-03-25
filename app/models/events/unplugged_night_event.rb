@@ -2,8 +2,8 @@ module Events
   class UnpluggedNightEvent < WeekdayRecurringEvent
     SESSIONS = {
       2 => {
-        start_time: Time.parse('6:30pm'),
-        end_time: Time.parse('9:30pm')
+        start_time: Time.zone.parse('6:30pm'),
+        end_time: Time.zone.parse('9:30pm')
       }
     }.freeze
 
