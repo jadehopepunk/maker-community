@@ -17,7 +17,7 @@ describe AvailabilityService do
     end
 
     context 'with one entry' do
-      let(:start_at) { Time.utc(2020, 1, 4, 10, 0) }
+      let(:start_at) { Time.new(2020, 1, 4, 10, 0) }
       let(:open_for_making) { create(:open_for_making) }
       let(:session) { open_for_making.sessions.create!(start_at:) }
       let(:entries) { { session.id => 'busy' } }

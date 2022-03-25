@@ -2,16 +2,16 @@ module Events
   class OpenTimeEvent < WeekdayRecurringEvent
     SESSIONS = {
       1 => {
-        start_time: Time.parse('6:30pm UTC'),
-        end_time: Time.parse('9:30pm UTC')
+        start_time: Time.parse('6:30pm'),
+        end_time: Time.parse('9:30pm')
       },
       4 => {
-        start_time: Time.parse('6:30pm UTC'),
-        end_time: Time.parse('9:30pm UTC')
+        start_time: Time.parse('6:30pm'),
+        end_time: Time.parse('9:30pm')
       },
       6 => {
-        start_time: Time.parse('10:00am UTC'),
-        end_time: Time.parse('4:00pm UTC')
+        start_time: Time.parse('10:00am'),
+        end_time: Time.parse('4:00pm')
       }
     }.freeze
 
