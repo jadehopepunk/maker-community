@@ -71,7 +71,7 @@ module Wp
     attr_reader :type, :bookable, :priority, :from_time_string, :to_time_string, :from_date_string, :to_date_string
 
     def combine_date_and_time(date, time)
-      DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec)
+      DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
     end
   end
 end

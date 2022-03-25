@@ -66,11 +66,11 @@ module Wp
     end
 
     def booking_start
-      meta['_booking_start'].to_datetime
+      meta['_booking_start'].in_time_zone(Time.zone)
     end
 
     def booking_end
-      meta['_booking_end'].to_datetime
+      meta['_booking_end'].in_time_zone(Time.zone)
     end
 
     def imported_order_item

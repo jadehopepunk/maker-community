@@ -7,9 +7,18 @@ class SlackNotifier
   PROGRAM_CHANNEL = '#team-program'.freeze
   PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
 
+  class NullSlackClient
+    def chat_postMessage(*params); end
+  end
+
   def initialize(client: Slack::Web::Client.new, delayed: true)
-    @client = client
-    @delayed = delayed
+    if ENV['BLOCK_SLACK_NOTIFICATIONS'] && !Rails.env.test?
+      @client = NullSlackClient.new
+      @delayed = false
+    else
+      @client = client
+      @delayed = delayed
+    end
   end
 
   def new_event_booking(booking)
