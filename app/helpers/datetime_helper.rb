@@ -26,7 +26,7 @@ module DatetimeHelper
     format_string += ':%M' if datetime.min.nonzero?
     format_string += '%P'
 
-    datetime.in_time_zone.strftime(format_string)
+    datetime.strftime(format_string)
   end
 
   def format_date_text(date)
@@ -36,7 +36,7 @@ module DatetimeHelper
 
     format_string = '%a, %b %d'
     format_string += ', %Y' if show_year
-    date.in_time_zone.strftime(format_string)
+    date.strftime(format_string)
   end
 
   def format_date_html(date)
