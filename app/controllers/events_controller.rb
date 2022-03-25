@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   def index
     @tags = load_tags
-    sessions_scope = EventSession.from_this_week
+    sessions_scope = EventSession.from_this_week.only_duty_managed_until(open_times_until).date_order
     @event_sessions = sessions_scope.tagged_with(@tags).page(page).per(20)
-    @sectioned_sessions = add_open_times section_by_date(@event_sessions)
+    @sectioned_sessions = section_by_date(@event_sessions)
     @tag_counts = EventSession.tag_counts(sessions_scope)
     @url_params = params.permit(:controller, :action)
   end
@@ -37,20 +37,6 @@ class EventsController < ApplicationController
     result
   end
 
-  def add_open_times(section_sessions)
-    return section_sessions unless first_page?
-
-    section_sessions['This week'] = sort_by_start_time(section_sessions['This week'] + virtual_sessions(Date.current))
-    section_sessions['Next week'] =
-      sort_by_start_time(section_sessions['Next week'] + virtual_sessions(Date.current.end_of_week + 1))
-
-    section_sessions
-  end
-
-  def virtual_sessions(date)
-    VirtualEvents::VirtualCalendar.new.virtual_sessions_during(date..date.end_of_week)
-  end
-
   def first_page?
     page == 1
   end
@@ -59,8 +45,8 @@ class EventsController < ApplicationController
     params[:page] || 1
   end
 
-  def week_nearly_over?
-    Date.current.end_of_week - Date.current <= 2
+  def open_times_until
+    Date.current.end_of_week + 7
   end
 
   def month_title(date = Date.current)

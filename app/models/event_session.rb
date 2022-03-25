@@ -14,6 +14,9 @@ class EventSession < ApplicationRecord
 
     where(event_id: Event.tagged_with(tags).pluck(:id))
   }
+  scope :only_duty_managed_until, lambda { |date|
+                                    joins(:event).where("events.duty_managed = 'f' OR (events.duty_managed = 't' AND start_at <= ?)", date)
+                                  }
 
   delegate :title, to: :event
 
