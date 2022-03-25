@@ -22,6 +22,7 @@ module Admin
 
     def create_month
       @month = get_month
+      OpenTimesService.new.create_sessions(date_range: @month.dates)
       redirect_to action: 'index', month: @month
     end
 

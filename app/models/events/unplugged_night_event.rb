@@ -1,0 +1,30 @@
+module Events
+  class UnpluggedNightEvent < WeekdayRecurringEvent
+    SESSIONS = {
+      2 => {
+        start_time: Time.parse('6:30pm UTC'),
+        end_time: Time.parse('9:30pm UTC')
+      }
+    }.freeze
+
+    START_DATE = Date.new(2022, 3, 1)
+
+    private
+
+    def template_for_date(date)
+      SESSIONS[date.wday] if valid_date?(date)
+    end
+
+    def valid_date?(date)
+      date >= START_DATE && valid_week?(date)
+    end
+
+    def valid_week?(date)
+      weeks_since_start(date).even?
+    end
+
+    def weeks_since_start(date)
+      ((date - START_DATE) / 7).to_i
+    end
+  end
+end
