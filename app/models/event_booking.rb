@@ -6,6 +6,7 @@ class EventBooking < ApplicationRecord
   scope :confirmed, -> { where(status: ['complete', 'paid']) }
 
   STATES = ['was-in-cart', 'complete', 'pending-confirmation', 'paid'].freeze
+  ROLES = ['attendee', 'duty_manager', 'teacher', 'volunteer'].freeze
 
   validates :status, inclusion: { in: STATES }
 
