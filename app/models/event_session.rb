@@ -17,6 +17,7 @@ class EventSession < ApplicationRecord
   scope :only_duty_managed_until, lambda { |date|
                                     joins(:event).where("events.duty_managed = 'f' OR (events.duty_managed = 't' AND start_at <= ?)", date)
                                   }
+  scope :special_event, -> { joins(:event).merge(Event.special_event) }
 
   delegate :title, to: :event
 

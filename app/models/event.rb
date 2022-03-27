@@ -6,4 +6,5 @@ class Event < ApplicationRecord
   belongs_to :image, optional: true, dependent: :destroy
 
   scope :duty_managed, -> { where(duty_managed: true) }
+  scope :special_event, -> { where(duty_managed: false) }
 end

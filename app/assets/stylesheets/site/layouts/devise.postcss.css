@@ -6,8 +6,16 @@
   height: 100vh;
 
   .form-container {
-    max-width: 20rem;
-    /* min-width: 15rem; */
+    padding: var(--gutter);
+    box-sizing: border-box;
+
+    @media (--desktop) {
+      min-width: 20rem;
+    }
+
+    @media (--mobile) {
+      width: 100%;
+    }
   }
 
   h2 {

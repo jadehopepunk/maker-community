@@ -5,7 +5,7 @@ module Admin
       @search_params = params.permit(filters: [], q: [:display_name_cont])
 
       @area_roles = Role.where(name: 'program_admin').includes(:users) || []
-      load_event_sessions_search EventSession
+      load_event_sessions_search EventSession.special_event
     end
 
     def show
