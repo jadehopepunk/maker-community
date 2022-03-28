@@ -2,7 +2,7 @@ module Slack
   class UpdateUsersJob < ApplicationJob
     queue_as :default
 
-    def perform()
+    def perform
       SlackUsersService.new.update_for_all_users(async: true)
     end
   end

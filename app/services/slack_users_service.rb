@@ -13,8 +13,6 @@ class SlackUsersService
       else
         update_for_user(user)
       end
-
-      sleep 1.second
     end
   end
 
