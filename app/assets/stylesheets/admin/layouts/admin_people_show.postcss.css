@@ -1,4 +1,17 @@
 .admin-people-show {
+  .image-and-details {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .person-image {
+      flex: 0 0 auto;
+      margin-right: 1rem;
+      max-width: 33%;
+      height: auto;
+    }
+  }
+
   .person-details {
     border: 2px solid var(--highlight-color);
     border-radius: 0.5rem;

@@ -15,6 +15,8 @@ class User < ApplicationRecord
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }
 
+  delegate :has_avatar?, :avatar_url, to: :slack_user, allow_nil: true
+
   def short_name
     display_name.split(' ').first
   end
