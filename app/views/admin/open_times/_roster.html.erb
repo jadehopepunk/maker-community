@@ -22,7 +22,7 @@
       <td class="day"><%= session.date.day %></td>
       <td class="weekday"><%= session.date.strftime('%a') %></td>
       <td class="session-name"><%= session.title %></td>
-      <td class="manager"></td>
+      <td class="manager" data-managers="<%= session.manager_bookings.map(&:user_id).join(',') %>"><%= session.manager_bookings.map {|booking| booking.user.short_name}.join(', ') %></td>
       <% users.each do |user| %>
       <td
         class="user-slot"

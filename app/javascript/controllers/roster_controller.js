@@ -167,7 +167,8 @@ export default class extends Controller {
 
   updateManagerCellText(cell) {
     const managerIds = this.managerCellIds(cell);
-    cell.innerText = managerIds.join(", ");
+    const managerNames = managerIds.map((id) => this.getUserName(id));
+    cell.innerText = managerNames.join(", ");
   }
 
   getManagerCell(sessionId) {
@@ -199,5 +200,9 @@ export default class extends Controller {
 
   setEditingManagerClass() {
     this.element.classList.add("editing-manager");
+  }
+
+  getUserName(userId) {
+    return this.element.querySelector(`.user-header[data-user="${userId}"]`).innerText;
   }
 }
