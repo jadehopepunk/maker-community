@@ -55,7 +55,9 @@ export default class extends Controller {
 
   cancelEdit(event) {
     this.editing = null;
+    this.editingManager = false;
     this.clearEditingClass();
+    this.clearEditingManagerClass();
   }
 
   cancelEditManager(event) {
@@ -225,6 +227,10 @@ export default class extends Controller {
 
   setEditingManagerClass() {
     this.element.classList.add("editing-manager");
+  }
+
+  clearEditingManagerClass() {
+    this.element.classList.remove("editing-manager");
   }
 
   getUserName(userId) {
