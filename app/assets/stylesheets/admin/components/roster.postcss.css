@@ -49,6 +49,10 @@ table.roster {
           &[data-availability="available"] {
             background-color: orange;
           }
+
+          &[data-role="manager"] {
+            border: 2px solid green;
+          }
         }
       }
 
@@ -123,10 +127,6 @@ table.roster {
         &:hover {
           border: 2px solid green;
           box-model: border-box;
-        }
-
-        &[data-role="manager"] {
-          border: 2px solid green;
         }
       }
     }

@@ -24,7 +24,14 @@
       <td class="session-name"><%= session.title %></td>
       <td class="manager"></td>
       <% users.each do |user| %>
-      <td class="user-slot" data-user="<%= user.id %>" data-availability="<%= session.availability_status(user) || 'unknown' %>"><%= session.availability_status(user) %></td>
+      <td
+        class="user-slot"
+        data-user="<%= user.id %>"
+        data-role="<%= 'manager' if session.manager_bookings.detect {|booking| booking.user_id == user.id } %>"
+        data-availability="<%= session.availability_status(user) || 'unknown' %>"
+      >
+        <%= session.availability_status(user) %>
+      </td>
       <% end %>
     </tr>
     <% end %>
