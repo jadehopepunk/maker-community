@@ -58,9 +58,12 @@ table.roster {
     }
   }
 
-  &:not(.editing) {
-    tbody.edit-actions {
-      display: none;
+  tbody.edit-actions td div {
+    display: none;
+    padding: 0.5em 0;
+
+    a {
+      margin-right: 0.5em;
     }
   }
 
@@ -92,7 +95,8 @@ table.roster {
     }
 
     tbody.edit-actions {
-      td {
+      div.edit-user-action {
+        display: block;
         padding: 0.5em 0;
 
         a {
@@ -124,6 +128,12 @@ table.roster {
         &[data-role="manager"] {
           border: 2px solid green;
         }
+      }
+    }
+
+    tbody.edit-actions {
+      div.edit-manager-action {
+        display: block;
       }
     }
   }

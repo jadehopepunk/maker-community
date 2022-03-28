@@ -58,6 +58,10 @@ export default class extends Controller {
     this.clearEditingClass();
   }
 
+  cancelEditManager(event) {
+    location.reload();
+  }
+
   saveEdit(event) {
     const values = this.currentEditValues();
     console.log("values", values);
