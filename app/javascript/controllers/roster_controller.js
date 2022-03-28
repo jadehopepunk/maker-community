@@ -131,9 +131,28 @@ export default class extends Controller {
   }
 
   toggleManager(user, sessionId, userCell) {
+    const isManager = userCell.dataset["role"] == "manager";
+
+    if (isManager) {
+      this.makeNotManager(user, sessionId, userCell);
+    } else {
+      this.makeManager(user, sessionId, userCell);
+    }
+  }
+
+  makeManager(user, sessionId, userCell) {
     const managerCell = this.getManagerCell(sessionId);
+
     userCell.dataset["role"] = "manager";
     this.addManagerToCell(managerCell, user);
+    this.updateManagerCellText(managerCell);
+  }
+
+  makeNotManager(user, sessionId, userCell) {
+    const managerCell = this.getManagerCell(sessionId);
+
+    userCell.dataset["role"] = null;
+    this.removeManagerFromCell(managerCell, user);
     this.updateManagerCellText(managerCell);
   }
 
@@ -158,6 +177,12 @@ export default class extends Controller {
   addManagerToCell(cell, user) {
     const existingManagers = this.managerCellIds(cell);
     const newManagers = existingManagers.includes(user) ? existingManagers : existingManagers.concat(user);
+    cell.dataset["managers"] = newManagers.join(",");
+  }
+
+  removeManagerFromCell(cell, user) {
+    const existingManagers = this.managerCellIds(cell);
+    const newManagers = existingManagers.filter((item) => item !== user);
     cell.dataset["managers"] = newManagers.join(",");
   }
 

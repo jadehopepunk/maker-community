@@ -19,6 +19,10 @@ class AvailabilityService
   end
 
   def update_managers(session:, users:)
+    session.manager_bookings.each do |booking|
+      remove_manager(session:, user: booking.user) unless booking.user.in?(users)
+    end
+
     users.each do |user|
       existing = session.manager_bookings.where(user:).first
 
@@ -28,5 +32,12 @@ class AvailabilityService
 
   def add_manager(session:, user:)
     session.manager_bookings.create(user:, role: 'duty_manager', status: 'complete', persons: 1)
+  end
+
+  def remove_manager(session:, user:)
+    booking = session.manager_bookings.where(user:).first
+    return unless booking
+
+    booking.destroy
   end
 end
