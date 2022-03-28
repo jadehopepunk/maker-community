@@ -84,6 +84,16 @@ export default class extends Controller {
     event.preventDefault();
 
     const values = this.currentManagers();
+    var fd = new FormData();
+    fd.append("session_managers", JSON.stringify(values));
+
+    Rails.ajax({
+      type: "POST",
+      url: "/admin/program/open_times/update_managers",
+      data: fd,
+    });
+
+    this.cancelEdit();
   }
 
   startEditing(userId) {
@@ -130,12 +140,12 @@ export default class extends Controller {
   // private
 
   currentManagers() {
-    var result = [];
+    var result = {};
 
     this.rosterBodyTarget.querySelectorAll("tr").forEach((row) => {
       const sessionId = row.dataset["sessionId"];
       const users = this.managerCellIds(row.querySelector("td.manager"));
-      console.log("sessionId users", sessionId, users);
+      result[sessionId] = users;
     });
 
     return result;

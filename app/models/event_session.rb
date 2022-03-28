@@ -1,6 +1,7 @@
 class EventSession < ApplicationRecord
   belongs_to :event
   has_many :bookings, dependent: :destroy, class_name: 'EventBooking'
+  has_many :manager_bookings, -> { duty_managers }, class_name: 'EventBooking'
   has_many :availabilities
 
   validates :start_at, presence: true

@@ -20,6 +20,12 @@ module Admin
       render success: true, json: {}
     end
 
+    def update_managers
+      authorize [:admin, :user], :admin_roster?
+      AvailabilityService.new.bulk_update_managers(session_managers:)
+      render success: true, json: {}
+    end
+
     def create_month
       @month = get_month
       OpenTimesService.new.create_sessions(date_range: @month.dates)
@@ -34,6 +40,10 @@ module Admin
 
     def entries
       JSON.parse(params[:entries]).transform_keys(&:to_i)
+    end
+
+    def session_managers
+      JSON.parse(params[:session_managers])
     end
   end
 end
