@@ -1,8 +1,21 @@
 class SlackUsersService
   class InvalidSlackRequest < RuntimeError; end
+  class NoSlackUser < RuntimeError; end
 
   def initialize(client: Slack::Web::Client.new)
     @client = client
+  end
+
+  def update_for_all_users(async: false)
+    User.find_each do |user|
+      if async
+        Slack::UpdateUserJob.perform_later(user)
+      else
+        update_for_user(user)
+      end
+
+      sleep 1.second
+    end
   end
 
   def update_for_user(user)
@@ -17,10 +30,14 @@ class SlackUsersService
 
   def update_slack_user(slack_user)
     slack_user.update(**attributes_from_slack(slack_user.user))
+  rescue NoSlackUser
+    nil
   end
 
   def create_for_user(user)
     SlackUser.create(user:, **attributes_from_slack(user))
+  rescue NoSlackUser
+    nil
   end
 
   private
@@ -32,6 +49,8 @@ class SlackUsersService
     raise InvalidSlackRequest unless result['ok']
 
     result['user']
+  rescue Slack::Web::Api::Errors::UsersNotFound => e
+    raise NoSlackUser, e.message
   end
 
   def attributes_from_slack(user)
