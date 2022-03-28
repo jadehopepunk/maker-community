@@ -63,8 +63,9 @@ export default class extends Controller {
   }
 
   saveEdit(event) {
+    event.preventDefault();
+
     const values = this.currentEditValues();
-    console.log("values", values);
 
     var fd = new FormData();
     fd.append("entries", JSON.stringify(values));
@@ -77,6 +78,12 @@ export default class extends Controller {
     });
 
     this.cancelEdit();
+  }
+
+  saveEditManager(event) {
+    event.preventDefault();
+
+    const values = this.currentManagers();
   }
 
   startEditing(userId) {
@@ -115,7 +122,6 @@ export default class extends Controller {
 
   toggleManager(user, sessionId, userCell) {
     const managerCell = this.getManagerCell(sessionId);
-    console.log("toggleManager", user, sessionId);
     userCell.dataset["role"] = "manager";
     this.addManagerToCell(managerCell, user);
     this.updateManagerCellText(managerCell);
@@ -123,10 +129,25 @@ export default class extends Controller {
 
   // private
 
+  currentManagers() {
+    var result = [];
+
+    this.rosterBodyTarget.querySelectorAll("tr").forEach((row) => {
+      const sessionId = row.dataset["sessionId"];
+      const users = this.managerCellIds(row.querySelector("td.manager"));
+      console.log("sessionId users", sessionId, users);
+    });
+
+    return result;
+  }
+
+  sessionIds() {
+    return this.rosterBodyTarget.querySelectorAll("tr").map((row) => row.dataset["sessionId"]);
+  }
+
   addManagerToCell(cell, user) {
     const existingManagers = this.managerCellIds(cell);
     const newManagers = existingManagers.includes(user) ? existingManagers : existingManagers.concat(user);
-    console.log("newManagers", newManagers);
     cell.dataset["managers"] = newManagers.join(",");
   }
 
