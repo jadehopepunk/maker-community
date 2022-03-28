@@ -58,6 +58,7 @@ table.roster {
 
       td.manager {
         width: 12em;
+        padding: 0 0.5em;
       }
     }
   }
@@ -123,6 +124,14 @@ table.roster {
     }
 
     tbody {
+      td.manager {
+        background-color: green;
+
+        &[data-managers=""] {
+          background-color: orange;
+        }
+      }
+
       td.user-slot {
         &:hover {
           border: 2px solid green;
