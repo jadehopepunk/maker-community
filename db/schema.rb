@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_233635) do
+ActiveRecord::Schema.define(version: 2022_03_28_045623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,19 @@ ActiveRecord::Schema.define(version: 2022_03_27_233635) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "slack_users", force: :cascade do |t|
+    t.string "slack_user_id"
+    t.string "team_id"
+    t.string "name"
+    t.string "display_name"
+    t.string "image_48"
+    t.string "image_512"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_slack_users_on_user_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id"
     t.string "stripe_source_id"
@@ -304,6 +317,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_233635) do
   add_foreign_key "memberships", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "slack_users", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_events", "users"
