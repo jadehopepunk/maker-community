@@ -51,7 +51,17 @@ table.roster {
           }
 
           &[data-role="manager"] {
-            border: 2px solid green;
+            &[data-availability="busy"] {
+              background: linear-gradient(to left bottom, green 50%, red 50%);
+            }
+
+            &[data-availability="unknown"] {
+              background: linear-gradient(to left bottom, green 50%, --slate-600 50%);
+            }
+
+            &[data-availability="available"] {
+              background-color: green;
+            }
           }
         }
       }
