@@ -3,14 +3,14 @@
     <tr>
       <th colspan="2">Day</th>
       <th>Session</th>
+      <th>Manager</th>
       <% users.each do |user| %>
       <th class="user-header" data-user="<%= user.id %>"><%= user.short_name %></th>
       <% end %>
     </tr>
     <tr class="actions" data-roster-target="edits">
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="3"></th>
+      <th class="manager-header"><% if policy([:admin, :user]).admin_roster? %><a data-action="roster#editManager" href="#">edit</a><% end %></th>
       <% users.each do |user| %>
       <th class="user-header" data-user="<%= user.id %>"><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
       <% end %>
@@ -22,6 +22,7 @@
       <td class="day"><%= session.date.day %></td>
       <td class="weekday"><%= session.date.strftime('%a') %></td>
       <td class="session-name"><%= session.title %></td>
+      <td class="manager"></td>
       <% users.each do |user| %>
       <td class="user-slot" data-user="<%= user.id %>" data-availability="<%= session.availability_status(user) || 'unknown' %>"><%= session.availability_status(user) %></td>
       <% end %>
@@ -30,7 +31,7 @@
   </tbody>
   <tbody class="edit-actions">
     <tr>
-      <td colspan="3"></td>
+      <td colspan="4"></td>
       <td>
         <a class="button" href="#" data-action="roster#saveEdit">Save</a>
         <a href="#" data-action="roster#cancelEdit">Cancel</a>

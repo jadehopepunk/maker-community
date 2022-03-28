@@ -1,10 +1,21 @@
-.roster {
+table.roster {
   min-width: 100%;
+  border-spacing: 0;
+
+  thead {
+    tr.actions {
+      th {
+        text-align: center;
+      }
+    }
+  }
 
   tbody.slots-body {
     tr {
       td {
         /* position: relative; */
+
+        border: 2px solid var(--background-color);
 
         &.day {
           width: 2em;
@@ -39,6 +50,10 @@
             background-color: orange;
           }
         }
+      }
+
+      td.manager {
+        width: 12em;
       }
     }
   }
@@ -82,6 +97,32 @@
 
         a {
           margin-right: 0.5em;
+        }
+      }
+    }
+  }
+
+  &.editing-manager {
+    thead {
+      tr.actions {
+        th {
+          a {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
+    tbody {
+      td.user-slot {
+        &:hover {
+          border: 2px solid green;
+          box-model: border-box;
+        }
+
+        &[data-role="manager"] {
+          border: 2px solid green;
         }
       }
     }

@@ -8,6 +8,7 @@ export default class extends Controller {
 
   connect() {
     this.editing = null;
+    this.editingManager = false;
 
     this.editsTarget.querySelectorAll("[data-action=edit]").forEach((element) => {
       element.addEventListener("click", (element) => this.onEdit(element));
@@ -27,9 +28,16 @@ export default class extends Controller {
   onBodyClick(event) {
     const target = event.target;
 
-    if (target.classList.contains("user-slot") && target.classList.contains("editing")) {
-      this.onEditClick(target);
+    if (target.classList.contains("user-slot")) {
       event.preventDefault();
+
+      if (this.editing) {
+        if (target.classList.contains("editing")) {
+          this.onEditClick(target);
+        }
+      } else if (this.editingManager) {
+        this.onEditManagerClick(target);
+      }
     }
   }
 
@@ -37,6 +45,12 @@ export default class extends Controller {
     const availability = this.nextAvailability(cell.dataset["availability"]);
     cell.dataset["availability"] = availability;
     cell.innerText = availability;
+  }
+
+  onEditManagerClick(cell) {
+    const user = cell.dataset["user"];
+    const sessionId = cell.parentElement.dataset["sessionId"];
+    this.toggleManager(user, sessionId, cell);
   }
 
   cancelEdit(event) {
@@ -62,7 +76,7 @@ export default class extends Controller {
   }
 
   startEditing(userId) {
-    if (this.editing) return;
+    if (this.editing || this.editingManager) return;
 
     this.editing = userId;
     this.clearEditingClass();
@@ -86,7 +100,48 @@ export default class extends Controller {
     return result;
   }
 
+  editManager(event) {
+    event.preventDefault();
+    if (this.editing || this.editingManager) return;
+
+    this.editingManager = true;
+    this.clearEditingClass();
+    this.setEditingManagerClass();
+  }
+
+  toggleManager(user, sessionId, userCell) {
+    const managerCell = this.getManagerCell(sessionId);
+    console.log("toggleManager", user, sessionId);
+    userCell.dataset["role"] = "manager";
+    this.addManagerToCell(managerCell, user);
+    this.updateManagerCellText(managerCell);
+  }
+
   // private
+
+  addManagerToCell(cell, user) {
+    const existingManagers = this.managerCellIds(cell);
+    const newManagers = existingManagers.includes(user) ? existingManagers : existingManagers.concat(user);
+    console.log("newManagers", newManagers);
+    cell.dataset["managers"] = newManagers.join(",");
+  }
+
+  managerCellIds(cell) {
+    return (cell.dataset["managers"] || "").split(",").filter((e) => e);
+  }
+
+  updateManagerCellText(cell) {
+    const managerIds = this.managerCellIds(cell);
+    cell.innerText = managerIds.join(", ");
+  }
+
+  getManagerCell(sessionId) {
+    return this.getSessionRow(sessionId).querySelector(".manager");
+  }
+
+  getSessionRow(sessionId) {
+    return this.rosterBodyTarget.querySelector(`[data-session-id="${sessionId}"]`);
+  }
 
   nextAvailability(input) {
     return AVAILABILITIES[(AVAILABILITIES.indexOf(input) + 1) % AVAILABILITIES.length];
@@ -94,6 +149,7 @@ export default class extends Controller {
 
   clearEditingClass() {
     this.element.classList.remove("editing");
+    this.element.classList.remove("editing-manager");
     this.element.querySelectorAll(".editing").forEach((element) => {
       element.classList.add("editing");
     });
@@ -104,5 +160,9 @@ export default class extends Controller {
     this.element.querySelectorAll(`[data-user="${userId}"]`).forEach((element) => {
       element.classList.add("editing");
     });
+  }
+
+  setEditingManagerClass() {
+    this.element.classList.add("editing-manager");
   }
 }
