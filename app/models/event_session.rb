@@ -31,7 +31,7 @@ class EventSession < ApplicationRecord
   end
 
   def duty_managers
-    manager_bookings
+    manager_bookings.map(&:user)
   end
 
   def self.tag_counts(session_scope)

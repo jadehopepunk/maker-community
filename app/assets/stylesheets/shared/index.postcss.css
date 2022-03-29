@@ -3,3 +3,5 @@
 @import "./global/colour_themes.postcss.css";
 @import "./global/typography.postcss.css";
 @import "./global/forms.postcss.css";
+
+@import "./components/avatars.postcss.css";

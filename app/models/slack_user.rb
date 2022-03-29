@@ -1,5 +1,6 @@
 class SlackUser < ApplicationRecord
   AVATAR_SIZES = {
+    xsmall: 48,
     small: 48,
     large: 512
   }.freeze

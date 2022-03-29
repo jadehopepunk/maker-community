@@ -1,0 +1,18 @@
+.avatar-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.avatar {
+  border-radius: 50%;
+
+  &.avatar-small {
+    width: 48px;
+    height: 48px;
+  }
+
+  &.avatar-xsmall {
+    width: 32px;
+    height: 32px;
+  }
+}
