@@ -1,11 +1,1 @@
-<div class="event-container event-open-time">
-  <a href="<%= event_path(event_session) %>" class="event event-open-time">
-    <div class="details">
-      <div class="date-time">
-        <span class="date"><%= format_date_html event_session.date %></span>
-        <span class="time"><%= format_time_html event_session.start_at %> - <%= format_time_html event_session.end_at %></span>
-      </div>
-      <h3 class="event-title">🤫 <%= event_session.event.title %></h3>
-    </div>
-  </a>
-</div>
+<%= render 'events/regular_time', event_session: event_session, emoji: '🤫' %>

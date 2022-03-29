@@ -30,6 +30,10 @@ class EventSession < ApplicationRecord
     start_at&.to_date
   end
 
+  def duty_managers
+    manager_bookings
+  end
+
   def self.tag_counts(session_scope)
     ActsAsTaggableOn::Tagging
       .where(taggable_type: 'Event', context: 'tags')
