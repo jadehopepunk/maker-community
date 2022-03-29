@@ -10,7 +10,7 @@ class EventSession < ApplicationRecord
   scope :from_this_week, -> { where('start_at >= ?', Date.current.beginning_of_week.to_time) }
   scope :in_date_range, ->(date_range) { where(start_at: date_range) }
   scope :future, -> { where('start_at >= ?', Date.current) }
-  scope :today, -> { where(start_at: Date.current) }
+  scope :today, -> { where('DATE(start_at) = ?', Date.current) }
   scope :tagged_with, lambda { |tags|
     return self if tags.empty?
 
