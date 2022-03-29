@@ -6,6 +6,7 @@ class SlackNotifier
   GENERAL_CHANNEL = '#general'.freeze
   PROGRAM_CHANNEL = '#team-program'.freeze
   PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
+  DUTY_MANAGER_CHANNEL = '#duty-managers'.freeze
 
   class NullSlackClient
     def chat_postMessage(*params); end
@@ -77,6 +78,20 @@ class SlackNotifier
     )
   end
 
+  def duty_managers_today(session)
+    users = session.duty_managers
+    return if users.empty?
+
+    post_message(
+      channel: GENERAL_CHANNEL,
+      text: <<~TEXT
+        #{users.map { |user| user_mention(user) }.to_sentence} you're the #{'DM'.pluralize(users.count)} today from #{format_time_text(session.start_at)} - #{format_time_text(session.end_at)}.
+
+        Good luck! Don't forget to take a few photos and post them in #photo-hub.
+      TEXT
+    )
+  end
+
   private
 
   def post_message(*params)
@@ -101,5 +116,13 @@ class SlackNotifier
 
   def url_helpers
     Rails.application.routes.url_helpers
+  end
+
+  def user_mention(user)
+    if user.slack_user
+      "<@#{user.slack_user.name}>"
+    else
+      user.display_name
+    end
   end
 end
