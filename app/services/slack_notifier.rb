@@ -83,7 +83,7 @@ class SlackNotifier
     return if users.empty?
 
     post_message(
-      channel: GENERAL_CHANNEL,
+      channel: DUTY_MANAGER_CHANNEL,
       text: <<~TEXT
         #{users.map { |user| user_mention(user) }.to_sentence} you're the #{'DM'.pluralize(users.count)} today from #{format_time_text(session.start_at)} - #{format_time_text(session.end_at)}.
 
