@@ -34,7 +34,7 @@ module Calendars
         e.uid         = "#{session.id}@#{Rails.application.config.action_mailer.default_url_options[:host]}"
         e.dtstart     = build_datetime session.start_at
         e.dtend       = build_datetime session.end_at
-        e.summary     = session.title
+        e.summary     = booking.user_calendar_title
         e.description = session.short_description
         e.location    = session.location
       end

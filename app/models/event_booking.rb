@@ -13,4 +13,12 @@ class EventBooking < ApplicationRecord
   validates :role, inclusion: { in: ROLES }
 
   delegate :in_future?, to: :session
+
+  def user_calendar_title
+    if role == 'attendee'
+      session.title
+    else
+      "#{role.humanize.titleize} - #{session.title}"
+    end
+  end
 end
