@@ -1,11 +1,13 @@
 namespace :data do
   desc 'Sync all data ascynchronously'
   task sync: [:environment] do
+    Wp::Attachment.import_async
     SyncJob.perform_later
   end
 
   desc 'Sync all data'
   task sync_now: [:environment] do
+    Wp::Attachment.sync
     Wp::Base.sync
     Plan.update_roles
   end
