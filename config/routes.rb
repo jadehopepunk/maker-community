@@ -3,6 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
   resources :events, only: [:index, :show]
+  resources :calendars, only: [:show]
 
   namespace :admin do
     root to: 'admin#index'

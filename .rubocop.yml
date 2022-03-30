@@ -5,7 +5,7 @@ AllCops:
     - db/migrate/**/*
 
 Metrics/BlockLength:
-  IgnoredMethods: ["describe", "context"]
+  IgnoredMethods: ["describe", "context", "draw"]
 
 Style/FrozenStringLiteralComment:
   Enabled: false

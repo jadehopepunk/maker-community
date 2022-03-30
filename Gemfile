@@ -16,6 +16,7 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'hash_to_hidden_fields'
+gem 'icalendar'
 gem 'image_processing', '~> 1.2'
 gem 'indefinite_article'
 gem 'kaminari'
