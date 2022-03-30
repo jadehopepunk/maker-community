@@ -17,6 +17,7 @@ module Calendars
       ical = Icalendar::Calendar.new
 
       ical.add_timezone build_timezone
+      ical.append_custom_property 'X-WR-CALNAME', cal.name
 
       cal.event_bookings.each do |booking|
         build_event(ical, booking)

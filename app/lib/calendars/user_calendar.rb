@@ -8,6 +8,10 @@ module Calendars
       @event_bookings ||= bookings_scope
     end
 
+    def name
+      "Maker Community bookings for #{user.display_name}"
+    end
+
     private
 
     attr_reader :user
