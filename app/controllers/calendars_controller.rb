@@ -6,6 +6,6 @@ class CalendarsController < ApplicationController
     calendar = Calendars::UserCalendar.new(@user)
     renderer = Calendars::IcalRenderer.new(calendar)
 
-    render plain: renderer.to_s
+    render plain: renderer.to_s, content_type: 'text/calendar'
   end
 end
