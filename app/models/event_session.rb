@@ -60,6 +60,10 @@ class EventSession < ApplicationRecord
     hashed_availability_states[user.id]
   end
 
+  def location
+    '70 Saxon St, Brunswick 3056 VIC, Australia'
+  end
+
   private
 
   def hashed_availability_states
