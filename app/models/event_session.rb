@@ -22,7 +22,7 @@ class EventSession < ApplicationRecord
   scope :special_event, -> { joins(:event).merge(Event.special_event) }
   scope :duty_managed, -> { joins(:event).merge(Event.duty_managed) }
 
-  delegate :title, to: :event
+  delegate :title, :short_description, to: :event
 
   def time_range
     [start_at, end_at]

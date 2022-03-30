@@ -1,19 +1,11 @@
-require 'icalendar'
-
 class CalendarsController < ApplicationController
   def show
-    # Create a calendar with an event (standard method)
-    cal = Icalendar::Calendar.new
-    cal.event do |e|
-      e.dtstart     = Icalendar::Values::Date.new('20050428')
-      e.dtend       = Icalendar::Values::Date.new('20050429')
-      e.summary     = 'Meeting with the man.'
-      e.description = 'Have a long lunch meeting and decide nothing...'
-      e.ip_class    = 'PRIVATE'
-    end
+    @user = User.where(calendar_token: params[:id]).first
+    raise ActiveRecord::RecordNotFound unless @user
 
-    cal.publish
+    calendar = Calendars::UserCalendar.new(@user)
+    renderer = Calendars::IcalRenderer.new(calendar)
 
-    render plain: cal.to_ical
+    render plain: renderer.to_s
   end
 end

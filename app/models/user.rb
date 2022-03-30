@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :user_inductions, dependent: :destroy
   has_many :inductions, through: :user_inductions
+  has_many :bookings, class_name: 'EventBooking', dependent: :destroy
   belongs_to :address, dependent: :destroy, optional: true
   has_one :slack_user
 
@@ -19,5 +20,9 @@ class User < ApplicationRecord
 
   def short_name
     display_name.split(' ').first
+  end
+
+  def self.jade
+    where(display_name: 'Jade').first
   end
 end
