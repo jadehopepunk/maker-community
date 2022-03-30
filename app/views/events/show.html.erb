@@ -5,7 +5,7 @@
         <h1><%= @event_session.event.title %></h1>
         <% if @event_session.event.image.present? %> <%= image_model_tag(@event_session.event.image, class: 'event-image') %> <% end %>
 
-        <div><%= @event_session.event.content.html_safe %></div>
+        <div><%= render_html_without_line_breaks @event_session.event.content %></div>
       </div>
       <div class="details">details</div>
     </div>
