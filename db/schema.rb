@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_045623) do
+ActiveRecord::Schema.define(version: 2022_03_30_031939) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -234,7 +235,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_045623) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at", precision: 6
+    t.datetime "created_at"
     t.string "tenant", limit: 128
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_045623) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "address_id"
     t.string "phone"
+    t.uuid "calendar_token", default: -> { "gen_random_uuid()" }
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["wordpress_id"], name: "index_users_on_wordpress_id", unique: true
