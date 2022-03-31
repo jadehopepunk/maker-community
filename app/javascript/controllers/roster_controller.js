@@ -214,7 +214,7 @@ export default class extends Controller {
     this.element.classList.remove("editing");
     this.element.classList.remove("editing-manager");
     this.element.querySelectorAll(".editing").forEach((element) => {
-      element.classList.add("editing");
+      element.classList.remove("editing");
     });
   }
 
