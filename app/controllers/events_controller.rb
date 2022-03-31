@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event_session = EventSession.find(params[:id])
+    @session = EventSession.find(params[:id])
   end
 
   private

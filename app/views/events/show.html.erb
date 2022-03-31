@@ -2,12 +2,20 @@
   <div class="container">
     <div class="events-show">
       <div class="main">
-        <h1><%= @event_session.event.title %></h1>
-        <% if @event_session.event.image.present? %> <%= image_model_tag(@event_session.event.image, class: 'event-image') %> <% end %>
+        <h1 class="page-title"><%= @session.title %></h1>
+        <%= image_model_tag(@session.image, class: 'event-image') if @session.image.present? %>
 
-        <div><%= render_html_without_line_breaks @event_session.event.content %></div>
+        <div><%= render_html_without_line_breaks @session.event.content %></div>
       </div>
-      <div class="details">details</div>
+      <div class="details">
+        <div class="big-date">
+          <span class="weekday"><%= @session.date.strftime '%A' %></span>
+          <span class="day"><%= @session.date.strftime '%-d' %></span>
+          <span class="month"><%= @session.date.strftime '%b' %></span>
+          <span class="year"><%= @session.date.strftime '%Y' %></span>
+        </div>
+        <div class="time-range"><%= format_time_range_html @session.time_range %></div>
+      </div>
     </div>
   </div>
 </div>

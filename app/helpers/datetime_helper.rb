@@ -19,6 +19,12 @@ module DatetimeHelper
     end
   end
 
+  def format_time_range_html(time_range)
+    content_tag :span, class: 'time-range' do
+      format_time_text(time_range.first) + ' - ' + format_time_text(time_range.last)
+    end
+  end
+
   def format_time_text(datetime)
     return nil if datetime.blank?
 

@@ -8,7 +8,7 @@ class EventSession < ApplicationRecord
 
   scope :date_order, -> { order(:start_at) }
   scope :from_this_week, -> { where('start_at >= ?', Date.current.beginning_of_week.to_time) }
-  scope :in_date_range, ->(date_range) { where(start_at: date_range) }
+  scope :in_date_range, ->(date_range) { where(start_at: DateUtilities.to_datetime_range(date_range)) }
   scope :future, -> { where('start_at >= ?', Date.current) }
   scope :today, -> { where('DATE(start_at) = ?', Date.current) }
   scope :tagged_with, lambda { |tags|
@@ -22,7 +22,7 @@ class EventSession < ApplicationRecord
   scope :special_event, -> { joins(:event).merge(Event.special_event) }
   scope :duty_managed, -> { joins(:event).merge(Event.duty_managed) }
 
-  delegate :title, :short_description, to: :event
+  delegate :title, :short_description, :image, to: :event
 
   def time_range
     [start_at, end_at]

@@ -2,13 +2,34 @@
   display: flex;
   flex-direction: row;
 
+  .page-title {
+    margin-bottom: var(--gutter);
+  }
+
+  .event-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+  }
+
   .main {
     margin-right: var(--gutter);
   }
 
   .details {
-    border: 2px dashed red;
+    /* border: 2px dashed red; */
     flex: 1;
     min-width: 350px;
+
+    .big-date {
+      font-size: 2.7rem;
+      margin-bottom: 0.3rem;
+
+      .weekday,
+      .year {
+        font-size: 0.6em;
+      }
+    }
   }
 }
