@@ -13,11 +13,12 @@ namespace :dev do
       puts '[2/4] Downloading backup onto disk'
       `curl -o tmp/latest.dump \`heroku pg:backups public-url #{heroku_app_flag} | cat\``
 
-      puts '[3/4] Mounting backup on local database'
-      `pg_restore --clean --verbose --no-acl --no-owner -h localhost -d #{c['database']} tmp/latest.dump`
+      # puts '[3/4] Mounting backup on local database'
+      # command = "pg_restore --clean --verbose --no-acl --no-owner -h localhost -d #{c['database']} tmp/latest.dump"
+      # exec command
 
-      puts '[4/4] Removing local backup'
-      `rm tmp/latest.dump`
+      # puts '[4/4] Removing local backup'
+      # `rm tmp/latest.dump`
 
       puts 'Done.'
     end

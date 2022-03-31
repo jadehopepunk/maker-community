@@ -21,7 +21,7 @@ module Events
     private
 
     def combine_date_and_time(date, time)
-      DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
+      Time.zone.local(date.year, date.month, date.day, time.hour, time.min, time.sec)
     end
   end
 end
