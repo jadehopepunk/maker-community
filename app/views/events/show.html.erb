@@ -1,20 +1,42 @@
 <div class="theme-program">
   <div class="container">
     <div class="events-show">
-      <div class="main">
-        <h1 class="page-title"><%= @session.title %></h1>
-        <%= image_model_tag(@session.image, class: 'event-image') if @session.image.present? %>
+      <h1 class="page-title"><%= @session.title %></h1>
+      <div class="columns">
+        <div class="main">
+          <%= image_model_tag(@session.image, class: 'event-image') if @session.image.present? %>
 
-        <div><%= render_html_without_line_breaks @session.event.content %></div>
-      </div>
-      <div class="details">
-        <div class="big-date">
-          <span class="weekday"><%= @session.date.strftime '%A' %></span>
-          <span class="day"><%= @session.date.strftime '%-d' %></span>
-          <span class="month"><%= @session.date.strftime '%b' %></span>
-          <span class="year"><%= @session.date.strftime '%Y' %></span>
+          <div><%= render_html_without_line_breaks @session.event.content %></div>
         </div>
-        <div class="time-range"><%= format_time_range_html @session.time_range %></div>
+        <div class="details">
+          <div class="time-details detail-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <div class="contents">
+              <div class="big-date">
+                <span class="weekday"><%= @session.date.strftime '%A' %></span>
+                <span class="day"><%= @session.date.strftime '%-d' %></span>
+                <span class="month"><%= @session.date.strftime '%b' %></span>
+                <span class="year"><%= @session.date.strftime '%Y' %></span>
+              </div>
+              <div class="time-range"><%= format_time_range_html @session.time_range %></div>
+            </div>
+          </div>
+          <div class="detail-with-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <div class="contents">
+              <div>Maker Community</div>
+              <div>70 Saxon St</div>
+              <div>Brunswick 3056 VIC</div>
+            </div>
+          </div>
+
+          <a href="<%= @session.wordpress_url %>" class="button call-to-action">Book Now</a>
+        </div>
       </div>
     </div>
   </div>

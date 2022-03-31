@@ -64,6 +64,10 @@ class EventSession < ApplicationRecord
     '70 Saxon St, Brunswick 3056 VIC, Australia'
   end
 
+  def wordpress_url
+    "https://makercommunity.org.au/product/#{event.slug}/?wbc_cal_start=#{start_at.to_i}&wbc_cal_end=#{end_at.to_i}"
+  end
+
   private
 
   def hashed_availability_states
