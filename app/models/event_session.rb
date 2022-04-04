@@ -8,9 +8,9 @@ class EventSession < ApplicationRecord
 
   scope :date_order, -> { order(:start_at) }
   scope :from_this_week, -> { where('start_at >= ?', Date.current.beginning_of_week.to_time) }
-  scope :in_date_range, ->(date_range) { where(start_at: DateUtilities.to_datetime_range(date_range)) }
-  scope :future, -> { where('start_at >= ?', Date.current) }
-  scope :today, -> { where('DATE(start_at) = ?', Date.current) }
+  scope :in_date_range, ->(date_range) { where(start_at: DateUtilities.date_range_to_datetime_range(date_range)) }
+  scope :future, -> { where('start_at >= ?', Date.current.to_datetime) }
+  scope :today, -> { where(start_at: DateUtilities.date_to_datetime_range(Date.current)) }
   scope :tagged_with, lambda { |tags|
     return self if tags.empty?
 
