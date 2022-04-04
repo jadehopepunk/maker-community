@@ -3,6 +3,6 @@ class WpAttachmentImportJob < ApplicationJob
 
   def perform(wordpress_post_id)
     attachment = Wp::Attachment.find(wordpress_post_id)
-    attachment.import_new
+    attachment.import_if_new
   end
 end
