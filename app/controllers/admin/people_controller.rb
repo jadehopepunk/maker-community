@@ -30,7 +30,7 @@ module Admin
     end
 
     def load_search_results(filters, query)
-      filters.apply(query.result).includes(:active_plans).page(params[:page]).per(20)
+      filters.apply(query.result).page(params[:page]).per(20)
     end
 
     def load_filters
