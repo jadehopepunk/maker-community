@@ -63,14 +63,12 @@ module Wp
     end
 
     def booking_availability
-      meta_avail_string = meta['_wc_booking_availability']
-      meta_avail = meta_avail_string.present? ? PHP.unserialize(meta_avail_string) : []
-      meta_avail.map { |a| Wp::BookingAvailability.new(a) }
+      meta_availability.map { |a| Wp::BookingAvailability.new({max_persons: }.merge(a)) }
     end
 
     def sync_event_sessions(event)
       booking_availability.select(&:bookable?).each do |availability|
-        availability.import_event_session_if_new(event)
+        availability.import_or_update(event)
       end
     end
 
@@ -96,7 +94,16 @@ module Wp
       @bookable_persons ||= children_of_type(:bookable_person)
     end
 
+    def max_persons
+      meta_int('_wc_booking_max_persons_group')
+    end
+
     private
+
+    def meta_availability
+      meta_avail_string = meta['_wc_booking_availability']
+      meta_avail_string.present? ? PHP.unserialize(meta_avail_string) : []
+    end
 
     def base_price
       return Prices::Free.new if base_price_amount.blank?

@@ -32,7 +32,6 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Need while we integrate with Wordpress
-gem 'activerecord-mysql-reconnect'
 gem 'down'
 gem 'mysql2'
 gem 'php-serialize'

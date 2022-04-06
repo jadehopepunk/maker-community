@@ -11,6 +11,7 @@ module Wp
       @to_time_string = options['to']
       @from_date_string = options['from_date']
       @to_date_string = options['to_date']
+      @max_persons = options[:max_persons]
 
       raise ArgumentError, "Invalid booking availability type: #{@type}" unless TYPES.include? @type
     end
@@ -19,18 +20,37 @@ module Wp
       bookable && BOOKABLE_TYPES.include?(type)
     end
 
-    def import_event_session_if_new(event)
+    def import_or_update(event)
       session = ::EventSession.where(event:, start_at:).first
-      session || import_event_session(event)
+      if session
+        update_existing(session)
+      else
+        import_event_session(event)
+      end
     end
 
     def import_event_session(event)
       dest = ::EventSession.new(
         event:,
         start_at:,
-        end_at:
+        **shared_attributes
       )
       EventSessionService.new.create(dest)
+    end
+
+    def update_existing(session)
+      session.assign_attributes shared_attributes
+      if session.changed?
+        session.save!
+        puts "updated #{session.class.name}: #{session.id}"
+      end
+    end
+
+    def shared_attributes
+      {
+        max_persons: @max_persons,
+        end_at: end_at
+      }
     end
 
     def date

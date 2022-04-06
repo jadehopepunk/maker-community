@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_060658) do
+ActiveRecord::Schema.define(version: 2022_04_06_120701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_060658) do
     t.datetime "end_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "max_persons"
     t.index ["event_id"], name: "index_event_sessions_on_event_id"
   end
 
