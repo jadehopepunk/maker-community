@@ -23,4 +23,14 @@ namespace :data do
   task sync_images: [:environment] do
     Wp::Attachment.sync
   end
+
+  desc 'Sync all images'
+  task resync_images: [:environment] do
+    Event.update_all(image_id: nil)
+    Image.delete_all
+    ActiveStorage::Attachment.delete_all
+    ActiveStorage::Blob.delete_all
+    ActiveStorage::VariantRecord.delete_all
+    Wp::Attachment.sync
+  end
 end
