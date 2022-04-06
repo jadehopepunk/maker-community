@@ -63,7 +63,7 @@ module Wp
     end
 
     def booking_availability
-      meta_availability.map { |a| Wp::BookingAvailability.new({max_persons: }.merge(a)) }
+      meta_availability.map { |a| Wp::BookingAvailability.new({ max_persons: }.merge(a)) }
     end
 
     def sync_event_sessions(event)
@@ -120,7 +120,7 @@ module Wp
     end
 
     def product_tag_list
-      terms.map(&:slug) & TermTaxonomy.product_tags.map(&:term).map(&:slug)
+      terms.map(&:slug) & Wp::TermTaxonomy.cached_product_terms.map(&:slug)
     end
 
     def attachment_image
