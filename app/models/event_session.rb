@@ -68,6 +68,20 @@ class EventSession < ApplicationRecord
     "https://makercommunity.org.au/product/#{event.slug}/?wbc_cal_start=#{start_at.to_i}&wbc_cal_end=#{end_at.to_i}"
   end
 
+  def has_person_limit?
+    max_persons.present?
+  end
+
+  def remaining_persons
+    return nil if max_persons.nil?
+
+    max_persons - booked_persons
+  end
+
+  def booked_persons
+    bookings.sum(:persons)
+  end
+
   private
 
   def hashed_availability_states

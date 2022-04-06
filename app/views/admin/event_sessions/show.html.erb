@@ -13,6 +13,19 @@
         <% end %>
       </div>
     </div>
+    <div class="detail">
+      <div class="title">Spaces</div>
+      <div class="value">
+        <% if @event_session.has_person_limit? %>
+        <div><%= @event_session.max_persons %> total</div>
+        <div><%= @event_session.booked_persons %> booked</div>
+        <div><%= @event_session.remaining_persons %> remaining</div>
+        <% else %>
+        <div>No booking limit</div>
+        <div><%= @event_session.booked_persons %> booked</div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <h3>Attendees</h3>
