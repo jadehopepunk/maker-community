@@ -99,7 +99,7 @@ module Wp
     private
 
     def base_price
-      return nil if base_price_amount.blank?
+      return Prices::Free.new if base_price_amount.blank?
 
       Prices::Full.new(per_person: base_price_amount)
     end

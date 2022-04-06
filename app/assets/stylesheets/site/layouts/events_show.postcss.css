@@ -38,6 +38,12 @@
     }
   }
 
+  .price-details {
+    .price-type-full {
+      font-size: 1.5rem;
+    }
+  }
+
   @media (--desktop) {
     .columns {
       display: flex;
