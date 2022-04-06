@@ -1,4 +1,4 @@
-<div class="admin-people-show">
+<div class="admin-people-show layout-show">
   <div class="breadcrumbs">
     <a class="breadcrumb return" href="<%= admin_people_path %>">↩ People</a>
   </div>
@@ -7,7 +7,7 @@
     <% if @person.has_avatar? %>
     <img class="person-image" src="<%= @person.avatar_url(:large) %>" alt="<%= @person.display_name %>" />
     <% end %>
-    <div class="callout person-details">
+    <div class="callout person-details show-details">
       <div class="detail">
         <div class="title">Inductions</div>
         <div class="value">

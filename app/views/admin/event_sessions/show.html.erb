@@ -4,6 +4,17 @@
     <div class="page-subtitle"><%= format_datetime_html @event_session.start_at, seperator: ' at ' %></div>
   </div>
 
+  <div class="callout show-details event-details">
+    <div class="detail">
+      <div class="title">Price</div>
+      <div class="value">
+        <% @event_session.event.prices.each do |price| %>
+        <div><%= price.type_title %> <%= number_to_currency price.per_person %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <h3>Attendees</h3>
   <br />
 
