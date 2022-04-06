@@ -106,7 +106,7 @@ module Wp
     end
 
     def base_price
-      return Prices::Free.new if base_price_amount.blank?
+      return Prices::Free.new if base_price_amount <= 0.1
 
       Prices::Full.new(per_person: base_price_amount)
     end

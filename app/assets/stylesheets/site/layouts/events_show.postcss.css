@@ -22,9 +22,6 @@
         margin-right: 10px;
         color: var(--highlight-color);
       }
-
-      > .content {
-      }
     }
 
     .big-date {
@@ -39,7 +36,8 @@
   }
 
   .price-details {
-    .price-type-full {
+    .price-type-full,
+    .price-type-free {
       font-size: 1.5rem;
     }
   }
