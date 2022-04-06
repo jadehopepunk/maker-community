@@ -9,7 +9,8 @@ module Wp
       wc_membership_plan: Wp::MembershipPlan,
       wc_user_membership: Wp::UserMembership,
       product: Wp::Product,
-      attachment: Wp::Attachment
+      attachment: Wp::Attachment,
+      bookable_person: Wp::BookablePerson
     }
 
     def as_subclass

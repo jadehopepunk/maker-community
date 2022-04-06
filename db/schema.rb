@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_031939) do
+ActiveRecord::Schema.define(version: 2022_04_06_060658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 2022_03_30_031939) do
     t.index ["event_session_id"], name: "index_event_bookings_on_event_session_id"
     t.index ["order_item_id"], name: "index_event_bookings_on_order_item_id"
     t.index ["user_id"], name: "index_event_bookings_on_user_id"
+  end
+
+  create_table "event_prices", force: :cascade do |t|
+    t.bigint "event_id"
+    t.string "type", default: "Prices::Full"
+    t.decimal "per_person", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_prices_on_event_id"
   end
 
   create_table "event_sessions", force: :cascade do |t|

@@ -13,6 +13,13 @@ module Wp
       term_slugs.include? 'events'
     end
 
+    def product_attributes
+      result = meta['_product_attributes']
+      return {} unless result
+
+      PHP.unserialize(result)
+    end
+
     private
 
     def plan_destination

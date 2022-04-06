@@ -54,6 +54,9 @@ GEM
     activerecord (7.0.1)
       activemodel (= 7.0.1)
       activesupport (= 7.0.1)
+    activerecord-mysql-reconnect (0.5.0)
+      activerecord
+      mysql2
     activestorage (7.0.1)
       actionpack (= 7.0.1)
       activejob (= 7.0.1)
@@ -354,6 +357,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-mysql-reconnect
   acts-as-taggable-on (~> 9.0)
   aws-sdk-s3
   bootsnap
