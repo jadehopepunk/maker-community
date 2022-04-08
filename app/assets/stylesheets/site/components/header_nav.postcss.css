@@ -25,6 +25,13 @@ body.with-navbar {
       grid-template-columns: 1fr 60px;
     }
 
+    h1 {
+      display: none;
+      @mixin text-heading-xlarge;
+      transition: font-size 0.3s ease-in-out;
+      margin-left: var(--gutter);
+    }
+
     .title-container {
       display: flex;
       flex-direction: row;
@@ -32,11 +39,43 @@ body.with-navbar {
       align-items: center;
     }
 
-    h1 {
-      display: none;
-      @mixin text-heading-xlarge;
-      transition: font-size 0.3s ease-in-out;
-      margin-left: var(--gutter);
+    .responsive-site-nav {
+      border: 1px solid red;
+      display: flex;
+      flex-direction: row;
+      height: var(--nav-height);
+      margin-right: var(--gutter);
+
+      a.hamburger {
+        padding: 0 10px;
+        height: var(--nav-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        svg {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      nav {
+        display: flex;
+        flex-direction: row;
+
+        > a {
+          font-size: 1.2rem;
+          line-height: var(--nav-height);
+
+          &:not(:last-child) {
+            margin-right: 2rem;
+          }
+
+          &:hover {
+            color: var(--highlight-color-emphasis);
+          }
+        }
+      }
     }
 
     .actions {
