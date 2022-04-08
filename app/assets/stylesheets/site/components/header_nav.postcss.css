@@ -48,6 +48,10 @@ body.with-navbar {
       flex-shrink: 0;
       height: var(--nav-height);
 
+      a.inactive {
+        color: grey;
+      }
+
       @media (--desktop) {
         a.hamburger {
           display: none;
@@ -65,8 +69,9 @@ body.with-navbar {
               margin-right: 2rem;
             }
 
-            &:hover {
+            &:not(.inactive):hover {
               color: var(--highlight-color-emphasis);
+              text-decoration: underline;
             }
           }
         }
