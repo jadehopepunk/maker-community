@@ -5,6 +5,22 @@ export default class extends Controller {
 
   toggle(event) {
     event.preventDefault();
-    console.log("toggle");
+    if (this.isOpen()) {
+      this.close();
+    } else {
+      this.open();
+    }
+  }
+
+  isOpen() {
+    return this.element.classList.contains("open");
+  }
+
+  open() {
+    this.element.classList.add("open");
+  }
+
+  close() {
+    this.element.classList.remove("open");
   }
 }
