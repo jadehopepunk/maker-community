@@ -30,3 +30,16 @@ a.button {
     color: var(--highlight-color-emphasis);
   }
 }
+
+a.not-implemented {
+  color: grey;
+  cursor: not-allowed;
+
+  &.button {
+    opacity: 0.5;
+
+    &:hover {
+      background-color: var(--highlight-color);
+    }
+  }
+}

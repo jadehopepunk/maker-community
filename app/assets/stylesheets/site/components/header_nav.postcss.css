@@ -48,10 +48,6 @@ body.with-navbar {
       flex-shrink: 0;
       height: var(--nav-height);
 
-      a.inactive {
-        color: grey;
-      }
-
       @media (--desktop) {
         a.hamburger {
           display: none;
