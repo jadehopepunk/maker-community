@@ -18,7 +18,15 @@
           No matter your skill-level, our workshops will empower you to transform your project ideas into reality. From CNC Machining to Jewellery Making: we supply the tools and knowledge to build
           your confidence, as well as your project.
         </p>
-        <a class="button" href="<%= events_path %>">Upcoming classes</a>
+        <% if @event_sessions.present? %>
+        <div class="coming-soon">
+          <h3>Upcoming Classes &amp; Events</h3>
+          <% @event_sessions.each do |event| %>
+          <a href="<%= event_path(event) %>" class="event"><%= event.title %></a>
+          <% end %>
+        </div>
+        <% end %>
+        <a class="button" href="<%= events_path %>">See all events</a>
       </div>
     </section>
   </div>
