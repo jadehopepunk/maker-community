@@ -1,0 +1,1 @@
+<div class="events-list"><% event_sessions.each do |event_session| %> <%= render "events/#{event_session.event.class.name.demodulize.underscore}", event_session: event_session %> <% end %></div>
