@@ -5,6 +5,22 @@
     .section-heading {
       margin-bottom: 1rem;
     }
+
+    &.image-left {
+      .image-and-details {
+        display: flex;
+        flex-direction: row;
+        gap: var(--gutter);
+
+        p:first-child {
+          margin-top: 0;
+        }
+
+        @media (--mobile) {
+          flex-direction: column;
+        }
+      }
+    }
   }
 
   .area-list {
@@ -33,14 +49,9 @@
   .getting-there {
     margin-top: 1em;
 
-    .image-and-details {
-      display: flex;
-      flex-direction: row;
-      gap: var(--gutter);
-
-      p:first-child {
-        margin-top: 0;
-      }
+    .section-photo {
+      height: auto;
+      max-width: 362px;
     }
   }
 
