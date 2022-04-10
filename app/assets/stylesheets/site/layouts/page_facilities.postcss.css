@@ -1,6 +1,6 @@
 .page-facilities {
   > section {
-    margin-top: 1rem;
+    margin-top: 2rem;
 
     .section-heading {
       margin-bottom: 1rem;
@@ -31,6 +31,8 @@
   }
 
   .getting-there {
+    margin-top: 1em;
+
     .image-and-details {
       display: flex;
       flex-direction: row;
