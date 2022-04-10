@@ -1,0 +1,27 @@
+.page-facilities {
+  > section {
+    margin-top: 1rem;
+
+    .section-heading {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .area-list {
+    display: grid;
+    grid-gap: var(--gutter);
+    grid-template-columns: 1fr 1fr;
+
+    @media (--mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .outline-block {
+    background-color: silver;
+    border: 2px dashed grey;
+    min-height: 200px;
+    text-align: center;
+    line-height: 200px;
+  }
+}

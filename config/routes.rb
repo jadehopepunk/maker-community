@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events, only: [:index, :show]
   resources :calendars, only: [:show]
+  get 'facilities', to: 'pages#facilities'
 
   namespace :admin do
     root to: 'admin#index'

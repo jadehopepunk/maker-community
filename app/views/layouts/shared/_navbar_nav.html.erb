@@ -9,7 +9,7 @@
   </a>
   <nav class="site-nav">
     <a href="<%= events_path %>">Events</a>
-    <a href="/" class="not-implemented">Facilities</a>
+    <a href="<%= facilities_path %>">Facilities</a>
     <a href="/" class="not-implemented">Membership</a>
     <% if current_user %> <% if policy(:application).can_admin? %>
     <a href="/admin">Admin</a>

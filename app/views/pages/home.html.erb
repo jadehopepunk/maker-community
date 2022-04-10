@@ -7,7 +7,7 @@
           We've got a fully equipped woodworking space, heaps of 3D Printers, a hefty CNC router, soldering stations, electronics, laser cutter, textiles, drones and much more. Maker Community is like
           your dream workshed, with the room and tools to create that project that you've always imagined.
         </p>
-        <a href="/" class="button not-implemented">Explore the workshop</a>
+        <a href="<%= facilities_path %>" class="button">Explore the workshop</a>
       </div>
       <div class="block-images"><% Image.where(wordpress_post_id: [1416, 1009, 1007]).each do |image| %> <%= image_model_tag(image, class: 'feature-image') %> <% end %></div>
     </section>
@@ -21,12 +21,6 @@
         <% if @event_sessions.present? %>
         <div class="coming-soon">
           <h3>Upcoming Classes &amp; Events</h3>
-          <!-- <% @event_sessions.each do |event| %>
-          <a href="<%= event_path(event) %>" class="event">
-            <span><%= event.start_at.mday %> <%= event.start_at.strftime('%b') %></span>
-            <span><%= event.title %></span>
-          </a>
-          <% end %> -->
           <%= render 'events/events_list', event_sessions: @event_sessions, style: 'compact-grid' %>
         </div>
         <% end %>
