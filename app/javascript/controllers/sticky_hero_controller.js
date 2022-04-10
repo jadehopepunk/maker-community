@@ -8,6 +8,7 @@ export default class extends Controller {
     this.openHeight = this.heroTarget.offsetHeight;
     this.heightAbove = 64;
     this.closedVisibleHeight = this.navTarget.offsetHeight;
+    console.log("closedVisibleHeight", this.closedVisibleHeight);
     this.closedTotalHeight = this.closedVisibleHeight + this.heightAbove;
 
     this.positionScrollTargets();
