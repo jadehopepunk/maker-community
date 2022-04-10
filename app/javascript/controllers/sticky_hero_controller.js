@@ -41,7 +41,6 @@ export default class extends Controller {
 
   positionScrollTargets() {
     document.querySelectorAll(".scroll-target a").forEach((a) => {
-      console.log("a", a);
       a.style.top = `-${this.closedTotalHeight}px`;
     });
   }
