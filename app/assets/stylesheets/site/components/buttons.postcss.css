@@ -11,6 +11,21 @@
   }
 }
 
+@define-mixin button-outline {
+  background-color: var(--background-color);
+  color: var(--highlight-color);
+  border: 2px solid var(--highlight-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 99999px;
+  display: inline-block;
+
+  &:hover {
+    background-color: var(--highlight-color-emphasis);
+    color: var(--highlight-color-inverse);
+  }
+}
+
 a.button {
   @mixin button;
 
@@ -46,4 +61,14 @@ a.not-implemented {
 
 a.link-in-text {
   text-decoration: underline;
+}
+
+.in-page-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  a {
+    @mixin button-outline;
+  }
 }
