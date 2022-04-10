@@ -6,7 +6,9 @@ import { application } from "./application";
 import NabarController from "./navbar_controller";
 import RosterController from "./roster_controller";
 import DropdownController from "./dropdown_controller";
+import StickyHeroController from "./sticky_hero_controller";
 
 application.register("navbar", NabarController);
 application.register("roster", RosterController);
 application.register("dropdown", DropdownController);
+application.register("sticky", StickyHeroController);

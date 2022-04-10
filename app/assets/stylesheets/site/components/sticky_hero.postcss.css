@@ -1,0 +1,44 @@
+.sticky-hero {
+  background-color: var(--background-color-emphasis);
+
+  .container {
+    padding-top: 15px;
+    padding-bottom: 0;
+  }
+
+  &.sticky {
+    position: fixed;
+    top: var(--nav-height);
+    width: 100%;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gutter);
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  .sticky-toolbar {
+    padding: 15px 0;
+  }
+
+  .hide-when-closed {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  &.closed {
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+
+    .hide-when-closed {
+      opacity: 0;
+    }
+  }
+}

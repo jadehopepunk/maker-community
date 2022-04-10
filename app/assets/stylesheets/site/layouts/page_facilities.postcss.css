@@ -18,35 +18,14 @@
   }
 
   .page-header {
-    background-color: var(--background-color-emphasis);
+    .section-photo {
+      width: 400px;
+    }
 
-    .hero {
-      display: flex;
-      flex-direction: row;
-      gap: var(--gutter);
-
-      .section-photo {
-        width: 400px;
-      }
-
-      .in-page-nav {
-        margin-top: 0.5rem;
-      }
-
-      .details {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .description {
-          p:first-child {
-            margin-top: 0;
-            font-size: 120%;
-          }
-        }
-
-        .call-to-action {
-        }
+    .description {
+      p:first-child {
+        margin-top: 0;
+        font-size: 120%;
       }
     }
   }
