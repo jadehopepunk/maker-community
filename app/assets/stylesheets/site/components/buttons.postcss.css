@@ -70,9 +70,16 @@ a.link-in-text {
 
   a {
     @mixin button-outline;
+    white-space: nowrap;
 
     &.active {
       @mixin button;
+    }
+  }
+
+  @media (--mobile) {
+    a {
+      font-size: 0.8rem;
     }
   }
 }

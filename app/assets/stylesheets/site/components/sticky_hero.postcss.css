@@ -42,4 +42,20 @@
       opacity: 0;
     }
   }
+
+  @media (--mobile) {
+    .hero {
+      flex-direction: column-reverse;
+    }
+
+    .sticky-toolbar {
+      margin-right: calc(var(--gutter) * -1);
+    }
+
+    nav.in-page-nav {
+      overflow-y: hidden;
+      overflow-x: scroll;
+      width: 100%;
+    }
+  }
 }

@@ -39,6 +39,7 @@ export default class extends Controller {
     links.forEach((a) => {
       if (targetId && a.hash === `#${targetId}`) {
         a.classList.add("active");
+        a.scrollIntoView({ behavior: "smooth" });
       } else {
         a.classList.remove("active");
       }
