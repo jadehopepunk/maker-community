@@ -9,6 +9,8 @@ export default class extends Controller {
     this.heightAbove = 64;
     this.closedVisibleHeight = this.navTarget.offsetHeight;
     this.closedTotalHeight = this.closedVisibleHeight + this.heightAbove;
+
+    this.positionScrollTargets();
   }
 
   onScroll(event) {
@@ -35,5 +37,12 @@ export default class extends Controller {
     this.heroTarget.classList.remove("closed");
     this.heroTarget.style.top = null;
     this.contentsTarget.style.paddingTop = null;
+  }
+
+  positionScrollTargets() {
+    document.querySelectorAll(".scroll-target a").forEach((a) => {
+      console.log("a", a);
+      a.style.top = `-${this.closedTotalHeight}px`;
+    });
   }
 }

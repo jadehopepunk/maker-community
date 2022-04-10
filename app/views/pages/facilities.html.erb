@@ -14,11 +14,11 @@
           <div class="call-to-action">
             <h2 class="hide-when-closed">Find out more</h2>
             <div class="sticky-toolbar" data-sticky-target="nav">
-              <nav class="in-page-nav">
-                <a href="#getting-there">Getting there</a>
-                <a href="#accessibility">Accessibility</a>
-                <a href="#areas">Workshop areas</a>
-                <a href="#tools">Tools</a>
+              <nav class="in-page-nav" data-controller="in-page-nav">
+                <a href="#getting-there" data-action="in-page-nav#click">Getting there</a>
+                <a href="#accessibility" data-action="in-page-nav#click">Accessibility</a>
+                <a href="#areas" data-action="in-page-nav#click">Workshop areas</a>
+                <a href="#tools" data-action="in-page-nav#click">Tools</a>
               </nav>
             </div>
           </div>
@@ -36,19 +36,19 @@
   <div data-sticky-target="contents">
     <div class="container">
       <div class="page-facilities">
-        <a id="getting-there"></a>
+        <div class="scroll-target"><a id="getting-there"></a></div>
         <section>
           <h2 class="section-heading">Getting there</h2>
           <div class="outline-block">there</div>
         </section>
 
-        <a id="accessibility"></a>
+        <div class="scroll-target"><a id="accessibility"></a></div>
         <section>
           <h2 class="section-heading">Accessibility</h2>
           <div class="outline-block">Accessibility</div>
         </section>
 
-        <a id="areas"></a>
+        <div class="scroll-target"><a id="areas"></a></div>
         <section>
           <h2 class="section-heading">Workshop areas</h2>
           <div class="area-list">
@@ -61,7 +61,7 @@
           </div>
         </section>
 
-        <a id="tools"></a>
+        <div class="scroll-target"><a id="tools"></a></div>
         <section>
           <h2 class="section-heading">Tools</h2>
           <div class="area outline-block">Tools</div>

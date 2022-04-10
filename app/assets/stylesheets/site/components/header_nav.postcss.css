@@ -200,3 +200,13 @@ body.with-navbar {
     }
   }
 }
+
+.scroll-target {
+  position: relative;
+
+  a {
+    position: absolute;
+    top: -64px;
+    left: 0;
+  }
+}
