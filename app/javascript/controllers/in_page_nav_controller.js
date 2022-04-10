@@ -7,6 +7,7 @@ export default class extends Controller {
 
   connect() {
     this.heights = this.findTargetHeights();
+    this.activeId = null;
   }
 
   click(event) {
@@ -35,6 +36,13 @@ export default class extends Controller {
   }
 
   setActiveLink(targetId) {
+    if (this.activeId !== targetId) {
+      this.changeActiveLink(targetId);
+      this.activeId = targetId;
+    }
+  }
+
+  changeActiveLink(targetId) {
     const links = this.element.querySelectorAll("a");
     links.forEach((a) => {
       if (targetId && a.hash === `#${targetId}`) {
