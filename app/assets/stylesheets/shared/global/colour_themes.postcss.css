@@ -13,6 +13,7 @@ beige: "#E1A994", */
   --teal-light: #14b8a6;
   --teal-lighter: #22e6d1;
   --sky: #78cee1;
+  --sky-darker: #2ba9c5;
   --gold: #efbf6e;
   --white: #ffffff;
   --black: #000000;
@@ -113,6 +114,8 @@ beige: "#E1A994", */
 .theme-place {
   --text-color: var(--black);
   --background-color: var(--sky);
+  --background-color-emphasis: var(--sky-darker);
+
   @mixin blue-dark-highlight;
 
   @mixin apply-theme-colors;

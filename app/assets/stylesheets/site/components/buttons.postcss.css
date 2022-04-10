@@ -43,3 +43,7 @@ a.not-implemented {
     }
   }
 }
+
+a.link-in-text {
+  text-decoration: underline;
+}
