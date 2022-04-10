@@ -49,13 +49,15 @@
     }
 
     .sticky-toolbar {
-      margin-right: calc(var(--gutter) * -1);
+      margin: 0 calc(var(--gutter) * -1);
     }
 
     nav.in-page-nav {
       overflow-y: hidden;
       overflow-x: scroll;
       width: 100%;
+      padding: 0 var(--gutter);
+      box-sizing: border-box;
     }
   }
 }
