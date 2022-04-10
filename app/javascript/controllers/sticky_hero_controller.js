@@ -1,15 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["nav"];
+  static targets = ["nav", "hero", "contents"];
 
   connect() {
     this.offsetTop = this.navTarget.offsetTop;
-    this.openHeight = this.element.offsetHeight;
+    this.openHeight = this.heroTarget.offsetHeight;
     this.heightAbove = 64;
     this.closedVisibleHeight = this.navTarget.offsetHeight;
     this.closedTotalHeight = this.closedVisibleHeight + this.heightAbove;
-    this.startsClosed = this.element.classList.contains("closed");
   }
 
   onScroll(event) {
@@ -27,12 +26,14 @@ export default class extends Controller {
   }
 
   close() {
-    this.element.classList.add("closed");
-    this.element.style.top = `${this.closedTotalHeight - this.openHeight}px`;
+    this.heroTarget.classList.add("closed");
+    this.heroTarget.style.top = `${this.closedTotalHeight - this.openHeight}px`;
+    this.contentsTarget.style.paddingTop = `${this.openHeight}px`;
   }
 
   open() {
-    this.element.classList.remove("closed");
-    this.element.style.top = null;
+    this.heroTarget.classList.remove("closed");
+    this.heroTarget.style.top = null;
+    this.contentsTarget.style.paddingTop = null;
   }
 }
