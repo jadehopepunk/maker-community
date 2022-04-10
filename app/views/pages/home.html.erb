@@ -27,7 +27,7 @@
             <span><%= event.title %></span>
           </a>
           <% end %> -->
-          <%= render 'events/events_list', event_sessions: @event_sessions %>
+          <%= render 'events/events_list', event_sessions: @event_sessions, style: 'compact-grid' %>
         </div>
         <% end %>
         <a class="button" href="<%= events_path %>">See all events</a>
