@@ -28,11 +28,24 @@ describe EventBookingsService do
     end
 
     context 'slack message' do
-      let(:event_session) { EventSession.create!(event:, start_at: Date.current + 7) }
+      context 'in the future' do
+        let(:event_session) { EventSession.create!(event:, start_at: Date.current + 7) }
 
-      it 'queues a Slack message if event is in the future' do
-        expect_any_instance_of(SlackNotifier).to receive(:new_event_booking).with(unsaved_booking)
-        subject.create(unsaved_booking)
+        context 'for confirmed event' do
+          it 'queues a Slack message' do
+            expect_any_instance_of(SlackNotifier).to receive(:new_event_booking).with(unsaved_booking)
+            subject.create(unsaved_booking)
+          end
+        end
+
+        context 'for unconfirmed event' do
+          let(:unsaved_booking) { EventBooking.new(session: event_session, user: jade, status: 'in-cart') }
+
+          it 'does not enqueue a slack message' do
+            expect_any_instance_of(SlackNotifier).not_to receive(:new_event_booking)
+            subject.create(unsaved_booking)
+          end
+        end
       end
     end
   end
