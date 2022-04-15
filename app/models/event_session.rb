@@ -79,7 +79,7 @@ class EventSession < ApplicationRecord
   end
 
   def booked_persons
-    bookings.sum(:persons)
+    bookings.confirmed.sum(:persons)
   end
 
   def to_param

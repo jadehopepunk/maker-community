@@ -18,8 +18,15 @@
     }
 
     tbody {
-      tr:nth-child(odd) {
-        background-color: var(--callout-background-color);
+      tr {
+        &:nth-child(odd) {
+          background-color: var(--callout-background-color);
+        }
+
+        &.unconfirmed {
+          opacity: 0.8;
+          color: red;
+        }
       }
 
       td {

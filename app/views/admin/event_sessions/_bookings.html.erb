@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <% bookings.each do |booking| %>
-      <tr>
+      <tr class="<%= booking.confirmed? ? 'confirmed' : 'unconfirmed' %>">
         <td><%= link_to booking.user.display_name, admin_person_path(booking.user), class: 'primary-row-link' %></td>
         <td><%= booking.persons %></td>
         <td><%= booking.status %></td>
