@@ -57,12 +57,17 @@ module Wp
 
       dest.assign_attributes shared_attributes
       if dest.changed?
+        puts "Invalid record for update: #{dest.inspect}" unless dest.valid?
         dest.save!
-        puts "updated #{self.class.name}: #{dest.title}"
+        on_update(dest)
       end
     end
 
     private
+
+    def on_update(dest)
+      puts "updated #{self.class.name}: #{dest.title}"
+    end
 
     def dest_class
       self.class.dest_class

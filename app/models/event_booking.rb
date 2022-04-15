@@ -1,5 +1,5 @@
 class EventBooking < ApplicationRecord
-  STATES = ['was-in-cart', 'in-cart', 'complete', 'pending-confirmation', 'paid'].freeze
+  STATES = ['was-in-cart', 'in-cart', 'complete', 'pending-confirmation', 'paid', 'cancelled'].freeze
   CONFIRMED_STATES = ['complete', 'paid'].freeze
   ROLES = ['attendee', 'duty_manager', 'teacher', 'volunteer'].freeze
 

@@ -4,7 +4,7 @@ module Wp
     include Concerns::IsPostType
 
     default_scope { where(post_type: 'wc_booking') }
-    scope :excluding_cart, -> { where.not(post_status: 'was-in-cart') }
+    scope :excluding_cart, -> { where.not(post_status: ['was-in-cart', 'in-cart']) }
 
     class << self
       def dest_class
@@ -12,7 +12,7 @@ module Wp
       end
 
       def sync
-        excluding_cart.find_each(&:import_if_new)
+        excluding_cart.find_each(&:import_or_update)
       end
     end
 
@@ -32,12 +32,22 @@ module Wp
         session: event_session,
         user:,
         order_item:,
-        status: post_status,
+        **shared_attributes,
         persons: booking_persons,
         wordpress_post_id: self.ID,
         created_at: post_date
       )
       EventBookingsService.new.create(dest)
+    end
+
+    def shared_attributes
+      {
+        status: post_status
+      }
+    end
+
+    def on_update(dest)
+      puts "updated #{self.class.name}: #{dest.id}"
     end
 
     def import_event_session_if_new
