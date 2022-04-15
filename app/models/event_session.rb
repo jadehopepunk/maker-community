@@ -82,6 +82,10 @@ class EventSession < ApplicationRecord
     bookings.sum(:persons)
   end
 
+  def to_param
+    "#{id}-#{event.slug}"
+  end
+
   private
 
   def hashed_availability_states

@@ -26,6 +26,8 @@ module Wp
         return
       end
 
+      puts "about to import wp booking #{self.ID}"
+
       dest = ::EventBooking.new(
         session: event_session,
         user:,
@@ -90,7 +92,17 @@ module Wp
     end
 
     def booking_persons
-      PHP.unserialize(meta['_booking_persons']).first
+      if meta_booking_persons.is_a?(Array)
+        meta_booking_persons.sum
+      elsif meta_booking_persons.is_a?(Hash)
+        meta_booking_persons.values.sum
+      else
+        raise "What do we do here? #{meta_booking_persons.class}"
+      end
+    end
+
+    def meta_booking_persons
+      PHP.unserialize(meta['_booking_persons'])
     end
   end
 end
