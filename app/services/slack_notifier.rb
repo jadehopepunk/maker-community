@@ -32,6 +32,13 @@ class SlackNotifier
     )
   end
 
+  def cancelled_event_booking(booking)
+    post_message(
+      channel: PROGRAM_CHANNEL,
+      text: "`#{booking.user.display_name}` cancelled their bookingfor #{event_session_admin_link(session)} on #{format_date_text(session.start_at)}"
+    )
+  end
+
   def new_event_listed(session)
     post_message(
       channel: GENERAL_CHANNEL,

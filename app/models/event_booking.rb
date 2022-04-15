@@ -26,4 +26,8 @@ class EventBooking < ApplicationRecord
   def confirmed?
     CONFIRMED_STATES.include?(status)
   end
+
+  def cancelled?
+    status == 'cancelled'
+  end
 end
