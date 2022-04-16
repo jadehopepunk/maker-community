@@ -50,7 +50,17 @@
             </div>
           </div>
 
+          <% if @booking %>
+          <div class="booking">
+            <h2>You're booked</h2>
+            <p>
+              We're looking forward to seeing you there. Find out about <a href="/facilities" class="link-in-text">getting there</a>, or <a href="/contact" class="link-in-text">contact us</a> if you
+              need to cancel.
+            </p>
+          </div>
+          <% else %>
           <a href="<%= new_event_booking_path(@session) %>" class="button call-to-action">Book Now</a>
+          <% end %>
         </div>
       </div>
     </div>

@@ -9,10 +9,11 @@
       <div><%= order.user.email %></div>
     </div>
   </div>
+  <%= f.error :user %>
   <p>Not you? <a href="<%= destroy_user_session_path %>">Sign out</a>.</p>
   <% else %>
   <p>Been here before? <a href="<%= new_user_session_path %>">Sign in</a>.</p>
-  <%= f.input :name %> <%= f.input :email, as: :email %> <% end %> <%= f.error :user %>
+  <%= f.input :name %> <%= f.input :email, as: :email %> <%= f.error :user %> <% end %>
 </div>
 <div class="form-section">
   <h2>Your booking</h2>

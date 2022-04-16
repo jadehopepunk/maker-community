@@ -86,6 +86,12 @@ class EventSession < ApplicationRecord
     [id.to_s, event.slug].reject(&:blank?).join('-')
   end
 
+  def active_booking_for(user)
+    return nil if user.nil?
+
+    bookings.confirmed.find_by(user:)
+  end
+
   private
 
   def hashed_availability_states
