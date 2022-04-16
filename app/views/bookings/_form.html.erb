@@ -1,0 +1,20 @@
+<%= simple_form_for order, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false} do |f| %> <%= f.error_notification %>
+<div class="form-section">
+  <h2>About you</h2>
+  <p>Been here before? <a href="<%= new_user_session_path %>">Sign in</a>.</p>
+  <%= f.input :name %> <%= f.input :email %>
+</div>
+<div class="form-section">
+  <h2>Your booking</h2>
+
+  <% @order.price_orders.each do |price_order| %>
+  <div class="for-prices">
+    <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
+    <div class="for-one-price"><%= price_fields.input :persons, as: :small_integer, required: false, label: price_order.price.type_title %> <%= price_fields.input :price_id, as: :hidden %></div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<div class="actions"><%= f.submit 'Book now' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
+<% end %>

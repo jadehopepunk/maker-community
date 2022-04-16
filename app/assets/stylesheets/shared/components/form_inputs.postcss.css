@@ -2,6 +2,9 @@
   input {
     &.string {
       border: 2px solid var(--callout-background-color);
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
     }
   }
 
@@ -10,11 +13,35 @@
   }
 
   div.input {
-    margin-top: 0.7rem;
+    &:not(:first-of-type) {
+      margin-top: 1rem;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+  }
+
+  .form-section {
+    &:not(:first-of-type) {
+      margin-top: 1rem;
+      border-top: 3px solid var(--callout-background-color);
+      padding-top: 1rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      line-height: 1em;
+    }
   }
 
   .actions {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   .small-integer-input {
@@ -30,6 +57,9 @@
       text-align: center;
       color: var(--highlight-color);
       font-size: 1.5rem;
+      padding: 0;
+      border: none;
+      margin: 0;
     }
 
     button {

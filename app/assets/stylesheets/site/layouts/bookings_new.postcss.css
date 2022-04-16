@@ -4,6 +4,15 @@
 
   .form {
     margin-top: var(--gutter);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .form-title {
+      display: block;
+      border-bottom: 2px solid var(--highlight-color);
+      margin-bottom: 1.5rem;
+    }
   }
 
   /* Remove when finished */

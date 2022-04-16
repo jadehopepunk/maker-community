@@ -2,16 +2,8 @@
   <div class="container">
     <div class="context"><%= render "events/event_session_preview", event_session: @event_session, link: false %></div>
     <div class="form">
-      <%= simple_form_for @order, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false} do |f| %> <%= f.error_notification %> <%= f.input :email %> <%
-      @order.price_orders.each do |price_order| %>
-      <div class="for-prices">
-        <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
-        <div class="for-one-price"><%= price_fields.input :price_id, as: :hidden %> <%= price_fields.input :persons, as: :small_integer, required: false, label: price_order.price.type_title %></div>
-        <% end %>
-      </div>
-      <% end %>
-      <div class="actions"><%= f.submit 'Book now' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
-      <% end %>
+      <h1 class="form-title">Book for this event</h1>
+      <%= render 'bookings/form', order: @order, title: 'Book for this event' %>
     </div>
   </div>
 </div>
