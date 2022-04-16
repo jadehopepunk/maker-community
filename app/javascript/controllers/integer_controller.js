@@ -11,12 +11,12 @@ export default class extends Controller {
 
   decrement(event) {
     event.preventDefault();
-    this.inputTarget.value = parseInt(this.inputTarget.value) - 1;
+    this.inputTarget.value = Math.max(this.value() - 1, this.min());
   }
 
   increment(event) {
     event.preventDefault();
-    this.inputTarget.value = parseInt(this.inputTarget.value) + 1;
+    this.inputTarget.value = Math.min(this.value() + 1, this.max());
   }
 
   preventFocus(event) {
@@ -28,5 +28,17 @@ export default class extends Controller {
       // No previous focus target, blur instead
       event.currentTarget.blur();
     }
+  }
+
+  value() {
+    return parseInt(this.inputTarget.value);
+  }
+
+  min() {
+    return parseInt(this.inputTarget.dataset.min);
+  }
+
+  max() {
+    return parseInt(this.inputTarget.dataset.max);
   }
 }

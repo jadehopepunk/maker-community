@@ -3,6 +3,8 @@ module CustomInputs
     def initialize(*params)
       super
       input_html_options['data-integer-target'] = 'input'
+      input_html_options['data-min'] = 0
+      input_html_options['data-max'] = 10
       input_html_options['readonly'] = true
     end
 
