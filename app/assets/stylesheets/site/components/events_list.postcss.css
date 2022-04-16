@@ -1,3 +1,81 @@
+a.event-preview {
+  display: flex;
+  flex-direction: row;
+  align-items: justify;
+  color: var(--text-color);
+  background-color: var(--callout-background-color);
+  border: 2px solid var(--callout-background-color);
+
+  &:hover {
+    border: 2px solid var(--highlight-color);
+  }
+
+  .event-title {
+    font-weight: bold;
+    font-size: 1.4rem;
+
+    @media (--mobile) {
+      font-size: 1.2rem;
+    }
+  }
+
+  .date-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 0.3rem;
+
+    .date {
+      margin-right: 10px;
+      font-weight: 600;
+    }
+  }
+
+  img.event-image {
+    width: 30%;
+    max-width: 200px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    margin: 0;
+  }
+
+  .details {
+    padding: calc(var(--gutter) * 0.75);
+
+    display: flex;
+    flex-direction: column;
+
+    .event-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-top: 1em;
+      margin-bottom: 0;
+    }
+  }
+
+  .event-host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .host-text {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
 .sectioned-events-list {
   display: flex;
   flex-direction: column;
@@ -24,105 +102,30 @@
 }
 
 .events-list {
-  a.event {
-    display: flex;
-    flex-direction: row;
-    align-items: justify;
-    color: var(--text-color);
-    background-color: var(--callout-background-color);
-    border: 2px solid var(--callout-background-color);
-
-    &:hover {
-      border: 2px solid var(--highlight-color);
-    }
-
-    .event-title {
-      font-weight: bold;
-      font-size: 1.4rem;
-
-      @media (--mobile) {
-        font-size: 1.2rem;
-      }
-    }
-
-    .date-time {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      margin-bottom: 0.3rem;
-
-      .date {
-        margin-right: 10px;
-        font-weight: 600;
-      }
-    }
-
-    img.event-image {
-      width: 30%;
-      max-width: 200px;
-      height: auto;
-      flex-shrink: 0;
-      object-fit: cover;
+  .open-time-event,
+  .unplugged-night-event {
+    a {
+      background-color: transparent;
+      border: 2px solid var(--callout-background-color);
       margin: 0;
-    }
 
-    .details {
-      padding: calc(var(--gutter) * 0.75);
-
-      display: flex;
-      flex-direction: column;
-
-      .event-description {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        margin-top: 1em;
-        margin-bottom: 0;
-      }
-    }
-
-    .event-host {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
+      .avatar-list {
+        float: right;
       }
 
-      .host-text {
+      h3.event-title {
+        color: #374151;
+        font-weight: 400;
+      }
+
+      .details {
+        width: 100%;
         display: flex;
-        flex-direction: column;
-      }
-    }
-  }
+        flex-direction: row;
 
-  a.event-open-time {
-    background-color: transparent;
-    border: 2px solid var(--callout-background-color);
-    margin: 0;
-
-    .avatar-list {
-      float: right;
-    }
-
-    h3.event-title {
-      color: #374151;
-      font-weight: 400;
-    }
-
-    .details {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-
-      .text {
-        flex: 1;
+        .text {
+          flex: 1;
+        }
       }
     }
   }
@@ -139,7 +142,8 @@
     grid-column: span 2;
 
     @media (--desktop) {
-      &.event-open-time {
+      &.open-time-event,
+      &.unplugged-night-event {
         max-width: 400px;
         min-width: 50%;
         grid-column: span 1;
@@ -168,7 +172,7 @@
   .event-container {
   }
 
-  a.event {
+  a.event-preview {
     display: flex;
     flex-direction: column;
     align-items: justify;

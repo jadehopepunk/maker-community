@@ -2,6 +2,7 @@
 @import "./layouts/devise.postcss.css";
 @import "./layouts/events_index.postcss.css";
 @import "./layouts/events_show.postcss.css";
+@import "./layouts/bookings_new.postcss.css";
 @import "./layouts/page_facilities.postcss.css";
 
 @import "./components/buttons.postcss.css";

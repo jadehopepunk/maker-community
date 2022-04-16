@@ -1,21 +1,19 @@
-<div class="event-container">
-  <a href="<%= event_path(event_session) %>" class="event">
-    <% if event_session.event.image.present? %> <%= image_model_tag(event_session.event.image, class: 'event-image') %> <% end %>
-    <div class="details">
-      <div class="date-time">
-        <span class="date"><%= format_date_html event_session.date %></span>
-        <span class="time"><%= format_time_html event_session.start_at %></span>
-      </div>
-      <h3 class="event-title"><%= event_session.event.title %></h3>
+<a href="<%= event_path(event_session) %>" class="event-preview">
+  <% if event_session.event.image.present? %> <%= image_model_tag(event_session.event.image, class: 'event-image') %> <% end %>
+  <div class="details">
+    <div class="date-time">
+      <span class="date"><%= format_date_html event_session.date %></span>
+      <span class="time"><%= format_time_html event_session.start_at %></span>
+    </div>
+    <h3 class="event-title"><%= event_session.event.title %></h3>
 
-      <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
-      <!-- <div class="event-host">
+    <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
+    <!-- <div class="event-host">
       <img class="avatar" src="http://placekitten.com/40/40" />
       <div class="host-text">
         <div class="teacher-description">presented by</div>
         <h3 class="teacher-name">Alma Arriaga</h3>
       </div>
     </div> -->
-    </div>
-  </a>
-</div>
+  </div>
+</a>

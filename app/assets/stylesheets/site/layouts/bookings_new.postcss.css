@@ -1,0 +1,14 @@
+.bookings-new {
+  /* Remove when finished */
+  .outline-block {
+    background-color: silver;
+    border: 2px dashed grey;
+    min-height: 200px;
+    text-align: center;
+    line-height: 200px;
+
+    &.in-progress {
+      line-height: inherit;
+    }
+  }
+}

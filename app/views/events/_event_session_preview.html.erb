@@ -1,0 +1,3 @@
+<div class="event-container <%= event_session.event.class.name.demodulize.underscore.dasherize %>">
+  <%= render "events/#{event_session.event.class.name.demodulize.underscore}", event_session: event_session %>
+</div>

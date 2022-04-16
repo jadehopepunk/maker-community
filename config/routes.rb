@@ -2,7 +2,11 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   devise_for :users
-  resources :events, only: [:index, :show]
+
+  resources :events, only: [:index, :show] do
+    resources :bookings, only: [:new, :create]
+  end
+
   resources :calendars, only: [:show]
   get 'facilities', to: 'pages#facilities'
 
