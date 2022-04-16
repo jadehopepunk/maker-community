@@ -12,12 +12,12 @@
   <p>Not you? <a href="<%= destroy_user_session_path %>">Sign out</a>.</p>
   <% else %>
   <p>Been here before? <a href="<%= new_user_session_path %>">Sign in</a>.</p>
-  <%= f.input :name %> <%= f.input :email, as: :email %> <% end %>
+  <%= f.input :name %> <%= f.input :email, as: :email %> <% end %> <%= f.error :user %>
 </div>
 <div class="form-section">
   <h2>Your booking</h2>
 
-  <div class="for-prices <%= 'field_with_errors' if true %>">
+  <div class="for-prices <%= 'field_with_errors' if f.object.errors.has_key?(:total_persons) %>">
     <% @order.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
     <div class="for-one-price" data-price-per-person="<%= price_order.price.per_person %>">
       <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= format_money price_order.price.per_person %></span></div>

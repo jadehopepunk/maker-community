@@ -8,6 +8,12 @@ module Forms
     validates :email, presence: true, unless: :user
     validates :name, presence: true, unless: :user
     validates :total_persons, comparison: { greater_than: 0, message: 'You must select at least one person' }
+    validates_each :user do |record, attr, value|
+      if value && record.event_session.bookings.confirmed.where(user: value).exists?
+        record.errors.add(attr,
+                          'You already have a booking for this event')
+      end
+    end
 
     delegate :prices, to: :event_session
 
