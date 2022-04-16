@@ -17,7 +17,7 @@
 <div class="form-section">
   <h2>Your booking</h2>
 
-  <div class="for-prices">
+  <div class="for-prices <%= 'field_with_errors' if true %>">
     <% @order.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
     <div class="for-one-price" data-price-per-person="<%= price_order.price.per_person %>">
       <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= format_money price_order.price.per_person %></span></div>
@@ -25,8 +25,7 @@
     </div>
     <% end %> <% end %>
   </div>
-
-  <%= f.input :comments, as: :text, label: 'Comments or special requirements' %>
+  <%= f.error :total_persons %> <%= f.input :comments, as: :text, label: 'Comments or special requirements' %>
 </div>
 <div class="form-section payment-section">
   <h2>Payment</h2>

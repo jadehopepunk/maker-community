@@ -45,6 +45,10 @@
           margin-top: 0;
         }
       }
+
+      &.field_with_errors {
+        border: 2px solid var(--error-color);
+      }
     }
 
     &.free {

@@ -1,4 +1,6 @@
 .simple_form {
+  --error-color: red;
+
   input.string,
   textarea {
     border: 2px solid var(--callout-background-color);
@@ -10,12 +12,12 @@
 
   .field_with_errors {
     input.string {
-      border-color: red;
+      border-color: var(--error-color);
     }
+  }
 
-    .error {
-      color: red;
-    }
+  .error {
+    color: var(--error-color);
   }
 
   input[type="submit"] {

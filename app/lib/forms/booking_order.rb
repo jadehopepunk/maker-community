@@ -7,6 +7,7 @@ module Forms
 
     validates :email, presence: true, unless: :user
     validates :name, presence: true, unless: :user
+    validates :total_persons, comparison: { greater_than: 0, message: 'You must select at least one person' }
 
     delegate :prices, to: :event_session
 
@@ -16,10 +17,14 @@ module Forms
     end
 
     def price_orders_attributes=(prices_attributes)
-      prices_attributes.values.each do |price_attributes|
+      prices_attributes.each_value do |price_attributes|
         price_order = price_orders.find { |po| po.price_id.to_s == price_attributes[:price_id] }
         price_order.attributes = price_attributes.except(:price_id)
       end
+    end
+
+    def total_persons
+      price_orders.map(&:persons).sum
     end
 
     private
