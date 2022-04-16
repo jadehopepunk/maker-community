@@ -18,7 +18,12 @@ module Forms
 
     def price_orders_attributes=(prices_attributes)
       prices_attributes.each_value do |price_attributes|
-        price_order = price_orders.find { |po| po.price_id.to_s == price_attributes[:price_id] }
+        price_order = price_orders.find { |po| po.price_id.to_s == price_attributes[:price_id].to_s }
+        unless price_order.present?
+          raise ArgumentError,
+                "Didn't find price for id #{price_attributes[:price_id].inspect} amongst #{price_orders.inspect}"
+        end
+
         price_order.attributes = price_attributes.except(:price_id)
       end
     end
@@ -27,7 +32,26 @@ module Forms
       price_orders.map(&:persons).sum
     end
 
+    def save
+      raise ArgumentError, 'This needs to be setup with an event session' unless event_session.present?
+
+      if valid?
+        save_booking!
+        return true
+      end
+
+      false
+    end
+
     private
+
+    def save_booking!
+      build_booking.save!
+    end
+
+    def build_booking
+      EventBooking.new(user:, session: event_session, status: 'complete', persons: total_persons, comments:)
+    end
 
     def set_price_orders
       @price_orders = prices.map do |price|

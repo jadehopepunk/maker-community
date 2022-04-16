@@ -28,4 +28,12 @@ FactoryBot.define do
       title { 'Open for Making' }
     end
   end
+
+  factory :event_session do
+    factory :spoon_carving_session do
+      start_at { Time.current + 1.day }
+      end_at { start_at + 1.hour }
+      event { build(:spoon_carving) }
+    end
+  end
 end
