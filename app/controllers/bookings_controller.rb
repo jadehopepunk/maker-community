@@ -28,6 +28,6 @@ class BookingsController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:email, price_orders_attributes: [:price_id, :persons])
+    params.require(:order).permit(:email, :name, :comments, price_orders_attributes: [:price_id, :persons])
   end
 end

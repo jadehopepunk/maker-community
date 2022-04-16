@@ -46,7 +46,8 @@ module Forms
     private
 
     def save_booking!
-      build_booking.save!
+      booking = build_booking
+      EventBookingsService.new.create(booking).save!
     end
 
     def build_booking

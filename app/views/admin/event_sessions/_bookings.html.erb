@@ -10,6 +10,7 @@
       <tr>
         <th><%= sort_link(q, :user_display_name, 'Name', default_order: :asc) %></th>
         <th>People</th>
+        <th>Comments</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
       <tr class="<%= booking.confirmed? ? 'confirmed' : 'unconfirmed' %>">
         <td><%= link_to booking.user.display_name, admin_person_path(booking.user), class: 'primary-row-link' %></td>
         <td><%= booking.persons %></td>
+        <td><%= booking.comments %></td>
         <td><%= booking.status %></td>
       </tr>
       <% end %>
