@@ -83,7 +83,7 @@ class EventSession < ApplicationRecord
   end
 
   def to_param
-    "#{id}-#{event.slug}"
+    [id.to_s, event.slug].reject(&:blank?).join('-')
   end
 
   private
