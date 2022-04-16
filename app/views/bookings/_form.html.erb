@@ -19,8 +19,8 @@
 
   <div class="for-prices">
     <% @order.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
-    <div class="for-one-price">
-      <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= number_to_currency price_order.price.per_person, precision: 0 %></span></div>
+    <div class="for-one-price" data-price-per-person="<%= price_order.price.per_person %>">
+      <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= format_money price_order.price.per_person %></span></div>
       <%= price_fields.input(:persons, as: :small_integer, required: false, label: false) %> <%= price_fields.input(:price_id, as: :hidden) %>
     </div>
     <% end %> <% end %>
@@ -28,7 +28,7 @@
 
   <%= f.input :comments, as: :text, label: 'Comments or special requirements' %>
 </div>
-<div class="form-section">
+<div class="form-section payment-section">
   <h2>Payment</h2>
   <p>This bit isn't done yet.</p>
 </div>

@@ -2,7 +2,7 @@
   .context {
   }
 
-  .form {
+  .form-container {
     margin-top: var(--gutter);
     max-width: 600px;
     margin-left: auto;
@@ -13,7 +13,9 @@
       border-bottom: 2px solid var(--highlight-color);
       margin-bottom: 1.5rem;
     }
+  }
 
+  .simple_form {
     .show-user {
       display: flex;
       flex-direction: row;
@@ -42,6 +44,12 @@
         .input {
           margin-top: 0;
         }
+      }
+    }
+
+    &.free {
+      .payment-section {
+        display: none;
       }
     }
   }
