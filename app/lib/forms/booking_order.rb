@@ -2,10 +2,11 @@ module Forms
   class BookingOrder
     include ActiveModel::Model
 
-    attr_accessor :email, :name, :user, :price_orders
+    attr_accessor :user, :price_orders, :email, :name, :comments
     attr_reader :event_session
 
     validates :email, presence: true, unless: :user
+    validates :name, presence: true, unless: :user
 
     delegate :prices, to: :event_session
 

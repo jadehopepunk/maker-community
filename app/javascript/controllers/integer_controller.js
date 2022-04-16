@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["input"];
 
   connect() {
-    console.log("connected", this.element);
     this.inputTarget.setAttribute("tabindex", "-1");
     this.inputTarget.addEventListener("focus", this.preventFocus);
     this.updateClasses();
@@ -38,6 +37,7 @@ export default class extends Controller {
   setValue(newValue) {
     this.inputTarget.value = newValue;
     this.updateClasses();
+    this.inputTarget.dispatchEvent(new Event("change"));
   }
 
   min() {

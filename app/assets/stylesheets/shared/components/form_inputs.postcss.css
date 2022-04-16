@@ -1,10 +1,20 @@
 .simple_form {
-  input {
-    &.string {
-      border: 2px solid var(--callout-background-color);
-      display: block;
-      width: 100%;
-      padding: 0.5rem 0.75rem;
+  input.string,
+  textarea {
+    border: 2px solid var(--callout-background-color);
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    box-sizing: border-box;
+  }
+
+  .field_with_errors {
+    input.string {
+      border-color: red;
+    }
+
+    .error {
+      color: red;
     }
   }
 
