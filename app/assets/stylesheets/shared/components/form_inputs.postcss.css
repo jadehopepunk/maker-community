@@ -1,0 +1,38 @@
+.simple_form {
+  input {
+    &.string {
+      border: 2px solid var(--callout-background-color);
+    }
+  }
+
+  .small-integer-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    input {
+      width: 2rem;
+      height: 2rem;
+      box-model: border-box;
+      background-color: transparent;
+      text-align: center;
+      color: var(--highlight-color);
+      font-size: 1.5rem;
+    }
+
+    button {
+      --size: 2rem;
+
+      @mixin button;
+      border: 0;
+      width: var(--size);
+      height: var(--size);
+      line-height: var(--size);
+      /* vertical-align: middle; */
+      padding: 0;
+      box-model: border-box;
+
+      margin-left: 5px;
+    }
+  }
+}
