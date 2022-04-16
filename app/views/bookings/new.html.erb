@@ -1,6 +1,9 @@
 <div class="theme-program bookings-new">
   <div class="container">
     <div class="context"><%= render "events/event_session_preview", event_session: @event_session, link: false %></div>
-    <div class="form"><%= simple_form_for @order, as: :order, url: event_bookings_path(@event_session) do |f| %> <%= f.input :email %> <%= f.submit 'Book' %> <% end %></div>
+    <div class="form">
+      <%= simple_form_for @order, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false} do |f| %> <%= f.error_notification %> <%= f.input :email %> <%= f.submit 'Book' %>
+      <% end %>
+    </div>
   </div>
 </div>
