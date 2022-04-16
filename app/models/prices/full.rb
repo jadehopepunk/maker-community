@@ -5,5 +5,9 @@ module Prices
     def full?
       true
     end
+
+    def title
+      'Full price'
+    end
   end
 end

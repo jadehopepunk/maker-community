@@ -25,6 +25,25 @@
         }
       }
     }
+
+    .for-prices {
+      .for-one-price {
+        padding: 0.5rem;
+
+        &:nth-child(odd) {
+          background-color: var(--callout-background-color);
+        }
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .input {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   /* Remove when finished */

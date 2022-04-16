@@ -7,6 +7,10 @@ class EventPrice < ApplicationRecord
     self.class.name.demodulize.humanize.titleize
   end
 
+  def title
+    type_title
+  end
+
   def type_css_class
     self.class.name.demodulize.underscore.dasherize
   end
