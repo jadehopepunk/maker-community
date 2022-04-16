@@ -13,6 +13,18 @@
       border-bottom: 2px solid var(--highlight-color);
       margin-bottom: 1.5rem;
     }
+
+    .show-user {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+
+      .details {
+        .display_name {
+          font-weight: bold;
+        }
+      }
+    }
   }
 
   /* Remove when finished */

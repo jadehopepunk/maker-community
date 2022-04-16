@@ -1,8 +1,18 @@
 <%= simple_form_for order, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false} do |f| %> <%= f.error_notification %>
 <div class="form-section">
   <h2>About you</h2>
+  <% if order.user %>
+  <div class="show-user">
+    <%= avatar_tag(order.user) %>
+    <div class="details">
+      <div class="display_name"><%= order.user.display_name %></div>
+      <div><%= order.user.email %></div>
+    </div>
+  </div>
+  <p>Not you? <a href="<%= destroy_user_session_path %>">Sign out</a>.</p>
+  <% else %>
   <p>Been here before? <a href="<%= new_user_session_path %>">Sign in</a>.</p>
-  <%= f.input :name %> <%= f.input :email %>
+  <%= f.input :name %> <%= f.input :email %> <% end %>
 </div>
 <div class="form-section">
   <h2>Your booking</h2>
