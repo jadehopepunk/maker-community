@@ -312,6 +312,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     slack-ruby-client (1.0.0)
       faraday (>= 1.0)
       faraday_middleware
@@ -382,6 +385,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sidekiq
+  simple_form
   slack-ruby-client
   sprockets-rails
   stimulus-rails
