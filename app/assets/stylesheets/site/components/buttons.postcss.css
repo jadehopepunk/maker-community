@@ -5,6 +5,7 @@
   padding: 0.5rem 1rem;
   border-radius: 99999px;
   display: inline-block;
+  border: 0;
 
   &:hover {
     background-color: var(--highlight-color-emphasis);

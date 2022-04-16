@@ -5,6 +5,18 @@
     }
   }
 
+  input[type="submit"] {
+    @mixin button;
+  }
+
+  div.input {
+    margin-top: 0.7rem;
+  }
+
+  .actions {
+    margin-top: 1rem;
+  }
+
   .small-integer-input {
     display: flex;
     flex-direction: row;
@@ -24,7 +36,6 @@
       --size: 2rem;
 
       @mixin button;
-      border: 0;
       width: var(--size);
       height: var(--size);
       line-height: var(--size);

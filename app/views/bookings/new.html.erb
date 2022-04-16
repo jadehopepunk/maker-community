@@ -6,13 +6,12 @@
       @order.price_orders.each do |price_order| %>
       <div class="for-prices">
         <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
-        <div class="for-one-price">
-          <h3><%= price_order.price.type_title %></h3>
-          <%= price_fields.input :price_id, as: :hidden %> <%= price_fields.input :persons, as: :small_integer %>
-        </div>
+        <div class="for-one-price"><%= price_fields.input :price_id, as: :hidden %> <%= price_fields.input :persons, as: :small_integer, required: false, label: price_order.price.type_title %></div>
         <% end %>
       </div>
-      <% end %> <%= f.submit 'Book now' %> <% end %>
+      <% end %>
+      <div class="actions"><%= f.submit 'Book now' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
+      <% end %>
     </div>
   </div>
 </div>
