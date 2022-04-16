@@ -9,7 +9,9 @@
         </p>
         <a href="<%= facilities_path %>" class="button">Explore the workshop</a>
       </div>
+      <% if false %>
       <div class="block-images"><% Image.where(wordpress_post_id: [1416, 1009, 1007]).each do |image| %> <%= image_model_tag(image, class: 'feature-image') %> <% end %></div>
+      <% end %>
     </section>
     <section class="theme-program area-block">
       <div class="block-contents">
