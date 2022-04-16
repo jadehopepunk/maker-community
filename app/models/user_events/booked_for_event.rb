@@ -5,7 +5,7 @@ module UserEvents
     end
 
     def event_session
-      booking.session
+      booking&.session
     end
 
     def event

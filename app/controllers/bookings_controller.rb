@@ -10,8 +10,11 @@ class BookingsController < ApplicationController
     load_event_session
     @order = new_order
     @order.attributes = order_params
-    @order.valid?
-    render template: 'bookings/new'
+    if @order.save
+      redirect_to event_path(@event_session), notice: 'Booking was successfully created.'
+    else
+      render template: 'bookings/new'
+    end
   end
 
   private
