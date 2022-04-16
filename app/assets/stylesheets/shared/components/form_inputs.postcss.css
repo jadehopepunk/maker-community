@@ -17,7 +17,13 @@
   }
 
   .error {
+    display: block;
     color: var(--error-color);
+    margin-top: 0.25rem;
+
+    a {
+      text-decoration: underline;
+    }
   }
 
   input[type="submit"] {

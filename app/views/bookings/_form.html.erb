@@ -13,7 +13,9 @@
   <p>Not you? <a href="<%= destroy_user_session_path %>">Sign out</a>.</p>
   <% else %>
   <p>Been here before? <a href="<%= new_user_session_path %>">Sign in</a>.</p>
-  <%= f.input :name %> <%= f.input :email, as: :email %> <%= f.error :user %> <% end %>
+  <%= f.input :name %> <%= f.input :email, as: :email %> <% if f.object.errors.of_kind?(:email_user, :email_exists) %>
+  <div class="error">Already has an account here, please <a href="<%= new_user_session_path %>">sign in</a> instead.</div>
+  <% end %> <%= f.error :user %> <% end %>
 </div>
 <div class="form-section">
   <h2>Your booking</h2>

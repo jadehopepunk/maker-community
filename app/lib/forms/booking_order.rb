@@ -5,15 +5,22 @@ module Forms
     attr_accessor :user, :price_orders, :email, :name, :comments
     attr_reader :event_session
 
-    validates :email, presence: true, unless: :user
-    validates :name, presence: true, unless: :user
-    validates :total_persons, comparison: { greater_than: 0, message: 'You must select at least one person' }
-    validates_each :user do |record, attr, value|
-      if value && record.event_session.bookings.confirmed.where(user: value).exists?
+    validates :email, presence: true,
+                      format: { with: Devise.email_regexp, message: "doesn't look like a valid email address" }, unless: :user
+    validates_each :user, if: :user do |record, attr, value|
+      if record.event_session.active_booking_for(value).present?
         record.errors.add(attr,
                           'You already have a booking for this event')
       end
     end
+    validates :name, presence: true, unless: :user
+    validates_each :email, unless: :user do |record, _attr, value|
+      if User.where(email: value).exists?
+        record.errors.add(:email_user, :email_exists,
+                          message: 'Already has an account here, please sign in instead')
+      end
+    end
+    validates :total_persons, comparison: { greater_than: 0, message: 'You must select at least one person' }
 
     delegate :prices, to: :event_session
 
@@ -35,7 +42,7 @@ module Forms
     end
 
     def total_persons
-      price_orders.map(&:persons).sum
+      (price_orders || []).map(&:persons).sum
     end
 
     def save
