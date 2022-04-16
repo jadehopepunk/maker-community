@@ -1,12 +1,10 @@
-<a href="<%= event_path(event_session) %>" class="event-preview">
-  <div class="details">
-    <div class="text">
-      <div class="date-time">
-        <span class="date"><%= format_date_html event_session.date %></span>
-        <span class="time"><%= format_time_html event_session.start_at %> - <%= format_time_html event_session.end_at %></span>
-      </div>
-      <h3 class="event-title"><%= emoji %> <%= event_session.event.title %></h3>
+<div class="details">
+  <div class="text">
+    <div class="date-time">
+      <span class="date"><%= format_date_html event_session.date %></span>
+      <span class="time"><%= format_time_html event_session.start_at %> - <%= format_time_html event_session.end_at %></span>
     </div>
-    <%= avatar_list event_session.duty_managers, size: :xsmall, title_prefix: 'Duty Manager - ' %>
+    <h3 class="event-title"><%= emoji %> <%= event_session.event.title %></h3>
   </div>
-</a>
+  <%= avatar_list event_session.duty_managers, size: :xsmall, title_prefix: 'Duty Manager - ' %>
+</div>
