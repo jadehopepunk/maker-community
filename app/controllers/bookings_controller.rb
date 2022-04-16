@@ -3,6 +3,7 @@ class BookingsController < ApplicationController
     load_event_session
     @order = Forms::BookingOrder.new
     @order.event_session = @event_session
+    store_location_for(:user, request.fullpath)
   end
 
   def create
