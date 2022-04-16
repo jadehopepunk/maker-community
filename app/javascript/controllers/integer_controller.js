@@ -7,16 +7,17 @@ export default class extends Controller {
     console.log("connected", this.element);
     this.inputTarget.setAttribute("tabindex", "-1");
     this.inputTarget.addEventListener("focus", this.preventFocus);
+    this.updateClasses();
   }
 
   decrement(event) {
     event.preventDefault();
-    this.inputTarget.value = Math.max(this.value() - 1, this.min());
+    this.setValue(Math.max(this.value() - 1, this.min()));
   }
 
   increment(event) {
     event.preventDefault();
-    this.inputTarget.value = Math.min(this.value() + 1, this.max());
+    this.setValue(Math.min(this.value() + 1, this.max()));
   }
 
   preventFocus(event) {
@@ -34,11 +35,26 @@ export default class extends Controller {
     return parseInt(this.inputTarget.value);
   }
 
+  setValue(newValue) {
+    this.inputTarget.value = newValue;
+    this.updateClasses();
+  }
+
   min() {
     return parseInt(this.inputTarget.dataset.min);
   }
 
   max() {
     return parseInt(this.inputTarget.dataset.max);
+  }
+
+  // Private
+
+  updateClasses() {
+    if (this.value() == 0) {
+      this.element.classList.add("zero");
+    } else {
+      this.element.classList.remove("zero");
+    }
   }
 }

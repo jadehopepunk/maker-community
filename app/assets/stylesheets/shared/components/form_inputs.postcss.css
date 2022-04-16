@@ -75,5 +75,11 @@
 
       margin-left: 5px;
     }
+
+    &.zero {
+      input {
+        color: grey;
+      }
+    }
   }
 }
