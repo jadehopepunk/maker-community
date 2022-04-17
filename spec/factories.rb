@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
     password { 'password' }
+    sign_up_status { 'full' }
 
     factory :jade do
       display_name { 'Jade' }
@@ -10,6 +11,12 @@ FactoryBot.define do
     factory :bilbo do
       display_name { 'Bilbo' }
       email { 'bilbo@user.com' }
+    end
+
+    factory :unclaimed_user do
+      display_name { 'Unclaimed' }
+      email { 'unclaimed@user.com' }
+      sign_up_status { 'unclaimed' }
     end
   end
 

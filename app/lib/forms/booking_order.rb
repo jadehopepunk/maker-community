@@ -10,17 +10,17 @@ module Forms
     validates_each :user, if: :user do |record, attr, value|
       if record.event_session.active_booking_for(value).present?
         record.errors.add(attr,
-                          'You already have a booking for this event')
+                          'you already have a booking for this event')
       end
     end
     validates :name, presence: true, unless: :user
     validates_each :email, unless: :user do |record, _attr, value|
-      if User.where(email: value).exists?
-        record.errors.add(:email_user, :email_exists,
-                          message: 'Already has an account here, please sign in instead')
+      if User.claimed.where(email: value).exists?
+        record.errors.add(:email, :email_exists,
+                          message: 'already has an account here, please sign in instead')
       end
     end
-    validates :total_persons, comparison: { greater_than: 0, message: 'You must select at least one person' }
+    validates :total_persons, comparison: { greater_than: 0, message: 'you must select at least one person' }
 
     delegate :prices, to: :event_session
 
@@ -64,7 +64,20 @@ module Forms
     end
 
     def build_booking
-      EventBooking.new(user:, session: event_session, status: 'complete', persons: total_persons, comments:)
+      EventBooking.new(user: (user || email_user), session: event_session, status: 'complete',
+                       persons: total_persons, comments:)
+    end
+
+    def email_user
+      existing_email_user || create_email_user
+    end
+
+    def create_email_user
+      User.create!(email:, display_name: name, sign_up_status: 'unclaimed')
+    end
+
+    def existing_email_user
+      User.unclaimed.where(email:).first
     end
 
     def set_price_orders

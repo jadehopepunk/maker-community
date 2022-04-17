@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }
+  scope :claimed, -> { where.not(sign_up_status: 'unclaimed') }
+  scope :unclaimed, -> { where(sign_up_status: 'unclaimed') }
 
   validates :sign_up_status, inclusion: { in: SIGN_UP_STATES }
 
@@ -36,5 +38,11 @@ class User < ApplicationRecord
 
   def has_one_of_plans?(plan_names)
     active_plans.has_name(plan_names).exists?
+  end
+
+  private
+
+  def password_required?
+    sign_up_status == 'full'
   end
 end
