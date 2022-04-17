@@ -69,15 +69,15 @@ module Forms
       @order.save!
     end
 
-    def save_booking!
-      booking = build_booking
-      @booking = EventBookingsService.new.create(booking).save!
-    end
+    # def save_booking!
+    #   booking = build_booking
+    #   @booking = EventBookingsService.new.create(booking).save!
+    # end
 
-    def build_booking
-      EventBooking.new(user: (user || email_user), session: event_session, status: 'complete',
-                       persons: total_persons, comments:)
-    end
+    # def build_booking
+    #   EventBooking.new(user: (user || email_user), session: event_session, status: 'complete',
+    #                    persons: total_persons, comments:)
+    # end
 
     def email_user
       existing_email_user || create_email_user
