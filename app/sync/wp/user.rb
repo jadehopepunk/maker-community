@@ -36,6 +36,7 @@ module Wp
       )
       dest.save!
       insert_new_inductions!(dest)
+      create_stripe_customer!(dest)
       puts "imported user #{dest.display_name}"
     end
 
@@ -50,6 +51,7 @@ module Wp
 
       update_user_address_if_needed(dest)
       insert_new_inductions!(dest)
+      create_stripe_customer!(dest)
     end
 
     def shared_attributes
@@ -119,6 +121,21 @@ module Wp
       return [] if value.blank?
 
       PHP.unserialize meta['_wc_memberships_profile_field_inductions']
+    end
+
+    def stripe_customer_id
+      meta['wp__stripe_customer_id']
+    end
+
+    def create_stripe_customer!(user)
+      if stripe_customer_id.present?
+        StripeCustomer.create!(
+          stripe_customer_id:,
+          user:
+        )
+      end
+    rescue ActiveRecord::RecordNotUnique
+      nil
     end
   end
 end

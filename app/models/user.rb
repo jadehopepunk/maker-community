@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :bookings, class_name: 'EventBooking', dependent: :destroy
   belongs_to :address, dependent: :destroy, optional: true
   has_one :slack_user
+  has_one :stripe_customer
 
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }

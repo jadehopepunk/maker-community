@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_17_015003) do
+ActiveRecord::Schema.define(version: 2022_04_17_032743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -223,6 +223,15 @@ ActiveRecord::Schema.define(version: 2022_04_17_015003) do
     t.index ["user_id"], name: "index_slack_users_on_user_id"
   end
 
+  create_table "stripe_customers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "stripe_customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "customer_unique_user_id", unique: true
+    t.index ["user_id"], name: "index_stripe_customers_on_user_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "user_id"
     t.string "stripe_source_id"
@@ -332,6 +341,7 @@ ActiveRecord::Schema.define(version: 2022_04_17_015003) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "slack_users", "users"
+  add_foreign_key "stripe_customers", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_events", "users"
