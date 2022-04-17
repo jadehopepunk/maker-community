@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   rolify
 
+  SIGN_UP_STATES = ['full', 'imported', 'unclaimed'].freeze
+
   devise :database_authenticatable, :recoverable, :rememberable, :validatable
   has_many :memberships, dependent: :destroy
   has_many :active_memberships, -> { active }, dependent: :destroy, class_name: 'Membership'
@@ -16,6 +18,8 @@ class User < ApplicationRecord
   scope :with_plan, ->(plan) { joins(:active_plans).where(plans: { id: plan.id }) }
   scope :current_participants, -> { joins(:active_plans).merge(Plan.in_person) }
 
+  validates :sign_up_status, inclusion: { in: SIGN_UP_STATES }
+
   delegate :has_avatar?, :avatar_url, to: :slack_user, allow_nil: true
 
   def short_name
@@ -24,5 +28,9 @@ class User < ApplicationRecord
 
   def self.jade
     where(display_name: 'Jade').first
+  end
+
+  def password_imported?
+    sign_up_status == 'imported'
   end
 end

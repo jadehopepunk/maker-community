@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_105833) do
+ActiveRecord::Schema.define(version: 2022_04_17_015003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(version: 2022_04_16_105833) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "encrypted_password"
     t.string "display_name", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: 6
@@ -303,6 +303,7 @@ ActiveRecord::Schema.define(version: 2022_04_16_105833) do
     t.integer "address_id"
     t.string "phone"
     t.uuid "calendar_token", default: -> { "gen_random_uuid()" }
+    t.string "sign_up_status", default: "full"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["wordpress_id"], name: "index_users_on_wordpress_id", unique: true
