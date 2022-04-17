@@ -59,11 +59,15 @@ module Forms
     private
 
     def save_order!
+      order_items = price_orders.map do |price_order|
+        price_order.build_order_item(event_session)
+      end.compact
+
       @order = Order.new(
         user: (user || email_user),
         status: 'pending',
         comments:,
-        order_items: price_orders.map(&:build_order_item).compact
+        order_items: order_items
       )
       @order.calculate_totals
       @order.save!

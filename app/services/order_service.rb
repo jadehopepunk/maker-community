@@ -24,18 +24,24 @@ class OrderService
   def build_item_fulfillment(order_item, results)
     product = order_item.product
 
-    if product.is_a?(EventPrice)
-      fulfill_event_price_item(order_item, product, results)
+    if product.is_a?(EventSession)
+      fulfill_event_session(order_item, product, results)
     else
       raise ArgumentError, "Unsupported product type: #{product.class}"
     end
   end
 
-  # def fulfill_event_price_item(order_item, product, _results)
-  #   event_session = product.event_session
-  #   booking = EventBooking.new(user: order_item.order.user, session: event_session, status: 'complete',
-  #                              persons: total_persons, comments:)
-  # end
+  def fulfill_event_session(order_item, event_session, results)
+    booking = EventBooking.new(
+      user: order_item.order.user,
+      session: event_session,
+      status: 'complete',
+      persons: order_item.quantity,
+      comments: order_item.order.comments,
+      order_item:
+    )
+    results << booking
+  end
 
   def trigger_order_item_events(order, order_item)
     if order_item.product.is_a?(Plan)
