@@ -17,7 +17,7 @@ describe Forms::BookingOrder do
 
     context 'with a user' do
       context 'with a single free person' do
-        it 'saves the booking' do
+        it 'saves the order' do
           booking_order = described_class.new(event_session:, user: jade)
           booking_order.attributes = {
             price_orders_attributes: {
@@ -27,12 +27,23 @@ describe Forms::BookingOrder do
           }
           expect(booking_order.save).to be_truthy
 
-          booking = event_session.bookings.last
-          expect(booking).not_to be_nil
-          expect(booking.user).to eq(jade)
-          expect(booking.status).to eq('complete')
-          expect(booking.persons).to eql(1)
-          expect(booking.comments).to eq('some comments')
+          order = Order.last
+
+          expect(order).not_to be_nil
+          expect(order.user).to eq(jade)
+          expect(order.status).to eq('pending')
+          expect(order.comments).to eq('some comments')
+          expect(order.total_price).to eq(0.0)
+          expect(order.total_tax).to eq(0.0)
+          expect(order.order_items.count).to eq(1)
+
+          item = order.order_items.first
+          expect(item.product).to eq(prices.first)
+          expect(item.name).to eq('Free')
+          expect(item.quantity).to eq(1)
+          expect(item.line_subtotal).to eq(0.0)
+          expect(item.line_total).to eq(0.0)
+          expect(item.line_tax).to eq(0.0)
         end
       end
     end
@@ -80,9 +91,9 @@ describe Forms::BookingOrder do
         }
         booking_order.save
 
-        booking = event_session.bookings.last
-        expect(booking).not_to be_nil
-        expect(booking.user).to eq(unclaimed_user)
+        order = Order.last
+        expect(order).not_to be_nil
+        expect(order.user).to eq(unclaimed_user)
       end
 
       it 'creates a new unclaimed user from email if possible' do
@@ -94,12 +105,12 @@ describe Forms::BookingOrder do
         }
         booking_order.save
 
-        booking = event_session.bookings.last
-        expect(booking).not_to be_nil
-        expect(booking.user).not_to be_nil
-        expect(booking.user.display_name).to eq('Jade 2')
-        expect(booking.user.email).to eq('jade2@user.com')
-        expect(booking.user.sign_up_status).to eq('unclaimed')
+        order = Order.last
+        expect(order).not_to be_nil
+        expect(order.user).not_to be_nil
+        expect(order.user.display_name).to eq('Jade 2')
+        expect(order.user.email).to eq('jade2@user.com')
+        expect(order.user.sign_up_status).to eq('unclaimed')
       end
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_17_032743) do
+ActiveRecord::Schema.define(version: 2022_04_17_060347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -161,7 +161,6 @@ ActiveRecord::Schema.define(version: 2022_04_17_032743) do
     t.string "name"
     t.integer "quantity"
     t.decimal "line_subtotal", precision: 10, scale: 2
-    t.decimal "line_subtotal_tax", precision: 10, scale: 2
     t.decimal "line_total", precision: 10, scale: 2
     t.decimal "line_tax", precision: 10, scale: 2
     t.integer "wordpress_id"
@@ -177,14 +176,14 @@ ActiveRecord::Schema.define(version: 2022_04_17_032743) do
     t.string "stripe_source_id"
     t.string "payment_method"
     t.string "payment_method_title"
-    t.decimal "order_total", precision: 8, scale: 2
-    t.decimal "order_tax", precision: 8, scale: 2
-    t.string "order_currency"
+    t.decimal "total_price", precision: 8, scale: 2
+    t.decimal "total_tax", precision: 8, scale: 2
     t.datetime "paid_at", precision: 6
     t.datetime "completed_at", precision: 6
     t.integer "wordpress_post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "comments"
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["wordpress_post_id"], name: "index_orders_on_wordpress_post_id", unique: true
   end

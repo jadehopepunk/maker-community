@@ -40,9 +40,8 @@ module Wp
         created_at: post_date,
         stripe_source_id: meta['_stripe_source_id'],
         stripe_customer_id: meta['_stripe_customer_id'],
-        order_total: meta['_order_total'],
-        order_tax: meta['_order_tax'],
-        order_currency: meta['_order_currency'],
+        total_price: meta['_order_total'],
+        total_tax: meta['_order_tax'],
         payment_method: meta['_payment_method'],
         payment_method_title: meta['_payment_method_title'],
         paid_at: meta['_paid_date'],
@@ -54,7 +53,7 @@ module Wp
     end
 
     def build_order_items
-      scope = order_items.where.not(order_item_type: %w[tax coupon shipping]).with_meta
+      scope = order_items.where.not(order_item_type: ['tax', 'coupon', 'shipping']).with_meta
       scope.map do |order_item|
         order_item.build_new
       end.compact

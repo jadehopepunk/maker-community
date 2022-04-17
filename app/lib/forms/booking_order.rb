@@ -49,7 +49,7 @@ module Forms
       raise ArgumentError, 'This needs to be setup with an event session' unless event_session.present?
 
       if valid?
-        save_booking!
+        save_order!
         return true
       end
 
@@ -58,9 +58,20 @@ module Forms
 
     private
 
+    def save_order!
+      @order = Order.new(
+        user: (user || email_user),
+        status: 'pending',
+        comments:,
+        order_items: price_orders.map(&:build_order_item)
+      )
+      @order.calculate_totals
+      @order.save!
+    end
+
     def save_booking!
       booking = build_booking
-      EventBookingsService.new.create(booking).save!
+      @booking = EventBookingsService.new.create(booking).save!
     end
 
     def build_booking

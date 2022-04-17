@@ -23,15 +23,15 @@ export default class extends Controller {
     const cost = this.totalCost;
 
     if (this.totalCost > 0) {
-      initializeStripeForm(cost);
+      // initializeStripeForm(cost);
     }
   }
 
   // PRIVATE
 
   updateClasses() {
-    // console.log("cost", this.totalCost);
-    // giveClassIf(this.element, "free", this.totalCost == 0);
+    console.log("cost", this.totalCost);
+    giveClassIf(this.element, "free", this.totalCost == 0);
   }
 
   get totalCost() {

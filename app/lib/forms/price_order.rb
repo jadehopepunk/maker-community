@@ -16,5 +16,11 @@ module Forms
     def persons=(value)
       @persons = value.to_i
     end
+
+    def build_order_item
+      result = OrderItem.new(product: price, name: price.title, quantity: persons, line_subtotal: price.per_person)
+      result.calculate_totals
+      result
+    end
   end
 end
