@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions', passwords: 'passwords' }
 
   resources :events, only: [:index, :show] do
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: [:new, :create] do
+      collection do
+        post :create_payment_intent
+      end
+    end
   end
 
   resources :calendars, only: [:show]

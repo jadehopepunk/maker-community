@@ -29,6 +29,7 @@ gem 'sidekiq'
 gem 'simple_form'
 gem 'slack-ruby-client'
 gem 'stimulus-rails'
+gem 'stripe'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 

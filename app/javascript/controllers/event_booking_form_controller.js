@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import { initializeStripeForm } from "../lib/stripe_event_payment";
 
 function giveClassIf(element, class_name, condition) {
   if (condition) {
@@ -13,18 +14,24 @@ export default class extends Controller {
     this.personInputs.forEach((input) => {
       input.addEventListener("change", this.bookingCountUpdated.bind(this));
     });
-    this.updateClasses();
+    this.bookingCountUpdated();
   }
 
   bookingCountUpdated(event) {
     this.updateClasses();
+
+    const cost = this.totalCost;
+
+    if (this.totalCost > 0) {
+      initializeStripeForm(cost);
+    }
   }
 
   // PRIVATE
 
   updateClasses() {
-    console.log("cost", this.totalCost);
-    giveClassIf(this.element, "free", this.totalCost == 0);
+    // console.log("cost", this.totalCost);
+    // giveClassIf(this.element, "free", this.totalCost == 0);
   }
 
   get totalCost() {

@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :create_payment_intent
+
   def new
     load_event_session
     @order = new_order
@@ -15,6 +17,16 @@ class BookingsController < ApplicationController
     else
       render template: 'bookings/new'
     end
+  end
+
+  def create_payment_intent
+    payment_intent = Stripe::PaymentIntent.create(
+      amount: 500,
+      currency: 'aud',
+      payment_method_types: ['card']
+    )
+
+    render json: { clientSecret: payment_intent['client_secret'] }.to_json
   end
 
   private
