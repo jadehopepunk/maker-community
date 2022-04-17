@@ -17,8 +17,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  def order; end
-
   private
 
   def new_order

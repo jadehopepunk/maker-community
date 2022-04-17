@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-import { initializeStripeForm } from "../lib/stripe_event_payment";
 
 function giveClassIf(element, class_name, condition) {
   if (condition) {
