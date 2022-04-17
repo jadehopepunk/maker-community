@@ -24,7 +24,10 @@
     <% @order.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
     <div class="for-one-price" data-price-per-person="<%= price_order.price.per_person %>">
       <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= format_money price_order.price.per_person %></span></div>
-      <%= price_fields.input(:persons, as: :small_integer, required: false, label: false) %> <%= price_fields.input(:price_id, as: :hidden) %>
+      <% if price_order.price.valid_for?(current_user) %> <%= price_fields.input(:persons, as: :small_integer, required: false, label: false) %> <%= price_fields.input(:price_id, as: :hidden) %> <%
+      else %>
+      <span><%= price_order.price.error_for(current_user) %></span>
+      <% end %>
     </div>
     <% end %> <% end %>
   </div>

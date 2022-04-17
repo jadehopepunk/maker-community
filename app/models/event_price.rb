@@ -18,4 +18,12 @@ class EventPrice < ApplicationRecord
   def full?
     false
   end
+
+  def valid_for?(user)
+    error_for(user).blank?
+  end
+
+  def error_for(_user)
+    nil
+  end
 end
