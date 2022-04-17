@@ -1,33 +1,23 @@
 class BookingsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: :create_payment_intent
-
   def new
     load_event_session
-    @order = new_order
-    @order.event_session = @event_session
+    @order_form = new_order
+    @order_form.event_session = @event_session
     store_location_for(:user, request.fullpath)
   end
 
   def create
     load_event_session
-    @order = new_order
-    @order.attributes = order_params
-    if @order.save
-      redirect_to event_path(@event_session), notice: 'Booking was successfully created.'
+    @order_form = new_order
+    @order_form.attributes = order_params
+    if @order_form.save
+      redirect_to pay_order_path(@order_form.order)
     else
       render template: 'bookings/new'
     end
   end
 
-  def create_payment_intent
-    payment_intent = Stripe::PaymentIntent.create(
-      amount: 500,
-      currency: 'aud',
-      payment_method_types: ['card']
-    )
-
-    render json: { clientSecret: payment_intent['client_secret'] }.to_json
-  end
+  def order; end
 
   private
 

@@ -3,7 +3,7 @@ module Forms
     include ActiveModel::Model
 
     attr_accessor :user, :price_orders, :email, :name, :comments
-    attr_reader :event_session
+    attr_reader :event_session, :order
 
     validates :email, presence: true,
                       format: { with: Devise.email_regexp, message: "doesn't look like a valid email address" }, unless: :user
@@ -63,7 +63,7 @@ module Forms
         user: (user || email_user),
         status: 'pending',
         comments:,
-        order_items: price_orders.map(&:build_order_item)
+        order_items: price_orders.map(&:build_order_item).compact
       )
       @order.calculate_totals
       @order.save!

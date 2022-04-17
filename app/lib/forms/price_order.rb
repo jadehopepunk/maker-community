@@ -18,6 +18,8 @@ module Forms
     end
 
     def build_order_item
+      return nil if persons == 0
+
       result = OrderItem.new(product: price, name: price.title, quantity: persons, line_subtotal: price.per_person)
       result.calculate_totals
       result

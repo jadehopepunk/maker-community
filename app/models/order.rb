@@ -9,7 +9,11 @@ class Order < ApplicationRecord
   validates :status, inclusion: { in: STATES }
 
   def calculate_totals
-    self.total_price = order_items.sum(:price)
-    self.total_tax = order_items.sum(:tax)
+    self.total_price = order_items.map(&:line_total).sum
+    self.total_tax = order_items.map(&:line_tax).sum
+  end
+
+  def total_price_cents
+    (total_price * 100).to_i
   end
 end

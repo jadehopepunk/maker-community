@@ -10,6 +10,11 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :orders, only: [] do
+    member do
+      get :pay
+    end
+  end
 
   resources :calendars, only: [:show]
   get 'facilities', to: 'pages#facilities'

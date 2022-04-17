@@ -1,12 +1,12 @@
-<%= simple_form_for order, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false, 'data-controller': 'event-booking-form'} do |f| %> <%= f.error_notification %>
+<%= simple_form_for order_form, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false, 'data-controller': 'event-booking-form'} do |f| %> <%= f.error_notification %>
 <div class="form-section">
   <h2>About you</h2>
-  <% if order.user %>
+  <% if f.object.user %>
   <div class="show-user">
-    <%= avatar_tag(order.user) %>
+    <%= avatar_tag(f.object.user) %>
     <div class="details">
-      <div class="display_name"><%= order.user.display_name %></div>
-      <div><%= order.user.email %></div>
+      <div class="display_name"><%= f.object.user.display_name %></div>
+      <div><%= f.object.user.email %></div>
     </div>
   </div>
   <%= f.error :user %>
@@ -19,7 +19,7 @@
   <h2>Your booking</h2>
 
   <div class="for-prices <%= 'field_with_errors' if f.object.errors.has_key?(:total_persons) %>">
-    <% @order.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
+    <% f.object.price_orders.each do |price_order| %> <%= f.simple_fields_for :price_orders, price_order do |price_fields| %>
     <div class="for-one-price" data-price-per-person="<%= price_order.price.per_person %>">
       <div><%= price_fields.label(:persons, label: price_order.price.title, required: false) %> <span><%= format_money price_order.price.per_person %></span></div>
       <% if price_order.price.valid_for?(current_user) %> <%= price_fields.input(:persons, as: :small_integer, required: false, label: false) %> <%= price_fields.input(:price_id, as: :hidden) %> <%
