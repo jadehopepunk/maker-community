@@ -36,7 +36,6 @@ module Wp
       dest = ::EventBooking.new(
         session: event_session,
         user:,
-        order_item:,
         **shared_attributes,
         persons: booking_persons,
         wordpress_post_id: self.ID,

@@ -11,7 +11,13 @@ class BookingsController < ApplicationController
     @order_form = new_order
     @order_form.attributes = order_params
     if @order_form.save
-      redirect_to pay_order_path(@order_form.order)
+      if @order_form.order.completed?
+        OrderService.new.fulfill_if_complete(@order_form.order)
+        flash[:notice] = 'Your booking has been confirmed.'
+        redirect_to event_path(@event_session)
+      else
+        redirect_to pay_order_path(@order_form.order)
+      end
     else
       render template: 'bookings/new'
     end

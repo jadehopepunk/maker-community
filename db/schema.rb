@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_18_042622) do
+ActiveRecord::Schema.define(version: 2022_04_18_044141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 2022_04_18_042622) do
   create_table "event_bookings", force: :cascade do |t|
     t.bigint "event_session_id"
     t.bigint "user_id"
-    t.bigint "order_item_id"
     t.string "status"
     t.integer "persons", default: 1, null: false
     t.integer "wordpress_post_id"
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 2022_04_18_042622) do
     t.string "role", default: "attendee"
     t.text "comments"
     t.index ["event_session_id"], name: "index_event_bookings_on_event_session_id"
-    t.index ["order_item_id"], name: "index_event_bookings_on_order_item_id"
     t.index ["user_id"], name: "index_event_bookings_on_user_id"
   end
 
@@ -328,7 +326,6 @@ ActiveRecord::Schema.define(version: 2022_04_18_042622) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "availabilities", "users", column: "creator_id"
   add_foreign_key "event_bookings", "event_sessions"
-  add_foreign_key "event_bookings", "order_items"
   add_foreign_key "event_bookings", "users"
   add_foreign_key "event_sessions", "events"
   add_foreign_key "events", "images"
