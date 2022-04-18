@@ -79,7 +79,7 @@ class EventSession < ApplicationRecord
   end
 
   def booked_persons
-    bookings.confirmed.sum(:persons)
+    bookings.active.sum(:persons)
   end
 
   def to_param
@@ -89,7 +89,7 @@ class EventSession < ApplicationRecord
   def active_booking_for(user)
     return nil if user.nil?
 
-    bookings.confirmed.find_by(user:)
+    bookings.active.find_by(user:)
   end
 
   private

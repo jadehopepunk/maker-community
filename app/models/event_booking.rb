@@ -1,5 +1,5 @@
 class EventBooking < ApplicationRecord
-  STATES = ['was-in-cart', 'in-cart', 'complete', 'pending-confirmation', 'paid', 'cancelled'].freeze
+  STATES = ['was-in-cart', 'in-cart', 'pending-confirmation', 'active', 'cancelled'].freeze
   CONFIRMED_STATES = ['complete', 'paid'].freeze
   ROLES = ['attendee', 'duty_manager', 'teacher', 'volunteer'].freeze
 
@@ -7,7 +7,7 @@ class EventBooking < ApplicationRecord
   belongs_to :session, class_name: 'EventSession', foreign_key: 'event_session_id'
   belongs_to :order_item, optional: true
 
-  scope :confirmed, -> { where(status: CONFIRMED_STATES) }
+  scope :active, -> { where(status: 'active') }
   scope :duty_managers, -> { where(role: 'duty_manager') }
 
   validates :status, inclusion: { in: STATES }
@@ -23,8 +23,8 @@ class EventBooking < ApplicationRecord
     end
   end
 
-  def confirmed?
-    CONFIRMED_STATES.include?(status)
+  def active?
+    status == 'active'
   end
 
   def cancelled?

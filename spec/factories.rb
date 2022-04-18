@@ -43,4 +43,8 @@ FactoryBot.define do
       event { build(:spoon_carving) }
     end
   end
+
+  factory :event_booking do
+    status { 'complete' }
+  end
 end

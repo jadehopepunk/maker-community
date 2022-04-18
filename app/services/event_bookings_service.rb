@@ -3,7 +3,7 @@ class EventBookingsService
     ActiveRecord::Base.transaction do
       booking.save!
 
-      if booking.confirmed?
+      if booking.active?
         UserEvents::BookedForEvent.create!(
           user: booking.user,
           subject: booking,
@@ -14,7 +14,7 @@ class EventBookingsService
 
     puts "created event booking #{booking.wordpress_post_id}"
 
-    SlackNotifier.new.new_event_booking(booking) if notify && booking.in_future? && booking.confirmed?
+    SlackNotifier.new.new_event_booking(booking) if notify && booking.in_future? && booking.active?
     booking
   end
 
@@ -33,7 +33,7 @@ class EventBookingsService
   def notify_booking_status_changed(booking, old_status, new_status)
     if new_status == 'cancelled'
       SlackNotifier.new.cancelled_event_booking(booking)
-    elsif old_status == 'cancelled'
+    elsif old_status != 'active'
       SlackNotifier.new.new_event_booking(booking)
     end
   end

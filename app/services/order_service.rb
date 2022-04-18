@@ -12,35 +12,26 @@ class OrderService
   end
 
   def fulfill(order)
-    results = []
     order.order_items.each do |order_item|
-      build_item_fulfillment(order_item, results)
+      fulfill_item(order_item)
     end
-    results
   end
 
   private
 
-  def build_item_fulfillment(order_item, results)
+  def fulfill_item(order_item)
     product = order_item.product
 
-    if product.is_a?(EventSession)
-      fulfill_event_session(order_item, product, results)
+    if product.is_a?(EventBooking)
+      fulfill_event_booking(order_item, product)
     else
       raise ArgumentError, "Unsupported product type: #{product.class}"
     end
   end
 
-  def fulfill_event_session(order_item, event_session, results)
-    booking = EventBooking.new(
-      user: order_item.order.user,
-      session: event_session,
-      status: 'complete',
-      persons: order_item.quantity,
-      comments: order_item.order.comments,
-      order_item:
-    )
-    results << booking
+  def fulfill_event_booking(_order_item, booking)
+    booking.status = 'active'
+    EventBookingsService.new.update(booking)
   end
 
   def trigger_order_item_events(order, order_item)

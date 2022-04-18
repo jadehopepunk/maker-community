@@ -7,7 +7,7 @@ describe EventBookingsService do
     let(:jade) { create(:jade) }
     let(:event) { create(:spoon_carving) }
     let(:event_session) { EventSession.create!(event:, start_at: jan(10)) }
-    let(:unsaved_booking) { EventBooking.new(session: event_session, user: jade, status: 'paid') }
+    let(:unsaved_booking) { EventBooking.new(session: event_session, user: jade, status: 'active') }
 
     it 'saves the booking' do
       subject.create(unsaved_booking)

@@ -3,6 +3,11 @@ module Wp
     self.table_name = 'wp_posts'
     include Concerns::IsPostType
 
+    STATE_MAPPING = {
+      'paid' => 'active',
+      'compete' => 'active'
+    }
+
     default_scope { where(post_type: 'wc_booking') }
     scope :excluding_cart, -> { where.not(post_status: ['was-in-cart', 'in-cart']) }
 
@@ -12,7 +17,7 @@ module Wp
       end
 
       def sync
-        excluding_cart.find_each(&:import_or_update)
+        find_each(&:import_or_update)
       end
     end
 
@@ -42,7 +47,7 @@ module Wp
 
     def shared_attributes
       {
-        status: post_status
+        status: booking_status
       }
     end
 
@@ -51,7 +56,7 @@ module Wp
     end
 
     def import_event_session_if_new
-      raise "No event for #{self.ID} status:#{post_status}" if event.nil?
+      raise "No event for #{self.ID} status:#{booking_status}" if event.nil?
 
       session = ::EventSession.where(event:, start_at: booking_start).first
       session || import_event_session
@@ -113,6 +118,10 @@ module Wp
 
     def meta_booking_persons
       PHP.unserialize(meta['_booking_persons'])
+    end
+
+    def booking_status
+      STATE_MAPPING[post_status] || post_status
     end
   end
 end
