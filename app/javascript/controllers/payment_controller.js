@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { initializeStripeForm } from "../lib/stripe_event_payment";
+import { initializeStripeForm, stripe } from "../lib/stripe_event_payment";
 
 export default class extends Controller {
   static targets = ["submit"];
@@ -10,10 +10,18 @@ export default class extends Controller {
     this.element.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     this.setLoading(true);
-    console.log("handling submit");
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: this.returnUrl,
+      },
+    });
+
+    this.setLoading(false);
   }
 
   setLoading(isLoading) {
@@ -30,6 +38,10 @@ export default class extends Controller {
   }
 
   // PRIVATE
+
+  get returnUrl() {
+    return this.element.dataset.returnUrl;
+  }
 
   get clientSecret() {
     return this.element.dataset.clientSecret;

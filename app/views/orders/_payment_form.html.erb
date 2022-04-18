@@ -1,4 +1,4 @@
-<form id="payment-form" class="stripe-payment-form" data-controller="payment" data-client-secret="<%= client_secret %>">
+<form id="payment-form" class="stripe-payment-form" data-controller="payment" data-client-secret="<%= client_secret %>" data-return-url="<%= @return_url %>">
   <div id="payment-element">
     <!--Stripe.js injects the Payment Element-->
   </div>

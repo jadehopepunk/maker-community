@@ -9,5 +9,6 @@ class OrdersController < ApplicationController
     )
 
     @client_secret = payment_intent['client_secret']
+    @return_url = stripe_return_order_url(@order)
   end
 end
