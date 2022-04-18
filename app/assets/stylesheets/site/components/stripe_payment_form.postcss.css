@@ -1,5 +1,9 @@
 .stripe-payment-form {
   .actions {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+
+    a.text-link {
+      text-decoration: underline;
+    }
   }
 }

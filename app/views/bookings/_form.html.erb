@@ -36,5 +36,5 @@
   <div>Total cost. <span data-booking-form-target="cost"></span></div>
 </div>
 
-<div class="actions"><%= f.submit 'Book now', 'data-booking-form-target' => 'submit' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
+<div class="actions"><%= f.submit 'Book now', 'data-booking-form-target' => 'submit' %> or <%= link_to 'cancel', event_path(@event_session), class: 'text-link' %></div>
 <% end %>
