@@ -65,11 +65,14 @@ module Forms
 
     private
 
+    def free?
+      total_price == BigDecimal('0.0')
+    end
+
     def save_order!
       @order = Order.new(
         user: best_user,
-        status: 'pending',
-        comments:,
+        status: (free? ? 'completed' : 'pending'),
         order_items: [build_order_item]
       )
 

@@ -28,7 +28,6 @@ module Wp
         name: order_item_name,
         quantity: meta['_qty'],
         line_subtotal: meta['_line_subtotal'],
-        line_subtotal_tax: meta['_line_subtotal_tax'],
         line_total: meta['_line_total'],
         line_tax: meta['_line_tax'],
         wordpress_id: order_item_id

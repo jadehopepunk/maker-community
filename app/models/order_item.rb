@@ -1,8 +1,5 @@
 def gst_included(amount)
-  gst_rate = BigDecimal('0.1')
-  divisor = BigDecimal('1.0') + gst_rate
-
-  amount / divisor
+  amount / BigDecimal("11")
 end
 
 class OrderItem < ApplicationRecord

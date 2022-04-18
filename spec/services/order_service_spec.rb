@@ -14,10 +14,13 @@ describe OrderService do
       context 'with a single line item' do
         let(:order_items) { [OrderItem.new(product: booking, quantity: 1)] }
 
-        it 'markst the booking as completed' do
+        it 'marks the booking as completed' do
           subject.fulfill(order)
 
           expect(booking.reload.status).to eq('active')
+        end
+
+        it 'marks the order as completed' do
         end
       end
     end

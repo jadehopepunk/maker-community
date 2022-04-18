@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Forms::BookingOrder do
-  let(:prices) { [Prices::Free.new] }
+  let(:free_price) { Prices::Free.new }
+  let(:prices) { [free_price] }
   let(:event) { create(:spoon_carving, prices:) }
   let(:event_session) { create(:spoon_carving_session, event:) }
   let(:jade) { create(:jade) }
@@ -17,11 +18,11 @@ describe Forms::BookingOrder do
 
     context 'with a user' do
       context 'with a single free person' do
-        it 'saves the pending order and an in-cart booking' do
+        it 'saves the completed order and an in-cart booking' do
           booking_order = described_class.new(event_session:, user: jade)
           booking_order.attributes = {
             price_orders_attributes: {
-              1 => { persons: 1, price_id: prices.first.id }
+              1 => { persons: 1, price_id: free_price.id }
             },
             comments: 'some comments'
           }
@@ -33,7 +34,6 @@ describe Forms::BookingOrder do
           expect(booking.user).to eq(jade)
           expect(booking.status).to eq('in-cart')
           expect(booking.persons).to eq(1)
-          expect(booking.persons).to eq(1)
           expect(booking.role).to eq('attendee')
           expect(booking.comments).to eq('some comments')
 
@@ -41,8 +41,7 @@ describe Forms::BookingOrder do
           expect(order).not_to be_nil
           expect(order).to be_persisted
           expect(order.user).to eq(jade)
-          expect(order.status).to eq('pending')
-          expect(order.comments).to eq('some comments')
+          expect(order.status).to eq('completed')
           expect(order.total_price).to eq(0.0)
           expect(order.total_tax).to eq(0.0)
           expect(order.order_items.count).to eq(1)
@@ -54,6 +53,47 @@ describe Forms::BookingOrder do
           expect(item.line_subtotal).to eq(0.0)
           expect(item.line_total).to eq(0.0)
           expect(item.line_tax).to eq(0.0)
+        end
+      end
+
+      context 'when there is a cost' do
+        let(:full_price) { Prices::Full.new(per_person: BigDecimal('110.0')) }
+        let(:prices) { [full_price, free_price] }
+
+        it 'saves the pending order and an in-cart booking' do
+          booking_order = described_class.new(event_session:, user: jade)
+          booking_order.attributes = {
+            price_orders_attributes: {
+              '1' => { persons: 1, price_id: free_price.id },
+              '2' => { persons: 2, price_id: full_price.id }
+            }
+          }
+          expect(booking_order.save).to be_truthy
+
+          booking = booking_order.booking
+          expect(booking).not_to be_nil
+          expect(booking).to be_persisted
+          expect(booking.user).to eq(jade)
+          expect(booking.status).to eq('in-cart')
+          expect(booking.persons).to eq(3)
+          expect(booking.role).to eq('attendee')
+
+          order = booking_order.order
+          expect(order).not_to be_nil
+          expect(order).to be_persisted
+          expect(order.user).to eq(jade)
+          expect(order.status).to eq('pending')
+          expect(order.total_price).to eq(BigDecimal('220.0'))
+          expect(order.total_tax).to eq(BigDecimal('20.0'))
+          expect(order.order_items.count).to eq(1)
+
+          item = order.order_items.first
+          expect(item.product).to eq(booking)
+          expect(item.name).to eq('Spoon Carving')
+          expect(item.quantity).to eq(1)
+          expect(item.line_subtotal).to eq(BigDecimal('220.0'))
+          expect(item.line_total).to eq(BigDecimal('220.0'))
+          expect(item.line_tax).to eq(BigDecimal('20.0'))
         end
       end
     end

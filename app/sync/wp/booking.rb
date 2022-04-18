@@ -5,7 +5,7 @@ module Wp
 
     STATE_MAPPING = {
       'paid' => 'active',
-      'compete' => 'active'
+      'complete' => 'active'
     }
 
     default_scope { where(post_type: 'wc_booking') }

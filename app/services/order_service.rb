@@ -11,7 +11,9 @@ class OrderService
     order
   end
 
-  def fulfill(order)
+  def fulfill_if_complete(order)
+    return unless order.completed?
+
     order.order_items.each do |order_item|
       fulfill_item(order_item)
     end

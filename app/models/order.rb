@@ -16,4 +16,8 @@ class Order < ApplicationRecord
   def total_price_cents
     (total_price * 100).to_i
   end
+
+  def completed?
+    status == 'completed'
+  end
 end
