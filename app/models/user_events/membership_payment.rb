@@ -5,7 +5,7 @@ module UserEvents
     end
 
     def plan
-      order_item.product
+      order_item&.product
     end
   end
 end
