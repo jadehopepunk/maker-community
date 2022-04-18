@@ -1,3 +1,5 @@
+require 'timeout'
+
 class Order < ApplicationRecord
   STATES = ['pending', 'processing', 'failed', 'completed', 'cancelled', 'refunded'].freeze
 
@@ -40,11 +42,22 @@ class Order < ApplicationRecord
     total_price_cents == 0
   end
 
-  def payment_intent_client_secret
-    return stripe_payment_intent_id if stripe_payment_intent_id.present?
+  def payment_intent
     raise ArgumentError, 'creating a payment intent for a free order' if free?
 
-    payment_intent = Stripe::PaymentIntent.create(
+    existing_payment_intent || create_payment_intent
+  end
+
+  private
+
+  def existing_payment_intent
+    return Stripe::PaymentIntent.retrieve(stripe_payment_intent_id) if stripe_payment_intent_id.present?
+  end
+
+  def create_payment_intent
+    raise ArgumentError, 'Already has a payment intent' if stripe_payment_intent_id.present?
+
+    result = Stripe::PaymentIntent.create(
       {
         amount: total_price_cents,
         currency: 'aud',
@@ -54,7 +67,8 @@ class Order < ApplicationRecord
       }
     )
 
-    update_attribute(:stripe_payment_intent_id, payment_intent['client_secret'])
-    stripe_payment_intent_id
+    update_attribute(:stripe_payment_intent_id, result['id'])
+
+    result
   end
 end
