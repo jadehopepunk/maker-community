@@ -8,6 +8,7 @@ class EventBooking < ApplicationRecord
   belongs_to :order_item, optional: true
 
   scope :active, -> { where(status: 'active') }
+  scope :in_cart, -> { where(status: 'in-cart') }
   scope :duty_managers, -> { where(role: 'duty_manager') }
 
   validates :status, inclusion: { in: STATES }

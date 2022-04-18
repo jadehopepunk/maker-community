@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def new
     load_event_session
+    load_existing_booking
     @order_form = new_order
     @order_form.event_session = @event_session
     store_location_for(:user, request.fullpath)
@@ -8,6 +9,7 @@ class BookingsController < ApplicationController
 
   def create
     load_event_session
+    load_existing_booking
     @order_form = new_order
     @order_form.attributes = order_params
     if @order_form.save
@@ -26,11 +28,17 @@ class BookingsController < ApplicationController
   private
 
   def new_order
-    Forms::BookingOrder.new(event_session: @event_session, user: current_user)
+    order = Forms::BookingOrder.new(event_session: @event_session, user: current_user)
+    order.existing_booking = @existing_booking
+    order
   end
 
   def load_event_session
     @event_session = EventSession.find(params[:event_id])
+  end
+
+  def load_existing_booking
+    @existing_booking = @event_session.bookings.in_cart.find_by(user: current_user)
   end
 
   def order_params

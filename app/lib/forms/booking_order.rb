@@ -63,6 +63,12 @@ module Forms
       false
     end
 
+    def existing_booking=(value)
+      @booking = value
+      self.comments = value.comments
+      @order = order
+    end
+
     private
 
     def free?
@@ -70,24 +76,28 @@ module Forms
     end
 
     def save_order!
-      @order = Order.new(
-        user: best_user,
+      @order ||= Order.new(
+        user: best_user
+      )
+      @order.attributes = {
         status: (free? ? 'completed' : 'pending'),
         order_items: [build_order_item]
-      )
-
+      }
       @order.calculate_totals
       @order.save!
     end
 
     def save_booking!
-      @booking = EventBooking.create(
+      @booking ||= EventBooking.new(
         user: best_user,
         session: event_session,
-        status: 'in-cart',
+        status: 'in-cart'
+      )
+      @booking.attributes = {
         persons: total_persons,
         comments:
-      )
+      }
+      @booking.save!
     end
 
     def build_order_item
