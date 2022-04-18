@@ -31,4 +31,8 @@ class EventBooking < ApplicationRecord
   def cancelled?
     status == 'cancelled'
   end
+
+  def department
+    'program'
+  end
 end

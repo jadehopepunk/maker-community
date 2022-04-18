@@ -1,7 +1,7 @@
 <div class="theme-program bookings-new">
   <div class="container">
     <div class="context"><%= render "events/event_session_preview", event_session: @event_session, link: false %></div>
-    <div class="form-container">
+    <div class="form-container single-column-form">
       <h1 class="form-title">Book for this event</h1>
       <%= render 'bookings/form', order_form: @order_form, title: 'Book for this event' %>
     </div>

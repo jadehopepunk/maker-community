@@ -1,3 +1,5 @@
-<div class="theme-program bookings-new">
-  <div class="container"><%= render 'orders/payment_form', order: @order, client_secret: @client_secret %></div>
+<div class="theme-<%= @order.department || 'blue' %> bookings-new">
+  <div class="container">
+    <div class="form-container single-column-form"><%= render 'orders/payment_form', order: @order, client_secret: @client_secret %></div>
+  </div>
 </div>

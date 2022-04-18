@@ -15,4 +15,8 @@ class OrderItem < ApplicationRecord
     self.line_total = line_subtotal * quantity
     self.line_tax = gst_included(line_total)
   end
+
+  def department
+    product&.department
+  end
 end

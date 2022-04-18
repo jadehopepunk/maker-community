@@ -27,4 +27,8 @@ class Order < ApplicationRecord
 
     item.order
   end
+
+  def department
+    order_items.detect(&:department).try(:department)
+  end
 end
