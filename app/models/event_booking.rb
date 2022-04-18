@@ -10,6 +10,7 @@ class EventBooking < ApplicationRecord
   scope :active, -> { where(status: 'active') }
   scope :in_cart, -> { where(status: 'in-cart') }
   scope :duty_managers, -> { where(role: 'duty_manager') }
+  scope :attendees, -> { where(role: 'attendee') }
 
   validates :status, inclusion: { in: STATES }
   validates :role, inclusion: { in: ROLES }
