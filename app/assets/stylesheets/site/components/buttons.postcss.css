@@ -35,6 +35,10 @@ a.button {
   }
 }
 
+button.button {
+  @mixin button;
+}
+
 .icon-button {
   width: 30px;
   height: 30px;

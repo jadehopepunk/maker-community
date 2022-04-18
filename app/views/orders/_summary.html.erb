@@ -1,0 +1,20 @@
+<table class="order-summary">
+  <tbody class="order-items">
+    <% order.order_items.each do |order_item| %>
+    <tr class="order-item">
+      <td class="product-preview"><%= render "orders/#{order_item.product.class.name.demodulize.underscore}", product: order_item.product %></td>
+      <td class="price"><%= format_money order_item.line_total %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tbody class="totals">
+    <tr>
+      <td class="heading">GST</td>
+      <td class="price"><%= format_money order.total_tax %></td>
+    </tr>
+    <tr class="order-total">
+      <td class="heading">Total</td>
+      <td class="price"><%= format_money order.total_price %></td>
+    </tr>
+  </tbody>
+</table>

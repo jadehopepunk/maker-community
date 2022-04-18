@@ -1,0 +1,60 @@
+.order-summary {
+  display: flex;
+  flex-direction: column;
+
+  tbody.order-items {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--highlight-color);
+    padding-bottom: 1rem;
+
+    tr {
+      display: flex;
+      flex-direction: row;
+
+      td {
+        flex-grow: 1;
+        padding: 0;
+      }
+
+      td.product-preview {
+      }
+
+      td.price {
+        flex-shrink: 0;
+        text-align: right;
+        width: 5rem;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  tbody.totals {
+    display: flex;
+    flex-direction: column;
+
+    tr {
+      display: flex;
+      flex-direction: row;
+
+      td.heading {
+        flex-grow: 1;
+        text-align: right;
+      }
+
+      td.price {
+        flex-shrink: 0;
+        text-align: right;
+        width: 5rem;
+        padding-left: 10px;
+      }
+
+      &.order-total {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+    }
+  }
+}

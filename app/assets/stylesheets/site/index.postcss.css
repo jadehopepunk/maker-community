@@ -4,6 +4,7 @@
 @import "./layouts/events_show.postcss.css";
 @import "./layouts/bookings_new.postcss.css";
 @import "./layouts/page_facilities.postcss.css";
+@import "./layouts/order_pay.postcss.css";
 
 @import "./components/buttons.postcss.css";
 @import "./components/header_nav.postcss.css";
@@ -12,3 +13,5 @@
 @import "./components/tags.postcss.css";
 @import "./components/footer_nav.postcss.css";
 @import "./components/sticky_hero.postcss.css";
+@import "./components/order_summary.postcss.css";
+@import "./components/stripe_payment_form.postcss.css";

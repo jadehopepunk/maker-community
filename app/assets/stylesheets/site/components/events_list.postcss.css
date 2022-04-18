@@ -61,7 +61,7 @@
 
     .details {
       padding: calc(var(--gutter) * 0.75);
-
+      overflow: hidden;
       display: flex;
       flex-direction: column;
 
