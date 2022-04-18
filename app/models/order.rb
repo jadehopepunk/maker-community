@@ -1,14 +1,29 @@
 require 'timeout'
 
 class Order < ApplicationRecord
-  STATES = ['pending', 'processing', 'failed', 'completed', 'cancelled', 'refunded'].freeze
+  include AASM
 
   belongs_to :user
   has_many :order_items, dependent: :destroy
 
   scope :completed_in_month, ->(month) { where(completed_at: month.dates) }
 
-  validates :status, inclusion: { in: STATES }
+  validates :status, inclusion: { in: aasm.states.map(&:name).map(&:to_s) }
+
+  aasm column: :status do
+    state :pending
+    state :processing
+    state :failed
+    state :completed
+    state :cancelled
+    state :refunded
+
+    event :complete do
+      transitions from: [:pending, :processing], to: :completed, after: lambda {
+        update_attribute(:completed_at, Time.current)
+      }
+    end
+  end
 
   def calculate_totals
     self.total_price = order_items.map(&:line_total).sum
@@ -45,7 +60,7 @@ class Order < ApplicationRecord
   def payment_intent
     raise ArgumentError, 'creating a payment intent for a free order' if free?
 
-    existing_payment_intent || create_payment_intent
+    @payment_intent ||= (existing_payment_intent || create_payment_intent)
   end
 
   private

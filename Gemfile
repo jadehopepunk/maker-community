@@ -32,6 +32,7 @@ gem 'stimulus-rails'
 gem 'stripe'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'aasm'
 
 # Need while we integrate with Wordpress
 gem 'down'
