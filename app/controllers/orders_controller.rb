@@ -19,7 +19,17 @@ class OrdersController < ApplicationController
   end
 
   def fulfill_order
-    raise "fulfill order #{@order.inspect}"
+    result = OrderService.new.fulfill_if_complete(@order)
+    redirect_to_product(result.first)
+  end
+
+  def redirect_to_product(product)
+    if product.is_a?(EventBooking)
+      flash[:success] = 'Booking complete'
+      redirect_to event_path(product.session)
+    else
+      redirect_to '/'
+    end
   end
 end
 

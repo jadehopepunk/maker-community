@@ -14,7 +14,7 @@ class OrderService
   def fulfill_if_complete(order)
     return unless order.completed?
 
-    order.order_items.each do |order_item|
+    order.order_items.map do |order_item|
       fulfill_item(order_item)
     end
   end
@@ -34,6 +34,7 @@ class OrderService
   def fulfill_event_booking(_order_item, booking)
     booking.status = 'active'
     EventBookingsService.new.update(booking)
+    booking
   end
 
   def trigger_order_item_events(order, order_item)
