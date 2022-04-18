@@ -17,7 +17,7 @@ describe Forms::BookingOrder do
 
     context 'with a user' do
       context 'with a single free person' do
-        it 'saves the order' do
+        it 'saves the pending order and an in-cart booking' do
           booking_order = described_class.new(event_session:, user: jade)
           booking_order.attributes = {
             price_orders_attributes: {
@@ -27,9 +27,19 @@ describe Forms::BookingOrder do
           }
           expect(booking_order.save).to be_truthy
 
-          order = Order.last
+          booking = booking_order.booking
+          expect(booking).not_to be_nil
+          expect(booking).to be_persisted
+          expect(booking.user).to eq(jade)
+          expect(booking.status).to eq('in-cart')
+          expect(booking.persons).to eq(1)
+          expect(booking.persons).to eq(1)
+          expect(booking.role).to eq('attendee')
+          expect(booking.comments).to eq('some comments')
 
+          order = booking_order.order
           expect(order).not_to be_nil
+          expect(order).to be_persisted
           expect(order.user).to eq(jade)
           expect(order.status).to eq('pending')
           expect(order.comments).to eq('some comments')
@@ -38,8 +48,8 @@ describe Forms::BookingOrder do
           expect(order.order_items.count).to eq(1)
 
           item = order.order_items.first
-          expect(item.product).to eq(prices.first)
-          expect(item.name).to eq('Free')
+          expect(item.product).to eq(booking)
+          expect(item.name).to eq('Spoon Carving')
           expect(item.quantity).to eq(1)
           expect(item.line_subtotal).to eq(0.0)
           expect(item.line_total).to eq(0.0)

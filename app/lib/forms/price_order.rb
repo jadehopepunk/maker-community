@@ -17,13 +17,8 @@ module Forms
       @persons = value.to_i
     end
 
-    def build_order_item(event_session)
-      return nil if persons == 0
-
-      result = OrderItem.new(product: event_session, name: price.title, quantity: persons,
-                             line_subtotal: price.per_person)
-      result.calculate_totals
-      result
+    def total_price
+      price.per_person * persons
     end
   end
 end

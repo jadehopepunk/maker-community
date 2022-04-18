@@ -3,7 +3,7 @@ module Forms
     include ActiveModel::Model
 
     attr_accessor :user, :price_orders, :email, :name, :comments
-    attr_reader :event_session, :order
+    attr_reader :event_session, :order, :booking
 
     validates :email, presence: true,
                       format: { with: Devise.email_regexp, message: "doesn't look like a valid email address" }, unless: :user
@@ -45,11 +45,18 @@ module Forms
       (price_orders || []).map(&:persons).sum
     end
 
+    def total_price
+      (price_orders || []).map(&:total_price).sum
+    end
+
     def save
       raise ArgumentError, 'This needs to be setup with an event session' unless event_session.present?
 
       if valid?
-        save_order!
+        ActiveRecord::Base.transaction do
+          save_booking!
+          save_order!
+        end
         return true
       end
 
@@ -59,29 +66,46 @@ module Forms
     private
 
     def save_order!
-      order_items = price_orders.map do |price_order|
-        price_order.build_order_item(event_session)
-      end.compact
-
       @order = Order.new(
-        user: (user || email_user),
+        user: best_user,
         status: 'pending',
         comments:,
-        order_items: order_items
+        order_items: [build_order_item]
       )
+
       @order.calculate_totals
       @order.save!
     end
 
-    # def save_booking!
-    #   booking = build_booking
-    #   @booking = EventBookingsService.new.create(booking).save!
-    # end
+    def save_booking!
+      @booking = EventBooking.create(
+        user: best_user,
+        session: event_session,
+        status: 'in-cart',
+        persons: total_persons,
+        comments:
+      )
+    end
 
-    # def build_booking
-    #   EventBooking.new(user: (user || email_user), session: event_session, status: 'complete',
-    #                    persons: total_persons, comments:)
-    # end
+    def build_order_item
+      result = OrderItem.new(
+        product: @booking,
+        name: event_session.title,
+        quantity: 1,
+        line_subtotal: total_price
+      )
+      result.calculate_totals
+      result
+    end
+
+    def build_booking
+      EventBooking.new(user: best_user, session: event_session, status: 'complete',
+                       persons: total_persons, comments:)
+    end
+
+    def best_user
+      user || email_user
+    end
 
     def email_user
       existing_email_user || create_email_user

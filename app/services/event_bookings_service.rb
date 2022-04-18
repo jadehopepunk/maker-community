@@ -3,11 +3,13 @@ class EventBookingsService
     ActiveRecord::Base.transaction do
       booking.save!
 
-      UserEvents::BookedForEvent.create!(
-        user: booking.user,
-        subject: booking,
-        occured_at: booking.session.start_at
-      )
+      if booking.confirmed?
+        UserEvents::BookedForEvent.create!(
+          user: booking.user,
+          subject: booking,
+          occured_at: booking.session.start_at
+        )
+      end
     end
 
     puts "created event booking #{booking.wordpress_post_id}"
