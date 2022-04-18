@@ -26,6 +26,8 @@ module Wp
       OrderService.new.create(dest)
 
       puts "Imported order: #{self.ID}"
+    rescue ActiveRecord::RecordInvalid => e
+      puts "Failed to import Order: #{self.ID} - #{e.message}: #{dest.inspect}"
     end
 
     def build_new

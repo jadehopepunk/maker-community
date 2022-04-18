@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe OrderService do
-  let(:order) { Order.create!(order_items:, comments: 'Order comment', status: 'pending', user: jade) }
+  subject { OrderService.new }
+  let(:order) { Order.create!(order_items:, status: 'completed', user: jade) }
   let(:order_items) { [] }
   let(:jade) { create(:jade) }
 
@@ -15,12 +16,9 @@ describe OrderService do
         let(:order_items) { [OrderItem.new(product: booking, quantity: 1)] }
 
         it 'marks the booking as completed' do
-          subject.fulfill(order)
+          subject.fulfill_if_complete(order)
 
           expect(booking.reload.status).to eq('active')
-        end
-
-        it 'marks the order as completed' do
         end
       end
     end

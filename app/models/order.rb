@@ -8,8 +8,6 @@ class Order < ApplicationRecord
 
   scope :completed_in_month, ->(month) { where(completed_at: month.dates) }
 
-  validates :status, inclusion: { in: aasm.states.map(&:name).map(&:to_s) }
-
   aasm column: :status do
     state :pending
     state :processing
@@ -24,6 +22,7 @@ class Order < ApplicationRecord
       }
     end
   end
+  validates :status, inclusion: { in: aasm.states.map(&:name).map(&:to_s) }
 
   def calculate_totals
     self.total_price = order_items.map(&:line_total).sum
