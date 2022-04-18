@@ -10,8 +10,15 @@ module Wp
     def create_wp_booking(booking)
       raise 'Only for production' unless Rails.env.production?
 
+      puts "about to upload booking #{booking.id}"
+
       dest = build_wp_booking(booking)
       dest.save!
+
+      puts " - saved to wordpress, id is #{dest.ID}"
+
+      booking.update_column(:wordpress_post_id, dest.ID)
+      puts ' - id linked'
     end
 
     def build_wp_booking(booking)
