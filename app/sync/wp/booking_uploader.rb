@@ -3,7 +3,7 @@ module Wp
     def upload_bookings
       scope = EventBooking.attendees.where(wordpress_post_id: nil)
       scope.all.each do |booking|
-        build_wp_booking(booking)
+        create_wp_booking(booking)
       end
     end
 
@@ -34,9 +34,19 @@ module Wp
         post_author: 134,
         post_title: "New Site Booking - #{booking.session.start_at.strftime('%b %d %Y @ %-l:%M %p')}",
         post_status: 'confirmed',
+        post_content: '',
+        post_excerpt: '',
         post_type: 'wc_booking',
         post_date: booking.created_at,
-        post_date_gmt: booking.created_at
+        post_date_gmt: booking.created_at,
+        post_modified: booking.updated_at,
+        post_modified_gmt: booking.updated_at,
+        to_ping: '',
+        pinged: '',
+        post_content_filtered: '',
+        post_mime_type: '',
+        guid: 'https://makercommunity.org.au/?post_type=wc_booking&#038;p=XXX',
+        comment_count: 0
       )
       dest.set_meta(
         '_booking_all_day' => '0',
