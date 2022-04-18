@@ -7,6 +7,7 @@ export default class extends Controller {
     console.log("connected");
     this.stripe = Stripe(this.element.dataset.publishableKey);
     this.initializeStripeForm();
+    this.checkStatus();
     this.element.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
@@ -27,9 +28,9 @@ export default class extends Controller {
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
-      this.showMessage(error.message);
+      this.showMessage(error.message, "bad");
     } else {
-      this.showMessage("An unexpected error occured.");
+      this.showMessage("An unexpected error occured.", "bad");
     }
 
     this.setLoading(false);
@@ -48,10 +49,14 @@ export default class extends Controller {
     }
   }
 
-  showMessage(messageText) {
+  showMessage(messageText, quality) {
     const messageContainer = this.element.querySelector("#payment-message");
 
     messageContainer.classList.remove("hidden");
+    messageContainer.classList.remove("good");
+    messageContainer.classList.remove("neutral");
+    messageContainer.classList.remove("bad");
+    messageContainer.classList.add(quality);
     messageContainer.textContent = messageText;
 
     setTimeout(function () {
@@ -67,6 +72,32 @@ export default class extends Controller {
     const paymentElement = this.elements.create("payment");
     paymentElement.mount("#payment-element");
     this.actionsTarget.classList.remove("hidden");
+  }
+
+  // Fetches the payment intent status after payment submission
+  async checkStatus() {
+    const clientSecret = this.clientSecret;
+
+    if (!clientSecret) {
+      return;
+    }
+
+    const { paymentIntent } = await this.stripe.retrievePaymentIntent(clientSecret);
+
+    switch (paymentIntent.status) {
+      case "succeeded":
+        this.showMessage("Payment succeeded!", "good");
+        break;
+      case "processing":
+        this.showMessage("Your payment is processing.", "neutral");
+        break;
+      case "requires_payment_method":
+        this.showMessage("Your payment was not successful, please try again.", "bad");
+        break;
+      default:
+        this.showMessage("Something went wrong.", "bad");
+        break;
+    }
   }
 
   // PRIVATE

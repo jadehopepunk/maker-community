@@ -12,11 +12,22 @@
   }
 
   #payment-message {
-    color: red;
     font-size: 16px;
     line-height: 20px;
     padding-top: 12px;
     text-align: center;
+
+    &.good {
+      color: green;
+    }
+
+    &.neutral {
+      color: var(--highlight-color);
+    }
+
+    &.bad {
+      color: red;
+    }
   }
 
   button {
