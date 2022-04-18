@@ -31,4 +31,30 @@ class Order < ApplicationRecord
   def department
     order_items.detect(&:department).try(:department)
   end
+
+  def idempotency_key
+    "order-#{id}"
+  end
+
+  def free?
+    total_price_cents == 0
+  end
+
+  def payment_intent_client_secret
+    return stripe_payment_intent_id if stripe_payment_intent_id.present?
+    raise ArgumentError, 'creating a payment intent for a free order' if free?
+
+    payment_intent = Stripe::PaymentIntent.create(
+      {
+        amount: total_price_cents,
+        currency: 'aud',
+        payment_method_types: ['card']
+      }, {
+        idempotency_key:
+      }
+    )
+
+    update_attribute(:stripe_payment_intent_id, payment_intent['client_secret'])
+    stripe_payment_intent_id
+  end
 end
