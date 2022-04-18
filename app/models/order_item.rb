@@ -1,5 +1,5 @@
 def gst_included(amount)
-  amount / BigDecimal("11")
+  amount / BigDecimal('11')
 end
 
 class OrderItem < ApplicationRecord
@@ -9,6 +9,7 @@ class OrderItem < ApplicationRecord
 
   scope :has_plan_name, ->(names) { joins(:plan).merge(Plan.has_name(names)) }
   scope :completed_in_month, ->(month) { joins(:order).merge(Order.completed_in_month(month)) }
+  scope :most_recent_first, -> { joins(:order).order('orders.created_at' => :desc) }
 
   def calculate_totals
     self.line_total = line_subtotal * quantity

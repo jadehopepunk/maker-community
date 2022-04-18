@@ -65,8 +65,10 @@ module Forms
 
     def existing_booking=(value)
       @booking = value
-      self.comments = value.comments
-      @order = order
+      return unless @booking
+
+      self.comments = @booking.comments
+      @order = Order.for_product(@booking)
     end
 
     private

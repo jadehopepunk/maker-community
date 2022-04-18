@@ -20,4 +20,11 @@ class Order < ApplicationRecord
   def completed?
     status == 'completed'
   end
+
+  def self.for_product(product)
+    item = OrderItem.where(product:).most_recent_first.first
+    return nil unless item
+
+    item.order
+  end
 end
