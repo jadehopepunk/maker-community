@@ -1,4 +1,4 @@
-<%= simple_form_for order_form, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false, 'data-controller': 'event-booking-form'} do |f| %> <%= f.error_notification %>
+<%= simple_form_for order_form, as: :order, url: event_bookings_path(@event_session), html: { 'data-turbo': false, 'data-controller': 'booking-form'} do |f| %> <%= f.error_notification %>
 <div class="form-section">
   <h2>About you</h2>
   <% if f.object.user %>
@@ -32,9 +32,9 @@
   <%= f.error :total_persons %> <%= f.input :comments, as: :text, label: 'Comments or special requirements' %>
 </div>
 <div class="form-section payment-section">
-  <h2>Payment</h2>
-  <p>This bit isn't done yet.</p>
+  <h2>Cost</h2>
+  <div>Total cost. <span data-booking-form-target="cost"></span></div>
 </div>
 
-<div class="actions"><%= f.submit 'Book now' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
+<div class="actions"><%= f.submit 'Book now', 'data-booking-form-target' => 'submit' %> or <%= link_to 'cancel', event_path(@event_session) %></div>
 <% end %>

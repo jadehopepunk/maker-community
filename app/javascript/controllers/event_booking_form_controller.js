@@ -8,7 +8,22 @@ function giveClassIf(element, class_name, condition) {
   }
 }
 
+function formatMoney(amount) {
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
+
+  return formatter.format(amount);
+}
+
 export default class extends Controller {
+  static targets = ["submit", "cost"];
+
   connect() {
     this.personInputs.forEach((input) => {
       input.addEventListener("change", this.bookingCountUpdated.bind(this));
@@ -29,8 +44,12 @@ export default class extends Controller {
   // PRIVATE
 
   updateClasses() {
-    console.log("cost", this.totalCost);
-    giveClassIf(this.element, "free", this.totalCost == 0);
+    const cost = this.totalCost;
+    const free = cost == 0;
+
+    this.submitTarget.value = free ? "Book now" : "Proceed to payment";
+    this.costTarget.innerText = formatMoney(cost);
+    giveClassIf(this.element, "free", free);
   }
 
   get totalCost() {

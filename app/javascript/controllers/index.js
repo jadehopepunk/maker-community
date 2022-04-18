@@ -18,5 +18,5 @@ application.register("dropdown", DropdownController);
 application.register("sticky", StickyHeroController);
 application.register("in-page-nav", InPageNavController);
 application.register("integer", IntegerController);
-application.register("event-booking-form", EventBookingFormController);
+application.register("booking-form", EventBookingFormController);
 application.register("payment", PaymentController);
