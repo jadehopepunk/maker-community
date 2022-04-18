@@ -1,12 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
-import { initializeStripeForm, stripe } from "../lib/stripe_event_payment";
 
 export default class extends Controller {
-  static targets = ["submit"];
+  static targets = ["submit", "actions"];
 
   connect() {
     console.log("connected");
-    initializeStripeForm(this.clientSecret);
+    this.stripe = Stripe(this.element.dataset.publishableKey);
+    this.initializeStripeForm();
     this.element.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
@@ -14,12 +14,23 @@ export default class extends Controller {
     event.preventDefault();
     this.setLoading(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
+    const { error } = await this.stripe.confirmPayment({
+      elements: this.elements,
       confirmParams: {
         return_url: this.returnUrl,
       },
     });
+
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Otherwise, your customer will be redirected to
+    // your `return_url`. For some payment methods like iDEAL, your customer will
+    // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+    if (error.type === "card_error" || error.type === "validation_error") {
+      this.showMessage(error.message);
+    } else {
+      this.showMessage("An unexpected error occured.");
+    }
 
     this.setLoading(false);
   }
@@ -35,6 +46,27 @@ export default class extends Controller {
       this.element.querySelector("#spinner").classList.add("hidden");
       this.element.querySelector("#button-text").classList.remove("hidden");
     }
+  }
+
+  showMessage(messageText) {
+    const messageContainer = this.element.querySelector("#payment-message");
+
+    messageContainer.classList.remove("hidden");
+    messageContainer.textContent = messageText;
+
+    setTimeout(function () {
+      messageContainer.classList.add("hidden");
+      messageContainer.textContent = "";
+    }, 4000);
+  }
+
+  async initializeStripeForm() {
+    const appearance = { theme: "stripe" };
+    this.elements = this.stripe.elements({ appearance, clientSecret: this.clientSecret });
+
+    const paymentElement = this.elements.create("payment");
+    paymentElement.mount("#payment-element");
+    this.actionsTarget.classList.remove("hidden");
   }
 
   // PRIVATE

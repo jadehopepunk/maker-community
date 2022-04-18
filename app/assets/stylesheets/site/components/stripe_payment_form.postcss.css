@@ -11,6 +11,14 @@
     display: none;
   }
 
+  #payment-message {
+    color: red;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 12px;
+    text-align: center;
+  }
+
   button {
     margin-bottom: 1rem;
     background: var(--highlight-color);

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :orders, only: [] do
     member do
       get :pay
-      post :stripe_return
+      get :stripe_return
     end
   end
 
