@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_18_065033) do
+ActiveRecord::Schema.define(version: 2022_04_19_071300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 2022_04_18_065033) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position", default: 0
     t.integer "wordpress_product_id"
+    t.text "description"
     t.index ["wordpress_post_id"], name: "index_plans_on_wordpress_post_id", unique: true
   end
 

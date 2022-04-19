@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :people, only: [:index, :show] do
       collection do
         get :metrics
+        resources :plans, only: [:index]
       end
     end
     scope :program do
