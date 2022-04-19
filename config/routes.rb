@@ -15,6 +15,11 @@ Rails.application.routes.draw do
       get :pay
     end
   end
+  resources :people, only: [] do
+    collection do
+      get :me
+    end
+  end
 
   resources :calendars, only: [:show]
   get 'facilities', to: 'pages#facilities'

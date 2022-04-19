@@ -13,8 +13,8 @@
     <a href="/" class="not-implemented">Membership</a>
     <% if current_user %> <% if policy(:application).can_admin? %>
     <a href="/admin">Admin</a>
-    <% end %>
-    <a href="<%= destroy_user_session_path %>">Sign out</a>
+    <% end %> <%= link_to me_people_path, class: 'avatar-link' do %><%= avatar_tag(current_user, size: :small) %><span class="link-details mobile-only">Your dashboard</span><% end %>
+    <!-- <a href="<%= destroy_user_session_path %>">Sign out</a> -->
     <% else %>
     <a href="<%= new_user_session_path %>">Sign in</a>
     <% end %>
