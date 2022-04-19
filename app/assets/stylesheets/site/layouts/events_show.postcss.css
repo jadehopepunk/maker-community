@@ -21,6 +21,7 @@
         height: 64px;
         margin-right: 10px;
         color: var(--highlight-color);
+        flex-shrink: 0;
       }
     }
 

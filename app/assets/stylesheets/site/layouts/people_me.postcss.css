@@ -9,7 +9,40 @@
     }
   }
 
-  .bookings-events-list {
-    max-width: 800px;
+  .actions-on-right {
+    display: flex;
+    gap: var(--gutter);
+
+    .body {
+      max-width: 800px;
+    }
+
+    .actions {
+      flex-grow: 1;
+    }
+
+    @media (--mobile) {
+      flex-direction: column;
+    }
+
+    @media (--desktop) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .details {
+    .detail-with-icon {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 2rem;
+
+      > .icon {
+        width: 64px;
+        height: 64px;
+        margin-right: 10px;
+        color: var(--highlight-color);
+        flex-shrink: 0;
+      }
+    }
   }
 }
