@@ -88,3 +88,7 @@ a.link-in-text {
     }
   }
 }
+
+a.text-link {
+  text-decoration: underline;
+}
