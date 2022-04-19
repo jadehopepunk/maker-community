@@ -67,12 +67,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'app.makercommunity.org.au', protocol: 'http' }
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port: ENV['MAILERTOGO_SMTP_PORT'],
-    address: ENV['MAILERTOGO_SMTP_HOST'],
-    user_name: ENV['MAILERTOGO_SMTP_USER'],
-    password: ENV['MAILERTOGO_SMTP_PASSWORD'],
-    domain: ENV['MAILERTOGO_DOMAIN'],
+  ActionMailer::Base.smtp_settings = {
+    port: ENV['MAILGUN_SMTP_PORT'],
+    address: ENV['MAILGUN_SMTP_SERVER'],
+    user_name: ENV['MAILGUN_SMTP_LOGIN'],
+    password: ENV['MAILGUN_SMTP_PASSWORD'],
+    domain: 'makercommunity.org.au',
     authentication: :plain
   }
 
