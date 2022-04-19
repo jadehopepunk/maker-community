@@ -1,6 +1,6 @@
 <% link = true unless local_assigns.has_key?(:link) %>
-<div class="event-container event-preview <%= event_session.event.class.name.demodulize.underscore.dasherize %>">
-  <% if link %><a href="<%= event_path(event_session) %>" class="event-link"
+<div class="event-container theme-program event-preview <%= event_session.event.class.name.demodulize.underscore.dasherize %>">
+  <% if link %><a href="<%= event_path(event_session) %>" class="event-link theme-program"
     ><% end %>
     <div class="event-preview-body"><%= render "events/#{event_session.event.class.name.demodulize.underscore}", event_session: event_session, link: link %></div>
     <% if link %></a

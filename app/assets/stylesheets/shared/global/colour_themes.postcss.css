@@ -100,11 +100,6 @@ beige: "#E1A994", */
   --background-color-emphasis: var(--teal-light);
   --callout-background-color: var(--teal-light);
 
-  .callout {
-    /* --text-colour: black;
-    color: var(--text-colour); */
-  }
-
   @mixin blue-dark-highlight;
 
   &.theme-inverted {

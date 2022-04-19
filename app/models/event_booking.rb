@@ -11,6 +11,8 @@ class EventBooking < ApplicationRecord
   scope :in_cart, -> { where(status: 'in-cart') }
   scope :duty_managers, -> { where(role: 'duty_manager') }
   scope :attendees, -> { where(role: 'attendee') }
+  scope :future, -> { joins(:session).merge(EventSession.future) }
+  scope :session_date_order, -> { joins(:session).merge(EventSession.date_order) }
 
   validates :status, inclusion: { in: STATES }
   validates :role, inclusion: { in: ROLES }

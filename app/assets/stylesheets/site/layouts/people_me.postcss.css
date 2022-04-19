@@ -8,4 +8,8 @@
       margin-bottom: 1em;
     }
   }
+
+  .bookings-events-list {
+    max-width: 800px;
+  }
 }

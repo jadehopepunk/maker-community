@@ -6,7 +6,7 @@
   </div>
   <h3 class="event-title"><%= event_session.event.title %></h3>
 
-  <p class="event-description"><%= event_session.event.short_description.html_safe %></p>
+  <p class="event-description"><%= event_session.event.short_description&.html_safe %></p>
   <!-- <div class="event-host">
     <img class="avatar" src="http://placekitten.com/40/40" />
     <div class="host-text">

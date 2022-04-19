@@ -26,13 +26,13 @@
       <div class="scroll-target"><a id="membership"></a></div>
       <section class="membership">
         <h2 class="section-heading">Membership</h2>
-        <%= render 'people/memberships', memberships: @user.memberships %>
+        <%= render 'people/memberships', memberships: @memberships %>
       </section>
 
       <div class="scroll-target"><a id="bookings"></a></div>
       <section class="bookings">
         <h2 class="section-heading">Bookings</h2>
-        <p>Your bookings go here</p>
+        <div class="bookings-events-list"><%= render 'events/events_list', event_sessions: @bookings.map(&:session) %></div>
       </section>
     </div>
   </div>
