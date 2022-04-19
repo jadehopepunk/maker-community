@@ -31,9 +31,15 @@
 
       td {
         padding: 0 1rem;
+        min-height: 36px;
 
         &.right {
           text-align: right;
+        }
+
+        .primary-row-title {
+          padding: 0.5rem 0;
+          display: block;
         }
 
         a.primary-row-link {

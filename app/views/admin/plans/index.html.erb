@@ -4,15 +4,15 @@
     <table>
       <thead>
         <tr>
-          <th>Header</th>
-          <th class="right">Roles</th>
+          <th>Plan</th>
+          <th class="right"></th>
         </tr>
       </thead>
       <tbody>
         <% @plans.each do |plan| %>
         <tr>
-          <td><%= plan.title %></td>
-          <td>stuff</td>
+          <td><span class="primary-row-title"><%= plan.title %></span></td>
+          <td class="right"><%= link_to 'edit', edit_admin_plan_path(plan) %></td>
         </tr>
         <% end %>
       </tbody>
