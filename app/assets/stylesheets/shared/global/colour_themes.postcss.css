@@ -97,6 +97,8 @@ beige: "#E1A994", */
 .theme-people {
   --text-color: var(--gray-100);
   --background-color: var(--teal-dark);
+  --background-color-emphasis: var(--teal-light);
+
   @mixin blue-dark-highlight;
 
   &.theme-inverted {

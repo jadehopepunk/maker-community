@@ -1,0 +1,31 @@
+<article class="theme-people people-me" data-controller="sticky" data-action="scroll@window->sticky#onScroll">
+  <div class="sticky-hero" data-sticky-target="hero">
+    <div class="container">
+      <h1 class="inline-page-title">Hi <%= @user.display_name %>,</h1>
+      <div class="hero">
+        <div class="details">
+          <div class="description">
+            <p>Welcome to Maker Community.</p>
+          </div>
+          <div class="call-to-action">
+            <h2 class="hide-when-closed">Find out more</h2>
+            <div class="sticky-toolbar" data-sticky-target="nav">
+              <nav class="in-page-nav" data-controller="in-page-nav" data-action="scroll@window->in-page-nav#onScroll">
+                <a href="#getting-there" data-action="in-page-nav#click">Getting there</a>
+                <a href="#accessibility" data-action="in-page-nav#click">Accessibility</a>
+                <a href="#areas" data-action="in-page-nav#click">Workshop areas</a>
+                <a href="#tools" data-action="in-page-nav#click">Tools</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-sticky-target="contents">
+    <div class="container">
+      <p>Some contents</p>
+    </div>
+  </div>
+</article>

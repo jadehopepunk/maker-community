@@ -1,6 +1,5 @@
 class PeopleController < ApplicationController
   def me
-    @person = current_user
-    render json: @person
+    @user = current_user
   end
 end
