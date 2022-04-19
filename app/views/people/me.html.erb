@@ -11,8 +11,8 @@
           <div class="call-to-action">
             <div class="sticky-toolbar" data-sticky-target="nav">
               <nav class="in-page-nav" data-controller="in-page-nav" data-action="scroll@window->in-page-nav#onScroll">
-                <a href="#getting-there" data-action="in-page-nav#click">Membership</a>
-                <a href="#accessibility" data-action="in-page-nav#click">Calendar</a>
+                <a href="#membership" data-action="in-page-nav#click">Membership</a>
+                <a href="#calendar" data-action="in-page-nav#click">Calendar</a>
               </nav>
             </div>
           </div>
@@ -23,7 +23,11 @@
 
   <div data-sticky-target="contents">
     <div class="container">
-      <p>Some contents</p>
+      <div class="scroll-target"><a id="membership"></a></div>
+      <section class="membership">
+        <h2 class="section-heading">Membership</h2>
+        <%= render 'people/memberships', memberships: @user.memberships %>
+      </section>
     </div>
   </div>
 </article>

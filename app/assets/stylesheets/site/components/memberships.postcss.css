@@ -1,0 +1,18 @@
+.memberships-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--gutter);
+}
+
+.membership-preview {
+  border: 2px solid var(--highlight-color);
+  background-color: var(--background-color-emphasis);
+  padding: var(--gutter);
+  border-radius: 6px;
+
+  p {
+    margin: 0;
+
+    margin-top: 0.5rem;
+  }
+}
