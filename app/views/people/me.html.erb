@@ -6,15 +6,13 @@
         <div class="details">
           <div class="description">
             <p>Welcome to Maker Community.</p>
+            <p>Not <%= @user.display_name %>? <a href="<%= destroy_user_session_path %>">Sign out</a></p>
           </div>
           <div class="call-to-action">
-            <h2 class="hide-when-closed">Find out more</h2>
             <div class="sticky-toolbar" data-sticky-target="nav">
               <nav class="in-page-nav" data-controller="in-page-nav" data-action="scroll@window->in-page-nav#onScroll">
-                <a href="#getting-there" data-action="in-page-nav#click">Getting there</a>
-                <a href="#accessibility" data-action="in-page-nav#click">Accessibility</a>
-                <a href="#areas" data-action="in-page-nav#click">Workshop areas</a>
-                <a href="#tools" data-action="in-page-nav#click">Tools</a>
+                <a href="#getting-there" data-action="in-page-nav#click">Membership</a>
+                <a href="#accessibility" data-action="in-page-nav#click">Calendar</a>
               </nav>
             </div>
           </div>
