@@ -1,1 +1,31 @@
-plans index
+<div class="layout-admin-people-index">
+  <div class="admin-area-leads">
+    <% @area_roles.each do |role| %>
+    <div class="role">
+      <h2><%= role.display_name.pluralize %></h2>
+      <% role.users.each do |user| %>
+      <a class="person" href="<%= url_for admin_person_path(user) %>"><%= user.display_name %></a>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <div class="admin-index-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Header</th>
+          <th class="right">Roles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @plans.each do |plan| %>
+        <tr>
+          <td><%= plan.title %></td>
+          <td>stuff</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @plans %>
+  </div>
+</div>

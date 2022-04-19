@@ -1,7 +1,8 @@
 module Admin
   class PlansController < AdminController
     def index
-      @plans = Plan.all
+      @area_roles = Role.where(name: 'people_admin').includes(:users) || []
+      @plans = Plan.page(params[:page]).per(20)
     end
   end
 end
