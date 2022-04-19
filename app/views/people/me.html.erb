@@ -12,7 +12,7 @@
             <div class="sticky-toolbar" data-sticky-target="nav">
               <nav class="in-page-nav" data-controller="in-page-nav" data-action="scroll@window->in-page-nav#onScroll">
                 <a href="#membership" data-action="in-page-nav#click">Membership</a>
-                <a href="#calendar" data-action="in-page-nav#click">Calendar</a>
+                <a href="#bookings" data-action="in-page-nav#click">Bookings</a>
               </nav>
             </div>
           </div>
@@ -27,6 +27,12 @@
       <section class="membership">
         <h2 class="section-heading">Membership</h2>
         <%= render 'people/memberships', memberships: @user.memberships %>
+      </section>
+
+      <div class="scroll-target"><a id="bookings"></a></div>
+      <section class="bookings">
+        <h2 class="section-heading">Bookings</h2>
+        <p>Your bookings go here</p>
       </section>
     </div>
   </div>

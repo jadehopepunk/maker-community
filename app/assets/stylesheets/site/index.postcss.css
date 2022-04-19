@@ -5,6 +5,7 @@
 @import "./layouts/bookings_new.postcss.css";
 @import "./layouts/page_facilities.postcss.css";
 @import "./layouts/order_pay.postcss.css";
+@import "./layouts/people_me.postcss.css";
 
 @import "./components/buttons.postcss.css";
 @import "./components/header_nav.postcss.css";

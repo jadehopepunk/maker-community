@@ -101,8 +101,8 @@ beige: "#E1A994", */
   --callout-background-color: var(--teal-light);
 
   .callout {
-    --text-colour: black;
-    color: var(--text-colour);
+    /* --text-colour: black;
+    color: var(--text-colour); */
   }
 
   @mixin blue-dark-highlight;
