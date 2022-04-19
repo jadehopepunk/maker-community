@@ -1,14 +1,6 @@
 <div class="layout-admin-people-index">
-  <div class="admin-area-leads">
-    <% @area_roles.each do |role| %>
-    <div class="role">
-      <h2><%= role.display_name.pluralize %></h2>
-      <% role.users.each do |user| %>
-      <a class="person" href="<%= url_for admin_person_path(user) %>"><%= user.display_name %></a>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
+  <%= render 'admin/shared/area_leads' %>
+
   <div class="callout stats-callout">
     <h2 class="callout-title">Overview</h2>
   </div>

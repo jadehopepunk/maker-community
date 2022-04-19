@@ -1,14 +1,6 @@
 <div class="layout-admin-roster">
-  <div class="admin-area-leads">
-    <% @area_roles.each do |role| %>
-    <div class="role">
-      <h2><%= role.display_name.pluralize %></h2>
-      <% role.users.each do |user| %>
-      <a class="person" href="<%= url_for admin_person_path(user) %>"><%= user.display_name %></a>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
+  <%= render 'admin/shared/area_leads' %>
+
   <h1 class="page-title">Open Times & Duty Management</h1>
   <%= render 'admin/shared/month_nav', month: @month %> <% if @sessions.present? %> <%= render 'admin/open_times/roster', users: @duty_managers, sessions: @sessions %> <% else %>
   <div class="no-roster">
