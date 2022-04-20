@@ -11,6 +11,7 @@ import InPageNavController from "./in_page_nav_controller";
 import IntegerController from "./integer_controller";
 import EventBookingFormController from "./event_booking_form_controller";
 import PaymentController from "./payment_controller";
+import FlashController from "./flash_controller";
 
 application.register("navbar", NabarController);
 application.register("roster", RosterController);
@@ -20,3 +21,4 @@ application.register("in-page-nav", InPageNavController);
 application.register("integer", IntegerController);
 application.register("booking-form", EventBookingFormController);
 application.register("payment", PaymentController);
+application.register("flash", FlashController);
