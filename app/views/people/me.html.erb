@@ -12,6 +12,7 @@
             <div class="sticky-toolbar" data-sticky-target="nav">
               <nav class="in-page-nav" data-controller="in-page-nav" data-action="scroll@window->in-page-nav#onScroll">
                 <a href="#membership" data-action="in-page-nav#click">Membership</a>
+                <a href="#slack" data-action="in-page-nav#click">Slack</a>
                 <a href="#bookings" data-action="in-page-nav#click">Bookings</a>
               </nav>
             </div>
@@ -27,6 +28,17 @@
       <section class="membership">
         <h2 class="section-heading">Membership</h2>
         <%= render 'people/memberships', memberships: @memberships %>
+      </section>
+
+      <div class="scroll-target"><a id="slack"></a></div>
+      <section class="slack">
+        <h2 class="section-heading">Slack</h2>
+        <p>We use slack for discussing our projects and running Maker Community.</p>
+        <% if @user.slack_user.present? %>
+        <p>You are connected as <strong>@<%= @user.slack_user.name %></strong> on slack.</p>
+        <% else %>
+        <a href="https://join.slack.com/t/maker-community/shared_invite/zt-k07ye0n9-655MWiPA4qr2oHJrz52LMA" class="button">Join our slack</a>
+        <% end %>
       </section>
 
       <div class="scroll-target"><a id="bookings"></a></div>

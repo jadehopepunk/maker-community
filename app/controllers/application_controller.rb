@@ -25,6 +25,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource_or_scope)
-    request.referrer
+    request.referrer || root_path
   end
 end
