@@ -15,10 +15,11 @@
 
     .body {
       max-width: 800px;
+      flex-grow: 1;
     }
 
     .actions {
-      flex-grow: 1;
+      max-width: 350px;
     }
 
     @media (--mobile) {
@@ -27,6 +28,7 @@
 
     @media (--desktop) {
       flex-direction: row-reverse;
+      justify-content: flex-end;
     }
   }
 
@@ -44,5 +46,9 @@
         flex-shrink: 0;
       }
     }
+  }
+
+  .no-data {
+    text-align: center;
   }
 }

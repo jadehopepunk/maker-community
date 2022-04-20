@@ -59,7 +59,13 @@
               </div>
             </div>
           </div>
-          <div class="bookings-events-list body"><%= render 'events/events_list', event_sessions: @bookings.map(&:session) %></div>
+          <div class="bookings-events-list body">
+            <% if @bookings.present? %> <%= render 'events/events_list', event_sessions: @bookings.map(&:session) %> <% else %>
+            <div class="no-data">
+              <p>You have no upcoming bookings, check out our <a href="<%= events_path %>" class="text-link">events page</a>.</p>
+            </div>
+            <% end %>
+          </div>
         </div>
       </section>
     </div>
