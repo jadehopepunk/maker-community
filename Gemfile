@@ -11,6 +11,7 @@ gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
 
+gem 'aasm'
 gem 'acts-as-taggable-on', '~> 9.0'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
@@ -25,6 +26,8 @@ gem 'pundit'
 gem 'ransack'
 gem 'redis'
 gem 'rolify'
+gem 'sentry-rails'
+gem 'sentry-ruby'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'slack-ruby-client'
@@ -32,7 +35,6 @@ gem 'stimulus-rails'
 gem 'stripe'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'aasm'
 
 # Need while we integrate with Wordpress
 gem 'down'
