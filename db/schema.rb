@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_19_071300) do
+ActiveRecord::Schema.define(version: 2022_05_01_023203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 2022_04_19_071300) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: 6
     t.string "tenant", limit: 128
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
@@ -309,7 +309,7 @@ ActiveRecord::Schema.define(version: 2022_04_19_071300) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "address_id"
     t.string "phone"
-    t.uuid "calendar_token", default: -> { "gen_random_uuid()" }
+    t.uuid "calendar_token"
     t.string "sign_up_status", default: "full"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
