@@ -67,7 +67,10 @@ module Wp
 
       if address.blank?
         user.address = build_address
-        user.save!
+        if user.address
+          puts "about to update user address: #{user.address.inspect}"
+          user.address.save!
+        end
       else
         address.assign_attributes(address_attributes)
         address.save! if address.changed?
