@@ -25,6 +25,8 @@ class User < ApplicationRecord
 
   delegate :has_avatar?, :avatar_url, to: :slack_user, allow_nil: true
 
+  before_validation :reset_calendar_token, on: :create
+
   def short_name
     display_name.split(' ').first
   end
@@ -45,5 +47,9 @@ class User < ApplicationRecord
 
   def password_required?
     sign_up_status == 'full'
+  end
+
+  def reset_calendar_token
+    self.calendar_token = SecureRandom.uuid
   end
 end
