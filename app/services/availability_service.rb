@@ -31,7 +31,7 @@ class AvailabilityService
   end
 
   def add_manager(session:, user:)
-    session.manager_bookings.create(user:, role: 'duty_manager', status: 'complete', persons: 1)
+    session.manager_bookings.create!(user:, role: 'duty_manager', status: 'active', persons: 1)
   end
 
   def remove_manager(session:, user:)
