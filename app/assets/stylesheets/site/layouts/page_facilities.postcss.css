@@ -23,16 +23,6 @@
     }
   }
 
-  .area-list {
-    display: grid;
-    grid-gap: var(--gutter);
-    grid-template-columns: 1fr 1fr;
-
-    @media (--mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .page-header {
     .section-photo {
       width: 400px;

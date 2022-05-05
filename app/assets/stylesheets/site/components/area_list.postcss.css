@@ -1,0 +1,17 @@
+.area-list {
+  display: grid;
+  grid-gap: var(--gutter);
+  grid-template-columns: 1fr 1fr;
+
+  @media (--mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  .area-preview {
+    border: 1px solid red;
+
+    img.area-main-image {
+      max-width: 50%;
+    }
+  }
+}
