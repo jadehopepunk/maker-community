@@ -1,6 +1,5 @@
 class EventBooking < ApplicationRecord
   STATES = ['was-in-cart', 'in-cart', 'pending-confirmation', 'active', 'cancelled'].freeze
-  CONFIRMED_STATES = ['complete', 'paid'].freeze
   ROLES = ['attendee', 'duty_manager', 'teacher', 'volunteer'].freeze
 
   belongs_to :user
