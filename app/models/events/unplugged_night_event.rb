@@ -8,6 +8,7 @@ module Events
     }.freeze
 
     START_DATE = Date.new(2022, 3, 1)
+    END_DATE = Date.new(2022, 4, 30)
 
     private
 
@@ -16,7 +17,7 @@ module Events
     end
 
     def valid_date?(date)
-      date >= START_DATE && valid_week?(date)
+      date >= START_DATE && date <= END_DATE && valid_week?(date)
     end
 
     def valid_week?(date)
