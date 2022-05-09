@@ -33,7 +33,7 @@ module Wp
         **shared_attributes,
         address: build_address,
         wordpress_id: self.ID,
-        sign_up_status: 'unclaimed',
+        sign_up_status: 'imported',
         created_at: user_registered
       )
       dest.save!
