@@ -1,0 +1,8 @@
+<div class="sessions-selector">
+  <% sessions.each do |session| %>
+  <div>
+    <input type="radio" id="<%= "session-#{session.id}" %>" name="session" value="<%= session.id %>" <%= session.id == @session.id ? 'checked' : '' %> />
+    <label for="<%= "session-#{session.id}" %>"><%= format_time_range_html session.time_range %></label>
+  </div>
+  <% end %>
+</div>

@@ -11,6 +11,7 @@ class EventSession < ApplicationRecord
   scope :in_date_range, ->(date_range) { where(start_at: DateUtilities.date_range_to_datetime_range(date_range)) }
   scope :future, -> { where('event_sessions.start_at >= ?', Date.current.to_datetime) }
   scope :today, -> { where(start_at: DateUtilities.date_to_datetime_range(Date.current)) }
+  scope :on_date, ->(date) { where(start_at: date.to_datetime..date.to_datetime.end_of_day) }
   scope :tagged_with, lambda { |tags|
     return self if tags.empty?
 
@@ -90,6 +91,10 @@ class EventSession < ApplicationRecord
     return nil if user.nil?
 
     bookings.active.find_by(user:)
+  end
+
+  def find_all_day_sessions
+    event.find_day_sessions(start_at)
   end
 
   private

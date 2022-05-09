@@ -8,4 +8,8 @@ class Event < ApplicationRecord
 
   scope :duty_managed, -> { where(duty_managed: true) }
   scope :special_event, -> { where(duty_managed: false) }
+
+  def find_day_sessions(date)
+    sessions.date_order.on_date(date)
+  end
 end

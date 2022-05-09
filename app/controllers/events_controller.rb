@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @session = EventSession.find(params[:id])
+    @day_sessions = @session.find_all_day_sessions
     @booking = @session.active_booking_for(current_user)
   end
 

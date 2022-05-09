@@ -20,7 +20,11 @@
                 <span class="month"><%= @session.date.strftime '%b' %></span>
                 <span class="year"><%= @session.date.strftime '%Y' %></span>
               </div>
-              <div class="time-range"><%= format_time_range_html @session.time_range %></div>
+              <div>
+                <% @day_sessions.each do |day_session| %>
+                <div class="time-range"><%= format_time_range_html day_session.time_range %></div>
+                <% end %>
+              </div>
             </div>
           </div>
 
@@ -58,7 +62,7 @@
               need to cancel.
             </p>
           </div>
-          <% else %>
+          <% else %> <% if @day_sessions.length > 1 %> <%= render 'events/session_selector', sessions: @day_sessions %> <% end %>
           <a href="<%= new_event_booking_path(@session) %>" class="button call-to-action">Book Now</a>
           <% end %>
         </div>
