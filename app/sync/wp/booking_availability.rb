@@ -49,7 +49,7 @@ module Wp
     def shared_attributes
       {
         max_persons: @max_persons,
-        end_at: end_at
+        end_at:
       }
     end
 

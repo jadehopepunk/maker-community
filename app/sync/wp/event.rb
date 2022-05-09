@@ -55,15 +55,29 @@ module Wp
     def shared_attributes
       {
         title: post_title,
-        short_description: short_description,
+        short_description:,
         content: post_content,
         image: attachment_image,
         tag_list: product_tag_list
       }
     end
 
+    def booking_duration
+      duration_type = meta['_wc_booking_duration_type']
+      duration_unit = meta['_wc_booking_duration_unit']
+      duration_amount = meta_int('_wc_booking_duration')
+
+      if duration_type == 'fixed' && ['hour', 'minute'].include?(duration_unit)
+        Wp::BookingDurationFixed.new(duration_amount, duration_unit)
+      else
+        Wp::BookingDurationNull.new
+      end
+    end
+
     def booking_availability
-      meta_availability.map { |a| Wp::BookingAvailability.new({ max_persons: }.merge(a)) }
+      meta_availability.map do |a|
+        booking_duration.build_availabilities({ max_persons: }.merge(a))
+      end.flatten
     end
 
     def sync_event_sessions(event)
