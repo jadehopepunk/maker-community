@@ -27,11 +27,13 @@ module Wp
     end
 
     def import_new
+      puts "importing #{inspect}"
       dest = dest_class.new(
         password: user_pass,
         **shared_attributes,
         address: build_address,
         wordpress_id: self.ID,
+        sign_up_status: 'unclaimed',
         created_at: user_registered
       )
       dest.save!
@@ -42,6 +44,7 @@ module Wp
 
     def update_existing
       dest = existing_dest
+      puts "updating user #{existing_dest.display_name}"
 
       dest.assign_attributes shared_attributes
       if dest.changed?
