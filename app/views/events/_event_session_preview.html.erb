@@ -1,4 +1,5 @@
-<% link = true unless local_assigns.has_key?(:link) %>
+<% day_sessions = [event_session] %><% if event_session.is_a?(Array) %><% day_sessions = event_session %><% event_session = event_session.first %><% end %> <% link = true unless
+local_assigns.has_key?(:link) %>
 <div class="event-container theme-program event-preview <%= event_session.event.class.name.demodulize.underscore.dasherize %>">
   <% if link %><a href="<%= event_path(event_session) %>" class="event-link theme-program"
     ><% end %>
