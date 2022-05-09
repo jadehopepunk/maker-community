@@ -43,6 +43,31 @@
     }
   }
 
+  .sessions-selector {
+    margin-bottom: 1em;
+
+    .link-container {
+      margin-top: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
+    }
+
+    .session-link {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: var(--callout-background-color);
+      padding: 0.25em 0.5em;
+
+      &.active {
+        background-color: var(--highlight-color);
+        color: var(--highlight-color-inverse);
+      }
+    }
+  }
+
   @media (--desktop) {
     .columns {
       display: flex;

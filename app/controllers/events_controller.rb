@@ -27,8 +27,7 @@ class EventsController < ApplicationController
     }
 
     event_sessions.each do |event_session|
-      session_date = event_session.is_a?(Array) ? event_session.first.date : event_session.date
-
+      session_date = event_session.date
       if session_date >= Date.current.beginning_of_week && session_date <= Date.current.end_of_week
         result['This week'] << event_session
       elsif session_date <= (Date.current.end_of_week + 7)
@@ -44,15 +43,7 @@ class EventsController < ApplicationController
   def group_multi_session_days(event_sessions)
     previous = nil
     event_sessions.each_with_object([]) do |event_session, result|
-      if previous.nil? || previous.date != event_session.date
-        result << event_session
-      else
-        last = result.pop
-        last = [last].compact unless last.is_a?(Array)
-        last << event_session
-
-        result.push last
-      end
+      result << event_session if previous.nil? || previous.date != event_session.date
       previous = event_session
     end
   end

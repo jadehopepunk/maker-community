@@ -13,10 +13,7 @@ class EventSession < ApplicationRecord
   scope :today, -> { where(start_at: DateUtilities.date_to_datetime_range(Date.current)) }
   scope :on_date, ->(date) { in_date_range(date.beginning_of_day..date.end_of_day) }
   scope :tagged_with, lambda { |tags|
-    raise sessions.date_order.on_date(date).to_sql
     return self if tags.empty?
-
-    raise sessions.date_order.on_date(date).to_sql
 
     where(event_id: Event.tagged_with(tags).pluck(:id))
   }

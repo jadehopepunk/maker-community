@@ -62,7 +62,7 @@
               need to cancel.
             </p>
           </div>
-          <% else %> <% if @day_sessions.length > 1 %> <%= render 'events/session_selector', sessions: @day_sessions %> <% end %>
+          <% else %> <% if @day_sessions.length > 1 %> <%= render 'events/session_selector', sessions: @day_sessions, current_session: @session %> <% end %>
           <a href="<%= new_event_booking_path(@session) %>" class="button call-to-action">Book Now</a>
           <% end %>
         </div>
