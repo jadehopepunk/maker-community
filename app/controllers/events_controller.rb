@@ -3,7 +3,7 @@ class EventsController < ApplicationController
     @tags = load_tags
     sessions_scope = EventSession.from_this_week.only_duty_managed_until(open_times_until).date_order
     @event_sessions = sessions_scope.tagged_with(@tags).page(page).per(30)
-    @sectioned_sessions = section_by_date(group_multi_session_days(@event_sessions))
+    @sectioned_sessions = section_by_date(EventSession.one_session_per_day(@event_sessions))
     @tag_counts = EventSession.tag_counts(sessions_scope)
     @url_params = params.permit(:controller, :action)
   end
@@ -38,14 +38,6 @@ class EventsController < ApplicationController
     end
 
     result
-  end
-
-  def group_multi_session_days(event_sessions)
-    previous = nil
-    event_sessions.each_with_object([]) do |event_session, result|
-      result << event_session if previous.nil? || previous.date != event_session.date
-      previous = event_session
-    end
   end
 
   def first_page?

@@ -25,6 +25,16 @@ class EventSession < ApplicationRecord
 
   delegate :title, :short_description, :image, :prices, to: :event
 
+  def self.one_session_per_day(sessions, limit: nil)
+    previous = nil
+    result = sessions.each_with_object([]) do |session, result|
+      result << session if previous.nil? || previous.date != session.date
+      previous = session
+    end
+
+    limit ? result.first(limit) : result
+  end
+
   def time_range
     [start_at, end_at]
   end
