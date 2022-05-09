@@ -4,14 +4,14 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
-    "@rails/ujs": "^6.1.5",
+    "@rails/ujs": "^7.0.2-4s",
     "autoprefixer": "^10.4.2",
     "esbuild": "^0.14.14",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.13",
     "postcss-cli": "^9.1.0",
     "postcss-custom-media": "^8.0.0",
-    "postcss-import": "^14.0.2",
-    "postcss-mixins": "^9.0.1",
+    "postcss-import": "^14.1.0",
+    "postcss-mixins": "^9.0.2",
     "postcss-nested": "^5.0.6"
   },
   "scripts": {
