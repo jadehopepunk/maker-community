@@ -11,9 +11,12 @@ class EventSession < ApplicationRecord
   scope :in_date_range, ->(date_range) { where(start_at: DateUtilities.date_range_to_datetime_range(date_range)) }
   scope :future, -> { where('event_sessions.start_at >= ?', Date.current.to_datetime) }
   scope :today, -> { where(start_at: DateUtilities.date_to_datetime_range(Date.current)) }
-  scope :on_date, ->(date) { where(start_at: date.to_datetime..date.to_datetime.end_of_day) }
+  scope :on_date, ->(date) { in_date_range(date.beginning_of_day..date.end_of_day) }
   scope :tagged_with, lambda { |tags|
+    raise sessions.date_order.on_date(date).to_sql
     return self if tags.empty?
+
+    raise sessions.date_order.on_date(date).to_sql
 
     where(event_id: Event.tagged_with(tags).pluck(:id))
   }
