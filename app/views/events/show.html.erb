@@ -21,9 +21,7 @@
                 <span class="year"><%= @session.date.strftime '%Y' %></span>
               </div>
               <div>
-                <% @day_sessions.each do |day_session| %>
-                <div class="time-range"><%= format_time_range_html day_session.time_range %></div>
-                <% end %>
+                <div class="time-range"><%= format_time_range_html @session.time_range %></div>
               </div>
             </div>
           </div>
