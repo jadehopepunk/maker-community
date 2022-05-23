@@ -25,8 +25,11 @@
         <div class="value"><%= render partial: 'admin/people/address', locals: { address: @person.address } %></div>
       </div>
       <div class="detail">
-        <div class="title">Phone</div>
-        <div class="value"><%= @person.phone %></div>
+        <div class="title">Contact</div>
+        <div class="value">
+          <div><%= @person.email %></div>
+          <div><%= @person.phone %></div>
+        </div>
       </div>
       <% if @person.slack_user %>
       <div class="detail">
