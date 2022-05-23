@@ -1,4 +1,12 @@
 <div class="area-preview">
   <h3>Machine Woodwork</h3>
-  <%= image_model_tag(Image.where(wordpress_post_id: 7604).first, class: 'area-main-image') %>
+  <div class="image-and-details">
+    <%= image_model_tag(Image.where(wordpress_post_id: 7604).first, class: 'area-main-image') %>
+    <div class="details">
+      <p>
+        We have a full woodworking machine shop, letting you mill timber to size, cut joinery, work with sheet material, and much more. High quality tools, good dust extraction, and detailed safety
+        inductions means you can start woodworking even without any experience.
+      </p>
+    </div>
+  </div>
 </div>

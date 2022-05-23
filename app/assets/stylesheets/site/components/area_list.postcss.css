@@ -8,10 +8,26 @@
   }
 
   .area-preview {
-    border: 1px solid red;
+    h3 {
+      margin-bottom: 0.75rem;
+    }
 
-    img.area-main-image {
-      max-width: 50%;
+    .image-and-details {
+      display: grid;
+      grid-gap: var(--gutter);
+      grid-template-columns: 1fr 1fr;
+
+      > img.area-main-image {
+        width: 100%;
+      }
+    }
+
+    .details {
+      p {
+        &:first-child {
+          margin-top: 0;
+        }
+      }
     }
   }
 }
