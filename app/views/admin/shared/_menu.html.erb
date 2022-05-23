@@ -7,7 +7,10 @@
     <% if @section == 'people' %>
     <a class="nav-item child-item" href="<%= admin_plans_path %>">Membership Plans</a>
     <% end %>
-    <div class="nav-item disabled <%= 'active' if @section == 'place' %>">Place</div>
+    <a class="nav-item has-children <%= 'active' if @section == 'place' %>" href="<%= admin_areas_path %>">Place</a>
+    <% if @section == 'place' %>
+    <a class="nav-item child-item" href="<%= admin_areas_path %>">Areas</a>
+    <% end %>
     <a class="nav-item has-children <%= 'active' if @section == 'program' %>" href="<%= admin_event_sessions_path %>">Program</a>
     <% if @section == 'program' %>
     <a class="nav-item child-item" href="<%= admin_open_times_path %>">Open Times</a>

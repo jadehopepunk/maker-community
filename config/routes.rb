@@ -32,6 +32,9 @@ Rails.application.routes.draw do
         resources :plans, only: [:index, :edit, :update]
       end
     end
+    scope :place do
+      resources :areas, only: [:index]
+    end
     scope :program do
       resources :event_sessions, only: [:index, :show]
       resources :open_times, only: [:index] do

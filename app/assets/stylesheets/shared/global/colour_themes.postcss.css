@@ -121,6 +121,14 @@ beige: "#E1A994", */
 
   @mixin blue-dark-highlight;
 
+  &.theme-inverted {
+    --text-color: var(--gray-100);
+    --highlight-color: var(--sky);
+    --highlight-color-inverse: var(--black);
+    --background-color: var(--slate-800);
+    --callout-background-color: var(--slate-700);
+  }
+
   @mixin apply-theme-colors;
 }
 
