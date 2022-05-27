@@ -44,12 +44,12 @@ module Wp
 
     def update_existing
       dest = existing_dest
-      puts "updating user #{existing_dest.display_name}"
+      puts "updating user #{dest.id} (#{dest.display_name})"
 
       dest.assign_attributes shared_attributes
       if dest.changed?
+        puts "  - attributes changed: #{shared_attributes.inspect}"
         dest.save!
-        puts "updated user #{dest.display_name}"
       end
 
       update_user_address_if_needed(dest)
