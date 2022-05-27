@@ -11,14 +11,14 @@ module Wp
       amount = per_person + base_amount
 
       case post_title
-      when 'Full'
+      when 'Full', 'Non member'
         Prices::Full.new(per_person: amount)
       when 'Concession'
         Prices::Concession.new(per_person: amount)
-      when 'Member'
+      when 'Member', 'MCI Member'
         Prices::Member.new(per_person: amount)
       else
-        raise "Unknown price type: #{price_type}"
+        raise "Unknown price type: \"#{post_title}\" for #{inspect}"
       end
     end
 
