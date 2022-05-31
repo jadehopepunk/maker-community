@@ -7,5 +7,9 @@ module Admin
       @q.sorts = ['name desc'] if @q.sorts.empty?
       @areas = @q.result.page(params[:page]).per(20)
     end
+
+    def new
+      @area = Area.new
+    end
   end
 end
