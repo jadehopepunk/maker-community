@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_01_023203) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_05_31_060700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -34,7 +33,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -51,8 +50,18 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "state"
     t.string "postcode"
     t.string "country_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "description"
+    t.bigint "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_areas_on_image_id"
   end
 
   create_table "availabilities", force: :cascade do |t|
@@ -60,8 +69,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.bigint "event_session_id"
     t.bigint "creator_id"
     t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_availabilities_on_creator_id"
     t.index ["event_session_id"], name: "index_availabilities_on_event_session_id"
     t.index ["user_id"], name: "index_availabilities_on_user_id"
@@ -73,8 +82,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "status"
     t.integer "persons", default: 1, null: false
     t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "role", default: "attendee"
     t.text "comments"
     t.index ["event_session_id"], name: "index_event_bookings_on_event_session_id"
@@ -85,17 +94,17 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.bigint "event_id"
     t.string "type", default: "Prices::Full"
     t.decimal "per_person", precision: 10, scale: 2
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_prices_on_event_id"
   end
 
   create_table "event_sessions", force: :cascade do |t|
     t.bigint "event_id"
-    t.datetime "start_at", precision: 6
-    t.datetime "end_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "max_persons"
     t.index ["event_id"], name: "index_event_sessions_on_event_id"
   end
@@ -106,8 +115,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "title"
     t.string "content"
     t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "short_description"
     t.bigint "image_id"
     t.string "type", default: "Events::SimpleEvent"
@@ -119,20 +128,20 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
   create_table "images", force: :cascade do |t|
     t.string "alt_text"
     t.string "caption"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "wordpress_post_id"
     t.index ["wordpress_post_id"], name: "index_images_on_wordpress_post_id", unique: true
   end
 
   create_table "imports", force: :cascade do |t|
-    t.datetime "imported_at", precision: 6
+    t.datetime "imported_at"
   end
 
   create_table "inductions", force: :cascade do |t|
     t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["title"], name: "index_inductions_on_title", unique: true
   end
 
@@ -142,10 +151,10 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.bigint "plan_id"
     t.bigint "subscription_id"
     t.integer "wordpress_post_id"
-    t.datetime "start_at", precision: 6
-    t.datetime "end_at", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_memberships_on_plan_id"
     t.index ["subscription_id"], name: "index_memberships_on_subscription_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
@@ -176,11 +185,11 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "payment_method_title"
     t.decimal "total_price", precision: 8, scale: 2
     t.decimal "total_tax", precision: 8, scale: 2
-    t.datetime "paid_at", precision: 6
-    t.datetime "completed_at", precision: 6
+    t.datetime "paid_at"
+    t.datetime "completed_at"
     t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "stripe_payment_intent_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["wordpress_post_id"], name: "index_orders_on_wordpress_post_id", unique: true
@@ -190,8 +199,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "title"
     t.string "name"
     t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position", default: 0
     t.integer "wordpress_product_id"
     t.text "description"
@@ -202,8 +211,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "name"
     t.string "resource_type"
     t.bigint "resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
@@ -216,16 +225,16 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "image_48"
     t.string "image_512"
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_slack_users_on_user_id"
   end
 
   create_table "stripe_customers", force: :cascade do |t|
     t.bigint "user_id"
     t.string "stripe_customer_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "customer_unique_user_id", unique: true
     t.index ["user_id"], name: "index_stripe_customers_on_user_id"
   end
@@ -240,8 +249,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "payment_method_title"
     t.string "payment_method"
     t.integer "wordpress_post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
     t.index ["wordpress_post_id"], name: "index_subscriptions_on_wordpress_post_id", unique: true
   end
@@ -253,7 +262,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
@@ -271,8 +280,8 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
@@ -282,7 +291,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "type"
     t.string "subject_type"
     t.bigint "subject_id"
-    t.datetime "occured_at", precision: 6
+    t.datetime "occured_at"
     t.json "data", default: {}
     t.index ["subject_type", "subject_id"], name: "index_user_events_on_subject"
     t.index ["user_id"], name: "index_user_events_on_user_id"
@@ -302,11 +311,11 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
     t.string "encrypted_password"
     t.string "display_name", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.integer "wordpress_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "address_id"
     t.string "phone"
     t.uuid "calendar_token"
@@ -326,6 +335,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_023203) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "areas", "images"
   add_foreign_key "availabilities", "users", column: "creator_id"
   add_foreign_key "event_bookings", "event_sessions"
   add_foreign_key "event_bookings", "users"

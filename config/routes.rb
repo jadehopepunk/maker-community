@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       end
     end
     scope :place do
-      resources :areas, only: [:index]
+      resources :areas
     end
     scope :program do
       resources :event_sessions, only: [:index, :show]

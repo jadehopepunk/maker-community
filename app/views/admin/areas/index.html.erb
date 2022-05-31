@@ -1,1 +1,25 @@
 <div class="layout-admin-place-index"><%= render 'admin/shared/area_leads' %></div>
+
+<div class="table-controls"><%= link_to 'New area', new_admin_area_path, class: 'button' %></div>
+
+<div class="admin-index-table event-sessions-table">
+  <table>
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :event_title, 'Name', default_order: :asc) %></th>
+        <th><%= sort_link(@q, :start_at, 'Date', default_order: :desc) %></th>
+        <th>Start</th>
+        <th>End</th>
+        <th class="right">Attending</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @areas.each do |area| %>
+      <tr>
+        <td><%= link_to areas.name, admin_area_path(area), class: 'primary-row-link' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @areas %>
+</div>
