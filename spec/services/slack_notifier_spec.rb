@@ -40,12 +40,10 @@ describe SlackNotifier do
 
     it 'notifies everyone in #general' do
       expect_message(
-        channel: '#general',
+        channel: '#events',
         text: <<~TEXT
           New event: *Spoon Carving*
           Fri, Jan 10, 2020 at 6:30pm
-
-          See it on our <https://makercommunity.org.au/events/|events page>
         TEXT
       )
 

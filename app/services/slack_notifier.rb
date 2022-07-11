@@ -4,6 +4,7 @@ class SlackNotifier
   attr_reader :client, :delayed
 
   GENERAL_CHANNEL = '#general'.freeze
+  EVENTS_CHANNEL = '#events'.freeze
   PROGRAM_CHANNEL = '#team-program'.freeze
   PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
   DUTY_MANAGER_CHANNEL = '#duty-managers'.freeze
@@ -41,12 +42,10 @@ class SlackNotifier
 
   def new_event_listed(session)
     post_message(
-      channel: GENERAL_CHANNEL,
+      channel: EVENTS_CHANNEL,
       text: <<~TEXT
         New event: *#{session.event.title}*
         #{format_datetime_text(session.start_at, seperator: ' at ')}
-
-        See it on our #{slack_link_to 'events page', 'https://makercommunity.org.au/events/'}
       TEXT
     )
   end
