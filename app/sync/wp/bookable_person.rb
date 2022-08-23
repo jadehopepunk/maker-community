@@ -10,12 +10,12 @@ module Wp
     def build_price(base_amount:)
       amount = per_person + base_amount
 
-      case post_title
-      when 'Full', 'Non member'
+      case post_title.downcase
+      when 'full', 'non member', 'non-member'
         Prices::Full.new(per_person: amount)
-      when 'Concession'
+      when 'concession'
         Prices::Concession.new(per_person: amount)
-      when 'Member', 'MCI Member', 'Community Member'
+      when 'member', 'mci member', 'community member', 'member/concession'
         Prices::Member.new(per_person: amount)
       else
         raise "Unknown price type: \"#{post_title}\" for #{inspect}"
