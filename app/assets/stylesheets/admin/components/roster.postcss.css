@@ -29,6 +29,12 @@ table.roster {
           width: 9em;
           font-size: 0.8em;
           opacity: 0.75;
+
+          &.highlight {
+            color: var(--highlight-color);
+            font-weight: bold;
+            font-size: 0.9em;
+          }
         }
 
         &.user-slot {

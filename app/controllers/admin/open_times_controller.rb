@@ -6,8 +6,8 @@ module Admin
       @month = get_month
       events = Event.duty_managed.all
 
-      @sessions = EventSession.where(event: events).includes(:manager_bookings,
-                                                             :availabilities).in_date_range(@month.dates).date_order
+      @sessions = EventSession.includes(:manager_bookings,
+                                        :availabilities).in_date_range(@month.dates).date_order
 
       @area_roles = Role.where(name: ['program_admin', 'duty_roster_admin']).includes(:users) || []
       @duty_managers = User.with_role(:duty_manager).order(:display_name)
