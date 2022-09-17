@@ -107,6 +107,13 @@ class EventSession < ApplicationRecord
     event.find_day_sessions(start_at)
   end
 
+  def override_with(other_session_id)
+    other_session = EventSession.find(other_session_id)
+    self.attributes = other_session.attributes.except("id")
+    save!
+    other_session.delete
+  end
+
   private
 
   def hashed_availability_states
