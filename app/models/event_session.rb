@@ -23,7 +23,7 @@ class EventSession < ApplicationRecord
   scope :special_event, -> { joins(:event).merge(Event.special_event) }
   scope :duty_managed, -> { joins(:event).merge(Event.duty_managed) }
 
-  delegate :title, :short_description, :image, :prices, to: :event
+  delegate :title, :short_description, :image, :prices, :duty_managed, to: :event
 
   def self.one_session_per_day(sessions, limit: nil)
     previous = nil
@@ -109,7 +109,7 @@ class EventSession < ApplicationRecord
 
   def override_with(other_session_id)
     other_session = EventSession.find(other_session_id)
-    self.attributes = other_session.attributes.except("id")
+    self.attributes = other_session.attributes.except('id')
     save!
     other_session.delete
   end
