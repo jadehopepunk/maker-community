@@ -373,7 +373,7 @@ DEPENDENCIES
   php-serialize
   puma (~> 5.0)
   pundit
-  rails (~> 7.0.2)
+  rails (~> 7.0.4)
   ransack
   redis
   rolify

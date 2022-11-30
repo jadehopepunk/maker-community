@@ -7,6 +7,8 @@ module MediaHelper
       class: 'image-model'
     }
     image_tag image.file, default_options.merge(options)
+  rescue ArgumentError => e
+    nil
   end
 
   def variant_image_tag(attachment, variant_name, options = {})
