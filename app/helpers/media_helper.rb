@@ -1,5 +1,7 @@
 module MediaHelper
   def image_model_tag(image, options = {})
+    return nil unless image
+
     default_options = {
       alt: image.alt_text,
       class: 'image-model'
