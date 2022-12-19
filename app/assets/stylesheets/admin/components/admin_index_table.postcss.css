@@ -13,7 +13,7 @@
     thead {
       th {
         text-align: left;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem var(--gutter);
 
         &.right {
           text-align: right;
@@ -34,7 +34,7 @@
       }
 
       td {
-        padding: 0 1rem;
+        padding: 0 var(--gutter);
         min-height: 36px;
 
         &.right {
@@ -92,6 +92,12 @@
     & > .tag:not(:last-child) {
       margin-right: 0.5rem;
     }
+
+    @media (--mobile) {
+      & > .tag:not(:last-child) {
+        margin-right: 0;
+      }
+    }
   }
 
   .tag {
@@ -105,6 +111,17 @@
     @media (--mobile) {
       padding: 0.2rem 0.4rem;
       border-radius: 0.3rem;
+
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 1px solid var(--tag-separator);
+      }
+
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
   }
 

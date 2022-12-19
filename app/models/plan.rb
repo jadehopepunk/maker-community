@@ -23,4 +23,8 @@ class Plan < ApplicationRecord
       role.save!
     end
   end
+
+  def short_title
+    title.sub(/Member\z/, '')
+  end
 end
