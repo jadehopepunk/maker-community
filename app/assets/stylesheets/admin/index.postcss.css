@@ -11,6 +11,7 @@
 
 @import "./layouts/admin.postcss.css";
 @import "./layouts/layout_show.postcss.css";
+@import "./layouts/layout_edit.postcss.css";
 @import "./layouts/admin_people_index.postcss.css";
 @import "./layouts/admin_people_show.postcss.css";
 @import "./layouts/admin_people_metrics.postcss.css";

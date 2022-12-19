@@ -41,6 +41,10 @@ body {
   }
 }
 
+.demphasize {
+  @mixin text-small;
+}
+
 a {
   color: var(--highlight-color);
 }

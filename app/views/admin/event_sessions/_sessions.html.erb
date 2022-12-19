@@ -10,8 +10,8 @@
       <tr>
         <th><%= sort_link(q, :event_title, 'Event Name', default_order: :asc) %></th>
         <th><%= sort_link(q, :start_at, 'Date', default_order: :desc) %></th>
-        <th>Start</th>
-        <th>End</th>
+        <th class="desktop-only">Start</th>
+        <th class="desktop-only">End</th>
         <th class="right">Attending</th>
       </tr>
     </thead>
@@ -19,9 +19,12 @@
       <% records.each do |event_session| %>
       <tr>
         <td><%= link_to event_session.event.title, admin_event_session_path(event_session), class: 'primary-row-link' %></td>
-        <td class="<%= 'date-past' if event_session.start_at.to_date < Date.current %>""><%= format_date_html event_session.start_at.to_date %></td>
-        <td><%= format_time_html event_session.start_at %></td>
-        <td><%= format_time_html event_session.end_at %></td>
+        <td class="<%= 'date-past' if event_session.start_at.to_date < Date.current %>"">
+          <%= format_date_html event_session.start_at.to_date %>
+          <div class="mobile-only demphasize"><%= format_time_range_html event_session.time_range %></div>
+        </td>
+        <td class="desktop-only"><%= format_time_html event_session.start_at %></td>
+        <td class="desktop-only"><%= format_time_html event_session.end_at %></td>
         <td class="right"><%= event_session.bookings.active.sum(:persons) %></td>
       </tr>
       <% end %>

@@ -29,6 +29,12 @@
   }
 }
 
+.desktop-only {
+  @media (--mobile) {
+    display: none;
+  }
+}
+
 @define-mixin mobile-guttered {
   @media (--mobile) {
     margin-left: var(--gutter);
