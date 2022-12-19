@@ -28,3 +28,14 @@
     display: none;
   }
 }
+
+@define-mixin mobile-guttered {
+  @media (--mobile) {
+    margin-left: var(--gutter);
+    margin-right: var(--gutter);
+  }
+}
+
+.mobile-guttered {
+  @mixin mobile-guttered;
+}

@@ -5,8 +5,6 @@
   margin-bottom: calc(var(--gutter) * 2);
 
   @media (--mobile) {
-    margin-left: calc(0px - var(--gutter));
-    margin-right: calc(0px - var(--gutter));
     margin-top: calc(0px - var(--gutter));
     border-radius: 0;
     border-top-width: 0;

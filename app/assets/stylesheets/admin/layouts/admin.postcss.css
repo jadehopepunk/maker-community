@@ -2,14 +2,22 @@
   display: flex;
   flex-direction: row;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
 
   .admin-body {
     flex-grow: 1;
   }
 
   .admin-content {
-    margin: var(--gutter);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: var(--gutter) 0;
+
+    margin: 0 var(--gutter);
+
+    @media (--mobile) {
+      margin: 0;
+    }
 
     .breadcrumbs {
       margin-bottom: 0.5rem;
