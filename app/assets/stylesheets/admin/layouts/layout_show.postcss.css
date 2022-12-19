@@ -1,6 +1,15 @@
 .layout-show {
   .title-container {
     margin-bottom: var(--gutter);
+    @mixin mobile-guttered;
+  }
+
+  h1.page-title {
+    @mixin mobile-guttered;
+  }
+
+  .breadcrumbs {
+    @mixin mobile-guttered;
   }
 
   .show-details {
@@ -11,6 +20,10 @@
     grid-template-columns: repeat(4, 1fr);
     gap: var(--gutter);
     margin-bottom: var(--gutter);
+
+    @media (--mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     .detail {
       .title {
