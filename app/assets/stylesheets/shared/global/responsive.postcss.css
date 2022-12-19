@@ -12,7 +12,7 @@
   --gutter: 20px;
 
   @media (--mobile) {
-    --gutter: 15px;
+    --gutter: 12px;
   }
 }
 

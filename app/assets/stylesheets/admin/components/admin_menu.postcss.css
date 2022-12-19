@@ -2,6 +2,10 @@
   .admin-menu {
     --gutter: 15px;
 
+    @media (--mobile) {
+      --gutter: 12px;
+    }
+
     width: 200px;
     flex-shrink: 0;
     box-size: border-box;

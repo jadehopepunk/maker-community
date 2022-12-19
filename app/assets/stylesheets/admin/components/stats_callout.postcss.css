@@ -4,6 +4,16 @@
   padding: var(--gutter);
   margin-bottom: calc(var(--gutter) * 2);
 
+  @media (--mobile) {
+    margin-left: calc(0px - var(--gutter));
+    margin-right: calc(0px - var(--gutter));
+    margin-top: calc(0px - var(--gutter));
+    border-radius: 0;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+
   .callout-title {
     @mixin text-heading-small;
     margin-bottom: 1rem;
@@ -32,6 +42,16 @@
       &:hover {
         .label {
           text-decoration: underline;
+        }
+      }
+    }
+
+    @media (--mobile) {
+      grid-template-columns: repeat(4, 1fr);
+
+      a.stat {
+        .label {
+          @mixin text-small;
         }
       }
     }

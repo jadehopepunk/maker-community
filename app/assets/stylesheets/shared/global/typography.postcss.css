@@ -16,7 +16,7 @@ body {
   line-height: 2.5rem;
 
   @media (--mobile) {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -29,6 +29,16 @@ body {
 @define-mixin text-large {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+@define-mixin text-small {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+
+  @media (--mobile) {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
 }
 
 a {
