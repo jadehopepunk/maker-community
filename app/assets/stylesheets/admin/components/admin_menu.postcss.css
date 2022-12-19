@@ -9,9 +9,18 @@
 
     .menu-hero {
       padding: var(--gutter);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1em;
 
       h1 {
         font-size: 1.5rem;
+      }
+
+      .hamburger {
+        display: none;
       }
     }
 
@@ -107,6 +116,33 @@
 
       .stats {
         margin-top: 1rem;
+      }
+    }
+
+    @media (--mobile) {
+      width: auto;
+      box-shadow: none;
+
+      .menu-hero {
+        h1 {
+          font-size: 1.2rem;
+        }
+
+        .hamburger {
+          margin-top: -10px;
+          margin-bottom: -10px;
+          display: block;
+        }
+      }
+
+      .menu-body {
+        display: none;
+      }
+
+      &.open {
+        .menu-body {
+          display: block;
+        }
       }
     }
   }

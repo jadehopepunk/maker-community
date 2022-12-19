@@ -54,4 +54,20 @@
     max-width: 600px;
     margin: 20vh auto;
   }
+
+  @media (--mobile) {
+    flex-direction: column;
+    align-items: justify;
+    height: 100%;
+    overflow: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .admin-body {
+      overflow: scroll;
+    }
+  }
 }

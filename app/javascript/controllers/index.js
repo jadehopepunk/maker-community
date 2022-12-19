@@ -12,6 +12,7 @@ import IntegerController from "./integer_controller";
 import EventBookingFormController from "./event_booking_form_controller";
 import PaymentController from "./payment_controller";
 import FlashController from "./flash_controller";
+import AdminMenuController from "./admin_menu_controller";
 
 application.register("navbar", NabarController);
 application.register("roster", RosterController);
@@ -22,3 +23,4 @@ application.register("integer", IntegerController);
 application.register("booking-form", EventBookingFormController);
 application.register("payment", PaymentController);
 application.register("flash", FlashController);
+application.register("admin-menu", AdminMenuController);

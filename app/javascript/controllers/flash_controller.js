@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    console.log("connected to flash");
     setTimeout(this.fadeAllFlash.bind(this), 3000);
   }
 
