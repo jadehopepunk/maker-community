@@ -82,4 +82,8 @@
       overflow: scroll;
     }
   }
+
+  .page-title {
+    @mixin mobile-guttered;
+  }
 }
