@@ -1,7 +1,5 @@
 .admin-people-show {
   .image-and-details {
-    @mixin mobile-guttered;
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -11,6 +9,8 @@
       flex: 0 0 auto;
       max-width: 33%;
       height: auto;
+
+      @mixin mobile-guttered;
     }
 
     @media (--mobile) {

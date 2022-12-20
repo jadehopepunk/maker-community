@@ -9,19 +9,25 @@
     <thead>
       <tr>
         <th><%= sort_link(q, :user_display_name, 'Name', default_order: :asc) %></th>
-        <th>People</th>
+        <th>
+          <span class="desktop-only">People</span>
+          <span class="mobile-only">#</span>
+        </th>
         <th>Role</th>
-        <th>Comments</th>
+        <th class="desktop-only">Comments</th>
         <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <% bookings.each do |booking| %>
       <tr class="<%= booking.active? ? 'confirmed' : 'unconfirmed' %>">
-        <td><%= link_to booking.user.display_name, admin_person_path(booking.user), class: 'primary-row-link' %></td>
+        <td>
+          <%= link_to booking.user.display_name, admin_person_path(booking.user), class: 'primary-row-link' %>
+          <div class="mobile-only"><%= booking.comments %></div>
+        </td>
         <td><%= booking.persons %></td>
         <td><%= booking.role %></td>
-        <td><%= booking.comments %></td>
+        <td class="desktop-only"><%= booking.comments %></td>
         <td><%= booking.status %></td>
       </tr>
       <% end %>
