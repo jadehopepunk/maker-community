@@ -91,7 +91,7 @@ class SlackNotifier
     post_message(
       channel: DUTY_MANAGER_CHANNEL,
       text: <<~TEXT
-        #{users.map { |user| user_mention(user) }.to_sentence} you're the #{'DM'.pluralize(users.count)} today from #{format_time_text(session.start_at)} - #{format_time_text(session.end_at)}.
+        #{users.map { |user| user_mention(user) }.to_sentence} you're the #{'DM'.pluralize(users.count)} #{relative_date_string(session.start_at)} from #{format_time_text(session.start_at)} - #{format_time_text(session.end_at)}.
 
         Good luck! Don't forget to take a few photos and post them in #photo-hub.
       TEXT
@@ -99,6 +99,13 @@ class SlackNotifier
   end
 
   private
+
+  def relative_date_string(time)
+    return 'today' if time.today?
+    return 'tomorrow' if time.tomorrow?
+
+    "in #{distance_of_time_in_words(Time.current, time)}"
+  end
 
   def post_message(*params)
     if delayed

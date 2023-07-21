@@ -10,5 +10,10 @@ class DateUtilities
       date_in_zone = date.to_time.in_time_zone(Time.zone)
       date_in_zone.beginning_of_day..date_in_zone.end_of_day
     end
+
+    def next_n_hours(number)
+      start = Time.current
+      start..(start + number.hours)
+    end
   end
 end
