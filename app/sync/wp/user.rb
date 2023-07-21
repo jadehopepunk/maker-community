@@ -44,7 +44,7 @@ module Wp
 
     def update_existing
       dest = existing_dest
-      puts "updating user #{dest.id} (#{dest.display_name})"
+      puts "updating user #{dest.id} (#{dest.display_name}) (WP: #{self.ID})"
 
       dest.assign_attributes shared_attributes
       if dest.changed?

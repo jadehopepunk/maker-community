@@ -7,7 +7,8 @@ class DateUtilities
     end
 
     def date_to_datetime_range(date)
-      date.to_time..(date.to_time + 1.day)
+      date_in_zone = date.to_time.in_time_zone(Time.zone)
+      date_in_zone.beginning_of_day..date_in_zone.end_of_day
     end
   end
 end
