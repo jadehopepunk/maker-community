@@ -50,6 +50,14 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :event_sessions, only: [] do
+      collection do
+        get :next
+      end
+    end
+  end
+
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end

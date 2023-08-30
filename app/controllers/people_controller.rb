@@ -6,4 +6,6 @@ class PeopleController < ApplicationController
     @memberships = current_user.memberships.includes(:plan)
     @bookings = current_user.bookings.includes(session: :event).future.session_date_order
   end
+
+  def duty_manager; end
 end
