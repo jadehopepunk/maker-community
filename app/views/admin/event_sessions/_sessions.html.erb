@@ -1,7 +1,7 @@
 <div class="admin-index-table event-sessions-table">
   <div class="table-controls">
     <%= render partial: 'admin/shared/filters', locals: { filters: filters } %> <%= search_form_for q, url: request.fullpath do |f| %>
-    <div class="search-with-submit"><%= f.search_field :event_title_cont %> <%= f.submit "search" %></div>
+    <!-- <div class="search-with-submit"><%= f.search_field :event_title_cont %> <%= f.submit "search" %></div> -->
     <% end %>
   </div>
 

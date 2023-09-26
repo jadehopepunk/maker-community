@@ -114,6 +114,14 @@ class EventSession < ApplicationRecord
     other_session.delete
   end
 
+  def self.ransackable_attributes(_auth_objectr = nil)
+    ['event_title']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
   private
 
   def hashed_availability_states
