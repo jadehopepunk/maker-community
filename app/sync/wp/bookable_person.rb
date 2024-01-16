@@ -17,6 +17,8 @@ module Wp
         Prices::Concession.new(per_person: amount)
       when 'member', 'mci member', 'community member', 'member/concession'
         Prices::Member.new(per_person: amount)
+      when 'spectator', 'challenge participant'
+        Prices::Free.new
       else
         raise "Unknown price type: \"#{post_title}\" for #{inspect}"
       end
