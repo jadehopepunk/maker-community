@@ -1,3 +1,4 @@
+<% duplicate_short_names = users.map(&:short_name).tally.select {|name, count| count > 1}.keys %>
 <table class="roster" data-controller="roster">
   <thead>
     <tr class="names">
@@ -5,7 +6,7 @@
       <th>Session</th>
       <th>Manager</th>
       <% users.each do |user| %>
-      <th class="user-header" data-user="<%= user.id %>"><%= user.short_name %></th>
+      <th class="user-header" data-user="<%= user.id %>"><%= duplicate_short_names.include?(user.short_name) ? user.display_name : user.short_name %></th>
       <% end %>
     </tr>
     <tr class="actions" data-roster-target="edits">
