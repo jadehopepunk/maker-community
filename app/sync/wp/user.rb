@@ -44,12 +44,17 @@ module Wp
 
     def update_existing
       dest = existing_dest
-      puts "updating user #{dest.id} (#{dest.display_name}) (WP: #{self.ID})"
+      puts "updating user #{dest.id} (#{dest.display_name}, #{dest.email}) (WP: #{self.ID})"
 
       dest.assign_attributes shared_attributes
       if dest.changed?
         puts "  - attributes changed: #{shared_attributes.inspect}"
-        dest.save!
+
+        begin
+          dest.save!
+        rescue ActiveRecord::RecordInvalid => e
+          puts "  - invalid record for update: #{dest.inspect}"
+        end
       end
 
       update_user_address_if_needed(dest)
