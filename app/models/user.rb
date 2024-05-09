@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   def password_imported?
     sign_up_status == 'imported'
-  endF
+  end
 
   def has_one_of_plans?(plan_names)
     active_plans.has_name(plan_names).exists?
