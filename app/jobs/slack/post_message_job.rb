@@ -3,6 +3,7 @@ module Slack
     queue_as :default
 
     def perform(*params)
+      sleep 2
       client = Slack::Web::Client.new
       client.chat_postMessage(*params)
     end
