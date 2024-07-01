@@ -27,6 +27,11 @@ module Wp
     def import_new
       author = ::User.find_by_wordpress_id(post_author)
 
+      if post_status == 'draft'
+        puts "skipping event #{self.ID} as it is a draft"
+        return
+      end
+
       dest = dest_class.create!(
         slug: post_name,
         author:,
