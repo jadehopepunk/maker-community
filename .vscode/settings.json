@@ -24,5 +24,6 @@
     "tmp": true,
     "log": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "ansible.python.interpreterPath": "/bin/python"
 }
