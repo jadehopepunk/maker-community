@@ -1,3 +1,8 @@
+.roster-container {
+  height: 80vh;
+  overflow: auto;
+}
+
 table.roster {
   min-width: 100%;
   border-spacing: 0;

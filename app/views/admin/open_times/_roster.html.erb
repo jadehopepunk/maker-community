@@ -1,57 +1,59 @@
 <% duplicate_short_names = users.map(&:short_name).tally.select {|name, count| count > 1}.keys %>
-<table class="roster" data-controller="roster">
-  <thead>
-    <tr class="names">
-      <th colspan="2">Day</th>
-      <th>Session</th>
-      <th>Manager</th>
-      <% users.each do |user| %>
-      <th class="user-header" data-user="<%= user.id %>"><%= duplicate_short_names.include?(user.short_name) ? user.display_name : user.short_name %></th>
+<div class="roster-container">
+  <table class="roster" data-controller="roster">
+    <thead>
+      <tr class="names">
+        <th colspan="2">Day</th>
+        <th>Session</th>
+        <th>Manager</th>
+        <% users.each do |user| %>
+        <th class="user-header" data-user="<%= user.id %>"><%= duplicate_short_names.include?(user.short_name) ? user.display_name : user.short_name %></th>
+        <% end %>
+      </tr>
+      <tr class="actions" data-roster-target="edits">
+        <th colspan="3"></th>
+        <th class="manager-header"><% if policy([:admin, :user]).admin_roster? %><a data-action="roster#editManager" href="#">edit</a><% end %></th>
+        <% users.each do |user| %>
+        <th class="user-header" data-user="<%= user.id %>"><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="slots-body" data-roster-target="rosterBody">
+      <% sessions.each do |session| %>
+      <tr data-session-id="<%= session.string_identifier %>">
+        <td class="day"><%= session.date.day %></td>
+        <td class="weekday"><%= session.date.strftime('%a') %></td>
+        <td class="session-name <%= 'highlight' if session.event.duty_managed? %>"><%= session.title %></td>
+        <td class="manager" data-managers="<%= session.manager_bookings.map(&:user_id).join(',') %>"><%= session.manager_bookings.map {|booking| booking.user.short_name}.join(', ') %></td>
+        <% users.each do |user| %>
+        <td
+          class="user-slot"
+          data-user="<%= user.id %>"
+          data-role="<%= 'manager' if session.manager_bookings.detect {|booking| booking.user_id == user.id } %>"
+          data-availability="<%= session.availability_status(user) || 'unknown' %>"
+        >
+          <%= session.availability_status(user) %>
+        </td>
+        <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <tr class="actions" data-roster-target="edits">
-      <th colspan="3"></th>
-      <th class="manager-header"><% if policy([:admin, :user]).admin_roster? %><a data-action="roster#editManager" href="#">edit</a><% end %></th>
-      <% users.each do |user| %>
-      <th class="user-header" data-user="<%= user.id %>"><% if policy([:admin, user]).edit_availability? %> <%= link_to 'edit', '#', 'data-action' => 'edit', 'data-user' => user.id %> <% end %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody class="slots-body" data-roster-target="rosterBody">
-    <% sessions.each do |session| %>
-    <tr data-session-id="<%= session.string_identifier %>">
-      <td class="day"><%= session.date.day %></td>
-      <td class="weekday"><%= session.date.strftime('%a') %></td>
-      <td class="session-name <%= 'highlight' if session.event.duty_managed? %>"><%= session.title %></td>
-      <td class="manager" data-managers="<%= session.manager_bookings.map(&:user_id).join(',') %>"><%= session.manager_bookings.map {|booking| booking.user.short_name}.join(', ') %></td>
-      <% users.each do |user| %>
-      <td
-        class="user-slot"
-        data-user="<%= user.id %>"
-        data-role="<%= 'manager' if session.manager_bookings.detect {|booking| booking.user_id == user.id } %>"
-        data-availability="<%= session.availability_status(user) || 'unknown' %>"
-      >
-        <%= session.availability_status(user) %>
-      </td>
-      <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-  <tbody class="edit-actions">
-    <tr>
-      <td colspan="3"></td>
-      <td>
-        <div class="edit-manager-action">
-          <a class="button" href="#" data-action="roster#saveEditManager">Save</a>
-          <a href="#" data-action="roster#cancelEditManager">Cancel</a>
-        </div>
-      </td>
-      <td>
-        <div class="edit-user-action">
-          <a class="button" href="#" data-action="roster#saveEdit">Save</a>
-          <a href="#" data-action="roster#cancelEdit">Cancel</a>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+    <tbody class="edit-actions">
+      <tr>
+        <td colspan="3"></td>
+        <td>
+          <div class="edit-manager-action">
+            <a class="button" href="#" data-action="roster#saveEditManager">Save</a>
+            <a href="#" data-action="roster#cancelEditManager">Cancel</a>
+          </div>
+        </td>
+        <td>
+          <div class="edit-user-action">
+            <a class="button" href="#" data-action="roster#saveEdit">Save</a>
+            <a href="#" data-action="roster#cancelEdit">Cancel</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
