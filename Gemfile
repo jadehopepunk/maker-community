@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-gem 'rails', '~> 7.1.3.4'
+gem 'rails', '~> 7.2'
 
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
@@ -12,7 +12,7 @@ gem 'puma', '~> 6.4.2'
 gem 'sprockets-rails'
 
 gem 'aasm'
-gem 'acts-as-taggable-on', '~> 10.0.0'
+gem 'acts-as-taggable-on', '~> 11.0.0'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'devise'
@@ -23,7 +23,7 @@ gem 'indefinite_article'
 gem 'kaminari'
 gem 'month'
 gem 'pundit'
-gem 'ransack', '~> 3.2.1'
+gem 'ransack', '~> 4.2.1'
 gem 'redis'
 gem 'rolify'
 gem 'sentry-rails'
