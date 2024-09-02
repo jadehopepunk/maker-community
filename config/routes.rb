@@ -56,6 +56,11 @@ Rails.application.routes.draw do
         get :next
       end
     end
+    resources :fobs, only: [] do
+      member do
+        get :touch
+      end
+    end
   end
 
   authenticate :user do
