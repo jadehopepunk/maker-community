@@ -27,6 +27,10 @@ class User < ApplicationRecord
 
   before_validation :reset_calendar_token, on: :create
 
+  def self.ransackable_attributes(_auth_objectr = nil)
+    ['display_name', 'email']
+  end
+
   def short_name
     display_name.split(' ').first
   end
