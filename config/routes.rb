@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     end
     resources :fobs, only: [] do
       member do
-        get :touch
+        post :touch
       end
     end
   end
