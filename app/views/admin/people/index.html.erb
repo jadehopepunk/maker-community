@@ -19,39 +19,41 @@
       </div>
     </div>
   <% end %>
-  <div class="admin-index-table">
-    <div class="table-controls">
-      <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %>
-      <%= search_form_for @q, url: admin_people_path do |f| %>
-        <%= hash_to_hidden_fields(@search_params) %>
-        <div class="search-with-submit">
-          <%= f.search_field :display_name_cont %>
-          <%= f.submit "search" %>
-        </div>
-      <% end %>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th><%= sort_link(@q, :display_name, 'Name', default_order: :asc) %></th>
-          <th class="right">Roles</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @people.each do |person| %>
-        <tr>
-          <td><%= link_to person.display_name, admin_person_path(person), class: 'primary-row-link' %></td>
-          <td>
-            <div class="tags">
-              <% person.active_plans.each do |plan| %>
-              <span class="tag"><%= plan.short_title %></span>
-              <% end %>
-            </div>
-          </td>
-        </tr>
+  <% if policy([:admin, :user]).index? %>
+    <div class="admin-index-table">
+      <div class="table-controls">
+        <%= render partial: 'admin/shared/filters', locals: { filters: @filters } %>
+        <%= search_form_for @q, url: admin_people_path do |f| %>
+          <%= hash_to_hidden_fields(@search_params) %>
+          <div class="search-with-submit">
+            <%= f.search_field :display_name_cont %>
+            <%= f.submit "search" %>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-    <%= paginate @people %>
-  </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th><%= sort_link(@q, :display_name, 'Name', default_order: :asc) %></th>
+            <th class="right">Roles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @people.each do |person| %>
+          <tr>
+            <td><%= link_to person.display_name, admin_person_path(person), class: 'primary-row-link' %></td>
+            <td>
+              <div class="tags">
+                <% person.active_plans.each do |plan| %>
+                <span class="tag"><%= plan.short_title %></span>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @people %>
+    </div>
+  <% end %>
 </div>

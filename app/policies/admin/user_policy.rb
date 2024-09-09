@@ -14,6 +14,10 @@ module Admin
       basic_member_stats?
     end
 
+    def index?
+      basic_member_stats?
+    end
+
     def show_personal_information?
       record == user || user&.has_any_role?(:president, :vice_president, :secretary, :people_admin)
     end

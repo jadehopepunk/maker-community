@@ -43,7 +43,8 @@ class ApplicationPolicy
       :people_admin,
       :program_admin,
       :place_admin,
-      :teacher
+      :teacher,
+      :website_dev
     )
   end
 
