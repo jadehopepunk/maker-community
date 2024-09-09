@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get :metrics
         resources :plans, only: [:index, :edit, :update]
         resources :fobs, only: [:index]
+        resources :fob_sessions, only: [:index]
       end
     end
     scope :place do

@@ -6,20 +6,16 @@
       <thead>
         <tr>
           <th>Id</th>
-          <th>Device Id</th>
-          <th>User</th>
         </tr>
       </thead>
       <tbody>
-        <% @fobs.each do |fob| %>
+        <% @fob_sessions.each do |fob_session| %>
         <tr>
-          <td><%= fob.id %></td>
-          <td><%= fob.device_id %></td>
-          <td><%= fob.user.inspect %></td>
+          <td><%= fob_session.id %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
-    <%= paginate @fobs %>
+    <%= paginate @fob_sessions %>
   </div>
 </div>
