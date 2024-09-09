@@ -1,0 +1,21 @@
+<div class="admin-index-table fobs-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Device Id</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% records.each do |fob| %>
+      <tr>
+        <td><%= fob.id %></td>
+        <td><%= fob.device_id %></td>
+        <td><%= fob.user.inspect %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate records %>
+</div>

@@ -12,6 +12,7 @@
       <a class="nav-item has-children <%= 'active' if @section == 'people' %>" href="<%= admin_people_path %>">People</a>
       <% if @section == 'people' %>
       <a class="nav-item child-item" href="<%= admin_plans_path %>">Membership Plans</a>
+      <a class="nav-item child-item" href="<%= admin_fobs_path %>">Fobs</a>
       <% end %>
       <a class="nav-item has-children <%= 'active' if @section == 'place' %>" href="<%= admin_areas_path %>">Place</a>
       <% if @section == 'place' %>
