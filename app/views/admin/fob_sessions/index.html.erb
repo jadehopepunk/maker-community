@@ -6,12 +6,18 @@
       <thead>
         <tr>
           <th>Id</th>
+          <th>Opened At</th>
+          <th>Closed At</th>
+          <th>Auto closed</th>
         </tr>
       </thead>
       <tbody>
-        <% @fob_sessions.each do |fob_session| %>
+        <% @fob_sessions.each do |session| %>
         <tr>
-          <td><%= fob_session.id %></td>
+          <td><%= session.id %></td>
+          <td><%= session.opened_at %></td>
+          <td><%= session.closed_at %></td>
+          <td><%= session.auto_closed %></td>
         </tr>
         <% end %>
       </tbody>

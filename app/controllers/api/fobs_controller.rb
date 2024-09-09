@@ -3,14 +3,11 @@ module Api
     skip_before_action :verify_authenticity_token
 
     def touch
-      fob = FobService.new.touch(params[:id])
+      fob_session = FobService.new.touch(params[:id])
       render json: {
-        fob_id: fob.id,
-        user: {
-          id: "3",
-          name: "John Doe"
-        },
-        status: "in"
+        fob_id: fob_session.fob_id,
+        user: nil,
+        status: fob_session.status
       }
     end
   end
