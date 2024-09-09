@@ -1,6 +1,7 @@
 module Api
   class FobsController < ApplicationController
     def touch
+      FobService.new.touch(params[:id])
       render json: {
         fob_id: params[:id],
         user: {

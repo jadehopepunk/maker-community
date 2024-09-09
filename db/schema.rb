@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_092050) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_09_065544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -123,6 +123,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_092050) do
     t.boolean "duty_managed", default: false
     t.index ["author_id"], name: "index_events_on_author_id"
     t.index ["image_id"], name: "index_events_on_image_id"
+  end
+
+  create_table "fobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "device_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_fobs_on_device_id", unique: true
+    t.index ["user_id"], name: "index_fobs_on_user_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -342,6 +351,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_092050) do
   add_foreign_key "event_sessions", "events"
   add_foreign_key "events", "images"
   add_foreign_key "events", "users", column: "author_id"
+  add_foreign_key "fobs", "users"
   add_foreign_key "memberships", "plans"
   add_foreign_key "memberships", "subscriptions"
   add_foreign_key "memberships", "users"
