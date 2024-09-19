@@ -1,0 +1,10 @@
+<div class="admin-layout-edit">
+  <div class="breadcrumbs">
+    <a class="breadcrumb return" href="<%= admin_fobs_path %>">↩ Fobs</a>
+  </div>
+  <h1 class="page-title">Assign Fob</h1>
+  <%= simple_form_for @fob, url: assign_admin_fob_path(@fob) do |f| %>
+  <div><%= f.label :user_id %> <%= f.select :user_id, User.current_participants.pluck("users.display_name", "users.id") %></div>
+  <div class="actions"><%= f.submit %></div>
+  <% end %>
+</div>

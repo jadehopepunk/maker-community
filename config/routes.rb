@@ -30,7 +30,12 @@ Rails.application.routes.draw do
       collection do
         get :metrics
         resources :plans, only: [:index, :edit, :update]
-        resources :fobs, only: [:index]
+        resources :fobs, only: [:index] do
+          member do
+            get :edit_assignment
+            patch :assign
+          end
+        end
         resources :fob_sessions, only: [:index]
       end
     end

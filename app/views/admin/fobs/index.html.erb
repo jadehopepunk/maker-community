@@ -15,7 +15,7 @@
         <tr>
           <td><%= fob.id %></td>
           <td><%= fob.device_id %></td>
-          <td><%= fob.user.inspect %></td>
+          <td><% if fob.user.present? %><%= fob.user.display_name %><% else %><%= link_to "assign", edit_assignment_admin_fob_path(fob) %><% end %></td>
         </tr>
         <% end %>
       </tbody>
