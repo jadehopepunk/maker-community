@@ -9,7 +9,7 @@ module Reports
     def each
       row = nil
 
-      months.each do |month|
+      months.reverse_each do |month|
         row = result_month(month, last_row: row, in_progress: Date.current < month.end_date)
         yield row
       end
