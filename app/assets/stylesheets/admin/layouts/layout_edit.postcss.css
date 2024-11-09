@@ -1,3 +1,12 @@
 .admin-layout-edit {
   @mixin mobile-guttered;
+
+  form {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    .form-actions {
+      margin-top: 1rem;
+    }
+  }
 }

@@ -38,6 +38,10 @@ Rails.application.routes.draw do
         end
         resources :fob_sessions, only: [:index]
       end
+      member do
+        get :edit_roles
+        patch :update_roles
+      end
     end
     scope :place do
       resources :areas

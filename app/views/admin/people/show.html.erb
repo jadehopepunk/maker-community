@@ -3,6 +3,9 @@
     <a class="breadcrumb return" href="<%= admin_people_path %>">↩ People</a>
   </div>
   <h1 class="page-title"><%= @person.display_name %></h1>
+
+  <div class="page-actions"><%= link_to('Edit Roles', edit_roles_admin_person_path(@person), class: 'button') if policy([:admin, @person]).edit_roles? %></div>
+
   <div class="image-and-details">
     <% if @person.has_avatar? %>
     <img class="person-image" src="<%= @person.avatar_url(:large) %>" alt="<%= @person.display_name %>" />

@@ -1,5 +1,7 @@
 module Admin
   class PeopleController < AdminController
+    before_action :load_person, only: %i[show edit_roles update_roles]
+
     def index
       @q = load_search_query
       @filters = load_filters
@@ -12,7 +14,6 @@ module Admin
     end
 
     def show
-      @person = authorize [:admin, User.find(params[:id])]
     end
 
     def metrics
@@ -21,7 +22,20 @@ module Admin
       @member_growth = Reports::MemberGrowth.new(start_date)
     end
 
+    def edit_roles
+    end
+
+    def update_roles
+      @person.roles = Role.where(id: params[:user][:role_ids])
+      @person.save
+      redirect_to admin_person_path(@person)
+    end
+
     private
+
+    def load_person
+      @person = authorize [:admin, User.find(params[:id])]
+    end
 
     def load_search_query
       query = policy_scope([:admin, User]).ransack(params[:q])

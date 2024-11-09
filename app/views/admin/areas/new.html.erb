@@ -1,3 +1,5 @@
-<h2>New Area</h2>
+<div class="admin-layout-edit">
+  <h2>New Area</h2>
 
-<%= simple_form_for [:admin, @area] do |f| %> <%= f.input :name %><%= f.input :description, as: :text, input_html: {rows: 4} %><% end %>
+  <%= simple_form_for [:admin, @area] do |f| %> <%= f.input :name %><%= f.input :description, as: :text, input_html: {rows: 4} %><% end %>
+</div>

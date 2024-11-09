@@ -26,6 +26,14 @@ module Admin
       record == user || user&.has_any_role?(:program_admin, :duty_roster_admin)
     end
 
+    def edit_roles?
+      user&.has_any_role?(:president, :vice_president, :secretary, :people_admin)
+    end
+
+    def update_roles?
+      edit_roles?
+    end
+
     def admin_roster?
       user&.has_any_role?(:program_admin, :duty_roster_admin)
     end
