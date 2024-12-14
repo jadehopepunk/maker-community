@@ -1,4 +1,6 @@
 class SlackUsersService
+  DELAY_AFTER_TOO_MANY_REQUESTS = 11
+
   class InvalidSlackRequest < RuntimeError; end
   class NoSlackUser < RuntimeError; end
 
@@ -42,13 +44,18 @@ class SlackUsersService
 
   attr_reader :client
 
-  def slack_user_lookup(email)
+  def slack_user_lookup(email, retries = 3)
     result = client.users_lookupByEmail(email:)
     raise InvalidSlackRequest unless result['ok']
 
     result['user']
   rescue Slack::Web::Api::Errors::UsersNotFound => e
     raise NoSlackUser, e.message
+  rescue Slack::Web::Api::Errors::TooManyRequestsError => e
+    raise e if retries <= 0
+
+    sleep DELAY_AFTER_TOO_MANY_REQUESTS
+    slack_user_lookup(email, retries - 1)
   end
 
   def attributes_from_slack(user)
