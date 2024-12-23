@@ -8,7 +8,7 @@ gem 'rails', '~> 8.0'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'pg'
-gem 'puma', '~> 6.4.2'
+gem 'puma', '~> 6.5.0'
 gem 'sprockets-rails'
 
 gem 'aasm'
