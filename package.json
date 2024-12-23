@@ -6,13 +6,13 @@
     "@hotwired/turbo-rails": "^8.0.12",
     "@rails/ujs": "^7.0.2-4s",
     "autoprefixer": "^10.4.2",
-    "esbuild": "^0.14.14",
+    "esbuild": "^0.24.2",
     "postcss": "^8.4.13",
-    "postcss-cli": "^9.1.0",
-    "postcss-custom-media": "^8.0.0",
-    "postcss-import": "^14.1.0",
-    "postcss-mixins": "^9.0.2",
-    "postcss-nested": "^5.0.6"
+    "postcss-cli": "^11.0.0",
+    "postcss-custom-media": "^11.0.0",
+    "postcss-import": "^16.0.0",
+    "postcss-mixins": "^11.0.0",
+    "postcss-nested": "^7.0.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
