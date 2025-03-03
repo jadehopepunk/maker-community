@@ -23,7 +23,11 @@ module Wp
     end
 
     def existing_dest
-      @dest ||= dest_class.where(wordpress_id: self.ID).first
+      @dest ||= dest_class.where(wordpress_id: self.ID).first || existing_by_email
+    end
+
+    def existing_by_email
+      dest_class.where(email: user_email).first unless user_email.blank?
     end
 
     def import_new
@@ -36,6 +40,7 @@ module Wp
         sign_up_status: 'imported',
         created_at: user_registered
       )
+
       dest.save!
       insert_new_inductions!(dest)
       create_stripe_customer!(dest)
