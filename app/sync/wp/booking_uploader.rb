@@ -12,6 +12,11 @@ module Wp
 
       puts "about to upload booking #{booking.id}"
 
+      unless booking.user.wordpress_id.present?
+        puts " - no wordpress user for booking #{booking.id}, skipping"
+        return
+      end
+
       dest = build_wp_booking(booking)
       dest.save!
 
@@ -28,6 +33,9 @@ module Wp
         puts " - no wordpress user for booking #{booking.id}, skipping"
         return
       end
+
+      # We may need to create the wordpress user since users can get created in the new site
+      raise ArgumentError, 'no wordpress user' unless booking.user.wordpress_id.present?
 
       # We don't currently create events in the new site so we are probably safe
       raise ArgumentError, 'no wordpress event' unless booking.session.event.wordpress_post_id.present?
