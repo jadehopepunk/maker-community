@@ -24,8 +24,10 @@ module Wp
     def build_wp_booking(booking)
       return if booking.wordpress_post_id.present?
 
-      # We may need to create the wordpress user since users can get created in the new site
-      raise ArgumentError, 'no wordpress user' unless booking.user.wordpress_id.present?
+      unless booking.user.wordpress_id.present?
+        puts " - no wordpress user for booking #{booking.id}, skipping"
+        return
+      end
 
       # We don't currently create events in the new site so we are probably safe
       raise ArgumentError, 'no wordpress event' unless booking.session.event.wordpress_post_id.present?
