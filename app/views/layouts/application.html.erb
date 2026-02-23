@@ -6,6 +6,13 @@
   </head>
 
   <body class="theme-blue with-navbar">
+    <div class="in-dev-banner" style="background-color: black; color: white; padding: 1rem; text-align: center">
+      <h1>Experimental website</h1>
+      <p>
+        This is not the main Maker Community website. It's a side project in development. To join or book at Maker Community, visit the official website at
+        <a href="https://makercommunity.org.au">makercommunity.org.au</a>
+      </p>
+    </div>
     <%= render 'layouts/shared/flash' %> <%= render 'layouts/shared/navbar', with_hero: current_page?('/') %> <%= yield %> <%= render 'layouts/shared/footer' %>
   </body>
 </html>
