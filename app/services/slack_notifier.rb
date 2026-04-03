@@ -4,8 +4,8 @@ class SlackNotifier
   attr_reader :client, :delayed
 
   GENERAL_CHANNEL = '#general'.freeze
-  EVENTS_CHANNEL = '#events'.freeze
-  PROGRAM_CHANNEL = '#team-program'.freeze
+  EVENTS_CHANNEL = '#feed-events'.freeze
+  PROGRAM_CHANNEL = '#feed-event-bookings'.freeze
   PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
   DUTY_MANAGER_CHANNEL = '#duty-managers'.freeze
 
