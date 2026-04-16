@@ -6,7 +6,7 @@ class SlackNotifier
   GENERAL_CHANNEL = '#general'.freeze
   EVENTS_CHANNEL = '#feed-events'.freeze
   PROGRAM_CHANNEL = '#feed-event-bookings'.freeze
-  PEOPLE_PRIVATE_CHANNEL = '#team-people-onboarding'.freeze
+  PEOPLE_PRIVATE_CHANNEL = '#feed-membership-changes'.freeze
   DUTY_MANAGER_CHANNEL = '#duty-managers'.freeze
 
   class NullSlackClient
